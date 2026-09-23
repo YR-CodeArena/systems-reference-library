@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Python 3 Masterclass: Zero to Hero Handbook | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (26 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#mod1">Module 1: Architecture & Setup</a></li>
+        <li><a href="#mod2">Module 2: Variables & Primitives</a></li>
+        <li><a href="#mod3">Module 3: Type Casting & Input</a></li>
+        <li><a href="#mod4">Module 4: Operators & Math</a></li>
+        <li><a href="#mod5">Module 5: Conditionals & Match-Case</a></li>
+        <li><a href="#mod6">Module 6: Logical Operators</a></li>
+        <li><a href="#mod7">Module 7: String Manipulation & Slicing</a></li>
+        <li><a href="#mod8">Module 8: While, For & Nested Loops</a></li>
+        <li><a href="#mod9">Module 9: Lists, Sets, Tuples, Dicts</a></li>
+        <li><a href="#mod10">Module 10: 2D Collections & Matrices</a></li>
+        <li><a href="#mod11">Module 11: Iterables & Comprehensions</a></li>
+        <li><a href="#mod12">Module 12: Functions & Scope</a></li>
+        <li><a href="#mod13">Module 13: *args, **kwargs & LEGB</a></li>
+        <li><a href="#mod14">Module 14: Modules & Main Guard</a></li>
+        <li><a href="#mod15">Module 15: File I/O (TXT, JSON, CSV)</a></li>
+        <li><a href="#mod16">Module 16: Exception Handling</a></li>
+        <li><a href="#mod17">Module 17: OOP Essentials</a></li>
+        <li><a href="#mod18">Module 18: Inheritance & Duck Typing</a></li>
+        <li><a href="#mod19">Module 19: Encapsulation & Dunders</a></li>
+        <li><a href="#mod20">Module 20: Decorators</a></li>
+        <li><a href="#mod21">Module 21: Multithreading</a></li>
+        <li><a href="#mod22">Module 22: REST API & Requests</a></li>
+        <li><a href="#mod23">Module 23: PyQt5 GUI Boilerplate</a></li>
+        <li><a href="#mod24">Module 24: PyQt5 Events & Signals</a></li>
+        <li><a href="#mod25">Module 25: Master Cheat Sheet</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Handbook &bull; Bro Code 12-Hour Course</span>
+          <span class="doc-badge pdf-tag">PDF Document 7 &bull; 26 Pages</span>
+        </div>
+        <h1 class="doc-title">Python 3 Masterclass: Zero to Hero Handbook</h1>
+        <p class="doc-subtitle">Deeply Explanatory Developer &amp; Data Analyst Technical Reference Notes</p>
+      </div>
+
+      <!-- Overview Box -->
+      <section class="content-section">
+        <div class="analogy-card" style="border-left-color: var(--accent-secondary);">
+          <div class="analogy-header">Handbook Overview &amp; Engineering Roadmap</div>
+          <p>This comprehensive technical reference manual captures every single concept, syntax structure, architectural pattern, procedural rule, data structure mechanic, and practical project blueprint taught in Bro Code's complete 12-hour Python masterclass. Designed as an exhaustive standalone engineering handbook, you can seamlessly refer back to this document long after completing your training to review core programming paradigms, advanced memory behaviors, functional patterns, object-oriented designs, concurrent multithreading, API integrations, and desktop GUI architectures.</p>
+        </div>
+      </section>
+
+      <!-- Module 1 -->
+      <section id="mod1" class="content-section">
+        <h2>Module 1: Language Architecture, Environment Setup &amp; Execution Model</h2>
+
+        <h3>1.1 Understanding the Python Execution Architecture</h3>
+        <p>Python is a high-level, interpreted, dynamically-typed, multi-paradigm programming language created by Guido van Rossum and released in 1991. Unlike statically compiled languages such as C, C++, or Rust, which convert source code directly into architecture-specific machine code binaries before execution, Python utilizes a multi-tier compilation and execution pipeline:</p>
+        <ul>
+          <li><strong>Source Code Parsing:</strong> The Python interpreter parses human-readable <code>.py</code> source files, verifying lexical syntax and building an Abstract Syntax Tree (AST).</li>
+          <li><strong>Bytecode Compilation:</strong> The AST is compiled into platform-independent intermediate instructions called Bytecode ( <code>.pyc</code> files stored automatically inside the <code>__pycache__</code> directory). Bytecode reduces execution overhead for subsequent script runs.</li>
+          <li><strong>Python Virtual Machine (PVM):</strong> The PVM is an execution engine loop that reads bytecode instructions sequentially and translates them into CPU-level instructions for the host operating system.</li>
+        </ul>
+        <p>This execution pipeline provides immense cross-platform portability across Windows, macOS, Linux, and embedded systems, allowing code written on one operating system to execute seamlessly on any other operating system equipped with a compatible Python interpreter.</p>
+
+        <h3>1.2 Interpreter Installation &amp; Environment Configuration</h3>
+        <p>To establish a production-ready Python development workspace, developers configure two essential software tools:</p>
+        <ol>
+          <li><strong>The CPython Interpreter:</strong> Downloaded directly from <code>python.org</code>, CPython is the standard reference implementation of Python written in C. During installation on Windows platforms, checking the option <strong>"Add python.exe to PATH"</strong> is critical. This registers Python binary directory paths into system Environment Variables, enabling global execution of <code>python</code> and <code>pip</code> commands from system terminals.</li>
+          <li><strong>Integrated Development Environments (IDEs):</strong>
+            <ul>
+              <li><strong>PyCharm (JetBrains):</strong> A dedicated Python IDE available in a free Community Edition. PyCharm excels in automated virtual environment provisioning, robust visual debugging, static code analysis, and refactoring utilities.</li>
+              <li><strong>Visual Studio Code (Microsoft):</strong> A lightweight extensible editor requiring the official Microsoft Python extension for debugging, linting, and terminal execution.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>1.3 Creating Your First Python Program</h3>
+        <p>Python source files are plain text files saved with the <code>.py</code> file extension. The primary output function in Python is the built-in <code>print()</code> function, which writes text output to the standard output stream (the console terminal).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Hello World and Comments</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># This is a single-line comment. The Python interpreter completely ignores comments.
+# Comments provide human-readable documentation explaining complex logic or assumptions.
+
+print("I like pizza")
+print("It's really good!")</code></pre>
+        </div>
+
+        <p><strong>Whitespace and Indentation Rule:</strong> Python does not use curly braces ( <code>{}</code> ) or semi-colons ( <code>;</code> ) to define code blocks or end statements. Code block relationships and execution scope are governed strictly by <strong>consistent indentation (4 spaces per level)</strong>!</p>
+      </section>
+
+      <!-- Module 2 -->
+      <section id="mod2" class="content-section">
+        <h2>Module 2: Variables &amp; Fundamental Primitive Data Types</h2>
+
+        <h3>2.1 Memory Containers, References, and Variables</h3>
+        <p>In computer programming, a <strong>Variable</strong> is a named reference stored in memory that points to a specific data value. In Python, variables are created automatically when assigned a value using the assignment operator ( <code>=</code> ). Unlike statically-typed languages where variable data types must be explicitly declared (e.g., <code>int age = 25;</code> ), Python utilizes <strong>Dynamic Typing</strong>, automatically inferring the variable's data type based on the value assigned to it at runtime.</p>
+
+        <div class="analogy-card">
+          <div class="analogy-header">Variable Naming Conventions (PEP 8 Style Guide)</div>
+          <ul>
+            <li>Must start with a letter ( <code>a-z, A-Z</code> ) or an underscore ( <code>_</code> ). Cannot start with numbers.</li>
+            <li>Can only contain alphanumeric characters and underscores ( <code>a-z, 0-9, _</code> ).</li>
+            <li>Case-sensitive ( <code>age</code> , <code>Age</code> , and <code>AGE</code> are three distinct variable containers).</li>
+            <li>Should follow <code>snake_case</code> naming conventions (e.g., <code>first_name</code> , <code>total_item_count</code> ).</li>
+            <li>Cannot use reserved Python keywords (such as <code>class</code> , <code>def</code> , <code>if</code> , <code>for</code> , <code>import</code> ).</li>
+          </ul>
+        </div>
+
+        <h3>2.2 The 4 Fundamental Primitive Data Types</h3>
+        <p>Python categorizes primitive values into four core data types:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Data Type</th>
+                <th>Type Keyword</th>
+                <th>Description &amp; Characteristics</th>
+                <th>Example Literals</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>String</strong></td>
+                <td><code>str</code></td>
+                <td>A contiguous sequence of characters enclosed within double quotes ( <code>"..."</code> ) or single quotes ( <code>'...'</code> ). Used for names, descriptions, and textual data.</td>
+                <td><code>"Bro"</code> , <code>'pizza'</code> , <code>"user@example.com"</code></td>
+              </tr>
+              <tr>
+                <td><strong>Integer</strong></td>
+                <td><code>int</code></td>
+                <td>Whole numbers without fractional decimal points (positive, negative, or zero). Used for precise counts, indices, and quantities. Supports exact arithmetic.</td>
+                <td><code>25</code> , <code>3</code> , <code>30</code> , <code>-100</code></td>
+              </tr>
+              <tr>
+                <td><strong>Float</strong></td>
+                <td><code>float</code></td>
+                <td>Floating-point numbers containing fractional decimal components. Used for precise scientific measurements, financial amounts, GPAs, and distances.</td>
+                <td><code>10.99</code> , <code>3.2</code> , <code>5.5</code> , <code>3.14159</code></td>
+              </tr>
+              <tr>
+                <td><strong>Boolean</strong></td>
+                <td><code>bool</code></td>
+                <td>Binary logical state flags taking strictly one of two state values: <code>True</code> or <code>False</code> (Must be capitalized). Essential for conditional branching.</td>
+                <td><code>True</code> , <code>False</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.3 String Interpolation via F-Strings (Formatted String Literals)</h3>
+        <p>Introduced in Python 3.6, Formatted String Literals (F-Strings) represent the modern standard for embedding variables and expressions directly inside text strings. Prefixing a string literal with <code>f</code> or <code>F</code> permits variable interpolation inside curly brace placeholders ( <code>{variable}</code> ).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Demonstrating Data Types &amp; F-Strings</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># 1. Strings (Textual Data)
+first_name = "Bro"
+food = "pizza"
+email = "bro123@fake.com"
+
+print(f"Hello {first_name}")
+print(f"You like {food}")
+print(f"Your email is {email}")
+
+# 2. Integers (Whole Numbers)
+age = 25
+quantity = 3
+num_of_students = 30
+
+print(f"You are {age} years old")
+print(f"You are purchasing {quantity} items")
+print(f"Class size: {num_of_students} students")
+
+# 3. Floats (Floating-Point Decimal Numbers)
+price = 10.99
+gpa = 3.2
+distance = 5.5
+
+print(f"Item price: ${price}")
+print(f"Academic GPA: {gpa}")
+print(f"Distance run: {distance} km")
+
+# 4. Booleans (Logical Binary Flags)
+is_student = True
+for_sale = False
+
+print(f"Student Status: {is_student}")
+if is_student:
+    print("You are enrolled as a student.")
+else:
+    print("You are not enrolled.")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 3 -->
+      <section id="mod3" class="content-section">
+        <h2>Module 3: Type Casting Mechanics &amp; User Input Handling</h2>
+
+        <h3>3.1 Type Casting Explained</h3>
+        <p>Type Casting is the explicit process of converting a value or variable from one data type to another. Type casting is required because Python enforces strong typing rules: attempting mathematical calculations between incompatible data types (such as adding a string to an integer) triggers runtime errors.</p>
+        <p>Python provides native type casting functions:</p>
+        <ul>
+          <li><code>str(value)</code> : Converts a value into its textual string representation.</li>
+          <li><code>int(value)</code> : Converts a value into an integer (truncates floating-point decimals without rounding).</li>
+          <li><code>float(value)</code> : Converts a value into a floating-point number.</li>
+          <li><code>bool(value)</code> : Converts a value into a boolean ( <code>True</code> or <code>False</code> ).</li>
+        </ul>
+
+        <h3>3.2 Inspecting Data Types with type()</h3>
+        <p>The built-in <code>type()</code> function inspects and returns the active data class of any object or variable.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Type Conversion and Inspection</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>name = "Bro Code"
+age = 25
+gpa = 3.2
+is_student = True
+
+# Inspecting Data Types
+print(type(name))         # Output: &lt;class 'str'&gt;
+print(type(age))          # Output: &lt;class 'int'&gt;
+print(type(gpa))          # Output: &lt;class 'float'&gt;
+print(type(is_student))    # Output: &lt;class 'bool'&gt;
+
+# Float to Int Conversion (Truncates decimal portion)
+gpa_integer = int(gpa)
+print(gpa_integer)        # Output: 3
+
+# Int to Float Conversion
+age_float = float(age)
+print(age_float)          # Output: 25.0
+
+# Int to String Conversion
+age_str = str(age)
+print(type(age_str))      # Output: &lt;class 'str'&gt;
+print(age_str + "1")      # Output: "251" (Text concatenation, not addition!)
+
+# String to Bool Conversion (Truthy vs Falsy Behavior)
+# Non-empty strings evaluate to True; empty strings evaluate to False
+print(bool("Bro"))        # Output: True
+print(bool(""))           # Output: False (Useful for validating empty user inputs!)</code></pre>
+        </div>
+
+        <h3>3.3 Accepting User Input via input() Function</h3>
+        <p>The <code>input()</code> function prompts the user to enter data via the console terminal. Program execution halts until the user types their input and presses Enter.</p>
+        
+        <p><strong>CRITICAL Architectural Principle — input() Return Type:</strong> The <code>input()</code> function ALWAYS returns user data as a String ( <code>str</code> ), regardless of whether the user typed numbers! Attempting mathematical calculations on raw <code>input()</code> values will trigger a runtime <code>TypeError</code> or produce incorrect string concatenation. Numerical inputs MUST be explicitly wrapped inside <code>int()</code> or <code>float()</code> type casting!</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Accepting &amp; Type Casting User Input</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Basic Text Input
+name = input("What is your name?: ")
+print(f"Hello {name}!")
+
+# Numeric Input with Nested Type Casting
+# Convert raw string input directly into Integer
+age = int(input("How old are you?: "))
+age += 1 # Increment integer safely
+print(f"Happy Birthday! Next year you will be {age} years old.")
+
+# Float Input for Geometry Calculations
+length = float(input("Enter rectangle length (cm): "))
+width = float(input("Enter rectangle width (cm): "))
+area = length * width
+
+print(f"The calculated area is: {area} cm²")</code></pre>
+        </div>
+
+        <h3>3.4 Practical Workshop — Shopping Cart Program</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Interactive Shopping Cart Calculator</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Prompting user for shopping cart details
+item = input("What item would you like to buy?: ")
+price = float(input("What is the unit price of the item?: $"))
+quantity = int(input("How many units would you like to purchase?: "))
+
+total = price * quantity
+
+print("\n--- YOUR RECEIPT ---")
+print(f"You bought {quantity} x {item}(s)")
+print(f"Total cost: ${total:.2f}")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 4 -->
+      <section id="mod4" class="content-section">
+        <h2>Module 4: Arithmetic Operators, Math Functions &amp; Geometry Projects</h2>
+
+        <h3>4.1 Arithmetic Operators Table</h3>
+        <p>Python supports standard arithmetic calculation operators alongside shorthand Augmented Assignment Operators that update variable values in place:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Operation</th>
+                <th>Standard Operator</th>
+                <th>Example</th>
+                <th>Augmented Operator</th>
+                <th>Shorthand Syntax</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Addition</strong></td>
+                <td><code>+</code></td>
+                <td><code>x + y</code></td>
+                <td><code>+=</code></td>
+                <td><code>x += 1</code></td>
+                <td>Adds numeric values together.</td>
+              </tr>
+              <tr>
+                <td><strong>Subtraction</strong></td>
+                <td><code>-</code></td>
+                <td><code>x - y</code></td>
+                <td><code>-=</code></td>
+                <td><code>x -= 1</code></td>
+                <td>Subtracts right value from left.</td>
+              </tr>
+              <tr>
+                <td><strong>Multiplication</strong></td>
+                <td><code>*</code></td>
+                <td><code>x * y</code></td>
+                <td><code>*=</code></td>
+                <td><code>x *= 2</code></td>
+                <td>Multiplies numeric values together.</td>
+              </tr>
+              <tr>
+                <td><strong>Division</strong></td>
+                <td><code>/</code></td>
+                <td><code>x / y</code></td>
+                <td><code>/=</code></td>
+                <td><code>x /= 2</code></td>
+                <td>Divides numbers. Always returns a Float!</td>
+              </tr>
+              <tr>
+                <td><strong>Exponentiation</strong></td>
+                <td><code>**</code></td>
+                <td><code>x ** y</code></td>
+                <td><code>**=</code></td>
+                <td><code>x **= 2</code></td>
+                <td>Raises left value to power of right ( x<sup>y</sup> ).</td>
+              </tr>
+              <tr>
+                <td><strong>Modulus</strong></td>
+                <td><code>%</code></td>
+                <td><code>x % y</code></td>
+                <td><code>%=</code></td>
+                <td><code>x %= 2</code></td>
+                <td>Returns division remainder. Useful for even/odd testing.</td>
+              </tr>
+              <tr>
+                <td><strong>Floor Division</strong></td>
+                <td><code>//</code></td>
+                <td><code>x // y</code></td>
+                <td><code>//=</code></td>
+                <td><code>x //= 2</code></td>
+                <td>Divides numbers and rounds down to nearest integer.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>4.2 Built-in Math Functions</h3>
+        <p>Python provides native built-in mathematical functions requiring no module imports:</p>
+        <ul>
+          <li><code>round(number, digits)</code> : Rounds a float to the nearest integer or specified decimal precision.</li>
+          <li><code>abs(number)</code> : Returns the absolute value (distance from zero as a positive number).</li>
+          <li><code>pow(base, exponent)</code> : Computes base raised to exponent power (equivalent to <code>base ** exponent</code> ).</li>
+          <li><code>max(v1, v2, v3, ...)</code> : Finds and returns the maximum value among arguments.</li>
+          <li><code>min(v1, v2, v3, ...)</code> : Finds and returns the minimum value among arguments.</li>
+        </ul>
+
+        <h3>4.3 Scientific Calculations with the math Module</h3>
+        <p>Importing <code>import math</code> provides access to advanced constants and mathematical functions:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Demonstrating Native &amp; Math Module Functions</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import math
+
+# Built-in Mathematical Functions
+x = 3.14
+y = -4
+z = 5
+
+print(round(x))         # Output: 3
+print(abs(y))           # Output: 4 (Absolute value)
+print(pow(4, 3))        # Output: 64 (4 * 4 * 4)
+print(max(x, y, z))     # Output: 5
+print(min(x, y, z))     # Output: -4
+
+# Math Module Constants & Functions
+print(math.pi)          # Output: 3.141592653589793
+print(math.e)           # Output: 2.718281828459045 (Exponential constant)
+print(math.sqrt(9))     # Output: 3.0 (Square root)
+
+# Ceiling (Always rounds UP to nearest integer)
+print(math.ceil(9.1))   # Output: 10
+
+# Floor (Always rounds DOWN to nearest integer)
+print(math.floor(9.9))  # Output: 9</code></pre>
+        </div>
+
+        <h3>4.4 Practical Geometry Projects — Circle &amp; Hypotenuse Calculations</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Geometry Formula Implementations</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import math
+
+# Project A: Circle Circumference (Formula: C = 2 * π * r)
+radius_c = float(input("Enter circle radius (cm): "))
+circumference = 2 * math.pi * radius_c
+print(f"Circumference: {round(circumference, 2)} cm")
+
+# Project B: Circle Area (Formula: A = π * r²)
+radius_a = float(input("Enter circle radius for area (cm): "))
+area = math.pi * pow(radius_a, 2)
+print(f"Circle Area: {round(area, 2)} cm²")
+
+# Project C: Right-Angled Triangle Hypotenuse (Pythagorean Theorem: c = √(a² + b²))
+side_a = float(input("Enter length of side A: "))
+side_b = float(input("Enter length of side B: "))
+hypotenuse = math.sqrt(pow(side_a, 2) + pow(side_b, 2))
+print(f"Calculated Hypotenuse (Side C): {round(hypotenuse, 2)}")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 5 -->
+      <section id="mod5" class="content-section">
+        <h2>Module 5: Decision Making — Conditional Statements &amp; Match-Case</h2>
+
+        <h3>5.1 Conditional Execution Pipeline ( if , elif , else )</h3>
+        <p>Conditional statements evaluate boolean expressions sequentially from top to bottom. The code block associated with the first condition evaluating to <code>True</code> is executed, and all subsequent conditional branches are skipped entirely.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Multi-Branch Conditional Execution</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>age = int(input("Enter your age: "))
+
+if age >= 100:
+    print("You are too old to sign up!")
+elif age >= 18:
+    print("You are now successfully signed up!")
+elif age < 0:
+    print("You haven't been born yet!")
+else:
+    print("You must be 18+ to sign up.")</code></pre>
+        </div>
+
+        <p><strong>Condition Evaluation Order Rules:</strong> Place more restrictive or higher threshold conditions at the top of an <code>if-elif</code> chain. Checking <code>elif age &gt;= 18:</code> before <code>if age &gt;= 100:</code> would cause a 105-year-old user to match the &gt;= 18 branch first, preventing the centenarian check from ever executing!</p>
+
+        <h3>5.2 Comparison Operators</h3>
+        <p>Comparison operators evaluate expressions and return boolean <code>True</code> or <code>False</code> values:</p>
+        <ul>
+          <li><code>==</code> : Equality check (Checks if left value equals right value. Do not confuse with single <code>=</code> assignment!).</li>
+          <li><code>!=</code> : Inequality check (Checks if left value does not equal right value).</li>
+          <li><code>&gt; / &lt;</code> : Greater than / Less than.</li>
+          <li><code>&gt;= / &lt;=</code> : Greater than or equal to / Less than or equal to.</li>
+        </ul>
+
+        <h3>5.3 Python 3.10 Pattern Matching ( match-case Statements)</h3>
+        <p>Introduced in Python 3.10, the <code>match-case</code> statement provides a structured pattern-matching syntax acting as a clean alternative to long chains of <code>elif</code> equality comparisons (similar to switch statements in C/Java). The underscore ( <code>case _</code> ) acts as the default wildcard fallback match.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Match-Case Syntax Implementation</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>def get_day_of_week(day_num):
+    match day_num:
+        case 1:
+            return "Sunday"
+        case 2:
+            return "Monday"
+        case 3:
+            return "Tuesday"
+        case 4:
+            return "Wednesday"
+        case 5:
+            return "Thursday"
+        case 6:
+            return "Friday"
+        case 7:
+            return "Saturday"
+        case _: # Wildcard default match
+            return "Invalid day number!"
+
+print(get_day_of_week(1)) # Output: "Sunday"
+print(get_day_of_week(9)) # Output: "Invalid day number!"
+
+# Combining Multiple Pattern Matches using Bitwise OR (|)
+def is_weekend(day_name):
+    match day_name.capitalize():
+        case "Saturday" | "Sunday":
+            return True
+        case "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday":
+            return False
+        case _:
+            return False
+
+print(is_weekend("Sunday")) # Output: True</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 6 -->
+      <section id="mod6" class="content-section">
+        <h2>Module 6: Logical Operators &amp; Conditional Expressions</h2>
+
+        <h3>6.1 Logical Operators ( or , and , not )</h3>
+        <p>Logical operators allow multiple boolean conditions to be combined together:</p>
+        <ul>
+          <li><code>or</code> : Evaluates to <code>True</code> if at least one condition is true. Short-circuits immediately upon encountering the first true condition.</li>
+          <li><code>and</code> : Evaluates to <code>True</code> only if ALL conditions are true. Short-circuits immediately upon encountering the first false condition.</li>
+          <li><code>not</code> : Inverts the boolean result (turns <code>True</code> to <code>False</code> , and <code>False</code> to <code>True</code> ).</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Logical Operator Chains &amp; Chained Comparisons</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>temp = 25
+is_raining = False
+is_sunny = True
+
+# 1. OR Operator (At least one condition TRUE)
+if temp > 35 or temp < 0 or is_raining:
+    print("Outdoor event is CANCELLED!")
+else:
+    print("Outdoor event is still SCHEDULED.")
+
+# 2. AND Operator (ALL conditions must be TRUE)
+if temp >= 28 and is_sunny:
+    print("It is hot and sunny outside! ")
+
+# 3. Python Chained Comparison Syntax Shortcut
+# Equivalent to: (temp < 28 and temp > 0 and is_sunny)
+if 0 < temp < 28 and is_sunny:
+    print("It is warm and sunny outside!")
+
+# 4. NOT Operator (Inverts boolean logic)
+if not is_raining:
+    print("It is not raining. Enjoy your day!")</code></pre>
+        </div>
+
+        <h3>6.2 Conditional Expressions (Ternary Operator Shorthand)</h3>
+        <p>A Conditional Expression is a concise inline shortcut for evaluating an <code>if-else</code> statement in a single line. It evaluates a condition and assigns or returns one of two values.</p>
+
+        <div class="formula-card">
+          X if condition else Y<br>
+          <em>(Returns value X if condition is True ; otherwise returns value Y ).</em>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Conditional Expressions Examples</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>num = 5
+age = 20
+user_role = "admin"
+
+# Check Positive/Negative
+result = "Positive" if num > 0 else "Negative"
+print(result) # Output: "Positive"
+
+# Check Even/Odd using Modulus
+parity = "Even" if num % 2 == 0 else "Odd"
+print(parity) # Output: "Odd"
+
+# Age Status Evaluation
+status = "Adult" if age >= 18 else "Child"
+print(status) # Output: "Adult"
+
+# Access Level Assignment
+access_level = "Full Access" if user_role == "admin" else "Limited Access"
+print(access_level) # Output: "Full Access"</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 7 -->
+      <section id="mod7" class="content-section">
+        <h2>Module 7: String Manipulation, Slicing &amp; Format Specifiers</h2>
+
+        <h3>7.1 Native String Methods Suite</h3>
+        <p>Strings in Python are immutable sequence objects featuring a rich built-in method library:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>String Method</th>
+                <th>Return Type</th>
+                <th>Description &amp; Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>len(string)</code></td>
+                <td><code>int</code></td>
+                <td>Returns character length of string (including spaces and punctuation).</td>
+              </tr>
+              <tr>
+                <td><code>string.find(sub)</code></td>
+                <td><code>int</code></td>
+                <td>Returns index of first occurrence of substring. Returns <code>-1</code> if not found.</td>
+              </tr>
+              <tr>
+                <td><code>string.rfind(sub)</code></td>
+                <td><code>int</code></td>
+                <td>Returns index of last occurrence of substring. Returns <code>-1</code> if not found.</td>
+              </tr>
+              <tr>
+                <td><code>string.capitalize()</code></td>
+                <td><code>str</code></td>
+                <td>Capitalizes first character of string and converts rest to lowercase.</td>
+              </tr>
+              <tr>
+                <td><code>string.upper() / lower()</code></td>
+                <td><code>str</code></td>
+                <td>Converts entire string to uppercase or lowercase.</td>
+              </tr>
+              <tr>
+                <td><code>string.isdigit()</code></td>
+                <td><code>bool</code></td>
+                <td>Returns <code>True</code> if string contains only digits (0-9).</td>
+              </tr>
+              <tr>
+                <td><code>string.isalpha()</code></td>
+                <td><code>bool</code></td>
+                <td>Returns <code>True</code> if string contains only alphabetical letters (No spaces!).</td>
+              </tr>
+              <tr>
+                <td><code>string.count(sub)</code></td>
+                <td><code>int</code></td>
+                <td>Counts total non-overlapping occurrences of substring.</td>
+              </tr>
+              <tr>
+                <td><code>string.replace(old, new)</code></td>
+                <td><code>str</code></td>
+                <td>Replaces all occurrences of substring <code>old</code> with <code>new</code> .</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>7.2 String Indexing &amp; Slicing Syntax</h3>
+        <p>Slicing extracts sub-sequences from a string using indexing bracket syntax: <code>string[start:end:step]</code> .</p>
+        
+        <p><strong>Slicing Field Rules:</strong></p>
+        <ul>
+          <li><code>start</code> : Inclusive starting index (Defaults to <code>0</code> if omitted).</li>
+          <li><code>end</code> : Exclusive ending index (Defaults to string length if omitted).</li>
+          <li><code>step</code> : Index increment step size (Defaults to <code>1</code> ). Negative step ( <code>-1</code> ) iterates backwards!</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — String Slicing &amp; Negative Indexing</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>credit_number = "1234-5678-9012-3456"
+
+# Fetch First Character (0-indexed)
+print(credit_number[0]) # Output: "1"
+
+# Slice First 4 Digits (Indices 0 to 3; end index 4 is exclusive)
+print(credit_number[0:4]) # Output: "1234"
+print(credit_number[:4])  # Output: "1234" (Omitting start defaults to 0)
+
+# Slice Characters from Index 5 to End
+print(credit_number[5:])  # Output: "5678-9012-3456"
+
+# Negative Indexing (Negative numbers count backwards from end)
+print(credit_number[-1]) # Output: "6" (Last character)
+last_four = credit_number[-4:]
+print(f"XXXX-XXXX-XXXX-{last_four}") # Output: "XXXX-XXXX-XXXX-3456"
+
+# Step Modifier (Extract every 2nd character)
+print(credit_number[::2]) # Output: "13-6891-46"
+
+# Reversing a String using Step -1
+reversed_str = credit_number[::-1]
+print(reversed_str) # Output: "6543-2109-8765-4321"</code></pre>
+        </div>
+
+        <h3>7.3 Advanced Format Specifiers inside F-Strings</h3>
+        <p>Format specifiers dictate visual formatting of numeric output inside F-Strings using colon syntax ( <code>{value:flags}</code> ):</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Format Specifier Demonstrations</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>price1 = 3.14159
+price2 = -987.65
+price3 = 1200.50
+
+# Decimal Precision (.2f = 2 decimal places float)
+print(f"Price: ${price1:.2f}") # Output: "Price: $3.14"
+
+# Allocating Field Width Padding (:10 = Align within 10-character width)
+print(f"Price: ${price3:10.2f}") # Output: "Price: $   1200.50"
+
+# Zero Padding (:010 = Fill leading width with zeros)
+print(f"Price: ${price1:010.2f}") # Output: "Price: $0000003.14"
+
+# Text Alignment (< = Left, > = Right, ^ = Center)
+print(f"Price: ${price1:<10.2f}") # Left aligned
+print(f"Price: ${price1:^10.2f}") # Center aligned
+
+# Positive/Negative Sign Display (+ = Show + for positive)
+print(f"Price: {price1:+.2f}") # Output: "+3.14"
+print(f"Price: {price2:+.2f}") # Output: "-987.65"
+
+# Thousands Separator (, = Insert commas into thousands)
+print(f"Price: ${price3:,.2f}") # Output: "Price: $1,200.50"</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 8 -->
+      <section id="mod8" class="content-section">
+        <h2>Module 8: Loops &amp; Iteration Mechanics — While, For &amp; Nested Loops</h2>
+
+        <h3>8.1 while Loops &amp; Sentinel Control</h3>
+        <p>A <code>while</code> loop repeatedly executes a block of code as long as a specified condition evaluates to <code>True</code> . It is primarily used when the exact number of iteration cycles is unknown ahead of time (such as validating user input).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Input Validation with While Loops</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Input Validation: Continuously re-prompt until valid name provided
+name = input("Enter your name: ")
+while name == "":
+    print("You did not enter your name!")
+    name = input("Enter your name: ") # Sentinel update to break loop
+print(f"Hello {name}")
+
+# Numeric Validation Example
+age = int(input("Enter your age: "))
+while age < 0:
+    print("Age cannot be negative!")
+    age = int(input("Enter your age: "))
+print(f"You are {age} years old.")</code></pre>
+        </div>
+
+        <h3>8.2 for Loops &amp; Range Mechanics</h3>
+        <p>A <code>for</code> loop iterates over a fixed sequence or iterable object (ranges, strings, lists). The built-in <code>range(start, stop, step)</code> function generates integer sequences:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — For Loop Variations</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Iterate over Range 1 to 10 (stop number 11 is EXCLUSIVE)
+for x in range(1, 11):
+    print(x) # Prints 1 through 10
+
+# Iterate Backwards using reversed() or negative step
+for x in reversed(range(1, 11)):
+    print(x) # Prints 10 down to 1
+print("HAPPY NEW YEAR!")
+
+# Custom Step Increments (Count by 2s)
+for x in range(1, 11, 2):
+    print(x) # Prints 1, 3, 5, 7, 9</code></pre>
+        </div>
+
+        <h3>8.3 Loop Control Statements ( break , continue , pass )</h3>
+        <ul>
+          <li><code>continue</code> : Immediately skips the remainder of the current iteration and jumps to the next cycle.</li>
+          <li><code>break</code> : Immediately terminates the loop entirely, jumping execution to code outside the loop block.</li>
+          <li><code>pass</code> : A null-op placeholder statement used when syntactically required, performing no action.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Continue and Break Statements</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Skip unlucky number 13 using continue
+for x in range(1, 21):
+    if x == 13:
+        continue # Skip 13 entirely
+    print(x)
+
+# Terminate loop prematurely using break
+for x in range(1, 21):
+    if x == 13:
+        break # Exit loop completely upon reaching 13
+    print(x)</code></pre>
+        </div>
+
+        <h3>8.4 Nested Loops &amp; Grid Matrix Generation</h3>
+        <p>A Nested Loop consists of a loop placed inside the body of an outer loop. The inner loop completes all of its iterations for every single iteration cycle of the outer loop.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Printing Character Grid with Nested Loops</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>rows = int(input("Enter number of rows: "))
+cols = int(input("Enter number of columns: "))
+symbol = input("Enter symbol to use: ")
+
+for x in range(rows):         # Outer loop controls rows
+    for y in range(cols):     # Inner loop controls columns
+        print(symbol, end="") # Prevent newline between columns
+    print()                   # Print newline after completing each row</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 9 -->
+      <section id="mod9" class="content-section">
+        <h2>Module 9: Python Data Structures — Lists, Sets, Tuples &amp; Dictionaries</h2>
+
+        <h3>9.1 Comparative Overview of Core Collections</h3>
+        <p>Python provides four native general-purpose collection data structures, categorized by four structural properties: Ordering, Mutability, Duplicate Permissibility, and Indexing Support.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Collection</th>
+                <th>Syntax Brackets</th>
+                <th>Ordered?</th>
+                <th>Mutable?</th>
+                <th>Duplicates?</th>
+                <th>Primary Use Case &amp; Characteristics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>List</strong></td>
+                <td>Square <code>[ ]</code></td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>General-purpose dynamic sequences. Highly flexible; supports appending, insertion, removal, and sorting.</td>
+              </tr>
+              <tr>
+                <td><strong>Set</strong></td>
+                <td>Curly <code>{ }</code></td>
+                <td>No</td>
+                <td>Yes (Add/Remove)</td>
+                <td>No</td>
+                <td>Unordered unique elements. Fast membership testing ( O(1) time complexity) and automatic duplicate elimination.</td>
+              </tr>
+              <tr>
+                <td><strong>Tuple</strong></td>
+                <td>Parentheses <code>( )</code></td>
+                <td>Yes</td>
+                <td>No (Immutable)</td>
+                <td>Yes</td>
+                <td>Read-only fixed sequences. Faster execution performance and lower memory footprint than lists. Safe against accidental modification.</td>
+              </tr>
+              <tr>
+                <td><strong>Dictionary</strong></td>
+                <td>Curly <code>{k: v}</code></td>
+                <td>Yes (3.7+)</td>
+                <td>Yes</td>
+                <td>Keys: No / Values: Yes</td>
+                <td>Key-Value pair mappings. Rapid value retrieval by key identifier. Ideal for structured JSON-like data records.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>9.2 Working with Lists</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Complete List Methods Demonstrations</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>fruits = ["apple", "orange", "banana", "coconut"]
+
+# Accessing Elements by Index
+print(fruits[0])  # Output: "apple"
+print(fruits[-1]) # Output: "coconut"
+
+# Modifying List Elements
+fruits[0] = "pineapple"
+
+# Core List Methods
+fruits.append("kiwi")                  # Appends element to end of list
+fruits.insert(1, "mango")              # Inserts "mango" at index 1
+fruits.remove("banana")                # Removes first matching occurrence of "banana"
+popped_item = fruits.pop()             # Removes and returns last element
+fruits.sort()                          # Sorts list elements alphabetically / numerically in place
+fruits.reverse()                       # Reverses list order in place
+print(fruits.index("orange"))          # Returns index of "orange"
+print(fruits.count("apple"))           # Returns count of occurrences
+fruits.clear()                         # Empties entire list</code></pre>
+        </div>
+
+        <h3>9.3 Working with Sets &amp; Tuples</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Set Operations &amp; Tuple Mechanics</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Sets (Unordered, Unique)
+color_set = {"red", "green", "blue", "red"} # Duplicate "red" is automatically discarded
+color_set.add("yellow")
+color_set.remove("green")
+print("red" in color_set) # Membership testing (Fast O(1) lookups)
+
+# Tuples (Ordered, Immutable)
+coordinates = (10.0, 20.0, 30.0)
+print(coordinates[0]) # Read index supported
+# coordinates[0] = 15.0 # TypeError! Tuples are immutable and cannot be modified!
+print(coordinates.count(10.0)) # Count occurrences
+print(coordinates.index(20.0)) # Find index location</code></pre>
+        </div>
+
+        <h3>9.4 Working with Dictionaries ( Key-Value Mappings)</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Dictionary CRUD Operations &amp; Methods</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>capitals = {
+    "USA": "Washington D.C.",
+    "India": "New Delhi",
+    "China": "Beijing",
+    "Russia": "Moscow"
+}
+
+# Safe Access via get() Method (Avoids KeyError if key is missing!)
+print(capitals.get("USA"))   # Output: "Washington D.C."
+print(capitals.get("Japan")) # Output: None (Does not crash program!)
+
+# Updating & Inserting Pairs
+capitals.update({"Germany": "Berlin"}) # Inserts new key-value pair
+capitals.update({"USA": "Detroit"})    # Overwrites existing key value
+
+# Removing Pairs
+capitals.pop("China")   # Removes "China" key-value pair
+capitals.popitem()      # Removes last inserted key-value pair
+
+# Extracting Keys, Values, and Items
+print(capitals.keys())   # Returns dict_keys object
+print(capitals.values()) # Returns dict_values object
+
+# Iterating over Key-Value Pairs using items()
+for country, capital in capitals.items():
+    print(f"The capital of {country} is {capital}")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 10 -->
+      <section id="mod10" class="content-section">
+        <h2>Module 10: 2D Collections &amp; Matrix Manipulation</h2>
+
+        <h3>10.1 Two-Dimensional Collections Architecture</h3>
+        <p>A 2D Collection (such as a 2D List or Matrix) is a collection comprised of other inner collections as its elements. It represents a tabular data structure consisting of rows and columns, similar to a spreadsheet or coordinate grid.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — 2D List Access &amp; Coordinate Indexing</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>fruits = ["apple", "orange", "banana"]
+vegetables = ["celery", "carrots", "potatoes"]
+meats = ["chicken", "fish", "turkey"]
+
+# Constructing 2D Grocery List
+groceries = [fruits, vegetables, meats]
+
+# Accessing Entire Rows
+print(groceries[0]) # Output: ['apple', 'orange', 'banana'] (Row 0)
+print(groceries[1]) # Output: ['celery', 'carrots', 'potatoes'] (Row 1)
+
+# Coordinate Indexing: groceries[row_index][column_index]
+print(groceries[0][0]) # Output: "apple" (Row 0, Col 0)
+print(groceries[1][2]) # Output: "potatoes" (Row 1, Col 2)
+print(groceries[2][1]) # Output: "fish" (Row 2, Col 1)</code></pre>
+        </div>
+
+        <h3>10.2 Iterating Through 2D Collections with Nested Loops</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Matrix Iteration and Numpad Example</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Iterating over 2D Grocery Matrix
+for category in groceries:      # Outer loop iterates rows
+    for item in category:       # Inner loop iterates column elements
+        print(item, end=" ")
+    print()                     # Print newline after each row
+
+# 2D Tuple Telephone Numpad Representation
+numpad = (
+    (1, 2, 3),
+    (4, 5, 6),
+    (7, 8, 9),
+    ("*", 0, "#")
+)
+
+for row in numpad:
+    for num in row:
+        print(num, end=" ")
+    print()</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 11 -->
+      <section id="mod11" class="content-section">
+        <h2>Module 11: Iterables, Membership Operators &amp; List Comprehensions</h2>
+
+        <h3>11.1 Iterables &amp; Membership Operators ( in / not in )</h3>
+        <p>An Iterable is any object or data collection capable of returning its elements sequentially one at a time within a loop. Membership operators ( <code>in</code> and <code>not in</code> ) evaluate whether a value exists inside a sequence, returning boolean <code>True</code> or <code>False</code> .</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Membership Operator Tests</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>word = "APPLE"
+letter = input("Guess a letter: ").upper()
+
+# String Membership Testing
+if letter in word:
+    print(f"Yes! '{letter}' is in the secret word.")
+else:
+    print(f"No, '{letter}' was not found.")
+
+# Dictionary Membership Testing (Checks Keys by default)
+grades = {"Sandy": "A", "Spongebob": "C", "Patrick": "D"}
+student = "Sandy"
+
+if student in grades:
+    print(f"{student}'s grade is: {grades[student]}")</code></pre>
+        </div>
+
+        <h3>11.2 List Comprehension Syntax &amp; Formula</h3>
+        <p>A List Comprehension provides a compact, elegant syntax for generating new lists from existing iterables in a single readable line. They execute significantly faster than traditional imperative for loops with <code>.append()</code> calls.</p>
+
+        <div class="formula-card">
+          Master List Comprehension Formula:<br>
+          [expression for item in iterable if condition]
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — List Comprehensions Comparison</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Traditional Imperative Approach (Requires 4 lines):
+doubles_traditional = []
+for x in range(1, 11):
+    doubles_traditional.append(x * 2)
+
+# Elegant List Comprehension Approach (1 Line):
+doubles = [x * 2 for x in range(1, 11)]
+squares = [z ** 2 for z in range(1, 11)]
+
+print(doubles) # Output: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+print(squares) # Output: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+# List Comprehension with Filtering Conditions:
+numbers = [1, -2, 3, -4, 5, -6, 8, -7]
+positive_nums = [num for num in numbers if num >= 0]
+even_nums = [num for num in numbers if num % 2 == 0]
+
+print(positive_nums) # Output: [1, 3, 5, 8]
+print(even_nums)     # Output: [-2, -4, -6, 8]</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 12 -->
+      <section id="mod12" class="content-section">
+        <h2>Module 12: Functions, Variable Scope &amp; Modular Programming</h2>
+
+        <h3>12.1 Function Definition, Arguments &amp; Return Values</h3>
+        <p>A Function is a reusable block of code designed to perform a specific task. Functions are defined using the <code>def</code> keyword and executed by appending parentheses <code>()</code> to the function identifier (invoking/calling the function).</p>
+        <ul>
+          <li><strong>Parameters:</strong> Variable identifiers listed inside the function definition statement.</li>
+          <li><strong>Arguments:</strong> Actual data values passed into the function parameters during invocation.</li>
+          <li><strong>Return Statement:</strong> The <code>return</code> keyword terminates function execution and sends calculated result data back to the caller.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Functions and Return Values</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Function Definition with Parameters
+def happy_birthday(name, age):
+    print(f"Happy Birthday to {name}!")
+    print(f"You are {age} years old!\n")
+
+# Invoking Function with Arguments
+happy_birthday("Bro", 20)
+happy_birthday("Steve", 30)
+
+# Function Returning Values
+def add(x, y):
+    return x + y
+
+def multiply(x, y):
+    return x * y
+
+total = add(10, 20)
+product = multiply(5, 5)
+print(f"Total: {total}, Product: {product}")</code></pre>
+        </div>
+
+        <h3>12.2 Default Arguments vs. Keyword Arguments</h3>
+        <ul>
+          <li><strong>Default Arguments:</strong> Assign default baseline values to parameters in the function header (e.g., <code>def net_price(list_price, discount=0, tax=0.05)</code> ). Used if the caller omits those arguments. Non-default parameters MUST precede default parameters!</li>
+          <li><strong>Keyword Arguments:</strong> Prefix arguments with parameter names during call time (e.g., <code>func(age=25, name="Bro")</code> ). Ignores positional order and improves code clarity.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Default &amp; Keyword Argument Usage</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Default Arguments
+def net_price(list_price, discount=0.0, tax=0.05):
+    return list_price * (1 - discount) * (1 + tax)
+
+# Uses default discount (0.0) and default tax (0.05)
+print(net_price(500)) 
+
+# Overrides discount parameter with 10% coupon (0.10)
+print(net_price(500, discount=0.10)) 
+
+# Keyword Arguments (Positional order ignored!)
+def hello(greeting, title, first_name, last_name):
+    print(f"{greeting} {title} {first_name} {last_name}")
+
+hello(greeting="Hello", last_name="Squarepants", title="Mr.", first_name="Spongebob")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 13 -->
+      <section id="mod13" class="content-section">
+        <h2>Module 13: Arbitrary Arguments (`*args` &amp; `**kwargs`) &amp; LEGB Rule</h2>
+
+        <h3>13.1 Arbitrary Arguments ( *args &amp; **kwargs )</h3>
+        <p>When the total number of arguments passed into a function is variable or unknown, Python provides two unpacking operators:</p>
+        <ul>
+          <li><code>*args</code> (Positional Unpacking): Prefixed with a single asterisk ( <code>*</code> ). Packs arbitrary positional arguments into a Tuple.</li>
+          <li><code>**kwargs</code> (Keyword Unpacking): Prefixed with double asterisks ( <code>**</code> ). Packs arbitrary keyword arguments into a Dictionary.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Utilizing *args and **kwargs</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># 1. *args Example: Dynamic Summation Function
+def add_all(*args):
+    total = 0
+    for num in args: # args is a Tuple
+        total += num
+    return total
+
+print(add_all(1, 2, 3))         # Output: 6
+print(add_all(10, 20, 30, 40))   # Output: 100
+
+# 2. **kwargs Example: Dynamic Address Printer
+def print_address(**kwargs):
+    for key, value in kwargs.items(): # kwargs is a Dictionary
+        print(f"{key}: {value}")
+
+print_address(street="123 Fake St", city="Detroit", state="MI", zip="54321")
+
+# 3. Combining *args and **kwargs (args MUST precede kwargs!)
+def shipping_label(*args, **kwargs):
+    print("Recipient:", " ".join(args))
+    print("Address:", f"{kwargs.get('street')}, {kwargs.get('city')}, {kwargs.get('state')}")
+
+shipping_label("Dr.", "Spongebob", "Squarepants", street="123 Conch St", city="Bikini Bottom", state="OC")</code></pre>
+        </div>
+
+        <h3>13.2 Variable Scope &amp; The LEGB Resolution Rule</h3>
+        <p>Variable Scope defines the accessibility boundary of a variable. Python resolves variable identifiers sequentially using the LEGB Rule order:</p>
+        <ol>
+          <li><strong>L — Local Scope:</strong> Variables declared inside the body of the active function.</li>
+          <li><strong>E — Enclosed Scope:</strong> Variables declared within an outer wrapping function (in nested functions).</li>
+          <li><strong>G — Global Scope:</strong> Variables declared at the top-level script file level outside any function.</li>
+          <li><strong>B — Built-in Scope:</strong> Pre-loaded language keywords and built-in identifiers (e.g., <code>len</code> , <code>range</code> , <code>print</code> ).</li>
+        </ol>
+      </section>
+
+      <!-- Module 14 -->
+      <section id="mod14" class="content-section">
+        <h2>Module 14: Python Modules &amp; Main Guard Syntax</h2>
+
+        <h3>14.1 Working with Native &amp; Custom Modules</h3>
+        <p>A Module is a Python file ( <code>.py</code> ) containing classes, functions, and variables intended to be imported into other scripts for modular organization.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Custom Module Definition &amp; Importing Mechanics</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># --- Custom Module File: example_math.py ---
+pi = 3.14159
+
+def square(x):
+    return x ** 2
+
+def cube(x):
+    return x ** 3
+
+# --- Main Application Script: main.py ---
+# Method 1: Import full module
+import example_math
+print(example_math.square(4)) # Output: 16
+
+# Method 2: Import with module alias
+import example_math as em
+print(em.cube(3))             # Output: 27
+
+# Method 3: Import specific function identifiers directly
+from example_math import pi, square
+print(pi)                     # Output: 3.14159</code></pre>
+        </div>
+
+        <h3>14.2 The if __name__ == '__main__': Execution Guard</h3>
+        <p>When Python executes a script, it assigns the special internal variable <code>__name__</code> a string value:</p>
+        <ul>
+          <li>If the script is being run directly as the entry point: <code>__name__ == '__main__'</code> .</li>
+          <li>If the script is being imported into another module: <code>__name__ == 'module_filename'</code> .</li>
+        </ul>
+        <p><strong>Architectural Purpose:</strong> Wrapping entry-point execution code inside <code>if __name__ == '__main__':</code> prevents functions in imported library modules from triggering unintended side-effects or test executions when imported elsewhere!</p>
+      </section>
+
+      <!-- Module 15 -->
+      <section id="mod15" class="content-section">
+        <h2>Module 15: File I/O Mechanics &amp; Serialization (Text, JSON, CSV)</h2>
+
+        <h3>15.1 Context Managers &amp; File Modes</h3>
+        <p>The safest pattern for file manipulation is the <code>with open(path, mode) as file:</code> context manager syntax. It guarantees that physical system file handles are closed automatically upon block exit, preventing resource leaks or file lock errors.</p>
+        <ul>
+          <li><code>'w'</code> (Write): Overwrites existing file content or creates a new file if missing.</li>
+          <li><code>'a'</code> (Append): Appends new data to the end of existing file content without overwriting.</li>
+          <li><code>'r'</code> (Read): Reads existing file content. Raises <code>FileNotFoundError</code> if missing.</li>
+          <li><code>'x'</code> (Exclusive Creation): Creates a new file; raises <code>FileExistsError</code> if file exists.</li>
+        </ul>
+
+        <h3>15.2 Handling Plain Text Files ( .txt )</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Plain Text File Operations</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>file_path = "output.txt"
+
+# 1. Writing Text File
+employees = ["Spongebob", "Patrick", "Squidward", "Sandy"]
+with open(file_path, "w") as file:
+    for emp in employees:
+        file.write(emp + "\n")
+print("Text file created successfully.")
+
+# 2. Reading Text File
+with open(file_path, "r") as file:
+    content = file.read()
+    print("--- File Content ---")
+    print(content)</code></pre>
+        </div>
+
+        <h3>15.3 Handling JSON Files ( .json Serialization)</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — JSON Serialization &amp; Deserialization</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import json
+
+json_path = "employee.json"
+employee_data = {
+    "name": "Spongebob",
+    "age": 30,
+    "job": "Cook",
+    "skills": ["Frying", "Karate"]
+}
+
+# 1. Writing JSON (Serialization / Dump)
+with open(json_path, "w") as file:
+    json.dump(employee_data, file, indent=4) # indent=4 formats pretty JSON
+
+# 2. Reading JSON (Deserialization / Load)
+with open(json_path, "r") as file:
+    loaded_data = json.load(file)
+    print(f"Loaded Employee: {loaded_data['name']}, Job: {loaded_data['job']}")</code></pre>
+        </div>
+
+        <h3>15.4 Handling CSV Files ( .csv Data Spreadsheets)</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Tabular CSV File Operations</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import csv
+
+csv_path = "employees.csv"
+data = [
+    ["Name", "Age", "Job"],
+    ["Spongebob", 30, "Cook"],
+    ["Patrick", 35, "Unemployed"],
+    ["Sandy", 27, "Scientist"]
+]
+
+# 1. Writing CSV File (newline="" prevents blank line injection on Windows)
+with open(csv_path, "w", newline="") as file:
+    writer = csv.writer(file)
+    for row in data:
+        writer.writerow(row)
+
+# 2. Reading CSV File
+with open(csv_path, "r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(f"Row Data: {row}")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 16 -->
+      <section id="mod16" class="content-section">
+        <h2>Module 16: Exception Handling &amp; Resource Safety</h2>
+
+        <h3>16.1 What is an Exception?</h3>
+        <p>An Exception is an event or error occurring during script runtime that interrupts normal execution flow. Unhandled exceptions cause Python scripts to terminate abruptly, outputting a stack trace traceback error message.</p>
+
+        <h3>16.2 The Try-Except-Else-Finally Architecture</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Comprehensive Exception Handling Block</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>try:
+    # Dangerous Code Block: Operations that may trigger runtime errors
+    number = int(input("Enter a divisor number: "))
+    result = 10 / number
+except ZeroDivisionError:
+    # Catches division by zero error (e.g. input 0)
+    print("Error: You cannot divide a number by zero!")
+except ValueError:
+    # Catches invalid input type conversions (e.g. input "pizza")
+    print("Error: Please enter valid numeric digits only!")
+except Exception as e:
+    # Catch-all fallback handler for unexpected exceptions
+    print(f"An unexpected error occurred: {e}")
+else:
+    # Executes ONLY if NO exceptions occurred in try block
+    print(f"Success! Calculation result: {result}")
+finally:
+    # ALWAYS executes regardless of whether exceptions occurred (Resource Cleanup)
+    print("Execution complete. Cleaning up resources.")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 17 -->
+      <section id="mod17" class="content-section">
+        <h2>Module 17: Object-Oriented Programming (OOP) Essentials</h2>
+
+        <h3>17.1 Classes, Objects, Attributes &amp; Methods</h3>
+        <p>Object-Oriented Programming (OOP) structures software programs around real-world data entities called Objects:</p>
+        <ul>
+          <li><strong>Class:</strong> A blueprint or template defining structural rules, variables, and functions.</li>
+          <li><strong>Object:</strong> A concrete instance created from a Class blueprint allocated in memory.</li>
+          <li><strong>Attributes:</strong> Variables associated with an Object representing its data state (e.g., <code>model</code> , <code>color</code> ).</li>
+          <li><strong>Methods:</strong> Functions declared inside a Class defining behaviors the Object can execute (e.g., <code>drive()</code> , <code>stop()</code> ).</li>
+        </ul>
+
+        <h3>17.2 The Constructor ( __init__ ) &amp; self Parameter</h3>
+        <p>The <code>__init__()</code> method is a special double-underscore (dunder) constructor method automatically invoked when a new object is instantiated. The <code>self</code> parameter represents the reference to the active object instance being created or operated upon.</p>
+
+        <h3>17.3 Instance Variables vs. Class Variables</h3>
+        <ul>
+          <li><strong>Instance Variables:</strong> Declared inside the <code>__init__</code> constructor using <code>self.variable</code> . Each instantiated object maintains its own unique instance value.</li>
+          <li><strong>Class Variables:</strong> Declared outside the constructor at class level. Shared globally across ALL instances instantiated from that class.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Complete OOP Class Definition</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>class Student:
+    # Class Variable (Shared across all student instances)
+    class_year = 2025
+    num_students = 0
+
+    # Constructor Method
+    def __init__(self, name, age):
+        # Instance Variables (Unique to each instance)
+        self.name = name
+        self.age = age
+        # Increment global class variable counter
+        Student.num_students += 1
+
+    # Instance Method
+    def study(self):
+        print(f"{self.name} is studying hard!")
+
+# Instantiating Objects
+student1 = Student("Spongebob", 30)
+student2 = Student("Patrick", 35)
+
+# Accessing Instance & Class Variables
+print(f"{student1.name} is {student1.age} years old.")
+print(f"Total Students Enrolled: {Student.num_students}") # Access via Class Identifier!
+student1.study()</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 18 -->
+      <section id="mod18" class="content-section">
+        <h2>Module 18: Advanced OOP — Inheritance, Super(), &amp; Polymorphism</h2>
+
+        <h3>18.1 Class Inheritance Architecture</h3>
+        <p>Inheritance allows a child class (subclass) to inherit all attributes and methods from a parent class (superclass), promoting code reusability and eliminating redundancy.</p>
+
+        <h3>18.2 Extending Behavior via super() Function</h3>
+        <p>The <code>super()</code> function allows a child class constructor or method to invoke the parent class constructor, delegating baseline initialization tasks upward.</p>
+
+        <h3>18.3 Polymorphism &amp; Duck Typing</h3>
+        <p>Polymorphism ("many forms") allows objects of different classes to respond to identical method calls based on shared interface signatures. Python utilizes Duck Typing: <em>"If it looks like a duck and quacks like a duck, it's treated as a duck."</em> Object identity depends on method presence rather than rigid explicit class inheritance.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Inheritance, super(), and Polymorphism</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Parent Superclass
+class Shape:
+    def __init__(self, color, is_filled):
+        self.color = color
+        self.is_filled = is_filled
+
+# Child Subclass 1
+class Circle(Shape):
+    def __init__(self, color, is_filled, radius):
+        super().__init__(color, is_filled) # Delegate parent initialization
+        self.radius = radius
+
+    def area(self):
+        import math
+        return math.pi * (self.radius ** 2)
+
+# Child Subclass 2
+class Square(Shape):
+    def __init__(self, color, is_filled, side):
+        super().__init__(color, is_filled)
+        self.side = side
+
+    def area(self):
+        return self.side ** 2
+
+# Demonstrating Polymorphism
+shapes = [Circle("Red", True, 5), Square("Blue", False, 4)]
+for shape in shapes:
+    # Identical area() method call executed on distinct objects!
+    print(f"{shape.color} Shape Area: {shape.area():.2f}")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 19 -->
+      <section id="mod19" class="content-section">
+        <h2>Module 19: Encapsulation, Properties, &amp; Special Magic Methods</h2>
+
+        <h3>19.1 Encapsulation &amp; The @property Decorator</h3>
+        <p>Encapsulation restricts direct external access to internal object attributes. Prefixing attributes with an underscore ( <code>_attribute</code> ) marks them protected. The <code>@property</code> decorator defines managed Getters, Setters, and Deleters to validate attribute access safely.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Getter and Setter Property Methods</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>class Rectangle:
+    def __init__(self, width, height):
+        self._width = width # Protected variable
+        self._height = height
+
+    # Getter for width
+    @property
+    def width(self):
+        return self._width
+
+    # Setter for width with validation
+    @width.setter
+    def width(self, new_width):
+        if new_width > 0:
+            self._width = new_width
+        else:
+            print("Error: Width must be greater than zero!")
+
+rect = Rectangle(10, 20)
+rect.width = 15     # Calls @width.setter automatically!
+print(rect.width)   # Calls @property getter!</code></pre>
+        </div>
+
+        <h3>19.2 Magic / Dunder Methods Suite</h3>
+        <p>Dunder methods customize operator and system behaviors for custom objects:</p>
+        <ul>
+          <li><code>__str__(self)</code> : Returns string representation when object is printed ( <code>print(obj)</code> ).</li>
+          <li><code>__eq__(self, other)</code> : Customizes equality comparison operator ( <code>obj1 == obj2</code> ).</li>
+          <li><code>__lt__(self, other)</code> : Customizes less-than comparison operator ( <code>obj1 &lt; obj2</code> ).</li>
+          <li><code>__add__(self, other)</code> : Customizes addition operator ( <code>obj1 + obj2</code> ).</li>
+          <li><code>__contains__(self, item)</code> : Customizes membership operator check ( <code>item in obj</code> ).</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Implementing Dunder Methods</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>class Book:
+    def __init__(self, title, author, pages):
+        self.title = title
+        self.author = author
+        self.pages = pages
+
+    def __str__(self):
+        return f"'{self.title}' by {self.author}"
+
+    def __eq__(self, other):
+        return self.title == other.title and self.author == other.author
+
+    def __add__(self, other):
+        return self.pages + other.pages
+
+book1 = Book("The Hobbit", "J.R.R. Tolkien", 310)
+book2 = Book("Harry Potter", "J.K. Rowling", 223)
+
+print(book1)                              # Output: 'The Hobbit' by J.R.R. Tolkien
+print(book1 == book2)                     # Output: False
+print(f"Total Pages: {book1 + book2}")     # Output: 533</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 20 -->
+      <section id="mod20" class="content-section">
+        <h2>Module 20: Decorators &amp; Functional Extensions</h2>
+
+        <h3>20.1 What is a Decorator?</h3>
+        <p>A Decorator is a higher-order function that takes a base function as an argument, extends or modifies its behavior within an inner wrapper function, and returns the modified function without altering the base function's source code.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Custom Decorator Function</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Decorator Function Definition
+def add_sprinkles(func):
+    def wrapper(*args, **kwargs):
+        print("*Adding colorful sprinkles...* ")
+        func(*args, **kwargs) # Call original base function
+    return wrapper
+
+# Applying Decorator using @ Syntax
+@add_sprinkles
+def get_ice_cream(flavor):
+    print(f"Here is your delicious {flavor} ice cream! ")
+
+# Invoking Decorated Function
+get_ice_cream("Vanilla")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 21 -->
+      <section id="mod21" class="content-section">
+        <h2>Module 21: Multithreading &amp; Concurrent Programming</h2>
+
+        <h3>21.1 Multithreading Mechanics</h3>
+        <p>Multithreading enables a Python program to execute multiple function tasks concurrently on separate threads of execution. Multithreading is optimal for I/O-bound operations (network requests, file downloads, database queries) where execution time is spent waiting on external resources.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Multithreading Concurrent Tasks with Join</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import threading
+import time
+
+def walk_dog(first_name):
+    time.sleep(4) # Simulate 4-second I/O delay
+    print(f"You finished walking {first_name}!")
+
+def take_out_trash():
+    time.sleep(2)
+    print("You took out the trash!")
+
+# Creating Thread Objects (Pass target function and args tuple)
+thread1 = threading.Thread(target=walk_dog, args=("Scooby",))
+thread2 = threading.Thread(target=take_out_trash)
+
+# Start Threads Concurrently
+thread1.start()
+thread2.start()
+
+# Synchronize: Wait for both threads to finish before proceeding
+thread1.join()
+thread2.join()
+
+print("All concurrent chores are complete!")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 22 -->
+      <section id="mod22" class="content-section">
+        <h2>Module 22: REST API Integration &amp; Web Requests</h2>
+
+        <h3>22.1 HTTP Web Requests with requests Module</h3>
+        <p>The third-party <code>requests</code> module manages HTTP communications with web services and REST APIs. Key HTTP status codes include: <code>200</code> (OK / Success), <code>400</code> (Bad Request), <code>401</code> (Unauthorized), <code>404</code> (Not Found), and <code>500</code> (Internal Server Error).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Fetching Pokemon REST API Data</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import requests
+
+pokemon_name = "pikachu"
+url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+
+try:
+    response = requests.get(url)
+    response.raise_for_status() # Raise exception for 4xx/5xx HTTP errors
+
+    # Parse JSON Response Body into Python Dictionary
+    pokemon_data = response.json()
+    print(f"Pokemon Name: {pokemon_data['name'].capitalize()}")
+    print(f"Pokemon ID: #{pokemon_data['id']}")
+    print(f"Base Height: {pokemon_data['height']}")
+    print(f"Base Weight: {pokemon_data['weight']}")
+except requests.exceptions.HTTPError as e:
+    print(f"HTTP Error Occurred: {e}")
+except requests.exceptions.RequestException as e:
+    print(f"Network Connection Error: {e}")</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 23 & 24 -->
+      <section id="mod23" class="content-section">
+        <h2>Module 23: Desktop GUI Development with PyQt5 — Core Architecture</h2>
+
+        <h3>23.1 PyQt5 Application Boilerplate Architecture</h3>
+        <p>PyQt5 is a set of Python bindings for the cross-platform Qt C++ application framework used to construct graphical desktop applications.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — PyQt5 Main Window Boilerplate</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtGui import QIcon
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("PyQt5 GUI Master Window")
+        # setGeometry(x_position, y_position, width, height)
+        self.setGeometry(700, 300, 500, 500)
+        # self.setWindowIcon(QIcon("icon.png"))
+
+def main():
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()           # Display Window
+    sys.exit(app.exec_())   # Start Main Event Loop
+
+if __name__ == "__main__":
+    main()</code></pre>
+        </div>
+
+        <h2 id="mod24">Module 24: PyQt5 Event Handling, Signals, Slots &amp; Custom Styling</h2>
+
+        <h3>24.1 Widgets, Signals &amp; Layout Managers</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python Script — Interactive PyQt5 Application</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import sys
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QLabel, QPushButton, 
+                             QLineEdit, QVBoxLayout, QWidget)
+from PyQt5.QtCore import Qt
+
+class InteractiveWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Interactive PyQt5 App")
+        self.setGeometry(700, 300, 400, 300)
+        self.init_ui()
+
+    def init_ui(self):
+        # Central Widget & Vertical Layout
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        layout = QVBoxLayout()
+
+        # Input LineEdit Text Box
+        self.input_box = QLineEdit()
+        self.input_box.setPlaceholderText("Enter your username...")
+
+        # Interactive Button
+        self.button = QPushButton("Submit")
+        # Connect Signal (clicked) to Slot (on_click method)
+        self.button.clicked.connect(self.on_click)
+
+        # Output Label
+        self.label = QLabel("Welcome!")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        # Add Widgets to Layout
+        layout.addWidget(self.input_box)
+        layout.addWidget(self.button)
+        layout.addWidget(self.label)
+        central_widget.setLayout(layout)
+
+    def on_click(self):
+        text = self.input_box.text()
+        self.label.setText(f"Hello, {text}!")
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    win = InteractiveWindow()
+    win.show()
+    sys.exit(app.exec_())</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 25 -->
+      <section id="mod25" class="content-section">
+        <h2>Module 25: Master Python Cheat Sheet &amp; Reference Index</h2>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Syntax Pattern / Function</th>
+                <th>Description &amp; Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3"><strong>Console I/O</strong></td>
+                <td><code>print(f"{var}")</code></td>
+                <td>Formatted String Literal interpolation.</td>
+              </tr>
+              <tr>
+                <td><code>input("Prompt: ")</code></td>
+                <td>Reads user string input from terminal.</td>
+              </tr>
+              <tr>
+                <td><code>int() / float() / str()</code></td>
+                <td>Type casting functions.</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>String Slicing</strong></td>
+                <td><code>s[0:4]</code></td>
+                <td>Extracts first 4 characters (index 0 to 3).</td>
+              </tr>
+              <tr>
+                <td><code>s[-4:]</code></td>
+                <td>Extracts last 4 characters.</td>
+              </tr>
+              <tr>
+                <td><code>s[::-1]</code></td>
+                <td>Reverses string completely.</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>Collections</strong></td>
+                <td><code>[x for x in list]</code></td>
+                <td>List Comprehension formula.</td>
+              </tr>
+              <tr>
+                <td><code>dict.get(key)</code></td>
+                <td>Safe dictionary access without KeyError.</td>
+              </tr>
+              <tr>
+                <td><code>set.add(val)</code></td>
+                <td>Adds unique value to set.</td>
+              </tr>
+              <tr>
+                <td><code>tuple[0]</code></td>
+                <td>Read-only ordered index access.</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>OOP Paradigm</strong></td>
+                <td><code>class Sub(Parent):</code></td>
+                <td>Class inheritance declaration.</td>
+              </tr>
+              <tr>
+                <td><code>super().__init__()</code></td>
+                <td>Calls parent superclass constructor.</td>
+              </tr>
+              <tr>
+                <td><code>@property</code></td>
+                <td>Defines managed getter/setter attribute.</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>File &amp; API</strong></td>
+                <td><code>with open(f, 'r') as file:</code></td>
+                <td>Auto-closing file context manager.</td>
+              </tr>
+              <tr>
+                <td><code>json.dump(d, f) / json.load(f)</code></td>
+                <td>JSON serialization / deserialization.</td>
+              </tr>
+              <tr>
+                <td><code>requests.get(url).json()</code></td>
+                <td>HTTP GET request JSON response parsing.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="page-nav-footer">
+          <a href="git-github.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Git &amp; GitHub Master Notes</span>
+          </a>
+          <a href="python-runtime.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Python Architecture &amp; Runtime</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Core &amp; Advanced Java Notes | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (21 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#overview">Overview &amp; Architecture</a></li>
+        <li><a href="#ch-1">1. Execution Model &amp; JDK/JRE/JVM</a></li>
+        <li class="depth-2"><a href="#ch-1-1">1.1 Execution Pipeline</a></li>
+        <li class="depth-2"><a href="#ch-1-2">1.2 JDK vs JRE vs JVM</a></li>
+        <li class="depth-2"><a href="#ch-1-3">1.3 Anatomy of Main</a></li>
+        <li class="depth-2"><a href="#ch-1-4">1.4 Console Output &amp; Escapes</a></li>
+        <li><a href="#ch-2">2. Memory Architecture &amp; Types</a></li>
+        <li class="depth-2"><a href="#ch-2-1">2.1 Stack vs Heap Allocation</a></li>
+        <li class="depth-2"><a href="#ch-2-2">2.2 Primitives vs References</a></li>
+        <li><a href="#ch-3">3. Scanner &amp; Buffer Management</a></li>
+        <li class="depth-2"><a href="#ch-3-1">3.1 Scanner Mechanics</a></li>
+        <li class="depth-2"><a href="#ch-3-2">3.2 The Input Buffer Trap</a></li>
+        <li><a href="#ch-4">4. Arithmetic &amp; Precedence</a></li>
+        <li class="depth-2"><a href="#ch-4-1">4.1 Modulus &amp; Operations</a></li>
+        <li class="depth-2"><a href="#ch-4-2">4.2 Integer vs Float Division</a></li>
+        <li class="depth-2"><a href="#ch-4-3">4.3 Pre vs Post-Increment</a></li>
+        <li class="depth-2"><a href="#ch-4-4">4.4 Operator Precedence</a></li>
+        <li><a href="#ch-5">5. Control Flow &amp; Switches</a></li>
+        <li class="depth-2"><a href="#ch-5-1">5.1 Conditional Execution</a></li>
+        <li class="depth-2"><a href="#ch-5-2">5.2 Ternary Operator</a></li>
+        <li class="depth-2"><a href="#ch-5-3">5.3 Enhanced Switch (Java 14+)</a></li>
+        <li><a href="#ch-6">6. Logic &amp; Random Numbers</a></li>
+        <li class="depth-2"><a href="#ch-6-1">6.1 Short-Circuit Evaluation</a></li>
+        <li class="depth-2"><a href="#ch-6-2">6.2 Pseudo-Random Numbers</a></li>
+        <li><a href="#ch-7">7. Math &amp; printf Formatting</a></li>
+        <li class="depth-2"><a href="#ch-7-1">7.1 Math Class Utilities</a></li>
+        <li class="depth-2"><a href="#ch-7-2">7.2 printf Specifier Reference</a></li>
+        <li><a href="#ch-8">8. Strings &amp; String Constant Pool</a></li>
+        <li class="depth-2"><a href="#ch-8-1">8.1 Immutability &amp; Pool</a></li>
+        <li class="depth-2"><a href="#ch-8-2">8.2 String Slicing Demo</a></li>
+        <li><a href="#ch-9">9. Iteration &amp; Loops</a></li>
+        <li><a href="#ch-10">10. Methods &amp; Overloading</a></li>
+        <li><a href="#ch-11">11. Scope, Lifetime &amp; Shadowing</a></li>
+        <li><a href="#ch-12">12. Arrays, Operations &amp; Varargs</a></li>
+        <li><a href="#ch-13">13. OOP Fundamentals &amp; Static</a></li>
+        <li><a href="#ch-14">14. Advanced OOP Pillars</a></li>
+        <li class="depth-2"><a href="#ch-14-1">14.1 The Four Pillars</a></li>
+        <li class="depth-2"><a href="#ch-14-2">14.2 Aggregation vs Composition</a></li>
+        <li><a href="#ch-15">15. ArrayList &amp; HashMap</a></li>
+        <li><a href="#ch-16">16. Enums &amp; Generics (&lt;T&gt;)</a></li>
+        <li><a href="#ch-17">17. Exception Handling &amp; File I/O</a></li>
+        <li><a href="#ch-18">18. Dates &amp; Times (java.time)</a></li>
+        <li><a href="#ch-19">19. Anonymous Classes &amp; Timers</a></li>
+        <li><a href="#ch-20">20. Multithreading &amp; Concurrency</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero" id="overview">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 10 &bull; 21 Pages</span>
+        </div>
+        <h1 class="doc-title">THE COMPLETE JAVA MASTER REFERENCE MANUAL</h1>
+        <p class="doc-subtitle">Comprehensive Core &amp; Advanced Java Notes &mdash; Fully Expanded Edition | Complete Conceptual Depth, Architectural Diagrams &amp; Production Code Snippets</p>
+      </div>
+
+<section class="content-section" id="ch-1">
+        <h2>1. Execution Model, JDK/JRE/JVM &amp; First Program</h2>
+
+        <h3 id="ch-1-1">1.1 Conceptual Deep Dive &amp; Execution Pipeline</h3>
+        <p>Java is a high-level, class-based, object-oriented programming language designed around the core philosophy of <strong>"Write Once, Run Anywhere" (WORA)</strong>. Unlike traditional purely compiled languages (like C or C++) which compile directly into platform-specific machine code (binary instructions unique to an x86 or ARM CPU), Java uses a two-stage translation pipeline involving both compilation and interpretation.</p>
+        <p>When a developer writes code in a file named <code>Main.java</code>, this file contains human-readable Java syntax. The Java Compiler (<code>javac</code>) compiles this source code into an intermediate format called <strong>Bytecode</strong>, stored in a <code>Main.class</code> file. Bytecode is not machine code for any real computer hardware; instead, it is an optimized set of instructions for an abstract machine called the <strong>Java Virtual Machine (JVM)</strong>.</p>
+        <p>When executing the application, the JVM loads the <code>.class</code> file and translates bytecode instructions into native machine code on the fly using a combination of an <strong>Interpreter</strong> and a <strong>Just-In-Time (JIT) Compiler</strong>. The Interpreter reads bytecode instructions line by line and executes them. However, when the JVM detects "hot spots" (frequently executed code paths, such as loops), the JIT compiler compiles those bytecode segments into native machine instructions directly executed by the host CPU, drastically accelerating execution speed.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>+--------------------+      javac Compiler      +--------------------+
+|  Source Code File  | -----------------------> |   Bytecode File    |
+|    (Main.java)     |                          |    (Main.class)    |
++--------------------+                          +--------------------+
+                                                          |
+                                                          v
+                                               +----------------------+
+                                               | Java Virtual Machine |
+                                               |        (JVM)         |
+                                               +----------------------+
+                                                          |
+                                  +-----------------------+-----------------------+
+                                  |                       |                       |
+                                  v                       v                       v
+                         +-----------------+     +-----------------+     +-----------------+
+                         |  Windows OS/CPU |     |    macOS/CPU    |     |   Linux OS/CPU  |
+                         |  Machine Code   |     |   Machine Code  |     |   Machine Code  |
+                         +-----------------+     +-----------------+     +-----------------+</code></pre>
+        </div>
+
+        <h3 id="ch-1-2">1.2 Architecture Stack: JDK vs. JRE vs. JVM</h3>
+        <p>To understand the Java runtime ecosystem, one must differentiate between the three core architectural layers:</p>
+        <ul>
+          <li><strong>JVM (Java Virtual Machine):</strong> The core execution engine. The JVM manages application memory (Stack and Heap), handles automatic garbage collection, enforces security boundaries, and executes bytecode. There are platform-specific JVM implementations for Windows, macOS, Linux, Android, etc.</li>
+          <li><strong>JRE (Java Runtime Environment):</strong> The distribution package necessary to run a compiled Java program. It encompasses the JVM along with the core Java Class Libraries (e.g., <code>java.lang</code>, <code>java.util</code>, <code>java.io</code>) and support files. It does not contain compilation tools.</li>
+          <li><strong>JDK (Java Development Kit):</strong> The full-featured software development environment required to create and compile Java applications. The JDK contains the JRE, the Java compiler (<code>javac</code>), the archiver (<code>jar</code>), documentation generators (<code>javadoc</code>), and debugging utilities (<code>jdb</code>).</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>JDK (Java Development Kit)
+[Compiler (javac) | Archiver (jar) | Debugger (jdb) | Documentation (javadoc)]
+       |
+       v
+JRE (Java Runtime Environment)
+[ Core Class Libraries (java.base, java.util) | Runtime Libraries ]
+       |
+       v
+JVM (Java Virtual Machine)
+[ Bytecode Interpreter | JIT Compiler | Garbage Collector | Stack & Heap Memory ]</code></pre>
+        </div>
+
+        <h3 id="ch-1-3">1.3 Anatomy of the Main Method</h3>
+        <p>Every standalone executable Java application requires an entry point signature matching the exact declaration:</p>
+        
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; Main.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class Main {
+    /**
+     * Entry point of the Java Application.
+     * @param args Command-line arguments passed to the application.
+     */
+    public static void main(String[] args) {
+        // Output statements
+        System.out.println("Hello, World!");
+        System.out.print("Execution finished without new line.\n");
+    }
+}</code></pre>
+        </div>
+
+        <p>Let's dissect each keyword of <code>public static void main(String[] args)</code>:</p>
+        <ul>
+          <li><strong>public:</strong> An access modifier specifying that the method can be invoked from anywhere outside its class package. The JVM launcher must call this method from the host operating system context.</li>
+          <li><strong>static:</strong> Indicates that the method belongs to the class itself, rather than an object instance of the class. This allows the JVM to invoke <code>main()</code> directly without allocating memory for an instance of the <code>Main</code> class first.</li>
+          <li><strong>void:</strong> The return type, specifying that this method does not return any value back to the caller upon completion.</li>
+          <li><strong>main:</strong> The exact method name searched for by the JVM class loader.</li>
+          <li><strong>String[] args:</strong> An array of String objects representing command-line parameters passed into the application at execution time (e.g., <code>java Main arg1 arg2</code>).</li>
+        </ul>
+
+        <h3 id="ch-1-4">1.4 Console Output &amp; Escape Sequences</h3>
+        <p>Java handles console output via <code>System.out</code>, which is an instance of <code>java.io.PrintStream</code>:</p>
+        <ul>
+          <li><code>System.out.print()</code>: Outputs the specified text string to the console without moving the output cursor to a new line.</li>
+          <li><code>System.out.println()</code>: Outputs the specified text string and automatically appends a platform-specific newline sequence, moving the cursor to the beginning of the next line.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Escape Sequence</th>
+                <th>Name</th>
+                <th>Description &amp; Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>\n</code></td>
+                <td>Newline</td>
+                <td>Moves the output cursor to the start of the next line.</td>
+              </tr>
+              <tr>
+                <td><code>\t</code></td>
+                <td>Tab</td>
+                <td>Inserts a standard horizontal tab space (typically 4 or 8 spaces).</td>
+              </tr>
+              <tr>
+                <td><code>\"</code></td>
+                <td>Double Quote</td>
+                <td>Escapes a literal double quote inside a String literal without closing it.</td>
+              </tr>
+              <tr>
+                <td><code>\\</code></td>
+                <td>Backslash</td>
+                <td>Inserts a single literal backslash character into the output string.</td>
+              </tr>
+              <tr>
+                <td><code>\r</code></td>
+                <td>Carriage Return</td>
+                <td>Moves the cursor back to the start of the current line, overwriting prior text.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Chapter 2 -->
+      <section class="content-section" id="ch-2">
+        <h2>2. Memory Architecture &amp; Primitive/Reference Types</h2>
+
+        <h3 id="ch-2-1">2.1 Stack vs. Heap Memory Allocation</h3>
+        <p>Java divides runtime RAM memory into distinct region architectures managed directly by the JVM:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>STACK MEMORY                                  HEAP MEMORY
+(Thread-Private, Fast, LIFO)                  (Shared, Dynamic Allocation)
++----------------------------------------+    +------------------------------------+
+| main() Frame                           |    |                                    |
+|  - primitive int age = 25              |    |  String Object                     |
+|  - primitive double gpa = 3.85         |    |  [ Value: "SpongeBob" ]            |
+|  - reference nameRef ------------------+--->|  Address: @0x7f8a9                 |
+|                                        |    |                                    |
++----------------------------------------+    |  Array Object                      |
+| calculate() Frame                      |    |  [ 10, 20, 30 ]                    |
+|  - local int temp = 100                |    |  Address: @0x3b1c2                 |
++----------------------------------------+    +------------------------------------+</code></pre>
+        </div>
+
+        <p><strong>Stack Memory:</strong> Each thread in a Java application possesses its own private Stack. Stack memory operates on a Last-In, First-Out (LIFO) frame basis. Whenever a method is called, a new Stack Frame is created containing all local variables and primitive values declared within that method. When the method returns, its stack frame is instantly popped and deallocated.</p>
+        <p><strong>Heap Memory:</strong> A single, globally shared pool of memory accessible by all application threads. All runtime objects (e.g., custom class instances, arrays, Strings) are dynamically allocated on the Heap using the <code>new</code> operator. Objects on the Heap remain alive until they are no longer referenced anywhere on the Stack, at which point they become eligible for automatic cleanup by the Garbage Collector (GC).</p>
+
+        <h3 id="ch-2-2">2.2 Primitive vs. Reference Types</h3>
+        <p>Java enforces a strict distinction between primitive data types and reference data types:</p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Data Type</th>
+                <th>Size (Bits/Bytes)</th>
+                <th>Stored Value / Representation</th>
+                <th>Default Value</th>
+                <th>Valid Value Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>byte</code></td>
+                <td>8 bits / 1 byte</td>
+                <td>Signed 2's complement integer</td>
+                <td><code>0</code></td>
+                <td>-128 to +127</td>
+              </tr>
+              <tr>
+                <td><code>short</code></td>
+                <td>16 bits / 2 bytes</td>
+                <td>Signed 2's complement integer</td>
+                <td><code>0</code></td>
+                <td>-32,768 to +32,767</td>
+              </tr>
+              <tr>
+                <td><code>int</code></td>
+                <td>32 bits / 4 bytes</td>
+                <td>Signed 2's complement integer</td>
+                <td><code>0</code></td>
+                <td>-2,147,483,648 to +2,147,483,647 (~2 Billion)</td>
+              </tr>
+              <tr>
+                <td><code>long</code></td>
+                <td>64 bits / 8 bytes</td>
+                <td>Signed 2's complement integer</td>
+                <td><code>0L</code></td>
+                <td>-9,223,372,036,854,775,808 to +9,223,372,036,854,775,807</td>
+              </tr>
+              <tr>
+                <td><code>float</code></td>
+                <td>32 bits / 4 bytes</td>
+                <td>IEEE 754 floating-point</td>
+                <td><code>0.0f</code></td>
+                <td>~6-7 significant decimal digits (Requires <code>f</code> suffix)</td>
+              </tr>
+              <tr>
+                <td><code>double</code></td>
+                <td>64 bits / 8 bytes</td>
+                <td>IEEE 754 floating-point</td>
+                <td><code>0.0d</code></td>
+                <td>~15-17 significant decimal digits (Standard precision)</td>
+              </tr>
+              <tr>
+                <td><code>char</code></td>
+                <td>16 bits / 2 bytes</td>
+                <td>Unsigned UTF-16 Code Unit</td>
+                <td><code>'\u0000'</code></td>
+                <td>0 to 65,535 (Single characters enclosed in <code>' '</code>)</td>
+              </tr>
+              <tr>
+                <td><code>boolean</code></td>
+                <td>1 bit (Logical)</td>
+                <td>Truth state (JVM dependent)</td>
+                <td><code>false</code></td>
+                <td>Literals: <code>true</code> or <code>false</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="analogy-box">
+          <span class="badge">The "Money Analogy" for Primitive vs. Reference Types</span>
+          <p>A primitive variable is like cash directly in your wallet—the variable name directly holds the exact numerical value on the Stack. A reference variable is like a bank slip with an address written on it—the variable on the Stack does not contain the object's actual data; it contains a 64-bit memory address pointing to where the real Object data resides on the Heap.</p>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; DataTypesDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class DataTypesDemo {
+    public static void main(String[] args) {
+        // Primitive Declarations (Stored directly on the Stack)
+        byte age = 25;
+        int views = 1_500_000; // Underscores improve readability
+        long worldPopulation = 8_000_000_000L; // 'L' suffix required for long literals
+        float temperature = 36.6f; // 'f' suffix required for float literals
+        double accountBalance = 9999.99;
+        char grade = 'A';
+        boolean isEnrolled = true;
+
+        // Reference Declaration (Reference on Stack pointing to Heap String Object)
+        String studentName = "SpongeBob";
+
+        System.out.println("Student: " + studentName + " | Age: " + age);
+        System.out.println("Population: " + worldPopulation);
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 3 -->
+      <section class="content-section" id="ch-3">
+        <h2>3. User Input via Scanner &amp; Buffer Management</h2>
+
+        <h3 id="ch-3-1">3.1 Understanding <code>java.util.Scanner</code> Mechanics</h3>
+        <p>The <code>Scanner</code> class parses primitive data types and strings from input streams using regular expressions. To read input from the console, developers wrap the standard input stream (<code>System.in</code>) inside a <code>Scanner</code> object instance:</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">Scanner scanner = new Scanner(System.in);</code></pre>
+        </div>
+
+        <h3 id="ch-3-2">3.2 The Input Buffer Trap &amp; Solution</h3>
+        <p>One of the most common pitfalls faced by Java developers involves mixing token-based parsing methods (e.g., <code>nextInt()</code>, <code>nextDouble()</code>) with line-based parsing methods (<code>nextLine()</code>).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>User types "25" and presses [ENTER] on the Keyboard:
+
+INPUT BUFFER STATE:
++-----+-----+------+
+| '2' | '5' | '\n' |   <-- '\n' is the newline character generated by pressing Enter
++-----+-----+------+
+
+1. scanner.nextInt() is called:
+   - Consumes '2' and '5' -> Converts to integer value 25.
+   - LEAVES '\n' sitting inside the Input Buffer!
+
+2. scanner.nextLine() is called immediately after:
+   - Scans the Input Buffer for text up to the next '\n'.
+   - Finds '\n' IMMEDIATELY -> Assumes user pressed Enter without typing!
+   - Returns an EMPTY String ("") and skips user prompting!</code></pre>
+        </div>
+
+        <div class="analogy-box">
+          <span class="badge">The Buffer Cleanup Rule</span>
+          <p>Whenever you invoke <code>nextInt()</code>, <code>nextDouble()</code>, <code>nextFloat()</code>, or <code>next()</code>, and plan to call <code>nextLine()</code> subsequently, you <strong>MUST</strong> clear the leftover newline character by invoking an unassigned <code>scanner.nextLine();</code> call in between.</p>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; ScannerBufferFix.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">import java.util.Scanner;
+
+public class ScannerBufferFix {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt(); // Reads integer, leaves '\n' in buffer
+
+        // --- BUFFER CLEARING STEP ---
+        scanner.nextLine(); // Consumes the leftover newline character '\n'
+
+        System.out.print("Enter your favorite color: ");
+        String color = scanner.nextLine(); // Now successfully waits for user input!
+
+        System.out.println("Age: " + age + " | Color: " + color);
+        scanner.close(); // Releasing system input resources
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 4 -->
+      <section class="content-section" id="ch-4">
+        <h2>4. Arithmetic Operators, Type Promotion &amp; Order of Operations</h2>
+
+        <h3 id="ch-4-1">4.1 Arithmetic &amp; Modulus Operators</h3>
+        <p>Java supports five standard binary arithmetic operators: Addition (<code>+</code>), Subtraction (<code>-</code>), Multiplication (<code>*</code>), Division (<code>/</code>), and Modulus (<code>%</code>).</p>
+        <p>The Modulus Operator (<code>%</code>) computes the remainder of an integer division operation. For instance, <code>10 % 3</code> yields <code>1</code> because 3 divides into 10 three times (giving 9), leaving a remainder of 1.</p>
+        <ul>
+          <li><strong>Parity Detection:</strong> Check if a number is even (<code>num % 2 == 0</code>) or odd (<code>num % 2 != 0</code>).</li>
+          <li><strong>Cyclic Array Indexing:</strong> Keep array bounds wrapping around smoothly: <code>index = (index + 1) % arrayLength</code>.</li>
+        </ul>
+
+        <h3 id="ch-4-2">4.2 Integer Division vs. Floating-Point Division</h3>
+        <p>When performing division between two integer types (<code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code>), Java performs Integer Division, truncating all fractional decimals without rounding:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; DivisionDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">int a = 10;
+int b = 4;
+int result1 = a / b; // Evaluates to 2! The .5 decimal is completely dropped.
+
+// To retain exact floating-point precision, explicitly cast at least one operand:
+double result2 = (double) a / b; // Evaluates to 2.5</code></pre>
+        </div>
+
+        <h3 id="ch-4-3">4.3 Pre-Increment vs. Post-Increment Semantics</h3>
+        <ul>
+          <li><strong>Post-Increment (<code>x++</code>):</strong> Evaluates the variable's current value in the surrounding expression first, and then increments the value of <code>x</code> by 1 afterwards.</li>
+          <li><strong>Pre-Increment (<code>++x</code>):</strong> Increments the value of <code>x</code> by 1 first, and then evaluates the newly updated value within the surrounding expression.</li>
+        </ul>
+
+        <h3 id="ch-4-4">4.4 Operator Precedence Table (PEMDAS Rules)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Precedence Level</th>
+                <th>Operator Categories</th>
+                <th>Operators Included</th>
+                <th>Associativity Direction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1 (Highest)</td>
+                <td>Parentheses / Member Access</td>
+                <td><code>()</code> <code>[]</code> <code>.</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Unary Operators</td>
+                <td><code>++</code> <code>--</code> <code>+</code> <code>-</code> <code>!</code> <code>~</code></td>
+                <td>Right-to-Left</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Multiplicative</td>
+                <td><code>*</code> <code>/</code> <code>%</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Additive</td>
+                <td><code>+</code> <code>-</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Relational Comparisons</td>
+                <td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>instanceof</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Equality Checks</td>
+                <td><code>==</code> <code>!=</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Logical AND</td>
+                <td><code>&amp;&amp;</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Logical OR</td>
+                <td><code>||</code></td>
+                <td>Left-to-Right</td>
+              </tr>
+              <tr>
+                <td>9 (Lowest)</td>
+                <td>Assignment Operators</td>
+                <td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code></td>
+                <td>Right-to-Left</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Chapter 5 -->
+      <section class="content-section" id="ch-5">
+        <h2>5. Control Flow, Decisions &amp; Enhanced Switches</h2>
+
+        <h3 id="ch-5-1">5.1 Conditional Decision Execution (<code>if</code>-<code>else if</code>-<code>else</code>)</h3>
+        <p>Conditional ladders evaluate logical expressions sequentially from top to bottom. As soon as a single condition evaluates to <code>true</code>, the corresponding block executes, and the remainder of the conditional branch is bypassed entirely.</p>
+
+        <h3 id="ch-5-2">5.2 The Ternary Operator (<code>? :</code>)</h3>
+        <p>A concise operator used as a shorthand replacement for simple assignment if-else structures:</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">variable = (condition) ? value_if_true : value_if_false;</code></pre>
+        </div>
+
+        <h3 id="ch-5-3">5.3 Enhanced Switch Expressions (Java 14+)</h3>
+        <p>Modern Java introduced Enhanced Switch Expressions using the arrow operator (<code>-&gt;</code>). Advantages over legacy fall-through switches:</p>
+        <ul>
+          <li>No explicit <code>break;</code> statements required—eliminates accidental fall-through bugs.</li>
+          <li>Allows comma-separated grouping of multiple match labels.</li>
+          <li>Can be used directly as expressions that return values into variables.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; EnhancedSwitchDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class EnhancedSwitchDemo {
+    public static void main(String[] args) {
+        String day = "Wednesday";
+
+        // Enhanced Switch Statement using Arrow Syntax
+        switch (day) {
+            case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> 
+                System.out.println("Weekday - Time to work!");
+            case "Saturday", "Sunday" -> 
+                System.out.println("Weekend - Time to relax!");
+            default -> 
+                System.out.println("Invalid day string specified.");
+        }
+
+        // Switch Expression Returning a Value
+        int quarter = switch (day) {
+            case "Monday", "Tuesday", "Wednesday" -> 1;
+            case "Thursday", "Friday" -> 2;
+            default -> 0;
+        };
+
+        System.out.println("Quarter: " + quarter);
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 6 -->
+      <section class="content-section" id="ch-6">
+        <h2>6. Logical Operators &amp; Random Number Generation</h2>
+
+        <h3 id="ch-6-1">6.1 Logical Operators &amp; Short-Circuit Evaluation</h3>
+        <ul>
+          <li><code>&amp;&amp;</code> (Logical AND): Evaluates to <code>true</code> only if both operands are <code>true</code>.</li>
+          <li><code>||</code> (Logical OR): Evaluates to <code>true</code> if at least one operand is <code>true</code>.</li>
+          <li><code>!</code> (Logical NOT): Inverts the boolean truth state of an expression.</li>
+        </ul>
+
+        <h4>Short-Circuit Behavior</h4>
+        <p>For <code>A &amp;&amp; B</code>, if <code>A</code> is <code>false</code>, <code>B</code> is never evaluated because the entire statement is guaranteed to be <code>false</code>. For <code>A || B</code>, if <code>A</code> is <code>true</code>, <code>B</code> is skipped completely. This prevents <code>NullPointerException</code>s (e.g., <code>if (obj != null &amp;&amp; obj.isValid())</code>).</p>
+
+        <h3 id="ch-6-2">6.2 Pseudo-Random Numbers (<code>java.util.Random</code>)</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; RandomDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">import java.util.Random;
+
+public class RandomDemo {
+    public static void main(String[] args) {
+        Random random = new Random();
+
+        // Bound parameter: nextInt(origin, bound) -> Inclusive of origin, EXCLUSIVE of bound
+        int diceRoll = random.nextInt(1, 7); // Generates integer between 1 and 6
+        double percentage = random.nextDouble(); // Generates 0.0 to 1.0
+        boolean coinFlip = random.nextBoolean(); // Generates true or false
+
+        System.out.println("Dice Roll: " + diceRoll + " | Coin: " + coinFlip);
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 7 -->
+      <section class="content-section" id="ch-7">
+        <h2>7. Math Utilities &amp; Output Formatting (<code>printf</code>)</h2>
+
+        <h3 id="ch-7-1">7.1 <code>java.lang.Math</code> Static Class Utilities</h3>
+        <ul>
+          <li><code>Math.pow(double base, double exp)</code>: Raises base to power exp.</li>
+          <li><code>Math.sqrt(double a)</code>: Returns positive square root.</li>
+          <li><code>Math.abs(val)</code>: Returns positive magnitude of value.</li>
+          <li><code>Math.round(val)</code>: Rounds float/double to nearest integer/long.</li>
+          <li><code>Math.ceil(val)</code>: Rounds value UP to nearest whole double.</li>
+          <li><code>Math.floor(val)</code>: Rounds value DOWN to nearest whole double.</li>
+          <li><code>Math.max(a, b)</code> / <code>Math.min(a, b)</code>: Returns higher or lower value.</li>
+        </ul>
+
+        <h3 id="ch-7-2">7.2 Master Reference for <code>System.out.printf</code> Formatting</h3>
+        <p><strong>Syntax Format Pattern:</strong> <code>% [flags] [width] [.precision] conversion-character</code></p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Specifier Token</th>
+                <th>Type Handled</th>
+                <th>Example Output Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>%s</code></td>
+                <td>String text</td>
+                <td><code>"Hello"</code></td>
+              </tr>
+              <tr>
+                <td><code>%d</code></td>
+                <td>Decimal Integers (byte, short, int, long)</td>
+                <td><code>12345</code></td>
+              </tr>
+              <tr>
+                <td><code>%f</code></td>
+                <td>Floating-point numbers (float, double)</td>
+                <td><code>12.345000</code></td>
+              </tr>
+              <tr>
+                <td><code>%.2f</code></td>
+                <td>Floats restricted to 2 decimal places</td>
+                <td><code>12.35</code> (Rounds automatically)</td>
+              </tr>
+              <tr>
+                <td><code>%,d / %,.2f</code></td>
+                <td>Adds thousand-separator commas</td>
+                <td><code>1,234,567.89</code></td>
+              </tr>
+              <tr>
+                <td><code>%-15s</code></td>
+                <td>Left-justified inside a 15-character field</td>
+                <td><code>"SpongeBob      "</code></td>
+              </tr>
+              <tr>
+                <td><code>%06d</code></td>
+                <td>Zero-padded integer up to 6 digits wide</td>
+                <td><code>000042</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Chapter 8 -->
+      <section class="content-section" id="ch-8">
+        <h2>8. String Manipulation &amp; String Slicing</h2>
+
+        <h3 id="ch-8-1">8.1 String Immutability &amp; The String Constant Pool</h3>
+        <p>Strings in Java are <strong>immutable</strong>. Once a <code>String</code> object is instantiated on the Heap, its internal character array cannot be modified. Any modification method (e.g., <code>toUpperCase()</code>, <code>replace()</code>) returns an entirely new <code>String</code> reference on the Heap.</p>
+        <p>To optimize memory usage, Java utilizes a <strong>String Constant Pool</strong> inside the Heap. When literal strings are created (<code>String s1 = "Java";</code>), Java checks the pool first. If the literal exists, it reuses the reference rather than creating a new object.</p>
+
+        <div class="analogy-box" style="border-left-color: var(--accent-red);">
+          <span class="badge" style="background-color: var(--accent-red); color: white;">The Absolute String Equality Rule</span>
+          <p><strong>NEVER</strong> compare String values using the <code>==</code> operator! The <code>==</code> operator checks if two reference variables point to the <em>same memory address</em> on the Heap. To compare actual character content, always use <code>.equals()</code> or <code>.equalsIgnoreCase()</code>.</p>
+        </div>
+
+        <h3 id="ch-8-2">8.2 String Slicing Demo</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; StringSlicingDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class StringSlicingDemo {
+    public static void main(String[] args) {
+        String email = "developer_user@java.org";
+
+        // Substring Extraction Syntax: substring(beginIndex, endIndex) -> endIndex is EXCLUSIVE
+        int atIndex = email.indexOf("@");
+        if (atIndex != -1) {
+            String username = email.substring(0, atIndex);
+            String domain = email.substring(atIndex + 1);
+            System.out.println("User: " + username + " | Domain: " + domain);
+        }
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 9 -->
+      <section class="content-section" id="ch-9">
+        <h2>9. Iteration &amp; Loops</h2>
+
+        <h3>9.1 Comparison of Java Loop Structures</h3>
+        <ul>
+          <li><strong>while loop:</strong> Evaluates condition before entering block. Executes 0 or more times.</li>
+          <li><strong>do-while loop:</strong> Executes block once first, then checks condition. Executes 1 or more times.</li>
+          <li><strong>for loop:</strong> Best when iteration counts are known beforehand. Syntax: <code>for (init; condition; update)</code></li>
+        </ul>
+
+        <h3>9.2 Control Flow Keywords (<code>break</code> &amp; <code>continue</code>)</h3>
+        <ul>
+          <li><code>break</code>: Instantly terminates the loop structure completely, jumping execution outside the loop.</li>
+          <li><code>continue</code>: Halts processing of the current cycle and skips directly to the next iteration check.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; LoopsDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class LoopsDemo {
+    public static void main(String[] args) {
+        // Demonstrating continue and break
+        for (int i = 1; i <= 10; i++) {
+            if (i == 5) continue; // Skip iteration when i is 5
+            if (i == 8) break;    // Terminate loop completely at 8
+            System.out.print(i + " ");
+        }
+        // Output: 1 2 3 4 6 7
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 10 -->
+      <section class="content-section" id="ch-10">
+        <h2>10. Methods &amp; Method Overloading</h2>
+
+        <h3>10.1 Anatomy of a Java Method</h3>
+        <p>A method is a named block of code that performs specific tasks and is executed upon call invocation.</p>
+        <ul>
+          <li><strong>Parameters:</strong> Formal variables declared in the method signature header.</li>
+          <li><strong>Arguments:</strong> The concrete values passed into the method during invocation.</li>
+          <li><strong>Pass-by-Value:</strong> Java is strictly <strong>pass-by-value</strong>! Primitive arguments pass copies of their values. Reference arguments pass copies of their memory addresses.</li>
+        </ul>
+
+        <h3>10.2 Method Overloading Principles</h3>
+        <p>Method Overloading occurs when multiple methods within the same class share the exact same method name, but have different parameter signatures (different number, types, or ordering of parameters). Changing only the return type does <strong>NOT</strong> overload a method and causes a compilation error!</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; OverloadingDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class OverloadingDemo {
+    public static void main(String[] args) {
+        System.out.println(add(10, 20));        // Invokes method 1
+        System.out.println(add(10.5, 20.5));    // Invokes method 2
+        System.out.println(add(1, 2, 3));       // Invokes method 3
+    }
+
+    public static int add(int a, int b) { return a + b; }
+    public static double add(double a, double b) { return a + b; }
+    public static int add(int a, int b, int c) { return a + b + c; }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 11 -->
+      <section class="content-section" id="ch-11">
+        <h2>11. Variable Scope, Lifetime &amp; Shadowing</h2>
+        <p>Scope dictates where a variable is accessible within code boundaries:</p>
+        <ul>
+          <li><strong>Local Scope:</strong> Variables declared inside a block or method. Exist on the Stack and disappear when the block scope terminates.</li>
+          <li><strong>Class Scope (Fields):</strong> Variables declared inside a class body but outside methods. Accessible across class instance/static contexts.</li>
+          <li><strong>Variable Shadowing:</strong> Occurs when a local variable declared inside a method shares the exact name as a class-level variable. The local variable "shadows" the class variable within that method scope. Use <code>this.fieldName</code> to explicitly reference the class variable.</li>
+        </ul>
+      </section>
+
+      <!-- Chapter 12 -->
+      <section class="content-section" id="ch-12">
+        <h2>12. Arrays, Operations &amp; Varargs</h2>
+
+        <h3>12.1 1D Arrays &amp; Memory Allocation</h3>
+        <p>An array is a fixed-size reference data type allocated on the Heap storing elements sequentially.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; ArrayOperations.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class ArrayOperations {
+    public static void main(String[] args) {
+        // Literal allocation
+        String[] cars = {"Mustang", "Corvette", "Charger"};
+
+        // Enhanced for-each loop
+        for (String car : cars) {
+            System.out.println(car);
+        }
+
+        System.out.println("Sum: " + sumNumbers(10.0, 20.0, 30.0));
+    }
+
+    // Varargs (Variable Arguments) Method: Type... name (Must be last parameter)
+    public static double sumNumbers(double... numbers) {
+        double total = 0.0;
+        for (double n : numbers) total += n;
+        return total;
+    }
+}</code></pre>
+        </div>
+
+        <h3>12.2 2D Arrays (Matrices)</h3>
+        <p>A 2D Array is an array of arrays representing rows and columns:</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">int[][] matrix = new int[rows][cols];</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 13 -->
+      <section class="content-section" id="ch-13">
+        <h2>13. OOP Fundamentals: Classes, Objects &amp; Static</h2>
+
+        <h3>13.1 Objects, Constructors &amp; <code>this</code> Keyword</h3>
+        <ul>
+          <li><strong>Class:</strong> Blueprint template defining properties and behaviors.</li>
+          <li><strong>Object:</strong> Concrete instance instantiated on the Heap using <code>new</code>.</li>
+          <li><strong>Constructor:</strong> Special initialization method matching class name, executed when instantiating objects.</li>
+          <li><strong>this:</strong> Keyword referring to the current object instance calling the method/constructor.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; Student.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">public class Student {
+    String name;
+    int age;
+    static int totalEnrolled = 0; // Shared class-level variable
+
+    // Constructor Overloading
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+        totalEnrolled++; // Increment global shared counter
+    }
+
+    public Student(String name) {
+        this(name, 18); // Constructor chaining
+    }
+
+    public static void displayEnrollment() {
+        System.out.println("Total Enrolled: " + totalEnrolled);
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 14 -->
+      <section class="content-section" id="ch-14">
+        <h2>14. Advanced OOP Pillars: Inheritance to Composition</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>                   +---------------------------------------+
+                   |            OOP PILLARS                |
+                   +---------------------------------------+
+                   |                                       |
+  +----------------+-------+                       +-------+----------------+
+  | Inheritance            |                       | Encapsulation          |
+  | Reusing parent fields  |                       | Protecting attributes  |
+  | using extends          |                       | using private/getters  |
+  +----------------+-------+                       +-------+----------------+
+                   |                                       |
+  +----------------+-------+                       +-------+----------------+
+  | Abstraction            |                       | Polymorphism           |
+  | Hiding details with    |                       | Multiple forms via     |
+  | abstract/interfaces    |                       | method overriding      |
+  +------------------------+                       +------------------------+</code></pre>
+        </div>
+
+        <h3 id="ch-14-1">14.1 Pillars Overview</h3>
+        <ol>
+          <li><strong>Encapsulation:</strong> Hide data via <code>private</code> access modifiers; expose safe access via <code>public</code> getters and setters.</li>
+          <li><strong>Inheritance (<code>extends</code>):</strong> Subclasses inherit non-private members from parent superclass. Use <code>super()</code> to invoke superclass constructor.</li>
+          <li><strong>Abstraction:</strong> Hide complete internal mechanics via <code>abstract</code> classes or interfaces.</li>
+          <li><strong>Polymorphism:</strong> Allow subclass instances to be referenced as parent superclass or interface types. Resolves methods dynamically at runtime via method overriding.</li>
+        </ol>
+
+        <h3 id="ch-14-2">14.2 Aggregation vs. Composition</h3>
+        <ul>
+          <li><strong>Aggregation:</strong> "Has-A" relationship where child objects can exist independently if parent is destroyed (e.g., Library has Books).</li>
+          <li><strong>Composition:</strong> Strong "Part-Of" relationship where child objects are bound to parent's lifecycle (e.g., Car has an Engine).</li>
+        </ul>
+      </section>
+
+      <!-- Chapter 15 -->
+      <section class="content-section" id="ch-15">
+        <h2>15. Data Structures: ArrayList &amp; HashMap</h2>
+
+        <h3>15.1 Autoboxing &amp; Unboxing</h3>
+        <p>Primitives cannot be stored directly inside collections. Java uses <strong>Autoboxing</strong> (primitive to wrapper object, e.g., <code>int</code> to <code>Integer</code>) and <strong>Unboxing</strong> automatically.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; CollectionsDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">import java.util.ArrayList;
+import java.util.HashMap;
+
+public class CollectionsDemo {
+    public static void main(String[] args) {
+        // Dynamic Resizable Array
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Pizza");
+        list.add("Burger");
+        list.remove("Burger");
+
+        // Key-Value Pair Map (Keys must be unique)
+        HashMap<String, Double> map = new HashMap<>();
+        map.put("Pizza", 12.99);
+        map.put("Taco", 3.50);
+
+        System.out.println("Pizza Price: $" + map.get("Pizza"));
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 16 -->
+      <section class="content-section" id="ch-16">
+        <h2>16. Enums &amp; Generics (<code>&lt;T&gt;</code>)</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">enum Day { MONDAY, TUESDAY, WEDNESDAY }
+
+// Generic Container Class
+class Box<T> {
+    private T item;
+    public void set(T item) { this.item = item; }
+    public T get() { return item; }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 17 -->
+      <section class="content-section" id="ch-17">
+        <h2>17. Exception Handling &amp; File I/O</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>                   +----------------------------------+
+                   |            Throwable             |
+                   +----------------------------------+
+                                     |
+               +---------------------+---------------------+
+               |                                           |
+  +-------------------------+                 +-------------------------+
+  |          Error          |                 |        Exception        |
+  | (e.g., OutOfMemoryError)|                 |   (Checked & Unchecked) |
+  +-------------------------+                 +-------------------------+
+                                                           |
+                                              +------------+------------+
+                                              |                         |
+                                 +-------------------------+   +------------------+
+                                 |    RuntimeException     |   |   IOException    |
+                                 | (Arithmetic, NullPointer|   | (File Not Found) |
+                                 +-------------------------+   +------------------+</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; FileIODemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">import java.io.*;
+
+public class FileIODemo {
+    public static void main(String[] args) {
+        // Try-With-Resources automatically closes AutoCloseable instances
+        try (FileWriter writer = new FileWriter("note.txt")) {
+            writer.write("Java File Operations Demo\nLine 2");
+        } catch (IOException e) {
+            System.out.println("Writing error: " + e.getMessage());
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("note.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Reading error: " + e.getMessage());
+        }
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 18 -->
+      <section class="content-section" id="ch-18">
+        <h2>18. Dates, Times &amp; Utility Classes (<code>java.time</code>)</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+LocalDateTime now = LocalDateTime.now();
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+System.out.println(now.format(fmt));</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 19 -->
+      <section class="content-section" id="ch-19">
+        <h2>19. Anonymous Classes, Timer &amp; TimerTask</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">import java.util.Timer;
+import java.util.TimerTask;
+
+Timer timer = new Timer();
+TimerTask task = new TimerTask() {
+    int count = 3;
+    @Override
+    public void run() {
+        if (count > 0) {
+            System.out.println(count--);
+        } else {
+            System.out.println("Done!");
+            timer.cancel();
+        }
+    }
+};
+timer.scheduleAtFixedRate(task, 0, 1000);</code></pre>
+        </div>
+      </section>
+
+      <!-- Chapter 20 -->
+      <section class="content-section" id="ch-20">
+        <h2>20. Multi-Threading &amp; Concurrency</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>[ New Thread ] ---> .start() ---> [ Runnable ] <---> [ Running ]
+                                       |                 |
+                                    .sleep()         Completes
+                                       v                 v
+                                 [ Waiting ] ----> [ Terminated ]</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">java &bull; MultiThreadingDemo.java</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-java">class Worker implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println(Thread.currentThread().getName() + " - Count: " + i);
+            try { Thread.sleep(1000); } catch (InterruptedException e) {}
+        }
+    }
+}
+
+public class MultiThreadingDemo {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(new Worker(), "Thread-A");
+        Thread t2 = new Thread(new Worker(), "Thread-B");
+
+        t1.start();
+        t2.start();
+
+        t1.join(); // Wait for t1 to finish
+        t2.join(); // Wait for t2 to finish
+
+        System.out.println("All Threads Finished Execution.");
+    }
+}</code></pre>
+        </div>
+
+        <div class="page-nav-footer">
+          <a href="postgresql.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">PostgreSQL Master Notes</span>
+          </a>
+          <a href="index.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Return to Hub &rarr;</span>
+            <span class="nav-card-title">Library Overview Dashboard</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

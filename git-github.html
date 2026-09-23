@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Comprehensive Git & GitHub Master Notes | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (8 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#intro-vcs">1. Introduction: Version Control</a></li>
+        <li class="depth-2"><a href="#what-is-vcs">What is Version Control?</a></li>
+        <li class="depth-2"><a href="#history-vcs">History of Version Control</a></li>
+        <li class="depth-2"><a href="#git-vs-github">Git vs. GitHub</a></li>
+        <li><a href="#global-setup">2. Global Setup & Configuration</a></li>
+        <li class="depth-2"><a href="#installing-verifying">Installing & Verifying Git</a></li>
+        <li class="depth-2"><a href="#author-details">Configuring Author Details</a></li>
+        <li class="depth-2"><a href="#default-editor">VS Code as Default Editor</a></li>
+        <li><a href="#core-workflow">3. Core Workflow & Lifecycle Areas</a></li>
+        <li class="depth-2"><a href="#lifecycle-zones">3 Distinct Local Zones</a></li>
+        <li class="depth-2"><a href="#write-add-commit">Write &rarr; Add &rarr; Commit</a></li>
+        <li><a href="#commit-practices">4. Commit Practices & Logs</a></li>
+        <li class="depth-2"><a href="#atomic-commits">Atomic Commits & Imperative Tone</a></li>
+        <li class="depth-2"><a href="#inspecting-history">Inspecting History with git log</a></li>
+        <li><a href="#gitignore-gitkeep">5. .gitignore & .gitkeep</a></li>
+        <li><a href="#git-internals">6. Git Internals & Architecture</a></li>
+        <li class="depth-2"><a href="#three-musketeers">Three Musketeers of Git Storage</a></li>
+        <li class="depth-2"><a href="#porcelain-plumbing">Porcelain vs. Plumbing Commands</a></li>
+        <li><a href="#branching-head">7. Git Branching & HEAD</a></li>
+        <li><a href="#merging-conflicts">8. Merging & Conflict Resolution</a></li>
+        <li class="depth-2"><a href="#fast-forward">Fast-Forward & 3-Way Merge</a></li>
+        <li class="depth-2"><a href="#conflict-resolution">Resolving Merge Conflicts</a></li>
+        <li><a href="#inspection-stashing-tagging">9. Inspection, Stashing & Tagging</a></li>
+        <li><a href="#rebase-reflog">10. git rebase vs merge & reflog</a></li>
+        <li class="depth-2"><a href="#git-rebase">git rebase & Golden Rule</a></li>
+        <li class="depth-2"><a href="#git-reflog">git reflog & Hard Reset Recovery</a></li>
+        <li><a href="#connecting-github">11. Connecting Git to GitHub</a></li>
+        <li><a href="#open-source">12. Open Source & PR Etiquette</a></li>
+        <li><a href="#command-reference">13. Quick Command Reference</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 6 &bull; 8 Pages</span>
+        </div>
+        <h1 class="doc-title">Comprehensive Git &amp; GitHub Master Notes</h1>
+        <p class="doc-subtitle">Based on Hitesh Choudhary's (Chai aur Code) Git and GitHub Complete Course, this guide provides a structured, end-to-end breakdown of Version Control, Git internals, branching, rebasing, remote syncing with GitHub, and open-source contribution workflows.</p>
+      </div>
+
+      <!-- Page 1 -->
+      <section id="intro-vcs" class="content-section">
+        <h2>1. Introduction: Version Control, Git vs. GitHub</h2>
+
+        <h3 id="what-is-vcs">What is Version Control (VCS)? [02:10]</h3>
+        <p>A Version Control System (VCS) manages and records the history of changes made to files over time. Think of it like saving checkpoints in a video game [15:59]:</p>
+        <ul>
+          <li>When your software reaches a stable, working state, you create a checkpoint.</li>
+          <li>If a newly added feature introduces bugs, you can instantly revert back to any prior checkpoint without losing your code history.</li>
+          <li>Multiple developers can work concurrently on the same codebase without overwriting one another's work [22:18].</li>
+        </ul>
+
+        <h3 id="history-vcs">History of Version Control [17:46]</h3>
+        <p>Before Git became the industry standard, various proprietary and early open-source VCS solutions existed:</p>
+        <ul>
+          <li><strong>SCCS &amp; RCS:</strong> Early revision systems.</li>
+          <li><strong>CVS &amp; SVN (Subversion):</strong> Centralized VCS systems where developers depended directly on a central server.</li>
+          <li><strong>Perforce &amp; Mercurial:</strong> Advanced commercial/open-source alternatives.</li>
+          <li><strong>Git (2005):</strong> Created by Linus Torvalds for the Linux kernel development. It is Distributed (every developer possesses the full repository history locally), free, open-source, and extremely fast.</li>
+        </ul>
+
+        <h3 id="git-vs-github">Git vs. GitHub [14:47]</h3>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>CONCEPT</th>
+                <th>GIT</th>
+                <th>GITHUB</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Nature</strong></td>
+                <td>Software / CLI tool running locally on your computer.</td>
+                <td>Cloud hosting platform / Web service for Git repositories.</td>
+              </tr>
+              <tr>
+                <td><strong>Primary Role</strong></td>
+                <td>Tracks file changes, creates checkpoints (commits), manages branches.</td>
+                <td>Hosts remote repositories, enables collaboration, PRs, issue tracking, CI/CD.</td>
+              </tr>
+              <tr>
+                <td><strong>Alternatives</strong></td>
+                <td>Mercurial, SVN</td>
+                <td>GitLab, Bitbucket, Azure Repos, Gitea [02:26:13]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Page 1 continued: Section 2 -->
+      <section id="global-setup" class="content-section">
+        <h2>2. Global Setup &amp; Initial Configuration</h2>
+
+        <h3 id="installing-verifying">Installing &amp; Verifying Git [24:26]</h3>
+        <p>Check your installed version in your terminal (macOS/Linux/Git Bash on Windows):</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>git --version</code></pre>
+        </div>
+
+        <h3 id="author-details">Configuring Author Details [30:28]</h3>
+        <p>Git embeds author information inside every commit. Set this globally across your machine:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Set your global username
+git config --global user.name "Your Name"
+
+# Set your global email (use the email associated with GitHub)
+git config --global user.email "your.email@example.com"
+
+# View all active Git configurations
+git config --list</code></pre>
+        </div>
+
+        <h3 id="default-editor">Configuring VS Code as the Default Editor [49:15]</h3>
+        <p>By default, Git opens the terminal-based Vim editor for multi-line commit messages or merge conflicts. To set VS Code as the default:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>git config --global core.editor "code --wait"</code></pre>
+        </div>
+
+        <p><em>(Ensure code is added to your system PATH via VS Code: Cmd/Ctrl + Shift + P &rarr; Shell Command: Install 'code' command in PATH).</em></p>
+      </section>
+
+      <!-- Page 2 -->
+      <section id="core-workflow" class="content-section">
+        <h2>3. Core Workflow &amp; Lifecycle Areas</h2>
+        <h3 id="lifecycle-zones">3 Distinct Local Zones</h3>
+        <p>Git organizes your files across three distinct local zones before pushing to a remote server [37:43]:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Architecture Diagram</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>+------------------+           git add            +------------------+          git commit          +-------------------+          git push          +------------------+
+| Working Directory| ---------------------------> |   Staging Area   | -----------------------------> | Local Repository  | -------------------------> | Remote (GitHub)  |
+| (Modified Files) |                              |  (Index / Cache) |                                |   (.git folder)   |                            |  (Origin / Main) |
+|                  | <--------------------------- |                  | <----------------------------- |                   | <------------------------- |                  |
++------------------+          git restore         +------------------+         git reset HEAD~        +-------------------+          git pull          +------------------+</code></pre>
+        </div>
+
+        <ol>
+          <li><strong>Working Directory:</strong> The active workspace where you create, edit, and delete files.</li>
+          <li><strong>Staging Area (Index):</strong> The preparation zone where files are staged ( <code>git add</code> ) for the next checkpoint [38:06].</li>
+          <li><strong>Local Repository (.git):</strong> The internal database tracking committed snapshots [38:25].</li>
+          <li><strong>Remote Repository:</strong> The remote copy hosted on platforms like GitHub [02:25:06].</li>
+        </ol>
+
+        <h3 id="write-add-commit">The Core Rhythm: Write &rarr; Add &rarr; Commit [36:55]</h3>
+
+        <h4>1. Initialize Repository:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>git init</code></pre>
+        </div>
+        <p>Creates a hidden <code>.git</code> folder containing metadata and object databases [34:14].</p>
+
+        <h4>2. Check Repository Status:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>git status</code></pre>
+        </div>
+
+        <h4>3. Stage Changes:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Stage a specific file
+git add file1.txt
+
+# Stage multiple specific files
+git add file1.txt file2.txt
+
+# Stage all modified and untracked files
+git add .</code></pre>
+        </div>
+
+        <h4>4. Unstage a Staged File: [41:32]</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>git rm --cached &lt;file-name&gt;
+# or
+git restore --staged &lt;file-name&gt;</code></pre>
+        </div>
+
+        <h4>5. Commit Changes (Checkpoint Creation): [42:13]</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>git commit -m "Add authentication middleware"</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 2 continued & Page 3 -->
+      <section id="commit-practices" class="content-section">
+        <h2>4. Commit Best Practices &amp; Commit Logs</h2>
+
+        <h3 id="atomic-commits">Atomic Commits [46:15]</h3>
+        <p><strong>Rule:</strong> A commit should represent a single logical unit of work (e.g., adding a specific UI component, fixing a single calculation bug). Do not batch weeks of unrelated tasks into one massive commit. Atomic commits make rollbacks and debugging easier.</p>
+
+        <h3>Imperative Commit Tone [47:43]</h3>
+        <p>Use present-tense imperative mood (as if issuing a command to the codebase):</p>
+        <ul>
+          <li>&bull; <code>Add user profile endpoint</code> (Preferred)</li>
+          <li>ˆ <code>Added user profile endpoint</code> (Avoid past tense)</li>
+          <li>ˆ <code>Adds user profile endpoint</code> (Avoid third-person)</li>
+        </ul>
+
+        <h3 id="inspecting-history">Inspecting History with git log [44:30]</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Detailed commit log (Shows full 40-char SHA-1 hash, author, date, and message)
+git log
+
+# Concise one-line per commit log
+git log --oneline
+
+# Graphical representation of branch history
+git log --oneline --graph --all</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 3 continued: Section 5 -->
+      <section id="gitignore-gitkeep" class="content-section">
+        <h2>5. .gitignore &amp; .gitkeep</h2>
+
+        <h3>Excluding Files with .gitignore [51:19]</h3>
+        <p>Store files you never want tracked (environment variables, system files, dependencies) in a root <code>.gitignore</code> file:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">.gitignore</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Environment variables and secrets
+.env
+.env.local
+
+# Dependency folders
+node_modules/
+vendor/
+__pycache__/
+
+# Build directories
+dist/
+build/
+
+# Operating system / IDE specific files
+.DS_Store
+.vscode/</code></pre>
+        </div>
+
+        <h3>Keeping Empty Directories with .gitkeep [53:33]</h3>
+        <p>Git tracks files, not empty folders. If you need an empty folder tracked (e.g., <code>logs/</code>, <code>uploads/</code>), add a dummy <code>.gitkeep</code> file inside:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>mkdir uploads
+touch uploads/.gitkeep
+git add uploads/.gitkeep
+git commit -m "Track uploads directory"</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 3 continued & Page 4: Section 6 -->
+      <section id="git-internals" class="content-section">
+        <h2>6. Deep Dive: Git Internals &amp; Architecture</h2>
+        <p>Git is essentially a content-addressable key-value datastore living inside the <code>.git/</code> folder [58:00].</p>
+
+        <h3 id="three-musketeers">The "Three Musketeers" of Git Storage [01:00:11]</h3>
+        <p>Every object stored in <code>.git/objects/</code> is identified by a 40-character SHA-1 hash:</p>
+        <ol>
+          <li><strong>Blob (Binary Large Object): [01:01:48]</strong> Stores the raw contents of a file (does not store metadata or file names).</li>
+          <li><strong>Tree Object: [01:01:35]</strong>
+            <ul>
+              <li>Represents a directory structure.</li>
+              <li>Maps file permissions, modes, and human-readable filenames to their respective Blob and Sub-Tree hashes.</li>
+            </ul>
+          </li>
+          <li><strong>Commit Object: [01:01:03]</strong>
+            <ul>
+              <li>Stores the root Tree SHA, parent commit hash(es), author info, committer info, timestamp, and the commit message.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Git Object Graph Layout</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>Commit Object Root Tree: 8a4b2c... Parent: 3f19ab... Author / Committer / Timestamp / Message
+    |
+    v
+Tree Object 100644 blob e69de2... index.js
+            100644 blob 4b825d... package.json
+            040000 tree 9f82d1... src/
+    |
+    v
+Blob Object (Raw file content of text)</code></pre>
+        </div>
+
+        <h3 id="porcelain-plumbing">Porcelain vs. Plumbing (Gardening) Commands [01:04:47]</h3>
+        <ul>
+          <li><strong>Porcelain Commands:</strong> High-level, user-friendly commands developers use every day ( <code>git add</code>, <code>git commit</code>, <code>git checkout</code> ).</li>
+          <li><strong>Plumbing / Gardening Commands:</strong> Low-level commands manipulating raw objects directly:</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash (Plumbing Commands)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Inspect the content and type of any SHA-1 object
+git cat-file -p &lt;object-hash&gt;
+git cat-file -t &lt;object-hash&gt;
+
+# Low-level hashing and index manipulation [01:06:47]
+git hash-object -w &lt;filename&gt;
+git update-index --add --cacheinfo 100644 &lt;blob-sha&gt; &lt;filename&gt;
+git write-tree</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 4 -->
+      <section id="branching-head" class="content-section">
+        <h2>7. Git Branching &amp; HEAD</h2>
+        <p>A branch in Git is simply a lightweight, movable pointer to a commit hash [01:13:45].</p>
+
+        <h3>The HEAD Pointer [01:15:00]</h3>
+        <p>HEAD points to the current active branch or commit you are working on. Viewable in <code>.git/HEAD</code> (e.g., <code>ref: refs/heads/main</code>).</p>
+
+        <h3>Managing Branches [01:16:37]</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># List all local branches (* denotes active branch)
+git branch
+
+# Create a new branch
+git branch feature-login
+
+# Switch to an existing branch
+git switch feature-login
+# or
+git checkout feature-login
+
+# Create AND switch to a new branch in a single command [01:21:26]
+git switch -c feature-login
+# or
+git checkout -b feature-login
+
+# Rename a branch [01:45:37]
+git branch -m &lt;old-name&gt; &lt;new-name&gt;
+# e.g., git branch -m master main
+
+# Delete a branch (safe delete prevents losing unmerged work) [01:45:47]
+git branch -d feature-login
+
+# Force delete a branch
+git branch -D feature-login</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 4 continued & Page 5: Section 8 -->
+      <section id="merging-conflicts" class="content-section">
+        <h2>8. Merging &amp; Conflict Resolution</h2>
+        <p>Merging integrates changes from one branch into another [01:23:18].</p>
+
+        <h3 id="fast-forward">1. Fast-Forward Merge [01:27:04]</h3>
+        <p>Occurs when the target branch has no new commits since the source branch branched off. Git simply moves the pointer forward.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Step 1: Switch to the receiving branch
+git switch main
+
+# Step 2: Merge the feature branch
+git merge feature-login</code></pre>
+        </div>
+
+        <h3>2. Non-Fast-Forward (3-Way) Merge [01:27:19]</h3>
+        <p>Occurs when both main and feature branches have independent new commits. Git combines histories and creates a Merge Commit [01:33:26].</p>
+
+        <h3 id="conflict-resolution">3. Handling Merge Conflicts [01:34:12]</h3>
+        <p>A conflict occurs when two branches modify the same line in the same file differently.</p>
+
+        <h4>Conflict Markers Breakdown [01:36:40]</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Conflict Diff Markers</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (Current Branch e.g., main)
+const API_URL = "https://api.production.com";
+=======
+const API_URL = "https://api.staging.com";
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; bug-fix (Incoming Branch)</code></pre>
+        </div>
+
+        <h4>Steps to Resolve Conflicts [01:40:07]:</h4>
+        <ol>
+          <li>Open conflicting file(s) in VS Code.</li>
+          <li>Select one option (Accept Current, Accept Incoming, Accept Both, or edit manually).</li>
+          <li>Ensure all marker lines ( <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> , <code>=======</code> , <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> ) are completely removed.</li>
+          <li>Stage the resolved files:
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git add &lt;resolved-file&gt;</code></pre>
+            </div>
+          </li>
+          <li>Finalize the merge:
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git commit -m "Resolve merge conflict in API configuration"</code></pre>
+            </div>
+          </li>
+          <li>(Optional) If you need to discard the merge mid-way: [01:39:26]
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git merge --abort</code></pre>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Page 5 continued & Page 6: Section 9 -->
+      <section id="inspection-stashing-tagging" class="content-section">
+        <h2>9. Inspection, Stashing &amp; Tagging</h2>
+
+        <h3>git diff [01:48:36]</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Compare unstaged working directory changes vs. staging area
+git diff
+
+# Compare staged changes vs. the last commit [01:49:53]
+git diff --staged
+
+# Compare differences between two commits [01:53:07]
+git diff &lt;commit-sha-1&gt;..&lt;commit-sha-2&gt;
+
+# Compare two branches
+git diff main..feature-branch</code></pre>
+        </div>
+
+        <h3>git stash (Temporary Shelf) [01:53:59]</h3>
+        <p>Saves dirty/uncommitted modifications onto a local stack so you can switch branches cleanly.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Stash current uncommitted changes
+git stash
+
+# or with a custom message
+git stash save "WIP: Navbar redesign"
+
+# List all stashed items [01:56:00]
+git stash list
+
+# Apply top stash and KEEP it in the stash list [01:56:52]
+git stash apply
+
+# Apply a specific stash entry
+git stash apply stash@{1}
+
+# Apply top stash and REMOVE it from the stash stack [01:57:17]
+git stash pop
+
+# Discard a specific stash item
+git stash drop stash@{0}
+
+# Clear all stashed changes
+git stash clear</code></pre>
+        </div>
+
+        <h3>git tag (Milestones &amp; Releases) [01:58:03]</h3>
+        <p>Used to mark specific release points in history (e.g., <code>v1.0.0</code>).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Create a lightweight tag on the current commit
+git tag v1.0.0
+
+# Create an annotated tag (Recommended for releases) [01:58:27]
+git tag -a v1.0.0 -m "Release version 1.0.0"
+
+# Tag a specific past commit
+git tag -a v0.9.0 &lt;commit-sha&gt; -m "Beta release"
+
+# List all tags [01:59:40]
+git tag
+
+# Push a specific tag to remote GitHub repository [02:00:51]
+git push origin v1.0.0
+
+# Push all local tags to GitHub
+git push origin --tags</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 6: Section 10 -->
+      <section id="rebase-reflog" class="content-section">
+        <h2>10. git rebase vs. git merge &amp; git reflog</h2>
+
+        <h3 id="git-rebase">git rebase Explained [02:03:50]</h3>
+        <p>Instead of creating a merge commit, Rebase moves the starting point of your feature branch to the tip of the base branch, producing a linear, clean commit history [02:06:07].</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Rebase Topology</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>Before Rebase: D---E (feature) / A---B---C (main)
+After 'git rebase main' on feature: A---B---C---D'---E' (feature linear history)</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Step 1: Switch to the feature branch you want to rebase
+git switch feature-branch
+
+# Step 2: Rebase on top of the updated base branch [02:16:35]
+git rebase main</code></pre>
+        </div>
+
+        <p><strong>The Golden Rule of Rebasing [02:12:44]:</strong> Never rebase a public/shared branch (like <code>main</code>). Only rebase local, unshared feature branches to keep history clean before merging.</p>
+
+        <h3 id="git-reflog">git reflog &amp; Emergency Recovery [02:18:26]</h3>
+        <p><code>git reflog</code> (Reference Log) records every movement of HEAD (commits, checkouts, resets, merges, rebases). Even "lost" or deleted commits can be recovered here.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash (Reflog Inspection)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Display entire HEAD movement history
+git reflog
+
+# Output example:
+# 7b2c1a4 HEAD@{0}: commit: Add navbar
+# 9a8f3b1 HEAD@{1}: checkout: moving from main to feature
+# 3c4d5e6 HEAD@{2}: reset: moving to HEAD~1</code></pre>
+        </div>
+
+        <h4>Recovering Lost Commits with Hard Reset [02:20:41]:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Hard reset back to any historical point identified in reflog
+git reset --hard &lt;sha-or-HEAD@{n}&gt;
+# e.g., git reset --hard 7b2c1a4</code></pre>
+        </div>
+        <p><em>(Caution: --hard overwrites your local working directory and staging area).</em></p>
+      </section>
+
+      <!-- Page 6 continued & Page 7: Section 11 -->
+      <section id="connecting-github" class="content-section">
+        <h2>11. Connecting Local Git to GitHub (SSH &amp; Remotes)</h2>
+
+        <h3>Setting Up SSH Keys [02:27:20]</h3>
+        <p>GitHub requires SSH authentication for terminal operations:</p>
+
+        <h4>1. Generate a new SSH Key Pair [02:29:19]:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>ssh-keygen -t ed25519 -C "your.email@example.com"</code></pre>
+        </div>
+        <p><em>(Press Enter to accept default file location /Users/username/.ssh/id_ed25519 and set an optional passphrase).</em></p>
+
+        <h4>2. Start SSH Agent &amp; Add Key (macOS/Linux) [02:30:47]:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519</code></pre>
+        </div>
+
+        <h4>3. Copy Public Key:</h4>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># macOS:
+pbcopy &lt; ~/.ssh/id_ed25519.pub
+
+# Windows (Git Bash):
+clip &lt; ~/.ssh/id_ed25519.pub
+
+# Linux:
+cat ~/.ssh/id_ed25519.pub</code></pre>
+        </div>
+
+        <h4>4. Add to GitHub [02:28:36]:</h4>
+        <p>Go to GitHub &rarr; Settings &rarr; SSH and GPG Keys &rarr; New SSH Key &rarr; Paste and Save.</p>
+
+        <h3>Linking Local Repo to GitHub &amp; Pushing [02:35:45]</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Check existing remotes
+git remote -v
+
+# Link local repository to remote GitHub repository as 'origin'
+git remote add origin git@github.com:username/repository-name.git
+
+# Set default upstream and push 'main' branch [02:39:59]
+git push -u origin main
+
+# Subsequent pushes on this branch can now simply be: [02:40:26]
+git push
+
+# Pull latest changes from remote repository
+git pull</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 7 & 8: Section 12 -->
+      <section id="open-source" class="content-section">
+        <h2>12. Open Source Contribution &amp; PR Etiquette</h2>
+
+        <h3>Open Source Contribution Rules [02:44:28]</h3>
+        <ul>
+          <li><strong>Talk First:</strong> Open an issue or communicate on the community Discord/Discussions before submitting code [02:45:37].</li>
+          <li><strong>Add Tangible Value:</strong> Avoid low-effort, spam pull requests (e.g., changing single typos in README.md or formatting changes) [02:44:51].</li>
+          <li><strong>Maintain Code Quality:</strong> Follow project linting rules, write meaningful commit messages, and document your changes [02:51:06].</li>
+        </ul>
+
+        <h3>End-to-End Open Source Contribution Workflow [02:47:35]</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Workflow Architecture</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>+--------------------+  Fork   +--------------------+ | Original Upstream | -----------------> |    Your GitHub     |
+|  (Maintainer Repo) |         |  (Remote: origin)  | +--------------------+                     +--------------------+
+|                    |         |                    |                                                  |
+|                    |         |                    |                                                  | git clone
+|                    |         |                    |                                                  v
+|                    |         |                    |                                        +--------------------+
+|                    |         |                    | <----------------- git push ---------  | Local Machine Repo |
+|                    |         |                    |                    (Feature Branch)    | (Local Workspace)  |
+|                    |         |                    |                                        +--------------------+
+|                    |         |                    | -----------------------------------------> Open Pull Request (PR)
++--------------------+         +--------------------+</code></pre>
+        </div>
+
+        <ol>
+          <li><strong>Fork the Repository [02:47:41]:</strong> Click Fork on the top right of the upstream GitHub repository.</li>
+          <li><strong>Clone Your Fork Locally [02:48:37]:</strong>
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git clone git@github.com:your-username/repository-name.git
+cd repository-name</code></pre>
+            </div>
+          </li>
+          <li><strong>Keep Fork Synced with Upstream:</strong>
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git remote add upstream git@github.com:original-owner/repository-name.git
+git fetch upstream
+git merge upstream/main</code></pre>
+            </div>
+          </li>
+          <li><strong>Create a Descriptive Feature Branch:</strong>
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git switch -c fix-navbar-overflow</code></pre>
+            </div>
+          </li>
+          <li><strong>Implement Changes, Test, Stage &amp; Commit:</strong>
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git add .
+git commit -m "Fix navbar overflow on mobile screen widths"</code></pre>
+            </div>
+          </li>
+          <li><strong>Push Feature Branch to Your Remote Fork [02:49:58]:</strong>
+            <div class="code-block-wrapper" style="margin: 0.5rem 0;">
+              <div class="code-header">
+                <span class="code-lang-label">Bash</span>
+                <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+              </div>
+              <pre><code>git push -u origin fix-navbar-overflow</code></pre>
+            </div>
+          </li>
+          <li><strong>Open a Pull Request (PR) on GitHub [02:50:53]:</strong>
+            <p>Go to your repository on GitHub. Click Compare &amp; pull request. Provide a clear title, description of changes, and reference any solved issues (e.g., <code>Closes #42</code>).</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Page 8: Section 13 -->
+      <section id="command-reference" class="content-section">
+        <h2>13. Git &amp; GitHub Quick Command Reference</h2>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Bash Cheat Sheet</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Setup & Config
+git config --global user.name "Name"
+git config --global user.email "email@example.com"
+git config --global core.editor "code --wait"
+
+# Tracking & Committing
+git init
+git status
+git add &lt;file&gt; / git add .
+git commit -m "Imperative commit message"
+git restore --staged &lt;file&gt;
+
+# History & Differences
+git log --oneline --graph --all
+git diff
+git diff --staged
+git reflog
+
+# Branches & Merges
+git branch
+git switch -c &lt;new-branch&gt;
+git switch &lt;branch-name&gt;
+git merge &lt;branch-name&gt;
+git merge --abort
+git rebase &lt;base-branch&gt;
+git branch -d &lt;branch-name&gt;
+
+# Stashing & Releases
+git stash
+git stash pop
+git tag -a v1.0.0 -m "Release v1.0.0"
+
+# Remotes & GitHub
+git remote add origin &lt;repo-ssh-url&gt;
+git push -u origin &lt;branch-name&gt;
+git push
+git pull
+git clone &lt;repo-url&gt;</code></pre>
+        </div>
+
+        <p><small style="color: var(--text-muted);">YouTube video views will be stored in your YouTube History, and your data will be stored and used by YouTube according to its Terms of Service</small></p>
+
+        <div class="page-nav-footer">
+          <a href="operating-systems.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Operating Systems Fundamentals</span>
+          </a>
+          <a href="python-masterclass.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Python 3 Masterclass Handbook</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

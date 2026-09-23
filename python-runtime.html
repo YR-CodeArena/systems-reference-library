@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Python Architecture & Runtime Study Notes | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (31 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#part1">PART I: CPYTHON INTERNALS</a></li>
+        <li class="depth-2"><a href="#ch1">Ch 1: Compilation Pipeline</a></li>
+        <li class="depth-2"><a href="#ch2">Ch 2: PVM & Bytecode Loop</a></li>
+        <li class="depth-2"><a href="#ch3">Ch 3: Memory, PyObject & GC</a></li>
+        <li class="depth-2"><a href="#ch4">Ch 4: The Global Interpreter Lock</a></li>
+        <li><a href="#part2">PART II: FOUNDATIONS & TYPES</a></li>
+        <li class="depth-2"><a href="#ch5">Ch 5: Variables & Dynamic Typing</a></li>
+        <li class="depth-2"><a href="#ch6">Ch 6: Primitive & Scalar Types</a></li>
+        <li class="depth-2"><a href="#ch7">Ch 7: Sequence Types & Layout</a></li>
+        <li class="depth-2"><a href="#ch8">Ch 8: Hash Tables (Dicts & Sets)</a></li>
+        <li class="depth-2"><a href="#ch9">Ch 9: Control Flow & Patterns</a></li>
+        <li class="depth-2"><a href="#ch10">Ch 10: Functions & Closures</a></li>
+        <li><a href="#part3">PART III: FUNCTIONAL PATTERNS</a></li>
+        <li class="depth-2"><a href="#ch11">Ch 11: Decorators & Callables</a></li>
+        <li class="depth-2"><a href="#ch12">Ch 12: Iterators & Generators</a></li>
+        <li class="depth-2"><a href="#ch13">Ch 13: Functional Programming</a></li>
+        <li class="depth-2"><a href="#ch14">Ch 14: Context Managers</a></li>
+        <li class="depth-2"><a href="#ch15">Ch 15: Error Handling & Groups</a></li>
+        <li><a href="#part4">PART IV: OOP & METAPROGRAMMING</a></li>
+        <li class="depth-2"><a href="#ch16">Ch 16: Class Anatomy & __slots__</a></li>
+        <li class="depth-2"><a href="#ch17">Ch 17: Inheritance, MRO & C3</a></li>
+        <li class="depth-2"><a href="#ch18">Ch 18: Dunder Methods Reference</a></li>
+        <li class="depth-2"><a href="#ch19">Ch 19: The Descriptor Protocol</a></li>
+        <li class="depth-2"><a href="#ch20">Ch 20: Metaclasses</a></li>
+        <li><a href="#part5">PART V: TYPING & PACKAGING</a></li>
+        <li class="depth-2"><a href="#ch21">Ch 21: Static Typing & Hints</a></li>
+        <li class="depth-2"><a href="#ch22">Ch 22: Modern Features (3.10-3.13)</a></li>
+        <li class="depth-2"><a href="#ch23">Ch 23: Imports & Architecture</a></li>
+        <li class="depth-2"><a href="#ch24">Ch 24: Packaging & Dependencies</a></li>
+        <li><a href="#part6">PART VI: CONCURRENCY & ASYNC</a></li>
+        <li class="depth-2"><a href="#ch25">Ch 25: Multi-Threading in Python</a></li>
+        <li class="depth-2"><a href="#ch26">Ch 26: Multi-Processing & Shared Mem</a></li>
+        <li class="depth-2"><a href="#ch27">Ch 27: AsyncIO Foundations</a></li>
+        <li class="depth-2"><a href="#ch28">Ch 28: Advanced AsyncIO Patterns</a></li>
+        <li class="depth-2"><a href="#ch29">Ch 29: Memory Profiling & Debugging</a></li>
+        <li class="depth-2"><a href="#ch30">Ch 30: System Integration & Matrix</a></li>
+        <li><a href="#works-cited">Works Cited</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Master Reference Guide</span>
+          <span class="doc-badge pdf-tag">PDF Document 8 &bull; 31 Pages</span>
+        </div>
+        <h1 class="doc-title">Python Architecture &amp; Runtime Study Notes</h1>
+        <p class="doc-subtitle">Comprehensive Master Reference Guide &bull; CPython Internals to Advanced Concurrency</p>
+      </div>
+
+      <!-- PART I -->
+      <section id="part1" class="content-section">
+        <h2>PART I: CPYTHON INTERNALS &amp; RUNTIME ARCHITECTURE</h2>
+
+        <h3 id="ch1">Chapter 1: Python vs. CPython &amp; The Compilation Pipeline</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>To master Python, you must first distinguish between the Python Language Specification and CPython. Python itself is an abstract set of rules—a specification that documents syntax, basic data types, and standard execution semantics. CPython is the primary, reference implementation of Python written in C. It reads Python code, translates it into an intermediate format called bytecode, and executes that bytecode on a virtual machine.</p>
+        <p>While CPython is the standard engine, alternative implementations exist to serve specialized software requirements:</p>
+        <ul>
+          <li><strong>PyPy:</strong> Uses a Just-In-Time (JIT) tracing compiler. Instead of interpreting bytecode line-by-line, PyPy monitors running code, identifies frequently executed loops ("hot spots"), and translates those loops directly into fast CPU machine instructions.</li>
+          <li><strong>Jython:</strong> Written in Java, Jython translates Python source code directly into Java Virtual Machine (JVM) bytecode, enabling seamless integration with Java libraries.</li>
+          <li><strong>IronPython:</strong> Written in C#, IronPython compiles Python code into Microsoft's .NET Common Language Runtime (CLR) bytecode.</li>
+          <li><strong>GraalPy:</strong> Built on GraalVM using the Truffle framework, GraalPy provides high-performance execution and polyglot integration with C, Java, and JavaScript.</li>
+        </ul>
+
+        <h4>2. The Step-by-Step Compilation Pipeline</h4>
+        <p>When you execute a script ( <code>python app.py</code> ), CPython processes source code through five distinct compilation stages before running it:</p>
+        <ol>
+          <li><strong>Lexical Analysis (Tokenizer):</strong> The C-level tokenizer ( <code>Parser/tokenizer.c</code> ) converts raw streams of text into lexical tokens (such as <code>NAME</code> , <code>NUMBER</code> , <code>OPERATOR</code> , <code>INDENT</code> , <code>DEDENT</code> ). It strips away comments and arbitrary whitespace while converting indentation into explicit scope tokens.</li>
+          <li><strong>Concrete Syntax Tree (CST) Generation:</strong> The parser ( <code>Parser/parser.c</code> ) takes the token stream and verifies it against Python's formal grammar rules. It creates a CST—a raw tree structure representing every grammatical element in the code.</li>
+          <li><strong>Abstract Syntax Tree (AST) Transformation:</strong> CPython converts the CST into an AST ( <code>Python/ast.c</code> ). The AST strips away superficial syntactic sugar (such as extra parentheses or formatting commas) to expose pure semantic operations ( <code>asdl_seq</code> structures in C).</li>
+          <li><strong>Control Flow Graph (CFG) Construction:</strong> The compiler ( <code>Python/compile.c</code> ) walks the AST to construct basic execution blocks and compute control flow pathways. This stage calculates jump offsets required for loops, conditional branches, and function returns.</li>
+          <li><strong>Bytecode Emission:</strong> The compiler emits a serial stream of bytecode instructions packaged inside a C structure called <code>PyCodeObject</code> . This <code>PyCodeObject</code> contains instructions that the CPython Virtual Machine can execute directly.</li>
+        </ol>
+
+        <h4>3. Simplified Code Example: Inspecting AST and Bytecode</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import ast
+import dis
+
+# Source code string to inspect
+source_code = "total = price + tax"
+
+# Step 1: Parse source code into an AST
+tree = ast.parse(source_code, filename="&lt;demo&gt;", mode="exec")
+
+# Display the Abstract Syntax Tree structure
+print("=== AST Structure ===")
+print(ast.dump(tree, indent=2))
+
+# Step 2: Compile AST into a CPython code object
+code = compile(tree, filename="&lt;demo&gt;", mode="exec")
+
+# Step 3: Disassemble code object into readable bytecode instructions
+print("\n=== Bytecode Disassembly ===")
+dis.dis(code)</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>ast.parse(...)</code> : Reads the raw string "total = price + tax" and builds an AST representation. The output shows an <code>Assign</code> node targeting the variable <code>total</code> , with a value node representing a <code>BinOp</code> (Binary Operation) adding <code>price</code> and <code>tax</code> .</li>
+          <li><code>compile(...)</code> : Takes the AST tree and produces an executable <code>PyCodeObject</code> . This object holds the compiled instructions, constant values, and variable names.</li>
+          <li><code>dis.dis(...)</code> : Takes the compiled <code>PyCodeObject</code> and translates the raw bytecode bytes into readable instructions:
+            <ul>
+              <li><code>LOAD_NAME 0 (price)</code> : Pushes the value of price onto the VM evaluation stack.</li>
+              <li><code>LOAD_NAME 1 (tax)</code> : Pushes the value of tax onto the evaluation stack.</li>
+              <li><code>BINARY_OP 0 (+)</code> : Pops tax and price , adds them together, and pushes the result back onto the stack.</li>
+              <li><code>STORE_NAME 2 (total)</code> : Pops the result and stores it in the local variable slot named total .</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5. .pyc Bytecode Caching Layout</h4>
+        <p>To speed up startup time, CPython caches compiled <code>PyCodeObject</code> structures on disk inside <code>__pycache__</code> directories as <code>.pyc</code> files. The header structure of a <code>.pyc</code> file is detailed below:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Header Offset</th>
+                <th>Field Name</th>
+                <th>Description &amp; Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bytes 0–3</td>
+                <td>Magic Number</td>
+                <td>Stores a version marker (e.g., <code>0x0D0A3433</code> ) to prevent Python 3.12 from loading Python 3.10 bytecode.</td>
+              </tr>
+              <tr>
+                <td>Bytes 4–7</td>
+                <td>Bitfield Flags</td>
+                <td>Stores hash validation flags (determines whether to check timestamps or source content hashes).</td>
+              </tr>
+              <tr>
+                <td>Bytes 8–15</td>
+                <td>Timestamp / Hash</td>
+                <td>Stores the modification timestamp or a 64-bit SipHash of the source file to detect code edits.</td>
+              </tr>
+              <tr>
+                <td>Bytes 16–19</td>
+                <td>File Size</td>
+                <td>Stores the bottom 32 bits of original source file length to detect incomplete writes.</td>
+              </tr>
+              <tr>
+                <td>Bytes 20+</td>
+                <td>Serialized Payload</td>
+                <td>Contains the marshaled <code>PyCodeObject</code> payload holding opcodes, variable names, and constants.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Python is an abstract language specification; CPython is its default C reference implementation.</li>
+          <li>Source code passes through Tokenizer &rarr; CST &rarr; AST &rarr; CFG &rarr; Bytecode before virtual machine execution.</li>
+          <li><code>.pyc</code> files cache compiled bytecode on disk to avoid recompiling unchanged source code on subsequent imports.</li>
+        </ul>
+
+        <h3 id="ch2">Chapter 2: CPython Virtual Machine (PVM) &amp; Bytecode Evaluation Loop</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>The CPython Virtual Machine (PVM) is the execution engine of Python. It is an abstract software emulation of a computer CPU. The PVM operates as a stack-based virtual machine, meaning it performs all calculations using an internal data structure called an evaluation stack (or value stack).</p>
+        <p>Virtual machine architectures generally fall into two categories:</p>
+        <ul>
+          <li><strong>Stack-Based VMs (e.g., CPython, JVM):</strong> Operations work by popping arguments off the top of a value stack, calculating results, and pushing results back onto the stack. They use compact instruction sizes because instructions do not need to specify source and destination register numbers.</li>
+          <li><strong>Register-Based VMs (e.g., LuaJIT, Dalvik):</strong> Operations specify virtual registers directly (e.g., <code>ADD R1, R2, R3</code> ). This reduces the total instruction count required per calculation, but increases individual instruction payload sizes and compiler complexity.</li>
+        </ul>
+
+        <h4>2. CPython Code Objects and ceval.c Mechanics</h4>
+        <p>When CPython executes a function, it wraps execution state inside a <code>PyFrameObject</code> . This frame contains local variable arrays, global namespace references, and an isolated value stack.</p>
+        <p>The primary evaluation loop resides in <code>Python/ceval.c</code> within the function <code>_PyEval_EvalFrameDefault()</code> . It runs an evaluation loop that reads opcodes from the <code>PyCodeObject</code> byte string ( <code>co_code</code> ) and dispatches execution targets using computed goto statements (an optimization supported by C compilers that maps opcodes directly to memory jump addresses).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">C (ceval.c Conceptual Evaluation Loop)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// Conceptual representation of the CPython evaluation loop in ceval.c
+PyObject* _PyEval_EvalFrameDefault(PyFrameObject *f, int throwflag) {
+    // Computed GOTOs dispatch table
+    static void *dispatch_table[256] = {
+        &&TARGET_NOP, &&TARGET_LOAD_FAST, &&TARGET_STORE_FAST,
+        &&TARGET_BINARY_OP, ...
+    };
+    #define DISPATCH() goto *dispatch_table[*next_instr++]
+
+    PyObject **stack_pointer = f->f_valuestack;
+    _Py_CODEUNIT *next_instr = f->f_code->co_firstinstr;
+
+    DISPATCH();
+
+    TARGET_LOAD_FAST: {
+        // Retrieve variable pointer from local variables array slot
+        PyObject *value = f->f_localsplus[GETARG(next_instr)];
+        Py_INCREF(value);
+        *stack_pointer++ = value; // Push pointer onto value stack
+        DISPATCH();
+    }
+
+    TARGET_BINARY_OP: {
+        PyObject *right = *--stack_pointer; // Pop right operand
+        PyObject *left  = *--stack_pointer; // Pop left operand
+        PyObject *res = PyNumber_Tobinary(left, right, GETARG(next_instr));
+        Py_DECREF(left);
+        Py_DECREF(right);
+        *stack_pointer++ = res; // Push calculation result
+        DISPATCH();
+    }
+}</code></pre>
+        </div>
+
+        <h4>3. Simplified Code Example: Step-by-Step Value Stack Trace</h4>
+        <p>Consider evaluating the expression <code>result = a + b * c</code> where local variables are <code>a = 10</code> , <code>b = 2</code> , and <code>c = 5</code> .</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Pure Python expression
+a = 10
+b = 2
+c = 5
+result = a + b * c</code></pre>
+        </div>
+
+        <p>Below is the instruction execution trace through the CPython PVM value stack:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>Bytecode Instruction</th>
+                <th>Value Stack State (Top on Right)</th>
+                <th>C-Level VM Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><code>LOAD_FAST 0 (a)</code></td>
+                <td><code>[10]</code></td>
+                <td>Fetch local array slot 0 (a); push pointer to 10.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><code>LOAD_FAST 1 (b)</code></td>
+                <td><code>[10, 2]</code></td>
+                <td>Fetch local array slot 1 (b); push pointer to 2.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><code>LOAD_FAST 2 (c)</code></td>
+                <td><code>[10, 2, 5]</code></td>
+                <td>Fetch local array slot 2 (c); push pointer to 5.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><code>BINARY_OP 5 (*)</code></td>
+                <td><code>[10, 10]</code></td>
+                <td>Pop 5 and 2; run <code>PyNumber_Multiply</code> ; push result 10.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><code>BINARY_OP 0 (+)</code></td>
+                <td><code>[20]</code></td>
+                <td>Pop 10 and 10; run <code>PyNumber_Add</code> ; push result 20.</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><code>STORE_FAST 3 (result)</code></td>
+                <td><code>[]</code></td>
+                <td>Pop 20; store pointer in local array slot 3 (result).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>The CPython Virtual Machine uses a stack-based structure to execute bytecode instructions.</li>
+          <li>The execution loop in <code>Python/ceval.c</code> evaluates instructions by pushing and popping pointers on a frame's value stack.</li>
+          <li><code>LOAD_FAST</code> and <code>STORE_FAST</code> provide fast variable lookups by accessing local array slots directly using integer indices instead of string dictionary searches.</li>
+        </ul>
+
+        <h3 id="ch3">Chapter 3: Memory Management, PyObject, and Garbage Collection</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>In CPython, everything is an object—integers, strings, functions, classes, and modules are all allocated on the heap as C structures. The universal foundation of every Python object is the <code>PyObject</code> structure (defined in <code>Include/object.h</code> ):</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">C (PyObject Definition in Include/object.h)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>typedef struct _object {
+    union {
+        Py_ssize_t ob_refcnt; // Tracks total active references pointing to this object
+        uint32_t ob_refcnt_split[2];
+    };
+    struct _typeobject *ob_type; // Pointer to the type structure defining object behavior
+} PyObject;</code></pre>
+        </div>
+
+        <p>For variable-length objects (like lists, tuples, or strings), CPython uses <code>PyVarObject</code> , which extends <code>PyObject</code> by adding an <code>ob_size</code> field tracking item count.</p>
+
+        <h4>2. Memory Allocator Hierarchy (PyMalloc)</h4>
+        <p>To avoid calling operating system allocation routines ( <code>malloc</code> / <code>free</code> ) repeatedly for small data items, CPython implements a four-tier memory manager:</p>
+        <ol>
+          <li><strong>OS Allocator (Tier 1):</strong> Standard C library calls ( <code>malloc</code> / <code>mmap</code> ) interact with OS page tables.</li>
+          <li><strong>Arenas (Tier 2):</strong> 256 KB memory blocks allocated directly from the OS, aligned to page boundaries.</li>
+          <li><strong>Pools (Tier 3):</strong> 4 KB subdivisions within arenas, dedicated to specific size classes.</li>
+          <li><strong>Blocks (Tier 4):</strong> Managed by CPython's specialized PyMalloc engine. PyMalloc handles requests &le; 512 bytes in 8-byte increments (e.g., 8, 16, 24, ... 512 bytes). Requests exceeding 512 bytes bypass PyMalloc and route to system <code>malloc</code> .</li>
+        </ol>
+
+        <h4>3. Dual Memory Cleanup Engines</h4>
+        <p>CPython combines two distinct memory management strategies:</p>
+        <ul>
+          <li><strong>Reference Counting:</strong> Every time an object reference is created, assigned, or passed, <code>ob_refcnt</code> increments ( <code>Py_INCREF</code> ). When references go out of scope or are deleted ( <code>del</code> ), <code>ob_refcnt</code> decrements ( <code>Py_DECREF</code> ). Once <code>ob_refcnt</code> drops to zero, memory is freed immediately.</li>
+          <li><strong>Cyclic Garbage Collector:</strong> Reference counting alone cannot free circular references (e.g., Object A references Object B, and Object B references Object A). To clean up these isolated circular structures, CPython runs an asynchronous generational Garbage Collector ( <code>gc</code> module).
+            <ul>
+              <li><strong>Generations:</strong> Container objects are placed in Generation 0 (new), Generation 1, or Generation 2 (long-lived) based on collection survival.</li>
+              <li><strong>Trial Deletion:</strong> To detect cycles, the GC copies object reference counts into a temporary <code>gc_refs</code> field, iterates through container references, and decrements counts. If an object's effective reference count drops to zero, it is isolated and deallocated.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4. Simplified Code Example: Reference Counting and Reference Cycles</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import sys
+import gc
+
+# Part A: Demonstrating Reference Counting
+sample_list = [1, 2, 3]
+print("Initial Ref Count:", sys.getrefcount(sample_list)) # Output: 2 (sample_list + parameter)
+
+alias_ref = sample_list
+print("Ref Count after alias:", sys.getrefcount(sample_list)) # Output: 3
+
+del alias_ref
+print("Ref Count after del alias:", sys.getrefcount(sample_list)) # Output: 2
+
+# Part B: Creating an Isolated Reference Cycle
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.neighbor = None
+
+# Turn off automatic GC to observe cycle behavior manually
+gc.disable()
+
+node_a = Node("A")
+node_b = Node("B")
+
+# Create mutual circular reference
+node_a.neighbor = node_b
+node_b.neighbor = node_a
+
+# Delete top-level variable names
+del node_a
+del node_b
+
+# Objects still exist in memory because internal reference counts are 1!
+print("Unreachable objects collected by GC:", gc.collect())</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>sys.getrefcount(sample_list)</code> : Returns the current reference count. Passing <code>sample_list</code> into <code>getrefcount</code> creates a temporary parameter reference, making the count 1 higher than variable names in scope.</li>
+          <li><code>node_a.neighbor = node_b</code> and <code>node_b.neighbor = node_a</code> : Constructs a circular link where both objects point to each other.</li>
+          <li><code>del node_a; del node_b</code> : Deletes the explicit variable names <code>node_a</code> and <code>node_b</code> . However, neither object's reference count drops to zero because <code>node_a.neighbor</code> still points to <code>node_b</code> and vice versa.</li>
+          <li><code>gc.collect()</code> : Runs the cyclic garbage collector manually. The collector performs trial deletion, identifies the isolated circular link, and frees the memory allocated for both Node instances.</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Every Python object starts with a C <code>PyObject</code> header containing a reference counter ( <code>ob_refcnt</code> ) and type pointer ( <code>ob_type</code> ).</li>
+          <li>PyMalloc optimizes small memory allocations (&le; 512 bytes) using Arenas, Pools, and Blocks.</li>
+          <li>Reference counting handles immediate memory cleanup, while the cyclic GC sweeps generational rings to break circular reference cycles.</li>
+        </ul>
+
+        <h3 id="ch4">Chapter 4: The Global Interpreter Lock (GIL) &amp; Native CPU Execution</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>The Global Interpreter Lock (GIL) is a mutex (mutual exclusion lock) inside CPython's runtime. It prevents multiple OS threads from executing Python bytecode at the same time, even on multi-core CPUs.</p>
+        <p>The GIL persists in CPython for three primary architectural reasons:</p>
+        <ol>
+          <li><strong>Single-Thread Speed:</strong> It avoids lock acquisition overhead on primitive operations (like dictionary lookups or reference increments) in single-threaded programs.</li>
+          <li><strong>Memory Safety:</strong> It prevents race conditions on CPython's internal non-atomic reference counter ( <code>ob_refcnt</code> ).</li>
+          <li><strong>C Extension Simplicity:</strong> It allows C extension modules to write thread-hostile code without causing memory corruption.</li>
+        </ol>
+
+        <h4>2. CPU-Bound vs. I/O-Bound Bottlenecks</h4>
+        <ul>
+          <li><strong>CPU-Bound Workloads:</strong> Multiple Python threads running heavy CPU calculations perform no faster than a single thread because threads spend time waiting for lock ownership.</li>
+          <li><strong>I/O-Bound Workloads:</strong> During file access, database queries, or network requests, CPython automatically releases the GIL. Other threads can run Python bytecode while one thread waits for I/O operations to complete.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (GIL CPU Bottleneck Benchmark)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import threading
+import time
+
+# CPU-Bound Task: Multithreading DOES NOT speed this up under the GIL
+def count_down(n):
+    while n > 0:
+        n -= 1
+
+N = 20_000_000
+
+# Sequential Execution
+start = time.time()
+count_down(N)
+print(f"Sequential Duration: {time.time() - start:.2f}s")
+
+# Multithreaded Execution (2 Threads)
+t1 = threading.Thread(target=count_down, args=(N // 2,))
+t2 = threading.Thread(target=count_down, args=(N // 2,))
+start = time.time()
+t1.start(); t2.start()
+t1.join(); t2.join()
+print(f"Two-Threaded Duration: {time.time() - start:.2f}s")</code></pre>
+        </div>
+
+        <h4>3. Bypassing the GIL &amp; The No-GIL Future</h4>
+        <ul>
+          <li><strong>Native C Extensions:</strong> Numerical libraries (such as NumPy or SciPy) release the GIL before launching vectorized C or C++ loops across multi-core processors.</li>
+          <li><strong>Free-Threaded Python (PEP 703 / --disable-gil):</strong> Introduced in Python 3.13, this build configuration removes the GIL entirely. It replaces global locking with:
+            <ul>
+              <li><strong>Biased Reference Counting:</strong> Assigns an owner thread to each object to allow fast, non-atomic reference count updates.</li>
+              <li><strong>Deferred Reference Counting:</strong> Skips reference count updates on top-level shared constants (like function codes and modules), leaving cleanup to garbage collection cycles.</li>
+              <li><strong>mimalloc:</strong> Replaces PyMalloc with a lock-free thread-safe allocator.</li>
+            </ul>
+          </li>
+          <li><strong>Per-Interpreter GIL (PEP 684):</strong> Allows multiple sub-interpreters to run within a single process, giving each sub-interpreter its own isolated GIL and heap.</li>
+        </ul>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>The GIL guarantees that only one thread executes Python bytecode at any given moment.</li>
+          <li>I/O-bound multithreading works well because threads release the GIL during blocking operations.</li>
+          <li>CPU-bound multithreading under the GIL does not provide parallel execution. Use multiprocessing, native libraries (like NumPy), or free-threaded Python builds (PEP 703) to achieve multi-core speedups.</li>
+        </ul>
+      </section>
+
+      <!-- PART II -->
+      <section id="part2" class="content-section">
+        <h2>PART II: PYTHON FOUNDATIONS &amp; TYPE SYSTEM</h2>
+
+        <h3 id="ch5">Chapter 5: Variables, Dynamic Typing, and Object Model</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>In Python, variables are symbolic references bound to memory addresses—not typed storage containers. When you execute <code>x = 42</code> , Python creates an integer object containing 42 in heap memory, then binds the label x to that object's address.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Variable names are labels pointing to memory objects
+a = [10, 20] # Creates list; binds 'a' to address X
+b = a        # Binds 'b' to address X
+b.append(30) # Modifying object at address X updates both references
+print("a:", a) # Output: [10, 20, 30]</code></pre>
+        </div>
+
+        <h4>2. Mutability, Identity, and Equality</h4>
+        <ul>
+          <li><strong>Immutable Types:</strong> <code>int</code> , <code>float</code> , <code>bool</code> , <code>str</code> , <code>tuple</code> , <code>bytes</code> , <code>frozenset</code> . Their state cannot be altered in-place after instantiation. Any modification instantiates a new object in memory.</li>
+          <li><strong>Mutable Types:</strong> <code>list</code> , <code>dict</code> , <code>set</code> , <code>bytearray</code> , custom class instances. Their internal state can be updated directly without changing memory pointers.</li>
+        </ul>
+        <p>Python provides three distinct ways to evaluate variables:</p>
+        <ol>
+          <li><code>id(obj)</code> : Returns an integer representing the memory address of the C object structure.</li>
+          <li><code>a is b</code> : Memory check—returns <code>True</code> only if <code>id(a) == id(b)</code> .</li>
+          <li><code>a == b</code> : Equality check—invokes <code>a.__eq__(b)</code> to evaluate matching content values.</li>
+        </ol>
+
+        <h4>3. Small Integer Caching and String Interning</h4>
+        <p>To reduce memory allocation overhead, CPython applies optimizations for immutable values:</p>
+        <ul>
+          <li><strong>Small Integer Cache:</strong> CPython pre-allocates global singletons for integers in the range <code>[-5, 256]</code> at startup. Assignments in this range re-use shared objects.</li>
+          <li><strong>String Interning:</strong> CPython automatically interns string literals that look like valid Python identifiers. You can manually force interning using <code>sys.intern()</code> .</li>
+        </ul>
+
+        <h4>4. Simplified Code Example: Variable Bindings and Copies</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import copy
+
+# Part A: Demonstrating Identity vs Equality
+x = [1, 2]
+y = [1, 2]
+print("Equality (x == y):", x == y) # Output: True (Contents match)
+print("Identity (x is y):", x is y) # Output: False (Separate objects in memory)
+
+# Part B: Shallow Copy vs Deep Copy
+original = [[10, 20], [30, 40]]
+shallow_copy = copy.copy(original)
+deep_copy = copy.deepcopy(original)
+
+# Modify nested inner list
+original[0].append(99)
+
+print("Original:    ", original)     # Output: [[10, 20, 99], [30, 40]]
+print("Shallow Copy:", shallow_copy) # Output: [[10, 20, 99], [30, 40]] (Shared inner lists)
+print("Deep Copy:   ", deep_copy)    # Output: [[10, 20], [30, 40]] (Fully isolated copy)</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>x == y</code> evaluates to <code>True</code> because list values match item-for-item. <code>x is y</code> evaluates to <code>False</code> because x and y point to distinct memory addresses.</li>
+          <li><code>copy.copy(original)</code> creates a new top-level list, but copies references to the inner list objects. Modifying <code>original[0]</code> affects <code>shallow_copy</code> .</li>
+          <li><code>copy.deepcopy(original)</code> recursively copies both outer and inner containers, building a fully isolated memory tree. Modifying <code>original[0]</code> leaves <code>deep_copy</code> unchanged.</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Variables are reference names bound to objects in memory—they are not typed storage slots.</li>
+          <li>Immutable object updates create new instances; mutable object updates alter state in-place.</li>
+          <li>Use shallow copies ( <code>copy.copy</code> ) for flat data structures and deep copies ( <code>copy.deepcopy</code> ) for nested data structures.</li>
+        </ul>
+
+        <h3 id="ch6">Chapter 6: Primitive &amp; Scalar Data Types Deep Dive</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Primitive scalar types in CPython wrap native C primitives inside object structures:</p>
+        <ul>
+          <li><strong>Integers (PyLongObject):</strong> Python handles integers with arbitrary-precision arithmetic. Numbers are stored as arrays of multi-bit "digits" ( <code>uint30_t</code> on 64-bit systems). As integer values grow, Python expands the size of the digit array dynamically, preventing integer overflow bugs.</li>
+          <li><strong>Floats (PyFloatObject):</strong> Wraps a native C double (IEEE 754 64-bit floating-point standard: 1 sign bit, 11 exponent bits, 52 mantissa bits). Because binary floats cannot represent certain decimal fractions exactly, precision artifacts can occur:</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import math
+from decimal import Decimal
+
+# Binary floating-point representation quirk
+print("0.1 + 0.2 =", 0.1 + 0.2) # Output: 0.30000000000000004
+
+# Safe float comparison
+print("Is close?", math.isclose(0.1 + 0.2, 0.3)) # Output: True
+
+# Decimal module for exact precision
+d1 = Decimal("0.1")
+d2 = Decimal("0.2")
+print("Decimal sum:", d1 + d2) # Output: Decimal('0.3')</code></pre>
+        </div>
+
+        <h4>2. Booleans and Logic Operations</h4>
+        <p>Booleans ( <code>True</code> and <code>False</code> ) are implemented as a direct subclass of <code>int</code> . <code>True</code> has an integer value of 1, and <code>False</code> has a value of 0.</p>
+        <p>Python evaluates logical operators ( <code>and</code> , <code>or</code> ) using short-circuit logic:</p>
+        <ul>
+          <li><code>A and B</code> : Evaluates A. If A is false, returns A immediately without evaluating B.</li>
+          <li><code>A or B</code> : Evaluates A. If A is true, returns A immediately without evaluating B.</li>
+        </ul>
+
+        <h4>3. Binary Data Types and Zero-Copy Buffers</h4>
+        <ul>
+          <li><code>bytes</code> : An immutable sequence of raw bytes.</li>
+          <li><code>bytearray</code> : A mutable sequence of raw bytes supporting in-place modifications.</li>
+          <li><code>memoryview</code> : Exposes CPython's buffer protocol ( <code>Py_buffer</code> ), allowing zero-copy slice access to memory without copying underlying byte arrays.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Zero-Copy memoryview Modification)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Modifying data via zero-copy memoryview
+buffer = bytearray(b"HELLO WORLD")
+view = memoryview(buffer)
+
+# Slice view without allocating a new byte array
+sub_slice = view[6:11]
+sub_slice[0:1] = b"C"
+
+print("Modified Buffer:", buffer) # Output: bytearray(b'HELLO COLD')</code></pre>
+        </div>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Python integers support arbitrary-precision arithmetic that scales dynamically in memory.</li>
+          <li>Floating-point calculations inherit IEEE 754 precision limits; use <code>decimal.Decimal</code> for exact monetary calculations.</li>
+          <li>Use <code>memoryview</code> to slice and modify large binary data buffers without duplicating memory.</li>
+        </ul>
+
+        <h3 id="ch7">Chapter 7: Sequence Types &amp; Memory Layout (Lists, Tuples, Strings)</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Sequences store ordered collections of items, but their memory implementations differ:</p>
+        <ul>
+          <li><strong>Python list (PyListObject):</strong> A dynamic array storing pointers ( <code>PyObject*</code> ) to items. When appends exceed capacity, CPython resizes the backing pointer array using an over-allocation growth formula:
+            <div class="formula-card">N_new = N + (N &gt;&gt; 3) + (N &lt; 9 ? 3 : 6)</div>
+            This yields amortized O(1) appends, while insertions or deletions at arbitrary index positions require O(n) array element shifting.
+          </li>
+          <li><strong>Python tuple (PyTupleObject):</strong> An immutable, fixed-size array of pointers. Because tuples cannot resize, they bypass dynamic allocation metadata, making them lighter on memory than lists.</li>
+          <li><strong>Python str (PEP 393 Flexible Unicode Representation):</strong> Strings adapt their internal character byte widths based on contents:
+            <ul>
+              <li><strong>1-Byte (Latin-1):</strong> Used when characters are within code points &le; U+00FF.</li>
+              <li><strong>2-Byte (UCS-2):</strong> Used when characters are within code points &le; U+FFFF.</li>
+              <li><strong>4-Byte (UCS-4):</strong> Used when characters include code points &le; U+10FFFF (e.g., emojis).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2. Simplified Code Example: Memory Measurement across Sequences</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import sys
+
+# Part A: Memory footprint comparison between tuple and list
+sample_tuple = (1, 2, 3, 4, 5)
+sample_list = [1, 2, 3, 4, 5]
+
+print("Tuple Byte Size:", sys.getsizeof(sample_tuple)) # Smaller footprint
+print("List Byte Size: ", sys.getsizeof(sample_list))  # Larger due to over-allocation
+
+# Part B: PEP 393 Flexible String Memory Growth
+str_ascii = "hello"       # 1 byte per character
+str_greek = "helloα"      # 2 bytes per character
+str_emoji = "hello 🐍"    # 4 bytes per character
+
+print("ASCII String Size: ", sys.getsizeof(str_ascii))
+print("Greek String Size: ", sys.getsizeof(str_greek))
+print("Emoji String Size: ", sys.getsizeof(str_emoji))</code></pre>
+        </div>
+
+        <h4>3. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>sys.getsizeof(sample_list)</code> returns a larger byte size than <code>sample_tuple</code> because lists allocate extra structural capacity to accommodate future append calls efficiently.</li>
+          <li><code>sys.getsizeof(str_ascii)</code> demonstrates PEP 393 memory optimization. When CPython detects plain ASCII input, it uses 1 byte per character. Introducing a Greek character shifts the entire string storage to 2 bytes per character, while introducing an emoji shifts the string storage to 4 bytes per character.</li>
+        </ul>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Lists are dynamic pointer arrays with amortized O(1) appends and O(n) arbitrary insertions.</li>
+          <li>Tuples are immutable fixed-size pointer arrays with smaller memory footprints.</li>
+          <li>Strings automatically adjust character width (1, 2, or 4 bytes) based on Unicode code points.</li>
+        </ul>
+
+        <h3 id="ch8">Chapter 8: Hash Tables in Python (Dictionaries &amp; Sets)</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Python dictionaries ( <code>PyDictObject</code> ) use a compact hash table layout (PEP 468/PEP 509) that decouples memory allocation into two separate structures:</p>
+        <ol>
+          <li><strong>Sparse Indices Array:</strong> An array storing integer index offsets into the entries table.</li>
+          <li><strong>Dense Entries Array:</strong> A contiguous array storing <code>[hash, key_pointer, value_pointer]</code> entries in exact insertion order.</li>
+        </ol>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Dictionary Memory Layout</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>Sparse Indices Array: [-1,  0,  1, -1, -1]
+                         |   |
+                         v   v
+Dense Entries Array:
+  [ Slot 0: Hash | Key Pointer | Value Pointer ]
+  [ Slot 1: Hash | Key Pointer | Value Pointer ]</code></pre>
+        </div>
+
+        <p>Decoupling lookup indices from data storage reduces total memory overhead and ensures that iteration over dictionaries preserves insertion order.</p>
+
+        <h4>2. Probing and Hash Collision Resolution</h4>
+        <p>When executing <code>d[key]</code> :</p>
+        <ol>
+          <li>CPython computes <code>hash(key)</code> using SipHash (a cryptographically secure hash algorithm designed to block HashDoS collision attacks).</li>
+          <li>Maps the calculated hash to an index slot using pseudo-random open-addressing probing:
+            <div class="formula-card">i = (5 * i + 1 + perturb) mod 2^k</div>
+          </li>
+          <li>If a collision occurs (two distinct keys map to the same slot), the perturbation variable shifts right ( <code>perturb &gt;&gt;= 5</code> ), generating a deterministic probe sequence to find an empty slot or matching key.</li>
+        </ol>
+
+        <h4>3. Simplified Code Example: Handling Hash Collisions</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>class CollisionKey:
+    def __init__(self, name):
+        self.name = name
+
+    def __hash__(self):
+        # Force identical hash values to simulate collisions
+        return 100
+
+    def __eq__(self, other):
+        return isinstance(other, CollisionKey) and self.name == other.name
+
+    def __repr__(self):
+        return f"Key({self.name})"
+
+# Construct dictionary with colliding keys
+dict_data = {}
+k1 = CollisionKey("Alpha")
+k2 = CollisionKey("Beta")
+
+dict_data[k1] = "Data 1"
+dict_data[k2] = "Data 2" # Triggers open addressing probe resolution
+
+print("Dictionary Contents:", dict_data)
+print("Key 1 Value:", dict_data[k1])</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>__hash__()</code> returns 100 for both key instances.</li>
+          <li>When <code>dict_data[k2]</code> is assigned, CPython calculates an initial slot index, detects an existing key ( <code>k1</code> ), and executes its internal open-addressing probe algorithm to find the next available slot in the dense entries array.</li>
+          <li>When reading <code>dict_data[k1]</code> , CPython probes the table, checks equality using <code>__eq__()</code> , matches the key instance, and returns "Data 1" .</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Dictionaries use a compact layout (sparse indices + dense entries) that preserves key insertion order.</li>
+          <li>Lookup performance is O(1) on average, but degrades to O(n) under heavy hash collisions.</li>
+          <li>Keys must be hashable—implementing <code>__hash__</code> and <code>__eq__</code> stably, or using immutable built-in types.</li>
+        </ul>
+
+        <h3 id="ch9">Chapter 9: Control Flow, Pattern Matching, and Comprehensions</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Control flow structures direct code execution paths. Under the hood, Python for loops iterate over objects using the Iteration Protocol ( <code>iter()</code> and <code>next()</code> calls):</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Loop Virtual Machine Lowering)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># High-level loop statement
+for item in [10, 20, 30]:
+    print(item)
+
+# Low-level virtual machine lowering equivalent
+iterator = iter([10, 20, 30])
+while True:
+    try:
+        item = next(iterator)
+    except StopIteration:
+        break # Exit loop when exhausted
+    print(item)</code></pre>
+        </div>
+
+        <h4>2. Structural Pattern Matching (PEP 634)</h4>
+        <p>Introduced in Python 3.10, match-case statements evaluate data shapes, mapping structures, and sequence patterns:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Structural Pattern Matching)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>def parse_payload(payload):
+    match payload:
+        case {"type": "user", "details": [name, age]} if age >= 18:
+            return f"Adult User: {name}, Age: {age}"
+        case {"type": "user", "details": [name, _]}:
+            return f"Minor User: {name}"
+        case {"type": "system", "status": 200}:
+            return "System Status OK"
+        case _:
+            return "Unknown Payload Structure"
+
+print(parse_payload({"type": "user", "details": ["Alice", 25]}))
+print(parse_payload({"type": "system", "status": 200}))</code></pre>
+        </div>
+
+        <h4>3. Comprehension Efficiency</h4>
+        <p>Comprehensions execute faster than manual for loops because CPython uses dedicated opcodes ( <code>LIST_APPEND</code> , <code>MAP_ADD</code> , <code>SET_ADD</code> ) that push items onto container structures directly within C loops, avoiding repeated attribute lookups ( <code>list.append</code> ).</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># List Comprehension
+squares_list = [x * x for x in range(10) if x % 2 == 0]
+
+# Generator Expression (Computes items on demand without allocating full list)
+squares_gen = (x * x for x in range(10) if x % 2 == 0)</code></pre>
+        </div>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li><code>for</code> loops consume standard iterators under the hood, catching <code>StopIteration</code> automatically.</li>
+          <li><code>match-case</code> statements provide structural destructuring based on shape, type, and guard conditions.</li>
+          <li>Comprehensions are faster than manual loops because they run append operations via inline C bytecode opcodes.</li>
+        </ul>
+
+        <h3 id="ch10">Chapter 10: Functions, Scopes, and Closures</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Functions in Python are first-class objects represented by <code>PyFunctionObject</code> . They can be passed as arguments, assigned to variables, and returned from other functions.</p>
+        <p>Variable scope resolution follows the LEGB rule:</p>
+        <ol>
+          <li><strong>Local (L):</strong> Names defined within the current function body.</li>
+          <li><strong>Enclosing (E):</strong> Names defined in outer enclosing function scopes.</li>
+          <li><strong>Global (G):</strong> Names defined at the top level of the current module.</li>
+          <li><strong>Built-in (B):</strong> Names pre-loaded in Python's builtins module (e.g., <code>len</code> , <code>range</code> ).</li>
+        </ol>
+
+        <h4>2. Scope Modifiers and Mutable Defaults</h4>
+        <ul>
+          <li><code>global</code> : Tells CPython to resolve and rebind a variable in the top-level module scope.</li>
+          <li><code>nonlocal</code> : Tells CPython to rebind a variable in the nearest enclosing function scope.</li>
+          <li><strong>Mutable Default Traps:</strong> Default arguments evaluate once when the function is defined—not when it is called. Avoid using mutable default parameters like <code>def func(lst=[])</code> .</li>
+        </ul>
+
+        <h4>3. Closure Mechanics</h4>
+        <p>When a nested function accesses a variable from an enclosing scope, CPython creates a closure using cell structures ( <code>PyCellObject</code> ). Cells keep variables alive in memory even after the enclosing scope's stack frame completes execution.</p>
+
+        <h4>4. Simplified Code Example: Scope Bindings and Closures</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Part A: Nonlocal Scopes and Closures
+def make_counter(start_value):
+    count = start_value # Variable in enclosing scope
+    def increment():
+        nonlocal count  # Rebind enclosing variable
+        count += 1
+        return count
+    return increment
+
+counter_a = make_counter(10)
+print("Count Call 1:", counter_a()) # Output: 11
+print("Count Call 2:", counter_a()) # Output: 12
+
+# Inspecting closure cell contents
+print("Closure Cell Value:", counter_a.__closure__[0].cell_contents) # Output: 12
+
+# Part B: Defensive Default Arguments
+def safe_add_item(item, target_list=None):
+    if target_list is None:
+        target_list = [] # Instantiate fresh list per call
+    target_list.append(item)
+    return target_list
+
+print("Safe List 1:", safe_add_item("A")) # Output: ['A']
+print("Safe List 2:", safe_add_item("B")) # Output: ['B']</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>nonlocal count</code> : Tells <code>increment()</code> to update <code>count</code> in <code>make_counter</code> 's scope rather than creating a new local variable.</li>
+          <li><code>counter_a.__closure__[0].cell_contents</code> : Reveals the underlying cell structure holding the value 12 in memory even after <code>make_counter()</code> has returned.</li>
+          <li><code>target_list=None</code> : Prevents sharing mutable state across independent calls by instantiating a new list instance whenever <code>target_list</code> is omitted.</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Scope lookups follow the LEGB search order: Local &rarr; Enclosing &rarr; Global &rarr; Built-in.</li>
+          <li>Always use <code>None</code> as a default value for arguments intended to hold mutable objects.</li>
+          <li>Closures use cell objects to preserve enclosing variable references after outer functions return.</li>
+        </ul>
+      </section>
+
+      <!-- PART III -->
+      <section id="part3" class="content-section">
+        <h2>PART III: FUNCTIONAL PATTERNS &amp; ADVANCED ABSTRACTIONS</h2>
+
+        <h3 id="ch11">Chapter 11: Decorators &amp; Callable Architectures</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>A callable is any Python object that supports function call syntax via <code>()</code> . An object is callable if its class implements the <code>__call__</code> method.</p>
+        <p>A decorator is a higher-order callable that takes a function as an input argument, adds functionality around it, and returns a callable object. Decorators leverage closures or wrapper functions to modify execution behavior without altering target function code.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Decorator Lowering Equivalent)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>@my_decorator
+def target_func():
+    pass
+
+# Low-level evaluation equivalent:
+# target_func = my_decorator(target_func)</code></pre>
+        </div>
+
+        <h4>2. Preserving Function Metadata (functools.wraps)</h4>
+        <p>When a function is wrapped by a decorator, its metadata (such as <code>__name__</code> , <code>__doc__</code> , and type annotations) is replaced by the wrapper function's metadata. Using <code>@functools.wraps(func)</code> copies the original function's metadata back onto the wrapper.</p>
+
+        <h4>3. Simplified Code Example: Parameterized Decorator and Class Decorator</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import functools
+import time
+
+# Part A: Parameterized Decorator for Execution Timing
+def time_execution(threshold_seconds=0.05):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.perf_counter()
+            result = func(*args, **kwargs)
+            duration = time.perf_counter() - start_time
+            if duration > threshold_seconds:
+                print(f"[WARNING] {func.__name__} took {duration:.4f}s (Threshold: {threshold_seconds}s)")
+            return result
+        return wrapper
+    return decorator
+
+@time_execution(threshold_seconds=0.01)
+def slow_calculation():
+    time.sleep(0.02)
+    return "Done"
+
+slow_calculation()
+
+# Part B: Class-Based Call Counter Decorator
+class CallCounter:
+    def __init__(self, func):
+        self.func = func
+        self.count = 0
+        functools.update_wrapper(self, func)
+
+    def __call__(self, *args, **kwargs):
+        self.count += 1
+        print(f"Function '{self.func.__name__}' called {self.count} times")
+        return self.func(*args, **kwargs)
+
+@CallCounter
+def greet(name):
+    return f"Hello, {name}"
+
+greet("Alice")
+greet("Bob")</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>time_execution(threshold_seconds=0.01)</code> : A three-tier nested function structure. The outer function takes configuration options, the middle function takes the target callable, and the inner wrapper executes around <code>func</code> .</li>
+          <li><code>@functools.wraps(func)</code> : Preserves <code>slow_calculation</code> 's name and docstring.</li>
+          <li><code>CallCounter</code> : Implements <code>__call__</code> to act as a decorator, keeping track of invocation counts across calls using <code>self.count</code> .</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Decorators wrap callables to add functionality around them transparently.</li>
+          <li>Always use <code>@functools.wraps</code> inside custom decorators to preserve original function metadata.</li>
+          <li>Class-based decorators implement <code>__call__</code> to maintain persistent state across invocations.</li>
+        </ul>
+
+        <h3 id="ch12">Chapter 12: Iterators, Iterables, and Generators</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>The Iteration Protocol drives loop execution in Python:</p>
+        <ul>
+          <li><strong>Iterable:</strong> Any object that implements <code>__iter__()</code> , returning an iterator.</li>
+          <li><strong>Iterator:</strong> Any object that implements <code>__next__()</code> , returning items sequentially and raising <code>StopIteration</code> when exhausted.</li>
+        </ul>
+
+        <h4>2. Generators and Frame Suspension Mechanics</h4>
+        <p>A generator is a specialized function that contains the <code>yield</code> keyword. Calling a generator returns a generator object without executing the function body immediately.</p>
+        <p>When <code>next()</code> is called on a generator object:</p>
+        <ol>
+          <li>Execution starts or resumes from the last point of execution.</li>
+          <li>When execution encounters <code>yield</code> , CPython suspends the function frame ( <code>PyFrameObject</code> ), preserving local variables and value stack state.</li>
+          <li>The yielded value is returned to the caller.</li>
+        </ol>
+        <p>Generators support bidirectional communication via:</p>
+        <ul>
+          <li><code>gen.send(value)</code> : Injects a value back into the generator expression where it yielded.</li>
+          <li><code>yield from sub_gen()</code> : Delegates iteration directly to an inner generator.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Iterators and Bidirectional Generators</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Part A: Custom Class Implementing Iteration Protocol
+class EvenNumbers:
+    def __init__(self, limit):
+        self.limit = limit
+        self.current = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current > self.limit:
+            raise StopIteration
+        val = self.current
+        self.current += 2
+        return val
+
+print("Custom Iterator Output:", list(EvenNumbers(6)))
+
+# Part B: Interactive Two-Way Generator
+def accumulator():
+    total = 0
+    while True:
+        value = yield total # Yields current total; receives injected value
+        if value is None:
+            break
+        total += value
+
+acc = accumulator()
+print("Initialized:", next(acc))    # Output: 0 (Advances to first yield)
+print("Added 10:   ", acc.send(10)) # Output: 10
+print("Added 20:   ", acc.send(20)) # Output: 30
+acc.close()                         # Cleanly terminates generator</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>EvenNumbers</code> : Implements <code>__iter__</code> (returns self) and <code>__next__</code> (yields even numbers until current &gt; limit, then raises <code>StopIteration</code> ).</li>
+          <li><code>accumulator</code> : Evaluates <code>value = yield total</code> . Calling <code>next(acc)</code> runs code up to <code>yield total</code> , returning 0. Calling <code>acc.send(10)</code> sets <code>value = 10</code> , adds it to total , loops around, and yields 10.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Iterables implement <code>__iter__()</code> ; iterators implement <code>__next__()</code> and raise <code>StopIteration</code> when exhausted.</li>
+          <li>Generators yield values lazily while suspending state, offering lower memory footprints than lists.</li>
+          <li><code>yield from</code> delegates iteration directly to an inner generator.</li>
+        </ul>
+
+        <h3 id="ch13">Chapter 13: Functional Programming in Python</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Functional programming treats computation as the evaluation of mathematical functions, avoiding side effects and mutable state.</p>
+        <p>Python supports functional paradigms using first-class functions and built-in higher-order utilities:</p>
+        <ul>
+          <li><code>map(func, iterable)</code> : Applies a function to every element in an iterable.</li>
+          <li><code>filter(func, iterable)</code> : Filters elements, retaining items where <code>func(item)</code> evaluates to true.</li>
+          <li><code>functools.reduce(func, iterable, initializer)</code> : Accumulates elements into a single aggregate value.</li>
+        </ul>
+
+        <h4>2. Functional Tools (functools and operator)</h4>
+        <ul>
+          <li><code>functools.partial</code> : Pre-binds fixed arguments to a function, returning a new callable with a simpler signature.</li>
+          <li><code>functools.singledispatch</code> : Enables generic polymorphic dispatch, picking different function bodies based on the type of the first argument.</li>
+          <li><code>operator</code> module: Provides C-optimized versions of arithmetic and comparison operations (e.g., <code>operator.add</code> , <code>operator.itemgetter</code> ).</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Functional Data Pipeline</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>from functools import reduce, partial, singledispatch
+import operator
+
+# Part A: Higher-Order Pipeline (Map, Filter, Reduce)
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Filter even numbers -> Square them -> Sum total
+evens = filter(lambda x: x % 2 == 0, numbers)
+squared_evens = map(lambda x: x ** 2, evens)
+total_sum = reduce(operator.add, squared_evens, 0)
+print("Functional Pipeline Result:", total_sum) # Output: 220 (2^2 + 4^2 + 6^2 + 8^2 + 10^2)
+
+# Part B: Single Dispatch Polymorphic Function
+@singledispatch
+def process_data(data):
+    raise NotImplementedError("Unsupported Data Type")
+
+@process_data.register(int)
+def _(data):
+    return f"Processed Integer: {data * 2}"
+
+@process_data.register(list)
+def _(data):
+    return f"Processed List of Length {len(data)}"
+
+print(process_data(50))
+print(process_data([10, 20, 30]))</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>filter(...)</code> , <code>map(...)</code> , and <code>reduce(...)</code> : Processes data sequentially without mutating the original input array.</li>
+          <li><code>@singledispatch</code> : Inspects argument types at runtime. Passing 50 routes execution to the int handler, while passing <code>[10, 20, 30]</code> routes execution to the list handler.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Use <code>map</code> , <code>filter</code> , and <code>reduce</code> to build data pipelines without mutating input state.</li>
+          <li><code>functools.partial</code> creates simplified callables with pre-bound arguments.</li>
+          <li><code>@singledispatch</code> routes function calls based on argument types.</li>
+        </ul>
+
+        <h3 id="ch14">Chapter 14: Context Managers &amp; Resource Management</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Context managers ensure clean, reliable resource management (such as closing file handles, releasing database connections, or unlocking locks) using <code>with</code> blocks.</p>
+        <p>The Context Management Protocol consists of two methods:</p>
+        <ol>
+          <li><code>__enter__(self)</code> : Acquires resources and returns an object bound to the variable target in <code>with ... as target:</code> .</li>
+          <li><code>__exit__(self, exc_type, exc_val, exc_tb)</code> : Executes cleanup logic when exiting the block. If an exception occurs inside the block, its type, value, and traceback are passed to <code>__exit__</code> . If <code>__exit__</code> returns <code>True</code> , the exception is suppressed.</li>
+        </ol>
+
+        <h4>2. Simplification Utilities (contextlib)</h4>
+        <p>The <code>contextlib</code> library provides helpers for writing context managers:</p>
+        <ul>
+          <li><code>@contextmanager</code> : Decorates a generator function that yields a resource, converting it into a context manager without defining a class manually.</li>
+          <li><code>ExitStack</code> : Manages dynamic, varying numbers of context managers safely in a single block.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: File and Lock Context Managers</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>from contextlib import contextmanager, ExitStack
+
+# Part A: Custom Class Context Manager with Error Suppression
+class ManagedFile:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+        self.file = None
+
+    def __enter__(self):
+        print(f"Opening file: {self.filename}")
+        self.file = open(self.filename, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.file:
+            self.file.close()
+            print("File closed successfully")
+        if exc_type is ZeroDivisionError:
+            print("Suppressed division error inside with block")
+            return True # Suppress exception
+        return False # Propagate other exceptions
+
+with ManagedFile("test_demo.txt", "w") as f:
+    f.write("Context Manager Execution Test\n")
+    1 / 0 # Triggers ZeroDivisionError, caught and suppressed by __exit__
+
+# Part B: Context Manager Generator using contextlib
+@contextmanager
+def simple_resource():
+    print("Resource Allocated")
+    try:
+        yield "Active Resource"
+    finally:
+        print("Resource Cleaned Up")
+
+with simple_resource() as res:
+    print(f"Using: {res}")</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>ManagedFile</code> : Opens a file in <code>__enter__</code> and returns the file object. <code>__exit__</code> runs automatically when exiting the block, closing the file handle regardless of whether exceptions occurred.</li>
+          <li><code>@contextmanager</code> : Code before <code>yield</code> acts as <code>__enter__</code> , the yielded value binds to <code>as res</code> , and code inside <code>finally</code> acts as <code>__exit__</code> .</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Context managers ensure reliable cleanup through <code>__enter__</code> and <code>__exit__</code> hooks.</li>
+          <li>Returning <code>True</code> from <code>__exit__</code> suppresses exceptions raised within <code>with</code> blocks.</li>
+          <li>Use <code>@contextmanager</code> to build context managers from simple generator functions.</li>
+        </ul>
+
+        <h3 id="ch15">Chapter 15: Error Handling &amp; Custom Exceptions</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Exceptions interrupt normal execution flow to handle runtime errors cleanly. All standard Python exceptions derive from <code>BaseException</code> :</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Exception Hierarchy</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>BaseException
+ ├── SystemExit
+ ├── KeyboardInterrupt
+ └── Exception
+      ├── ArithmeticError (ZeroDivisionError)
+      ├── LookupError (IndexError, KeyError)
+      ├── TypeError
+      └── ValueError</code></pre>
+        </div>
+
+        <p>User-defined custom exceptions should inherit from <code>Exception</code> rather than <code>BaseException</code> to avoid intercepting system signals like <code>KeyboardInterrupt</code> .</p>
+
+        <h4>2. Exception Syntax and Chaining</h4>
+        <p>A full error handling block contains four sections:</p>
+        <ul>
+          <li><code>try</code> : Code that may raise an exception.</li>
+          <li><code>except</code> : Handles specific exceptions.</li>
+          <li><code>else</code> : Runs only if no exceptions were raised in the try block.</li>
+          <li><code>finally</code> : Always executes, ensuring cleanup regardless of exceptions.</li>
+        </ul>
+        <p>Explicit exception chaining uses <code>raise NewException from original_exception</code> , binding the root cause to <code>__cause__</code> . Implicit chaining sets <code>__context__</code> automatically when an exception occurs inside an except block.</p>
+
+        <h4>3. Exception Groups (PEP 654)</h4>
+        <p>Python 3.11 introduced <code>ExceptionGroup</code> and <code>except*</code> syntax to handle multiple concurrent exceptions simultaneously (such as errors raised across parallel async tasks).</p>
+
+        <h4>4. Simplified Code Example: Custom Exception and Exception Groups</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Part A: Custom Exception with Explicit Chaining
+class ValidationError(Exception):
+    pass
+
+def process_age(age_str):
+    try:
+        age = int(age_str)
+        if age < 0:
+            raise ValueError("Age cannot be negative")
+        return age
+    except ValueError as err:
+        # Explicit exception chaining
+        raise ValidationError("Invalid age input provided") from err
+
+try:
+    process_age("-5")
+except ValidationError as e:
+    print("Caught Exception:", e)
+    print("Original Cause: ", e.__cause__)
+
+# Part B: Exception Groups (Python 3.11+)
+try:
+    raise ExceptionGroup(
+        "Batch Processing Errors",
+        [ValueError("Bad Value"), KeyError("Missing Key")]
+    )
+except* ValueError as eg:
+    print("Handled ValueErrors:", eg.exceptions)
+except* KeyError as eg:
+    print("Handled KeyErrors:", eg.exceptions)</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>raise ValidationError(...) from err</code> : Wraps a low-level <code>ValueError</code> inside a high-level <code>ValidationError</code> , preserving the underlying cause in <code>e.__cause__</code> .</li>
+          <li><code>except* ValueError</code> : Selectively matches and handles <code>ValueError</code> instances inside an <code>ExceptionGroup</code> while allowing unhandled exception types to propagate.</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Inherit from <code>Exception</code> for custom application errors.</li>
+          <li>Use <code>raise CustomError from err</code> to preserve original causes during exception translation.</li>
+          <li>Use <code>ExceptionGroup</code> and <code>except*</code> (Python 3.11+) to handle concurrent errors cleanly.</li>
+        </ul>
+      </section>
+
+      <!-- PART IV -->
+      <section id="part4" class="content-section">
+        <h2>PART IV: OBJECT-ORIENTED PROGRAMMING &amp; METAPROGRAMMING</h2>
+
+        <h3 id="ch16">Chapter 16: Class Anatomy &amp; OOP Fundamentals</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Class instantiation in CPython operates through a two-stage process:</p>
+        <ol>
+          <li><code>__new__(cls, *args, **kwargs)</code> : A static method responsible for allocating object memory in the heap. It returns a newly created, uninitialized object instance.</li>
+          <li><code>__init__(self, *args, **kwargs)</code> : An instance method that receives the newly allocated instance reference ( <code>self</code> ) to initialize attributes.</li>
+        </ol>
+
+        <h4>2. Methods and Attribute Storage Mechanics</h4>
+        <p>By default, instance attributes are stored inside a dynamic dictionary attached to every object ( <code>__dict__</code> ).</p>
+        <p>Methods bind differently depending on decorators:</p>
+        <ul>
+          <li><strong>Instance Methods:</strong> Take <code>self</code> as their first parameter, accessing instance data.</li>
+          <li><strong>@classmethod:</strong> Takes <code>cls</code> as its first parameter, operating on class state across inheritance trees.</li>
+          <li><strong>@staticmethod:</strong> Takes no automatic first parameter, behaving like a plain function isolated inside the class namespace.</li>
+        </ul>
+
+        <h4>3. Footprint Optimization with __slots__</h4>
+        <p>Defining <code>__slots__</code> replaces an instance's dynamic <code>__dict__</code> with a fixed array of pointers. This reduces memory footprint per object and prevents users from assigning unlisted arbitrary attributes dynamically.</p>
+
+        <h4>4. Simplified Code Example: Class Construction and __slots__</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Part A: Stage 1 (__new__) and Stage 2 (__init__)
+class LifecycleDemo:
+    def __new__(cls, *args, **kwargs):
+        print("1. __new__ called: Allocating memory for PyObject")
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, name):
+        print("2. __init__ called: Initializing object state")
+        self.name = name
+
+obj = LifecycleDemo("Sample")
+
+# Part B: Memory Optimization with __slots__
+class SlottedPoint:
+    __slots__ = ("x", "y") # Replaces __dict__ with fixed pointer array
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+p = SlottedPoint(10, 20)
+print(f"Point: x={p.x}, y={p.y}")
+
+# Attempting to set an unlisted attribute raises an AttributeError
+try:
+    p.z = 30
+except AttributeError as err:
+    print("Attribute Assignment Blocked:", err)</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>LifecycleDemo</code> : Output shows that <code>__new__</code> executes first to allocate memory, returning an instance pointer that is passed as <code>self</code> to <code>__init__</code> .</li>
+          <li><code>SlottedPoint</code> : Omits <code>__dict__</code> creation. Assigning <code>p.z = 30</code> raises an <code>AttributeError</code> because z is not listed in <code>__slots__</code> .</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li><code>__new__</code> allocates instance memory; <code>__init__</code> initializes attribute values.</li>
+          <li>Use <code>__slots__</code> to eliminate <code>__dict__</code> memory overhead when instantiating large numbers of objects.</li>
+          <li>Class methods take <code>cls</code> ; instance methods take <code>self</code> ; static methods take no implicit first argument.</li>
+        </ul>
+
+        <h3 id="ch17">Chapter 17: Inheritance, Polymorphism, and MRO</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>When classes inherit from multiple parent classes, Python uses the C3 Linearization Algorithm to construct a deterministic Method Resolution Order (MRO). C3 Linearization ensures two properties:</p>
+        <ol>
+          <li><strong>Monotonicity:</strong> Derived classes preserve the search precedence order defined by parent classes.</li>
+          <li><strong>Local Precedence:</strong> Parent classes listed in class headers are searched in left-to-right order.</li>
+        </ol>
+        <p>The linearization formula for a class C with parents P<sub>1</sub>, P<sub>2</sub>, …, P<sub>n</sub> is defined as:</p>
+
+        <div class="formula-card">
+          L(C) = [C] + merge(L(P<sub>1</sub>), L(P<sub>2</sub>), ..., L(P<sub>n</sub>), [P<sub>1</sub>, P<sub>2</sub>, ..., P<sub>n</sub>])
+        </div>
+
+        <h4>2. Cooperative Multiple Inheritance (super())</h4>
+        <p><code>super()</code> does not simply call a direct parent class; it looks up the next class in the current instance's MRO sequence. This enables cooperative multiple inheritance, passing method calls down the MRO chain cleanly.</p>
+
+        <h4>3. Abstract Base Classes (abc module)</h4>
+        <p>Abstract Base Classes enforce interface contracts, preventing instantiation if derived subclasses fail to implement methods decorated with <code>@abstractmethod</code> .</p>
+
+        <h4>4. Simplified Code Example: MRO and Abstract Base Classes</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>from abc import ABC, abstractmethod
+
+# Part A: Abstract Base Class
+class AbstractDatabase(ABC):
+    @abstractmethod
+    def connect(self):
+        pass
+
+class PostgresDatabase(AbstractDatabase):
+    def connect(self):
+        return "Connected to PostgreSQL"
+
+db = PostgresDatabase()
+print(db.connect())
+
+# Part B: MRO and Cooperative super() Calls
+class Base:
+    def action(self):
+        print("Base execution")
+
+class MixinA(Base):
+    def action(self):
+        print("MixinA start")
+        super().action()
+        print("MixinA end")
+
+class MixinB(Base):
+    def action(self):
+        print("MixinB start")
+        super().action()
+        print("MixinB end")
+
+class Combined(MixinA, MixinB):
+    pass
+
+c = Combined()
+print("MRO Sequence:", [cls.__name__ for cls in Combined.__mro__])
+c.action()</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>Combined.__mro__</code> : Resolves to <code>[Combined, MixinA, MixinB, Base, object]</code> .</li>
+          <li><code>c.action()</code> : Calls <code>MixinA.action()</code> . Its <code>super().action()</code> call delegates to <code>MixinB.action()</code> (the next class in Combined's MRO), which in turn delegates to <code>Base.action()</code> .</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>The C3 Linearization algorithm computes deterministic MRO lookup orders.</li>
+          <li><code>super()</code> delegates calls to the next class in the current instance's MRO sequence, enabling cooperative inheritance.</li>
+          <li>Abstract Base Classes enforce method implementations on derived subclasses at instantiation time.</li>
+        </ul>
+
+        <h3 id="ch18">Chapter 18: Dunder (Magic) Methods Complete Reference</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Dunder methods (short for "double underscore" methods) hook directly into CPython runtime operations, allowing custom classes to overload built-in operators, emulate sequence types, and customize attribute lookups.</p>
+
+        <h4>2. Functional Categories of Dunder Methods</h4>
+        <ul>
+          <li><strong>Object Representation:</strong>
+            <ul>
+              <li><code>__repr__(self)</code> : Unambiguous, technical string view (useful for debugging).</li>
+              <li><code>__str__(self)</code> : User-friendly string representation.</li>
+            </ul>
+          </li>
+          <li><strong>Arithmetic Operator Overloading:</strong>
+            <ul>
+              <li><code>__add__(self, other)</code> : Overloads <code>+</code> .</li>
+              <li><code>__sub__(self, other)</code> : Overloads <code>-</code> .</li>
+              <li>Returns <code>NotImplemented</code> if the operation is unsupported for the passed argument type.</li>
+            </ul>
+          </li>
+          <li><strong>Container Emulation:</strong>
+            <ul>
+              <li><code>__len__(self)</code> : Overloads <code>len()</code> .</li>
+              <li><code>__getitem__(self, key)</code> : Overloads bracket indexing ( <code>obj[key]</code> ).</li>
+            </ul>
+          </li>
+          <li><strong>Dynamic Attribute Lookups:</strong>
+            <ul>
+              <li><code>__getattr__(self, name)</code> : Invoked only if the attribute was not located in the instance <code>__dict__</code> or class hierarchy.</li>
+              <li><code>__getattribute__(self, name)</code> : Invoked unconditionally for every attribute access.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Overloading Dunder Methods</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    # Technical String Representation
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y})"
+
+    # Overloading + Operator
+    def __add__(self, other):
+        if isinstance(other, Vector):
+            return Vector(self.x + other.x, self.y + other.y)
+        return NotImplemented
+
+    # Overloading Indexing (v[0], v[1])
+    def __getitem__(self, index):
+        if index == 0: return self.x
+        if index == 1: return self.y
+        raise IndexError("Vector index out of range")
+
+    # Fallback Attribute Access
+    def __getattr__(self, name):
+        return f"Attribute '{name}' does not exist"
+
+v1 = Vector(2, 3)
+v2 = Vector(4, 5)
+
+print("Vector Addition (v1 + v2):", v1 + v2) # Output: Vector(6, 8)
+print("Vector Index 0 (v1[0]):    ", v1[0])    # Output: 2
+print("Missing Attribute:        ", v1.z)      # Output: Attribute 'z' does not exist</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>v1 + v2</code> : Triggers <code>v1.__add__(v2)</code> , returning a new <code>Vector(6, 8)</code> .</li>
+          <li><code>v1[0]</code> : Triggers <code>Vector.__getitem__(v1, 0)</code> , returning <code>self.x</code> .</li>
+          <li><code>v1.z</code> : Attempts standard lookup, fails to find z , and falls back to <code>Vector.__getattr__(v1, "z")</code> .</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Use <code>__repr__</code> for technical representations and <code>__str__</code> for user-facing output.</li>
+          <li>Return <code>NotImplemented</code> from arithmetic dunders if argument types are unsupported.</li>
+          <li><code>__getattr__</code> runs as a fallback for missing attributes; <code>__getattribute__</code> runs on every attribute access.</li>
+        </ul>
+
+        <h3 id="ch19">Chapter 19: The Descriptor Protocol</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Descriptors drive Python's attribute binding model. A descriptor is a class that implements one or more methods in the Descriptor Protocol:</p>
+        <ul>
+          <li><code>__get__(self, instance, owner)</code></li>
+          <li><code>__set__(self, instance, value)</code></li>
+          <li><code>__delete__(self, instance)</code></li>
+        </ul>
+        <p>Descriptors fall into two categories:</p>
+        <ol>
+          <li><strong>Data Descriptors:</strong> Implement both <code>__get__</code> and <code>__set__</code> .</li>
+          <li><strong>Non-Data Descriptors:</strong> Implement only <code>__get__</code> (e.g., standard methods or <code>@staticmethod</code> ).</li>
+        </ol>
+
+        <h4>2. Attribute Lookup Search Order</h4>
+        <p>When you execute <code>obj.attr</code> , <code>object.__getattribute__</code> resolves lookups in the following order:</p>
+        <ol>
+          <li><strong>Data Descriptors:</strong> If attr is a data descriptor on the class, its <code>__get__</code> method is invoked first.</li>
+          <li><strong>Instance __dict__:</strong> Looks for attr inside <code>obj.__dict__</code> .</li>
+          <li><strong>Non-Data Descriptors:</strong> If attr is a non-data descriptor on the class, its <code>__get__</code> method is invoked.</li>
+          <li><strong>Class Attributes:</strong> Searches class and parent dictionaries.</li>
+        </ol>
+
+        <h4>3. Simplified Code Example: Type-Checking Descriptor</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>class IntegerField:
+    def __init__(self, name):
+        self.storage_name = f"_{name}"
+
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self # Accessed via class object
+        return getattr(instance, self.storage_name, 0)
+
+    def __set__(self, instance, value):
+        if not isinstance(value, int):
+            raise TypeError(f"Field '{self.storage_name}' must be an integer")
+        setattr(instance, self.storage_name, value)
+
+class Player:
+    score = IntegerField("score") # Data descriptor instance
+
+p = Player()
+p.score = 100 # Invokes IntegerField.__set__
+print("Player Score:", p.score) # Invokes IntegerField.__get__
+
+try:
+    p.score = "One Hundred"
+except TypeError as err:
+    print("Descriptor Blocked Value:", err)</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>IntegerField</code> : A data descriptor implementing <code>__get__</code> and <code>__set__</code> .</li>
+          <li><code>p.score = 100</code> : Triggers <code>IntegerField.__set__</code> , which validates that 100 is an int and writes it to <code>p._score</code> .</li>
+          <li><code>p.score = "One Hundred"</code> : Raises a <code>TypeError</code> inside <code>__set__</code> , enforcing type safety before updating instance state.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Descriptors manage attribute access using <code>__get__</code> , <code>__set__</code> , and <code>__delete__</code> .</li>
+          <li>Data descriptors override instance <code>__dict__</code> entries in lookup precedence.</li>
+          <li>Descriptors power properties, bound methods, class methods, and ORM fields under the hood.</li>
+        </ul>
+
+        <h3 id="ch20">Chapter 20: Metaprogramming &amp; Metaclasses</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>In Python, classes are objects themselves—instances of a higher-level class called a metaclass. By default, the metaclass for all classes is <code>type</code> .</p>
+        <p>You can instantiate classes dynamically at runtime using <code>type(name, bases, dict)</code> :</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Constructing a class dynamically using type()
+DynamicClass = type(
+    "DynamicClass",
+    (object,),
+    {"version": 1.0, "get_version": lambda self: self.version}
+)
+
+obj = DynamicClass()
+print(obj.get_version()) # Output: 1.0</code></pre>
+        </div>
+
+        <h4>2. Custom Metaclass Creation</h4>
+        <p>Custom metaclasses inherit from <code>type</code> , intercepting class definition evaluation to validate or modify attributes during import time:</p>
+        <ul>
+          <li><code>__prepare__(mcs, name, bases)</code> : Returns a custom dictionary mapping used to collect class body attributes.</li>
+          <li><code>__new__(mcs, name, bases, attrs)</code> : Allocates and returns the class object structure before construction finishes.</li>
+        </ul>
+
+        <h4>3. Modern Alternative: __init_subclass__ (PEP 487)</h4>
+        <p>For basic class registration and attribute checking, <code>__init_subclass__</code> provides a simpler alternative to writing custom metaclasses.</p>
+
+        <h4>4. Simplified Code Example: Metaclass and __init_subclass__</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Part A: Metaclass enforcing upper-case attribute names
+class EnforceUppercaseMeta(type):
+    def __new__(mcs, name, bases, attrs):
+        # Validate that non-dunder attributes are uppercase
+        for attr_name in attrs:
+            if not attr_name.startswith("_") and not attr_name.isupper():
+                raise TypeError(f"Attribute '{attr_name}' in '{name}' must be uppercase!")
+        return super().__new__(mcs, name, bases, attrs)
+
+class SystemConfig(metaclass=EnforceUppercaseMeta):
+    PORT = 8080
+    HOST = "127.0.0.1"
+    # timeout = 30 # Uncommenting raises TypeError!
+
+print("SystemConfig Host:", SystemConfig.HOST)
+
+# Part B: Class Registration via __init_subclass__
+class PluginBase:
+    registry = {}
+    def __init_subclass__(cls, plugin_name, **kwargs):
+        super().__init_subclass__(**kwargs)
+        cls.registry[plugin_name] = cls
+
+class AudioPlugin(PluginBase, plugin_name="audio_processor"):
+    pass
+
+print("Registered Plugins:", PluginBase.registry)</code></pre>
+        </div>
+
+        <h4>5. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>EnforceUppercaseMeta</code> : Inspects class attributes inside <code>__new__</code> during import time. If any non-dunder attribute name is lowercase, it raises a <code>TypeError</code> .</li>
+          <li><code>PluginBase</code> : Uses <code>__init_subclass__</code> to auto-register derived subclasses in <code>PluginBase.registry</code> without requiring custom metaclasses.</li>
+        </ul>
+
+        <h4>6. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Classes are instances of metaclasses; <code>type</code> is the default metaclass in Python.</li>
+          <li>Custom metaclasses intercept class creation in <code>__new__</code> to enforce structure or transform methods.</li>
+          <li>Use <code>__init_subclass__</code> (PEP 487) as a simpler alternative to custom metaclasses for basic subclass registration.</li>
+        </ul>
+      </section>
+
+      <!-- PART V -->
+      <section id="part5" class="content-section">
+        <h2>PART V: STATIC TYPING, MODERN PYTHON &amp; PACKAGING</h2>
+
+        <h3 id="ch21">Chapter 21: Static Typing &amp; Type Hints System</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>PEP 484 introduced gradual static type annotations to Python. Type hints provide readable annotations for static analysis tools (like mypy or pyright) without affecting Python's dynamic runtime execution semantics.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Type Hints Runtime Behavior)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Type hints do not enforce runtime type checks by default
+def greet(name: str) -> str:
+    return f"Hello, {name}"
+
+greet(123) # Runs at runtime without raising an error unless static checkers are used</code></pre>
+        </div>
+
+        <h4>2. Key Type Annotations</h4>
+        <ul>
+          <li><strong>Unions:</strong> <code>str | int</code> (replaces legacy <code>Union[str, int]</code> ).</li>
+          <li><strong>Optionals:</strong> <code>str | None</code> (replaces legacy <code>Optional[str]</code> ).</li>
+          <li><strong>Generics (typing.Generic):</strong> Parameterizes classes over abstract type variables ( <code>TypeVar</code> ).</li>
+          <li><strong>Protocols (typing.Protocol / PEP 544):</strong> Defines structural subtyping (static duck typing), checking interface matching without requiring explicit class inheritance.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Generics and Protocols</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>from typing import TypeVar, Generic, Protocol
+
+# Part A: Generics with TypeVar
+T = TypeVar("T")
+
+class Container(Generic[T]):
+    def __init__(self, item: T):
+        self._item = item
+
+    def get_item(self) -> T:
+        return self._item
+
+int_box = Container[int](100)
+str_box = Container[str]("Python")
+print("Int Box Item:", int_box.get_item())
+
+# Part B: Structural Subtyping with Protocol
+class Renderable(Protocol):
+    def render(self) -> str:
+        ...
+
+class Button:
+    def render(self) -> str:
+        return "&lt;button&gt;Click&lt;/button&gt;"
+
+def draw_element(element: Renderable) -> None:
+    print("Rendering:", element.render())
+
+draw_element(Button()) # Matches Protocol interface statically</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>Container(Generic[T])</code> : Defines a reusable generic container. <code>int_box</code> binds T to <code>int</code> , enforcing integer return signatures for static type checkers.</li>
+          <li><code>Renderable(Protocol)</code> : Defines an interface requirement ( <code>render() -&gt; str</code> ). <code>Button</code> satisfies Renderable implicitly without inheriting from it explicitly.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Type hints provide metadata for static type checkers (mypy); they are ignored by the Python interpreter at runtime.</li>
+          <li>Use <code>A | B</code> for unions and <code>A | None</code> for optional types in modern Python (3.10+).</li>
+          <li>Use <code>Protocol</code> (PEP 544) to specify structural duck-typing interfaces for static type checkers.</li>
+        </ul>
+
+        <h3 id="ch22">Chapter 22: Modern Python Features (Python 3.10 through 3.13+)</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Recent CPython releases introduce performance optimizations and language updates:</p>
+        <ul>
+          <li><strong>PEP 659 (Python 3.11 - Specializing Adaptive Interpreter):</strong> Monitors running bytecode opcodes. When it identifies predictable, monomorphic operations (e.g., repeatedly reading an attribute from the same class type), it rewrites generic bytecode instructions into specialized fast opcodes (e.g., <code>LOAD_ATTR_INSTANCE_VALUE</code> ) to skip dictionary lookups.</li>
+          <li><strong>PEP 684 &amp; PEP 734 (Python 3.12/3.13 - Sub-interpreters):</strong> Enables multiple isolated sub-interpreters to run within a single process, giving each sub-interpreter its own separate GIL.</li>
+          <li><strong>PEP 744 (Python 3.13 - JIT Compiler):</strong> Introduces an experimental "Copy-and-Patch" Just-In-Time (JIT) compiler. It parses bytecode instruction traces and patches pre-compiled machine code templates directly into native CPU executable memory regions at runtime.</li>
+          <li><strong>PEP 703 (Python 3.13 - Free-threaded Python):</strong> Adds an optional build flag ( <code>--disable-gil</code> ) that removes the Global Interpreter Lock, enabling true multi-threaded CPU execution.</li>
+        </ul>
+
+        <h4>2. Simplified Code Example: Modern Syntax Updates</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Part A: Parenthesized Context Managers (Python 3.10+)
+# Allows grouping multiple context managers cleanly using parentheses
+with (
+    open("test_demo.txt", "w") as f1,
+    open("test_demo.txt", "r") as f2
+):
+    f1.write("Modern Python Features Test\n")
+    f1.flush()
+    print("Read back:", f2.read().strip())
+
+# Part B: Pattern Matching Guard Conditions (Python 3.10+)
+def evaluate_number(val):
+    match val:
+        case int(x) if x > 0:
+            return f"Positive Integer: {x}"
+        case int(x) if x < 0:
+            return f"Negative Integer: {x}"
+        case _:
+            return "Zero or Non-Integer"
+
+print(evaluate_number(42))</code></pre>
+        </div>
+
+        <h4>3. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>The Specializing Adaptive Interpreter (Python 3.11+) rewrites dynamic opcodes into fast specialized instructions at runtime.</li>
+          <li>Python 3.13 introduces experimental free-threaded builds (PEP 703) and copy-and-patch JIT execution (PEP 744).</li>
+          <li>Per-interpreter GIL support (PEP 684) enables multi-core execution across isolated sub-interpreters in a single process.</li>
+        </ul>
+
+        <h3 id="ch23">Chapter 23: Imports, Modules, and Package Architecture</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>CPython processes module imports through three distinct runtime stages:</p>
+        <ol>
+          <li><strong>Cache Search (sys.modules):</strong> Checks whether the requested module is already loaded. If present, CPython returns the cached module object immediately.</li>
+          <li><strong>Module Location (Finders):</strong> Iterates through <code>sys.meta_path</code> invoking <code>MetaPathFinder</code> objects (e.g., <code>PathFinder</code> ) to locate module specs.</li>
+          <li><strong>Module Loading (Loaders):</strong> Invokes loader procedures to allocate module object namespaces and execute compiled bytecode.</li>
+        </ol>
+
+        <h4>2. Package Variants and Circular Imports</h4>
+        <ul>
+          <li><strong>Regular Packages:</strong> Directories containing explicit <code>__init__.py</code> files that define package initialization logic and export namespaces ( <code>__all__</code> ).</li>
+          <li><strong>Namespace Packages (PEP 420):</strong> Directories without <code>__init__.py</code> files, allowing package namespaces to span across non-contiguous file paths on <code>sys.path</code> .</li>
+          <li><strong>Circular Import Resolution:</strong> Occurs when Module A imports Module B while Module B attempts to import Module A before execution completes. Resolve circular imports by restructuring module dependencies or deferring import statements inside function bodies.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Dynamic Module Imports</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import sys
+import importlib.util
+
+def dynamic_import(module_name):
+    # Check if module is already cached
+    if module_name in sys.modules:
+        return sys.modules[module_name]
+
+    # Find module spec
+    spec = importlib.util.find_spec(module_name)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot locate module: {module_name}")
+
+    # Create module object from spec
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+
+    # Execute module bytecode
+    spec.loader.exec_module(module)
+    return module
+
+math_module = dynamic_import("math")
+print("Dynamic Import Square Root:", math_module.sqrt(144)) # Output: 12.0</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>sys.modules</code> : Serves as the central cache for loaded modules.</li>
+          <li><code>importlib.util.find_spec("math")</code> : Searches <code>sys.path</code> to locate the module target.</li>
+          <li><code>spec.loader.exec_module(module)</code> : Executes the module's compiled bytecode to populate its namespace.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Imports use a 3-step pipeline: Check <code>sys.modules</code> &rarr; Find via <code>sys.meta_path</code> &rarr; Load via <code>exec_module</code> .</li>
+          <li>PEP 420 enables implicit namespace packages without requiring <code>__init__.py</code> files.</li>
+          <li>Resolve circular imports by refactoring module architecture or deferring imports inside function bodies.</li>
+        </ul>
+
+        <h3 id="ch24">Chapter 24: Professional Packaging &amp; Dependency Management</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Modern Python packaging relies on standard configuration declarations defined inside <code>pyproject.toml</code> (PEP 517, PEP 518, PEP 621). This separates build backend requirements from project metadata.</p>
+
+        <h4>2. Structure of pyproject.toml</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TOML (pyproject.toml)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "demo_package"
+version = "1.0.0"
+description = "A sample Python package layout"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28.0"
+]
+
+[project.scripts]
+demo-cli = "demo_package.cli:main"</code></pre>
+        </div>
+
+        <h4>3. Toolchain Isolation and Binaries</h4>
+        <ul>
+          <li><strong>Virtual Environments (venv):</strong> Sets <code>sys.prefix</code> to point to a workspace directory, isolating project packages from global system libraries.</li>
+          <li><strong>Modern Toolchains (uv, poetry, hatch):</strong> Provide fast dependency resolution and build pre-compiled binary wheel distributions ( <code>.whl</code> ) targeting platform ABIs.</li>
+        </ul>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Use <code>pyproject.toml</code> to declare build system backends and project dependencies cleanly.</li>
+          <li>Virtual environments isolate dependency installations by modifying <code>sys.prefix</code> .</li>
+          <li>Wheel artifacts ( <code>.whl</code> ) distribute compiled extensions for target platforms without requiring local compilation steps.</li>
+        </ul>
+      </section>
+
+      <!-- PART VI -->
+      <section id="part6" class="content-section">
+        <h2>PART VI: CONCURRENCY, ASYNC &amp; HIGH-PERFORMANCE COMPUTING</h2>
+
+        <h3 id="ch25">Chapter 25: Multi-Threading in Python</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Python threads ( <code>threading.Thread</code> ) wrap native OS-level kernel threads (POSIX pthreads on Linux/macOS, Windows threads). However, because CPython enforces the Global Interpreter Lock (GIL), threads execute sequentially for CPU-bound Python bytecode workloads.</p>
+        <p>Multi-threading remains beneficial for I/O-bound workloads (such as fetching URLs or reading files), where threads release the lock during blocking operations.</p>
+
+        <h4>2. Synchronization Primitives</h4>
+        <p>To prevent data races when mutating shared state across threads, Python provides synchronization primitives:</p>
+        <ul>
+          <li><strong>Lock:</strong> Mutual exclusion lock. Only one thread can hold the lock at a time.</li>
+          <li><strong>RLock:</strong> Reentrant lock. Allows the owning thread to acquire the lock multiple times without deadlocking.</li>
+          <li><strong>Semaphore:</strong> Limits concurrent access to a fixed resource count.</li>
+          <li><strong>queue.Queue:</strong> Thread-safe FIFO data structure handling atomic push/pop operations internally.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Thread Synchronization with Lock and Queue</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import threading
+import queue
+import time
+
+shared_queue = queue.Queue()
+counter_lock = threading.Lock()
+shared_counter = 0
+
+def worker():
+    global shared_counter
+    while True:
+        try:
+            val = shared_queue.get(timeout=0.05)
+            # Safe mutation using Lock
+            with counter_lock:
+                shared_counter += val
+            shared_queue.task_done()
+        except queue.Empty:
+            break
+
+# Enqueue work items
+for item in [10, 20, 30, 40]:
+    shared_queue.put(item)
+
+# Spawn worker threads
+threads = [threading.Thread(target=worker) for _ in range(2)]
+for t in threads: t.start()
+for t in threads: t.join()
+
+print("Final Thread-Safe Counter:", shared_counter) # Output: 100</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>queue.Queue()</code> : Handles internal locking so multiple threads can add or fetch work items safely.</li>
+          <li><code>with counter_lock</code> : Acquires the mutex before updating <code>shared_counter</code> , preventing race conditions during concurrent access.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Python threads map to OS kernel threads, but run sequentially during CPU tasks due to the GIL.</li>
+          <li>Use multi-threading primarily for blocking I/O tasks.</li>
+          <li>Protect shared data structures using <code>Lock</code> , <code>RLock</code> , or thread-safe containers like <code>queue.Queue</code> .</li>
+        </ul>
+
+        <h3 id="ch26">Chapter 26: Multi-Processing &amp; Shared Memory</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>The <code>multiprocessing</code> module bypasses the GIL by spawning distinct OS processes, each hosting an independent CPython interpreter and isolated memory space.</p>
+
+        <h4>2. Process Start Models and IPC</h4>
+        <p>Operating systems start processes using three distinct models:</p>
+        <ul>
+          <li><strong>fork (POSIX default):</strong> Clones the parent process using the OS <code>fork()</code> syscall. Fast startup, but unsafe when combined with multi-threaded runtimes.</li>
+          <li><strong>spawn (Windows/macOS default):</strong> Starts a clean, newly instantiated CPython process. Slower startup, but portable and safe.</li>
+          <li><strong>forkserver:</strong> Launches a clean single-threaded server process responsible for spawning subsequent worker processes.</li>
+        </ul>
+        <p>Inter-Process Communication (IPC) techniques:</p>
+        <ul>
+          <li><code>multiprocessing.Queue / Pipe</code> : Serializes objects via pickle to transmit data between process boundaries.</li>
+          <li><code>multiprocessing.shared_memory (PEP 574)</code> : Allocates shared memory regions accessible by multiple processes without serialization overhead.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Multi-Processing Shared Memory</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>from multiprocessing import Process
+from multiprocessing.shared_memory import SharedMemory
+import numpy as np
+
+def compute_square(shm_name, shape, dtype):
+    # Attach directly to existing shared memory region
+    existing_shm = SharedMemory(name=shm_name)
+    # Create NumPy array backed by shared memory
+    arr = np.ndarray(shape, dtype=dtype, buffer=existing_shm.buf)
+    arr[:] = arr ** 2 # In-place square operation
+    existing_shm.close()
+
+if __name__ == "__main__":
+    data = np.array([1, 2, 3, 4, 5], dtype=np.int64)
+
+    # Allocate shared memory block
+    shm = SharedMemory(create=True, size=data.nbytes)
+    shm_arr = np.ndarray(data.shape, dtype=data.dtype, buffer=shm.buf)
+    shm_arr[:] = data[:] # Copy initial data into shared buffer
+
+    p = Process(target=compute_square, args=(shm.name, data.shape, data.dtype))
+    p.start()
+    p.join()
+
+    print("Mutated Shared Memory Array:", shm_arr) # Output: [1, 4, 9, 16, 25]
+
+    shm.close()
+    shm.unlink() # Free shared OS memory block</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>SharedMemory(create=True, size=data.nbytes)</code> : Allocates a shared memory block managed by the operating system.</li>
+          <li><code>compute_square</code> : Attaches to the shared memory block using <code>shm.name</code> , modifying array values in-place without serializing data across process boundaries.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li><code>multiprocessing</code> bypasses the GIL by spawning isolated CPython processes.</li>
+          <li>Process creation models include <code>spawn</code> (safe, portable) and <code>fork</code> (fast POSIX cloning).</li>
+          <li>Use <code>multiprocessing.shared_memory</code> for zero-copy memory sharing across processes.</li>
+        </ul>
+
+        <h3 id="ch27">Chapter 27: Asynchronous Programming Foundations (AsyncIO Internals)</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>AsyncIO provides single-threaded cooperative multitasking through an event loop. The loop monitors non-blocking socket file descriptors using OS multiplexing primitives ( <code>epoll</code> on Linux, <code>kqueue</code> on macOS).</p>
+        <p>Key AsyncIO abstractions:</p>
+        <ul>
+          <li><strong>Coroutines (async def):</strong> Functions that can suspend execution at <code>await</code> expressions, yielding control back to the event loop.</li>
+          <li><strong>Tasks:</strong> Wraps coroutines into schedulable Future objects managed by the event loop.</li>
+          <li><strong>Structured Concurrency (asyncio.TaskGroup):</strong> Introduced in Python 3.11, TaskGroups manage task lifecycles cleanly, ensuring that if one child task fails, remaining tasks are cancelled automatically.</li>
+        </ul>
+
+        <h4>2. Simplified Code Example: Async Coroutines and TaskGroup</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import asyncio
+
+async def fetch_data(task_id, delay):
+    print(f"Task {task_id}: Fetching data...")
+    await asyncio.sleep(delay) # Yields control to event loop
+    print(f"Task {task_id}: Finished")
+    return f"Payload {task_id}"
+
+async def main():
+    # Structured Concurrency using TaskGroup (Python 3.11+)
+    async with asyncio.TaskGroup() as tg:
+        t1 = tg.create_task(fetch_data(1, 0.02))
+        t2 = tg.create_task(fetch_data(2, 0.01))
+    # TaskGroup guarantees both tasks finish before moving past the block
+    print("Results:", t1.result(), t2.result())
+
+asyncio.run(main())</code></pre>
+        </div>
+
+        <h4>3. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>await asyncio.sleep(delay)</code> : Yields control back to the event loop without blocking the execution thread. While t1 sleeps, the event loop runs t2 .</li>
+          <li><code>async with asyncio.TaskGroup()</code> : Manages child task execution, ensuring all scheduled tasks complete successfully or fail cleanly together.</li>
+        </ul>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>AsyncIO uses an event loop to run cooperative non-blocking tasks on a single thread.</li>
+          <li>Coroutines suspend execution at <code>await</code> statements, allowing other scheduled tasks to run.</li>
+          <li>Use <code>asyncio.TaskGroup</code> (Python 3.11+) to manage task lifecycles cleanly.</li>
+        </ul>
+
+        <h3 id="ch28">Chapter 28: Advanced AsyncIO Patterns &amp; Networking</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>High-throughput AsyncIO applications combine non-blocking network streams, synchronization primitives, and thread delegation wrappers.</p>
+        <p>Key primitives:</p>
+        <ul>
+          <li><code>asyncio.Semaphore</code> : Limits concurrent access to a fixed resource limit across async tasks.</li>
+          <li><code>asyncio.to_thread</code> : Runs blocking synchronous functions inside an internal <code>ThreadPoolExecutor</code> , preventing blocking operations from stalling the main event loop.</li>
+        </ul>
+
+        <h4>2. Simplified Code Example: Async TCP Echo Server</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Async TCP Echo Server)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import asyncio
+
+# Client handler coroutine
+async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+    data = await reader.read(100)
+    message = data.decode()
+    print(f"Server received: {message.strip()}")
+    writer.write(f"ECHO: {message}".encode())
+    await writer.drain()
+    writer.close()
+    await writer.wait_closed()
+
+async def run_server():
+    server = await asyncio.start_server(handle_client, "127.0.0.1", 8889)
+    async with server:
+        # Serve requests for a short duration demo
+        await asyncio.sleep(0.05)
+
+# Example of bridging synchronous blocking calls
+def blocking_disk_io():
+    return "File Read Complete"
+
+async def main():
+    server_task = asyncio.create_task(run_server())
+    # Delegate blocking synchronous functions to threads safely
+    result = await asyncio.to_thread(blocking_disk_io)
+    print("Async Bridged Result:", result)
+    await server_task
+
+asyncio.run(main())</code></pre>
+        </div>
+
+        <h4>3. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>asyncio.start_server(handle_client, ...)</code> : Launches a non-blocking TCP server. Each incoming client connection triggers <code>handle_client</code> as a concurrent task.</li>
+          <li><code>asyncio.to_thread(blocking_disk_io)</code> : Offloads blocking synchronous functions to a background thread, preventing them from stalling the main event loop.</li>
+        </ul>
+
+        <h4>4. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>AsyncIO servers process network requests concurrently using non-blocking stream handlers.</li>
+          <li>Use <code>asyncio.to_thread()</code> to run blocking synchronous functions without stalling the event loop.</li>
+          <li>Use <code>asyncio.Semaphore</code> to throttle concurrency levels on network connections or API calls.</li>
+        </ul>
+
+        <h3 id="ch29">Chapter 29: Memory Profiling, Optimization &amp; Debugging</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Optimizing Python applications requires diagnosing resource utilization using standard tools:</p>
+        <ul>
+          <li><strong>Memory Profiling (tracemalloc):</strong> Tracks individual Python memory allocations back to their source code line numbers.</li>
+          <li><strong>Execution Profiling (cProfile / pstats):</strong> Measures function call counts and cumulative execution time to identify performance bottlenecks.</li>
+          <li><strong>Interactive Debugging (pdb / breakpoint()):</strong> Pauses program execution to inspect local stack frame variables interactively.</li>
+        </ul>
+
+        <h4>2. Micro-Optimization Strategies</h4>
+        <ul>
+          <li><strong>Local Variable Lookup:</strong> Reading local variables ( <code>LOAD_FAST</code> ) is faster than global variables ( <code>LOAD_GLOBAL</code> ). Cache global functions inside local variables inside high-frequency loops.</li>
+          <li><strong>Generator Usage:</strong> Use generators to stream data item-by-item rather than allocating large intermediate lists in memory.</li>
+        </ul>
+
+        <h4>3. Simplified Code Example: Memory Tracking and Profiling</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import tracemalloc
+import cProfile
+import pstats
+
+# Part A: Memory Allocation Tracking using tracemalloc
+tracemalloc.start()
+
+# Code block allocating memory
+data_list = [dict(key=i, value=str(i)) for i in range(5000)]
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics('lineno')
+
+print("=== Top Memory Allocations ===")
+for stat in top_stats[:2]:
+    print(stat)
+
+# Part B: Execution Time Profiling using cProfile
+def compute_heavy_sum():
+    return sum(i * i for i in range(50000))
+
+profiler = cProfile.Profile()
+profiler.enable()
+compute_heavy_sum()
+profiler.disable()
+
+stats = pstats.Stats(profiler).sort_stats('cumtime')
+print("\n=== Performance Profiling ===")
+stats.print_stats(1)</code></pre>
+        </div>
+
+        <h4>4. Code Explanation Walkthrough</h4>
+        <ul>
+          <li><code>tracemalloc.take_snapshot()</code> : Captures heap memory state, listing allocation costs by line number.</li>
+          <li><code>cProfile.Profile()</code> : Records function execution statistics, displaying invocation counts and cumulative time spent per call.</li>
+        </ul>
+
+        <h4>5. Summary Notes &amp; Takeaways</h4>
+        <ul>
+          <li>Use <code>tracemalloc</code> to track memory leaks and line-by-line allocation costs.</li>
+          <li>Use <code>cProfile</code> to identify runtime bottlenecks and hot execution paths.</li>
+          <li>Use <code>breakpoint()</code> to insert interactive debugging sessions into execution frames.</li>
+        </ul>
+
+        <h3 id="ch30">Chapter 30: System Integration, C-Extensions &amp; Modern Concurrency Synthesis</h3>
+        <h4>1. Core Concept &amp; Theoretical Foundation</h4>
+        <p>Python integrates with native compiled C/C++ libraries using foreign function interfaces:</p>
+        <ul>
+          <li><code>ctypes</code> : Standard library module for loading dynamic C shared libraries ( <code>.so</code> / <code>.dll</code> ) and invoking C functions directly.</li>
+          <li><code>cffi</code> : Foreign Function Interface for C, offering faster execution and cleaner C declaration parsing.</li>
+          <li><strong>Rust Extensions (PyO3 / maturin):</strong> Allows writing safe, thread-safe CPython extensions in Rust.</li>
+        </ul>
+
+        <h4>2. Simplified Code Example: Native C Functions via ctypes</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import ctypes
+
+# Load standard C system library
+# Uses C-runtime library binding
+try:
+    # POSIX system binding
+    libc = ctypes.CDLL("libc.so.6")
+except OSError:
+    # Windows system binding fallback
+    libc = ctypes.CDLL("msvcrt.dll")
+
+# Invoke native C 'puts' function
+message = b"Hello from Native C Execution!"
+libc.puts(message)</code></pre>
+        </div>
+
+        <h4>3. Concurrency Decision Matrix</h4>
+        <p>Choosing the right concurrency model depends on whether the workload is CPU-bound or I/O-bound:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Paradigm</th>
+                <th>Architectural Execution Model</th>
+                <th>Memory Sharing</th>
+                <th>GIL Bottlenecks</th>
+                <th>Primary Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>AsyncIO</strong></td>
+                <td>Single Thread / Event Loop</td>
+                <td>Fully Shared Memory</td>
+                <td>Subject to GIL</td>
+                <td>High-concurrency network services, HTTP clients, chat systems.</td>
+              </tr>
+              <tr>
+                <td><strong>Multi-Threading</strong></td>
+                <td>OS Kernel Threads</td>
+                <td>Fully Shared Memory</td>
+                <td>Subject to GIL</td>
+                <td>Blocking disk/socket I/O tasks.</td>
+              </tr>
+              <tr>
+                <td><strong>Multi-Processing</strong></td>
+                <td>Isolated OS Processes</td>
+                <td>Isolated Memory</td>
+                <td>Bypasses GIL</td>
+                <td>CPU-bound calculations across multi-core systems.</td>
+              </tr>
+              <tr>
+                <td><strong>Sub-interpreters</strong></td>
+                <td>Isolated Interpreters</td>
+                <td>Isolated Memory</td>
+                <td>Per-Interpreter GIL</td>
+                <td>Parallel execution within a single process (PEP 684).</td>
+              </tr>
+              <tr>
+                <td><strong>Free-Threaded</strong></td>
+                <td>Multi-threaded No-GIL</td>
+                <td>Fully Shared Memory</td>
+                <td>GIL Removed</td>
+                <td>Parallel multi-threaded CPU execution on a shared heap (PEP 703).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>4. Summary Notes &amp; Core Best Practices</h4>
+        <ol>
+          <li><strong>Understand Objects &amp; References:</strong> Variables are dynamic references pointing to heap objects; distinguish clearly between value equality ( <code>==</code> ) and object identity ( <code>is</code> ).</li>
+          <li><strong>Optimize Memory Layouts:</strong> Use <code>__slots__</code> for fixed instance attributes, <code>memoryview</code> for zero-copy binary buffer slicing, and generators for streaming data lazily.</li>
+          <li><strong>Choose the Right Concurrency Tool:</strong> Use <code>asyncio</code> for non-blocking network I/O, <code>threading</code> for blocking disk/socket operations, <code>multiprocessing</code> for CPU-heavy tasks, and free-threaded builds (PEP 703) or sub-interpreters (PEP 684) for multi-core parallelism.</li>
+        </ol>
+
+        <h3 id="works-cited">Works cited</h3>
+        <ol style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;">
+          <li>How Python's GIL Works - Codefinity, https://codefinity.com/blog/How-Python's-GIL-Works</li>
+          <li>Common Object Structures — Python 3.14.7 documentation, https://docs.python.org/3/c-api/structures.html</li>
+          <li>PEP 703 - Making the Global Interpreter Lock Optional in CPython - Python Enhancement Proposals, https://peps.python.org/pep-0703/</li>
+          <li>What's New In Python 3.9 - Python 3.14.7 documentation, https://docs.python.org/3/whatsnew/3.9.html</li>
+          <li>How free are threads in Python now? - Jamie's Blog, https://blog.changs.co.uk/how-free-are-threads-in-python-now.html</li>
+          <li>What's New In Python 3.13 - Python 3.14.7 documentation, https://docs.python.org/3/whatsnew/3.13.html</li>
+          <li>Free-threaded Python: past, present, and future - LWN.net, https://lwn.net/Articles/1078367/</li>
+          <li>Python support for free threading - Python 3.14.7 documentation, https://docs.python.org/3/howto/free-threading-python.html</li>
+          <li>The Dawn of Concurrency and Parallelism: Python 3.12 Starts to Support a Per-Interpreter GIL - Reddit, https://www.reddit.com/r/Python/comments/18e0q7p/the_dawn_of_concurrency_and_parallelism_python/</li>
+          <li>PEP 684 - A Per-Interpreter GIL - Python Enhancement Proposals, https://peps.python.org/pep-0684/</li>
+          <li>extrainterpreters - PyPI, https://pypi.org/project/extrainterpreters/</li>
+          <li>Python 3.14 - Astral, https://astral.sh/blog/python-3.14</li>
+          <li>C3 linearization algorithm in Python - GeeksforGeeks, https://www.geeksforgeeks.org/python/c3-linearization-algorithm-in-python/</li>
+          <li>Python 3.13: Free Threading and a JIT Compiler - Real Python, https://realpython.com/python313-free-threading-jit/</li>
+        </ol>
+
+        <div class="page-nav-footer">
+          <a href="python-masterclass.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Python 3 Masterclass Handbook</span>
+          </a>
+          <a href="postgresql.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">PostgreSQL Master Notes</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

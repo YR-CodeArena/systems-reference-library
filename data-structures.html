@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Foundational Computer Science & Data Architecture | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (18 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#algorithmic-efficiency">Algorithmic Efficiency & Complexity</a></li>
+        <li class="depth-2"><a href="#empirical-vs-asymptotic">Empirical vs Asymptotic Measurement</a></li>
+        <li class="depth-2"><a href="#big-o-notation">Formal Big-O Notation</a></li>
+        <li class="depth-2"><a href="#complexity-hierarchy">Hierarchy of Time Complexities</a></li>
+        <li class="depth-2"><a href="#space-complexity">Auxiliary Memory & Call Stacks</a></li>
+        <li class="depth-2"><a href="#case-analysis">Best, Average, Worst-Case Analysis</a></li>
+        <li><a href="#sequential-structures">Sequential Structures & Memory</a></li>
+        <li class="depth-2"><a href="#static-array">Static Array Arithmetic</a></li>
+        <li class="depth-2"><a href="#dynamic-array">Dynamic Arrays & Amortized Analysis</a></li>
+        <li class="depth-2"><a href="#linked-lists">Node-Based Linked Lists</a></li>
+        <li class="depth-2"><a href="#memory-wall">Memory Wall & Cache Locality</a></li>
+        <li class="depth-2"><a href="#linear-disciplines">Stacks, Queues, Deques & Buffers</a></li>
+        <li><a href="#hashing-mechanics">Associative Structures & Hashing</a></li>
+        <li class="depth-2"><a href="#hash-foundations">Hash Keys & Compression</a></li>
+        <li class="depth-2"><a href="#collision-resolution">Chaining vs Open Addressing</a></li>
+        <li class="depth-2"><a href="#load-factors">Load Factors & Resizing</a></li>
+        <li class="depth-2"><a href="#hash-engines">Engines: CPython, OpenJDK, V8</a></li>
+        <li><a href="#hierarchical-structures">Hierarchical Data Structures</a></li>
+        <li class="depth-2"><a href="#tree-topologies">Tree Topologies & Skew Trap</a></li>
+        <li class="depth-2"><a href="#balanced-trees">AVL & Red-Black Trees</a></li>
+        <li class="depth-2"><a href="#binary-heaps">Binary Heaps & Floyd's Heapify</a></li>
+        <li class="depth-2"><a href="#graph-representations">Graph Representations</a></li>
+        <li><a href="#traversal-algorithms">Algorithms & Traversals</a></li>
+        <li class="depth-2"><a href="#searching">Linear vs Binary Search</a></li>
+        <li class="depth-2"><a href="#sorting-quadratic">Quadratic Sorting</a></li>
+        <li class="depth-2"><a href="#divide-conquer">Merge Sort & Quick Sort</a></li>
+        <li class="depth-2"><a href="#graph-traversals">DFS vs BFS & Shortest Path</a></li>
+        <li><a href="#decision-matrix">Architectural Decision Matrix</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 4 &bull; 18 Pages</span>
+        </div>
+        <h1 class="doc-title">Foundational Computer Science and Data Architecture</h1>
+        <p class="doc-subtitle">Essential Data Structures, Memory Mechanics, and Algorithmic Complexity</p>
+      </div>
+
+      <!-- Page 1 -->
+      <section id="algorithmic-efficiency" class="content-section">
+        <h2>Algorithmic Efficiency and Computational Complexity</h2>
+
+        <h3 id="empirical-vs-asymptotic">Empirical Execution Time vs. Asymptotic Measurement</h3>
+        <p>Evaluating the performance of an algorithm by measuring elapsed wall-clock execution time—such as recording the start and end timestamps of a routine in milliseconds—introduces non-deterministic variables that obscure true computational efficiency. Empirical wall-clock duration reflects the state of the host execution environment rather than the inherent efficiency of the algorithm itself:</p>
+        
+        <ul>
+          <li><strong>Microarchitectural Heterogeneity:</strong> Microprocessors differ significantly across instruction set architectures (such as x86-64 versus ARM64), Arithmetic Logic Unit (ALU) pipeline depths, branch prediction algorithms, and hardware cache capacities. An identical routine executed on an enterprise server processor will yield wall-clock metrics orders of magnitude faster than when executed on an embedded microcontroller, despite executing the exact same logical steps.</li>
+          <li><strong>Operating System Preemption and Scheduling:</strong> Modern operating systems utilize preemptive multitasking kernels. A thread executing an algorithmic routine may be suspended mid-execution due to timer interrupts, thread quantum expirations, kernel page faults, or context switches to background system daemons, inflating the measured wall-clock duration unpredictably.</li>
+          <li><strong>Dynamic Frequency Scaling and Thermal Throttling:</strong> Modern CPUs modulate their clock speed dynamically using technologies such as Intel SpeedStep, AMD Precision Boost, or thermal throttling governors. A routine benchmarked while the CPU is cold at 4.8 GHz will register dramatically lower runtimes than the same routine executed when the die temperature forces the processor to throttle to 2.2 GHz.</li>
+          <li><strong>Managed Runtime Latencies:</strong> In high-level execution engines such as the Java Virtual Machine (JVM) or Google V8, execution times are influenced by Just-In-Time (JIT) compilation tiers (e.g., C1 vs. C2 compilers in Java, Ignition vs. TurboFan in V8), deoptimization bails, and non-deterministic stop-the-world Garbage Collection (GC) pauses.</li>
+        </ul>
+
+        <p>To evaluate computational procedures independently of specific hardware and transient OS conditions, computer science abstracts performance using asymptotic analysis, measuring the operational growth rate as the input size N scales toward infinity (N &rarr; &infin;).</p>
+
+        <h3 id="big-o-notation">Mathematical Formalization of Big-O Notation</h3>
+        <p>Big-O notation establishes a mathematical upper bound on the asymptotic growth rate of an algorithm's resource consumption. It guarantees that an algorithm's total execution operations (or auxiliary memory footprint) will not grow faster than a specific mathematical function as the input dataset becomes arbitrarily large.</p>
+        
+        <p>Formally, let T(N) represent the exact operation count of an algorithm as a function of the input size N, and let f(N) be an asymptotic bounding function. The algorithm is said to be O(f(N)) if and only if there exist strictly positive real constants c and N<sub>0</sub> such that:</p>
+
+        <div class="formula-card">
+          T(N) &le; c &middot; f(N) &emsp; &forall; N &ge; N<sub>0</sub>
+        </div>
+
+        <p>The constant N<sub>0</sub> defines the threshold input size beyond which initial setup costs, loop initializations, and low-order terms cease to dictate performance. The positive scalar multiplier c accounts for machine-level execution details such as whether a given loop iteration requires two microprocessor instructions or twenty—ensuring that the metric reflects the underlying rate of growth rather than hardware-specific constants.</p>
+        
+        <p>In asymptotic evaluations, two simplification rules are consistently applied:</p>
+        <ol>
+          <li><strong>Elimination of Multiplicative Constants:</strong> The expression O(14N) simplifies directly to O(N). Whether an operation requires 1 instruction cycle or 14, doubling the input size N doubles the total required operations proportionally.</li>
+        </ol>
+      </section>
+
+      <!-- Page 2 -->
+      <section id="complexity-hierarchy" class="content-section">
+        <ol start="2">
+          <li><strong>Suppression of Non-Dominant Terms:</strong> The polynomial O(N<sup>3</sup> + 500N<sup>2</sup> + 10000) simplifies to O(N<sup>3</sup>). As N scales from 10<sup>3</sup> to 10<sup>6</sup>, the cubic term (10<sup>18</sup>) completely dominates the quadratic term (5 &times; 10<sup>14</sup>) and the constant term, rendering them statistically inconsequential to system scalability.</li>
+        </ol>
+
+        <h3>The Hierarchy of Time Complexities and Everyday Analogies</h3>
+        <p>The spectrum of algorithmic time complexity maps directly to tangible operations and systems-level interactions:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>COMPLEXITY CLASS</th>
+                <th>FORMAL NAME</th>
+                <th>GROWTH WHEN DOUBLING N</th>
+                <th>REAL-WORLD ANALOGY</th>
+                <th>SYSTEMS COMPUTING CONTEXT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>O(1)</strong></td>
+                <td>Constant</td>
+                <td>Zero operational increase (1&times;)</td>
+                <td>Accessing an item from an assigned gym locker using an exact locker number.</td>
+                <td>Array indexing via memory base-offset arithmetic; accessing a key in an uncollided hash map.</td>
+              </tr>
+              <tr>
+                <td><strong>O(log N)</strong></td>
+                <td>Logarithmic</td>
+                <td>Work increases by a flat additive constant (+c)</td>
+                <td>Looking up a term in a printed, alphabetically organized encyclopedia by opening to the middle, halving the remaining volume each step.</td>
+                <td>Binary search over sorted contiguous memory; lookups within balanced search trees.</td>
+              </tr>
+              <tr>
+                <td><strong>O(N)</strong></td>
+                <td>Linear</td>
+                <td>Operations double linearly (2&times;)</td>
+                <td>Reading every page of a physical book cover-to-cover from page 1 to page N to locate a misprinted word.</td>
+                <td>Single-pass linear scan across unsorted collections; counting elements; garbage collection sweeps.</td>
+              </tr>
+              <tr>
+                <td><strong>O(N log N)</strong></td>
+                <td>Linearithmic</td>
+                <td>Operations slightly more than double (2+&epsilon;)</td>
+                <td>Sorting a randomized stack of N final exam papers by splitting them into halves, sorting each sub-stack, and interleaving them.</td>
+                <td>Efficient comparison-based sorting routines such as Merge Sort, Heapsort, and Quicksort.</td>
+              </tr>
+              <tr>
+                <td><strong>O(N<sup>2</sup>)</strong></td>
+                <td>Quadratic</td>
+                <td>Operations square (N &rarr; N<sup>2</sup>)</td>
+                <td>A networking reception where every attendee in a room of N people must individually shake hands with every other attendee.</td>
+                <td>Nested loops over sequences; naive sorting routines such as Bubble Sort, Selection Sort, and Insertion Sort.</td>
+              </tr>
+              <tr>
+                <td><strong>O(2<sup>N</sup>)</strong></td>
+                <td>Exponential</td>
+                <td>Operations double with every added unit (K &rarr; K<sup>2</sup>)</td>
+                <td>Cracking an N-switch mechanical combination lock by exhaustively attempting every binary on/off permutation.</td>
+                <td>Exhaustive brute-force combinatorial search; recursive Fibonacci computation without memoization.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>The computational differences between these complexity classes become stark as datasets grow. If an input scales to N = 10<sup>6</sup> elements, an O(log<sub>2</sub> N) algorithm completes in roughly 20 operations, requiring mere nanoseconds. An O(N) linear algorithm processes 10<sup>6</sup> operations, completing in fractions of a millisecond on gigahertz-class hardware.</p>
+        
+        <p>An O(N log<sub>2</sub> N) routine requires approximately 2 &times; 10<sup>7</sup> operations, finishing in milliseconds. An O(N<sup>2</sup>) algorithm executes 10<sup>12</sup> operations, which requires over 15 minutes of uninterrupted compute at a rate of one billion operations per second. Finally, an O(2<sup>N</sup>) algorithm demands 2<sup>1000000</sup> operations—a quantity vastly exceeding the number of fundamental particles in the observable universe (10<sup>80</sup>), rendering execution physically impossible regardless of available hardware.</p>
+
+        <h3 id="space-complexity">Auxiliary Memory, Call Stacks, and Space Complexity</h3>
+        <p>A complete algorithmic analysis requires measuring space complexity alongside time complexity. Total space complexity decomposes into two components:</p>
+
+        <div class="formula-card">
+          Total Space = Input Space + Auxiliary Space
+        </div>
+
+        <p>Input space denotes the memory required to store the incoming dataset, whereas auxiliary space measures the temporary or scratchpad memory allocated by the algorithm to transform that data.</p>
+      </section>
+
+      <!-- Page 3 -->
+      <section id="case-analysis" class="content-section">
+        <p>In recursive algorithms, a hidden consumer of auxiliary space is the execution call stack. Each active function invocation constructs an activation record (stack frame) on the thread call stack, saving local variables, parameter bindings, and the return address register. If a recursive algorithm recurses to a depth of N, it incurs an auxiliary space complexity of O(N). When processing large inputs, excessive recursion depth can breach the thread stack memory limit (often configured between 1 MB and 8 MB), triggering a runtime stack overflow exception.</p>
+        
+        <p>Algorithms operating with O(1) auxiliary space are classified as in-place algorithms. In-place routines mutate or swap data within the original allocated buffer, eliminating the need to allocate mirrored collections proportional to N.</p>
+
+        <h3>Best, Average, and Worst-Case Operational Analysis</h3>
+        <p>The computational overhead of an algorithm often depends heavily on the ordering and composition of its input data:</p>
+        <ul>
+          <li><strong>Worst-Case Analysis (O):</strong> Measures the absolute upper bound on operations, guaranteeing that even under the most adversarial or pathological input distribution, system resource consumption will not exceed this threshold. This metric is essential for mission-critical and real-time backend systems.</li>
+          <li><strong>Average-Case Analysis (&Theta; or Expected Time):</strong> Models computational behavior across a uniform distribution of all valid inputs, reflecting typical day-to-day performance in production environments.</li>
+          <li><strong>Best-Case Analysis (&Omega;):</strong> Identifies the lower operational bound when the input data presents the most favorable configuration possible, such as running a sorting routine on an array that is already fully sorted.</li>
+        </ul>
+
+        <p>A classic illustration of these divergent behaviors is Quicksort:</p>
+        <ul>
+          <li><strong>Average Case (&Theta;(N log N)):</strong> When pivot selections partition the array into relatively balanced subproblems, the recursion tree reaches a depth of &approx; log<sub>2</sub> N, performing O(N) total partition comparisons at each level.</li>
+          <li><strong>Worst Case (O(N<sup>2</sup>)):</strong> If a naive Quicksort implementation selects the first or last element as the pivot, and the input array is already sorted (or reverse sorted), each partitioning step isolates only a single element, leaving an unbalanced subproblem of size N - 1. This degrades the recursion tree depth to N, producing an arithmetic series of operations:
+            <div class="formula-card" style="margin: 0.5rem 0;">
+              &sum;<sub>i=1</sub><sup>N</sup> i = N(N+1)/2 = O(N<sup>2</sup>)
+            </div>
+          </li>
+          <li><strong>Best Case (&Omega;(N log N)):</strong> The chosen pivot splits the dataset into two balanced halves of size &lfloor; N/2 &rfloor; at every level of recursion, minimizing the overall depth of the call tree.</li>
+        </ul>
+
+        <h2 id="sequential-structures">Memory Layouts and Sequential Data Structures</h2>
+        <p>Dynamic Random-Access Memory (DRAM) is organized as a flat, linear array of byte-addressable cells. The physical arrangement of data within this address space determines processor cache utilization, memory bus traffic, and overall execution speed.</p>
+
+        <h3 id="static-array">Physical Memory Mechanics and Static Array Arithmetic</h3>
+        <p>A static array represents a sequence of elements stored in a contiguous, unbroken block of virtual memory addresses. Because each element has an identical byte width and is laid out sequentially, calculating the exact memory address of any element at index i requires no traversal. Instead, the runtime computes the target address using an arithmetic formula:</p>
+
+        <div class="formula-card">
+          Address(A[i]) = BaseAddress + (i &times; ElementSize)
+        </div>
+
+        <p>Where:</p>
+        <ul>
+          <li><strong>BaseAddress</strong> is the pointer to byte zero of the array.</li>
+          <li><strong>i</strong> is the target element index within the bounds [0, N-1].</li>
+          <li><strong>ElementSize</strong> is the scalar width of the data type in bytes (e.g., 4 bytes for a standard 32-bit integer; 8 bytes for a 64-bit float or memory pointer).</li>
+        </ul>
+
+        <p>Because address computation relies on a single multiplication and addition—instructions executed in single-cycle micro-operations inside the CPU ALU—random access to any array index executes in guaranteed O(1) constant time.</p>
+      </section>
+
+      <!-- Page 4 -->
+      <section id="dynamic-array" class="content-section">
+        <h3>Dynamic Array Mechanics and Geometric Growth Policies</h3>
+        <p>Static arrays suffer from fixed capacity constraints. Dynamic arrays address this limitation by wrapping an internal static array within an abstraction that manages dynamic geometric reallocation.</p>
+        
+        <p>When an insertion (append or push) occurs and the internal buffer capacity is fully saturated, the dynamic array executes three sequential operations:</p>
+        <ol>
+          <li>Allocates a new contiguous memory buffer of expanded capacity, scaled by a growth factor g (typically 1.5&times; or 2&times;).</li>
+          <li>Copies all N existing element values or references from the old buffer to the new buffer.</li>
+          <li>Deallocates or unreferences the old memory block and updates the internal base pointer to reference the newly allocated memory block.</li>
+        </ol>
+
+        <p>Although this resizing operation incurs an O(N) allocation and memory copy penalty, the geometric expansion strategy ensures that resizing occurs with exponentially decreasing frequency.</p>
+        
+        <p>Using the Aggregate Method of Amortized Analysis, one can prove that appending to a dynamic array maintains an amortized time complexity of O(1). Assuming an initial capacity of 1 and a growth factor of g = 2:</p>
+        <ul>
+          <li>Insertion 1: 1 write (Cost: 1)</li>
+          <li>Insertion 2: 1 copy + 1 write (Cost: 2)</li>
+          <li>Insertion 3: 2 copies + 1 write (Cost: 3)</li>
+          <li>Insertion 5: 4 copies + 1 write (Cost: 5)</li>
+          <li>Insertion N = 2<sup>k</sup> + 1: 2<sup>k</sup> copies + 1 write</li>
+        </ul>
+
+        <p>Across a sequence of N appends, the total cost C is the sum of standard insertions plus the geometric progression of data copies:</p>
+
+        <div class="formula-card">
+          C = N + &sum;<sub>j=0</sub><sup>&lfloor; log<sub>2</sub> N &rfloor;</sup> 2<sup>j</sup> = N + (2<sup>&lfloor; log<sub>2</sub> N &rfloor; + 1</sup> - 1) &lt; N + 2N = 3N
+        </div>
+
+        <p>Averaging this total cost over N operations yields:</p>
+        <div class="formula-card">
+          Amortized Cost = C / N &lt; 3N / N = O(1)
+        </div>
+
+        <p>If the array expanded using a linear growth strategy (such as allocating space for only 1 additional item on each push), every insertion would trigger an O(N) copy operation, causing total work to collapse to &sum;<sub>i=1</sub><sup>N</sup> i = O(N<sup>2</sup>), or an amortized penalty of O(N) per append.</p>
+        
+        <p>Language runtimes tune their geometric growth factors to balance memory fragmentation against reallocation overhead:</p>
+        <ul>
+          <li><strong>Java (<code>java.util.ArrayList</code>):</strong> Uses an expansion factor of 1.5&times; via the bitwise shift operation <code>newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1)</code>. A growth factor below 2 allows memory allocators to potentially reuse contiguous blocks freed during earlier resizes.</li>
+          <li><strong>CPython (<code>listobject.c</code>):</strong> Uses an aggressive growth curve that scales by approximately 1.125&times; (a one-eighth expansion) plus a constant padding factor: <code>new_allocated = ((size_t)newsize + (newsize &gt;&gt; 3) + 6) &amp; ~(size_t)3</code>. This produces the capacity sequence: 0, 4, 8, 16, 24, 32, 40, 52, 64, 76, &hellip;, optimizing memory footprint for systems running large volumes of small lists.</li>
+          <li><strong>JavaScript (V8 Engine):</strong> Arrays transition between internal representations. When operating as continuous dense arrays ("packed elements"), V8 starts with small capacities and scales using growth factors between 1.5&times; and 2&times;, but transitions to hash-table-backed "dictionary mode" if sparse, widely separated indices are assigned.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python: Dynamic Array Appending</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Python Dynamic Array Appending (Managed via CPython listobject.c)
+dynamic_list = []
+for value in range(10):
+    dynamic_list.append(value) # Amortized O(1) appending</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 5 -->
+      <section id="linked-lists" class="content-section">
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java ArrayList Geometric Expansion</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// Java ArrayList: Contiguous Geometric Expansion
+import java.util.ArrayList;
+
+public class DynamicArrayDemonstration {
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;(4); // Initial capacity = 4
+        for (int i = 0; i &lt; 10; i++) {
+            arrayList.add(i); // Reallocates at 1.5x via bitwise shifting
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TypeScript Dynamic Array Backing</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// TypeScript Dynamic Array Backing
+const dynamicVector: number[] = [];
+for (let i = 0; i &lt; 10; i++) {
+    dynamicVector.push(i); // Handled by V8 dense packed elements store
+}</code></pre>
+        </div>
+
+        <h3>Node-Based Architectures: Singly, Doubly, and Circular Linked Lists</h3>
+        <p>In contrast to contiguous arrays, linked lists allocate memory non-contiguously. Each discrete data item is wrapped in an independent heap-allocated node that bundles its payload with one or more pointers storing the virtual memory addresses of adjacent nodes:</p>
+        
+        <ul>
+          <li><strong>Singly Linked List:</strong> Each node contains a single pointer referencing its successor (<code>next</code>). Traversal is strictly forward. While inserting or deleting a node immediately following a known node pointer requires only updating two pointer addresses in O(1) time, finding an arbitrary node requires traversing the chain from the head, resulting in O(N) traversal time.</li>
+          <li><strong>Doubly Linked List:</strong> Each node maintains two pointers: one pointing forward to its successor (<code>next</code>) and one backward to its predecessor (<code>prev</code>). This bidirectional linking enables O(1) node excision if a direct reference to the target node is already held, avoiding the need to traverse from the head to find the predecessor.</li>
+          <li><strong>Circular Linked List:</strong> The tail node's next pointer loops back to reference the head node rather than terminating with a NULL sentinel. This circular structure models round-robin CPU schedulers, cyclic audio buffers, and continuous playlist loops.</li>
+        </ul>
+
+        <h3>Memory Fragmentation and Allocation Overhead</h3>
+        <p>Because linked list nodes are allocated individually on the heap through system allocators (such as <code>malloc</code> or JVM object allocation), they become scattered across the virtual address space. This introduces heap fragmentation and high memory overhead per element.</p>
+        
+        <p>On a standard 64-bit architecture:</p>
+        <ul>
+          <li>A 64-bit pointer consumes 8 bytes of storage.</li>
+          <li>In a doubly linked list storing a 4-byte 32-bit integer, each node requires 8 bytes (<code>next</code>) + 8 bytes (<code>prev</code>) + 4 bytes (data) + 4 bytes (padding for memory alignment) = 24 bytes of physical memory to store a 4-byte payload.</li>
+          <li>In managed environments like the JVM, object headers introduce an additional 12 to 16 bytes of metadata per node, increasing total node size to 32–40 bytes. In contrast, a contiguous array stores raw integers with zero pointer overhead per element.</li>
+        </ul>
+
+        <h3 id="memory-wall">The Memory Wall: Cache Hierarchies, Spatial Locality, and Pointer Chasing</h3>
+        <p>The primary performance bottleneck in modern computing is memory access latency—a gap known as the Memory Wall. Microprocessors operate at nanosecond cycle speeds, whereas retrieving data from main DRAM requires 50 to 100 nanoseconds, stalling the CPU for hundreds of wasted clock cycles. To bridge this latency gap, CPUs employ hierarchical on-chip caches:</p>
+        <ul>
+          <li><strong>L1 Data Cache:</strong> Located directly on the CPU core; holds 32–64 KB with access latencies of ~4–5 clock cycles.</li>
+          <li><strong>L2 Cache:</strong> Dedicated per core; holds 512 KB–1 MB with latencies of ~12–14 clock cycles.</li>
+        </ul>
+      </section>
+
+      <!-- Page 6 -->
+      <section class="content-section">
+        <ul>
+          <li><strong>L3 Cache:</strong> Shared across all cores on the die; holds 16–64+ MB with latencies of ~40–60 clock cycles.</li>
+          <li><strong>Main DRAM:</strong> Off-chip memory; spans gigabytes with latencies of 100–200+ CPU clock cycles.</li>
+        </ul>
+
+        <p>Processors fetch data from DRAM into cache lines—fixed, contiguous 64-byte blocks rather than retrieving individual bytes.</p>
+
+        <h4>Spatial and Temporal Locality in Arrays</h4>
+        <p>When a program requests access to an array index <code>A[0]</code>, the CPU experiences an initial cache miss, halts the pipeline, and loads the entire 64-byte block enclosing <code>A[0]</code> into the L1 cache. If the array stores 4-byte integers, this single 64-byte fetch loads <code>A[0]</code> through <code>A[15]</code> directly into high-speed L1 cache.</p>
+        
+        <p>Subsequent iterations accessing <code>A[1]</code> through <code>A[15]</code> result in immediate L1 Cache Hits, executing in 1 to 4 clock cycles without accessing main memory. Modern microprocessors also feature hardware prefetchers that detect contiguous memory access patterns and proactively pull upcoming cache lines from DRAM into the cache hierarchy before the execution pipeline requests them.</p>
+
+        <h4>The Cost of Pointer Chasing in Linked Lists</h4>
+        <p>Because linked list nodes are scattered across non-contiguous heap memory, traversing a list (<code>current = current.next</code>) requires pointer chasing. Traversing from node A to node B forces the CPU to dereference an arbitrary memory address. Because node B rarely resides in the same 64-byte cache line as node A, each traversal step can trigger an L1/L2/L3 cache miss, causing the processor pipeline to stall while waiting for main memory.</p>
+        
+        <p>Empirical benchmarks by Bjarne Stroustrup demonstrated that a contiguous dynamic array (<code>std::vector</code>) can outperform a linked list (<code>std::list</code>) by orders of magnitude, even for operations theoretically favorable to linked lists, such as inserting elements at arbitrary positions. Although inserting into an array requires shifting elements (O(N)), these shifts occur across contiguous blocks using vectorized CPU memory-copy instructions (<code>memmove</code>/SIMD), operating at cache-bus speeds.</p>
+        
+        <p>In contrast, finding the insertion point in a linked list requires traversing nodes sequentially, accumulating cache misses on almost every dereference and negating any theoretical O(1) pointer-splicing advantage.</p>
+
+        <h3 id="linear-disciplines">Abstract Linear Disciplines: Stacks, Queues, Deques, and Circular Buffers</h3>
+        <p>Stacks and Queues are abstract data types (ADTs) that constrain access patterns to enforce predictable, ordered data manipulation disciplines.</p>
+
+        <h4>Stack (Last-In, First-Out: LIFO)</h4>
+        <p>Elements are added and removed from the same termination point, known as the top.</p>
+        <ul>
+          <li><code>push(x)</code>: Places an element onto the top (O(1)).</li>
+          <li><code>pop()</code>: Removes and returns the top element (O(1)).</li>
+          <li><code>peek()</code>: Inspects the top element without state mutation (O(1)).</li>
+        </ul>
+
+        <p>Key applications include:</p>
+        <ul>
+          <li><strong>Call Stack Execution:</strong> Compilers and interpreters manage execution scope frames via a call stack. When a function executes, its frame is pushed; upon return, its frame is popped.</li>
+          <li><strong>Undo/Redo Buffers:</strong> Application states are pushed onto an execution stack. Triggering an "Undo" pops the latest command and pushes it onto an auxiliary "Redo" stack.</li>
+          <li><strong>Balanced Bracket Parsing:</strong> Compilers parse syntax trees and match delimiters (<code>{}</code>, <code>()</code>, <code>[]</code>) by pushing opening tokens and asserting that closing tokens match the popped element.</li>
+        </ul>
+
+        <h4>Queue (First-In, First-Out: FIFO)</h4>
+        <p>Elements are inserted at the rear (enqueue) and extracted from the front (dequeue).</p>
+        <ul>
+          <li><code>enqueue(x)</code>: Appends an element to the queue tail (O(1)).</li>
+        </ul>
+      </section>
+
+      <!-- Page 7 -->
+      <section class="content-section">
+        <ul>
+          <li><code>dequeue()</code>: Extracts and returns the front element (O(1)).</li>
+          <li><code>peek()</code>: Returns the front element without removal (O(1)).</li>
+        </ul>
+
+        <p>Key applications include:</p>
+        <ul>
+          <li><strong>Operating System CPU Scheduling:</strong> Schedulers manage processes in ready queues (e.g., Round-Robin scheduling) to ensure equitable CPU time slicing.</li>
+          <li><strong>Network Request Buffering:</strong> Web servers (such as NGINX or Node.js event loops) buffer inbound TCP requests in FIFO queues during throughput spikes.</li>
+          <li><strong>Asynchronous IO Spoolers:</strong> Print drivers and messaging brokers (such as RabbitMQ) dispatch jobs sequentially to physical peripherals.</li>
+        </ul>
+
+        <h4>Double-Ended Queue (Deque) and Circular Ring Buffers</h4>
+        <p>A Deque supports O(1) constant-time insertion and extraction at both ends (<code>push_front</code>, <code>push_back</code>, <code>pop_front</code>, <code>pop_back</code>).</p>
+        
+        <p>Implementing a queue or deque over a dynamic array requires managing index drift. Popping from index 0 of an array requires shifting all subsequent elements left, an undesirable O(N) penalty. A Circular Ring Buffer resolves this by wrapping a fixed-size contiguous array with two moving cursor indices: <code>head</code> and <code>tail</code>.</p>
+        
+        <p>When elements are enqueued or dequeued, the pointers increment and wrap around the array boundaries using the modulo operator:</p>
+
+        <div class="formula-card">
+          Index<sub>next</sub> = (Index<sub>current</sub> + 1) mod Capacity
+        </div>
+
+        <ul>
+          <li><code>enqueue(x)</code>: Writes to <code>buffer[tail]</code>, then advances: <code>tail = (tail + 1) % Capacity</code>.</li>
+          <li><code>dequeue()</code>: Reads from <code>buffer[head]</code>, then advances: <code>head = (head + 1) % Capacity</code>.</li>
+        </ul>
+
+        <p>When Capacity is an exact power of two (2<sup>k</sup>), the modulo operation can be replaced with a single-cycle bitwise AND operation:</p>
+
+        <div class="formula-card">
+          Index<sub>next</sub> = (Index<sub>current</sub> + 1) &amp; (Capacity - 1)
+        </div>
+
+        <p>This bitwise optimization is common in high-throughput network card ring buffers, audio stream pipelines, and lock-free concurrency queues (such as the LMAX Disruptor pattern).</p>
+
+        <h2 id="hashing-mechanics">Associative Data Structures and Hashing Mechanics</h2>
+        <p>Associative data structures map arbitrary keys to values, providing an average operational complexity of O(1) for insertion, retrieval, and deletion.</p>
+
+        <h3 id="hash-foundations">Hash Table Foundations: Keys, Hash Functions, and Compression</h3>
+        <p>A hash table maps a large key space to a compact array of buckets of size M via a three-tiered pipeline:</p>
+        <ol>
+          <li><strong>The Object Key (K):</strong> An arbitrary data structure (e.g., string, composite object, UUID).</li>
+          <li><strong>The Hash Function (h(K)):</strong> A deterministic algorithm that ingests key bytes and projects them into an integer hash value across a wide numeric domain (typically a 32-bit or 64-bit integer).</li>
+          <li><strong>Bucket Compression:</strong> Translates the large hash value into a bounded array index i within the bucket array range [0, M - 1]:
+            <div class="formula-card" style="margin: 0.5rem 0;">Index = |h(K)| mod M</div>
+          </li>
+        </ol>
+
+        <p>A well-designed hash function must satisfy several core properties:</p>
+        <ul>
+          <li><strong>Strict Determinism:</strong> A given key K must yield the identical hash code throughout its execution lifecycle.</li>
+          <li><strong>Uniform Distribution:</strong> Keys must distribute evenly across the hash space to minimize bucket clustering.</li>
+          <li><strong>Avalanche Effect:</strong> Flipping a single bit in the input key must unpredictably alter approximately 50% of the output hash bits.</li>
+        </ul>
+      </section>
+
+      <!-- Page 8 -->
+      <section id="collision-resolution" class="content-section">
+        <ul>
+          <li><strong>Efficient Computation:</strong> The hashing algorithm must compute in O(L) time, where L is the length or byte width of the key, without consuming excessive CPU cycles.</li>
+        </ul>
+
+        <h3>Collision Resolution Strategies: Chaining vs. Open Addressing</h3>
+        <p>Because the theoretical key space vastly exceeds the physical bucket capacity M, the Pigeonhole Principle dictates that two unique keys will inevitably map to the same bucket index (h(K<sub>1</sub>) mod M = h(K<sub>2</sub>) mod M). This event constitutes a hash collision. Hash table architectures use two primary paradigms to resolve these collisions:</p>
+
+        <h4>1. Separate Chaining</h4>
+        <p>In separate chaining, each slot in the bucket array serves as the head of an auxiliary collection. Colliding keys are appended to that bucket's secondary container.</p>
+        <ul>
+          <li><strong>Standard Chaining (Linked Lists):</strong> Colliding entries form a singly linked list. If a pathological hash function maps all N keys to the same bucket, lookup complexity degrades from O(1) to a linear search of O(N).</li>
+          <li><strong>Treeified Chaining (Balanced Red-Black Trees):</strong> To prevent worst-case performance degradation, modern implementations such as Java 8+ HashMap employ dynamic treeification. When a single bucket's collision chain exceeds a threshold of 8 entries (<code>TREEIFY_THRESHOLD</code>) and the total table capacity reaches at least 64 (<code>MIN_TREEIFY_CAPACITY</code>), the bucket's linked list converts into a balanced Red-Black Tree. This caps worst-case search and insertion times at O(log N), preventing Hash-DoS algorithmic complexity attacks. When deletions reduce bucket size to 6 (<code>UNTREEIFY_THRESHOLD</code>), the tree reverts to a standard linked list.</li>
+        </ul>
+
+        <h4>2. Open Addressing</h4>
+        <p>In open addressing architectures, all key-value entries reside directly within the bucket array itself, eliminating pointer allocations and secondary nodes. When a collision occurs at index h(K), the algorithm searches (probes) for an alternate vacant slot in the array according to a deterministic sequence:</p>
+
+        <div class="formula-card">
+          h(K, i) = (h'(K) + P(K, i)) mod M
+        </div>
+
+        <p>Where i &isin; [0, M-1] is the probe iteration counter, and P(K, i) is the probing function.</p>
+        <ul>
+          <li><strong>Linear Probing:</strong> P(K, i) = i. The search checks consecutive slots sequentially: h, h+1, h+2, &hellip; Linear probing maximizes CPU cache spatial locality because probed slots sit contiguously in memory. However, it suffers from primary clustering: long runs of occupied slots merge, compounding collisions and degrading access times.</li>
+          <li><strong>Quadratic Probing:</strong> P(K, i) = c<sub>1</sub> i + c<sub>2</sub> i<sup>2</sup>. The probe interval expands quadratically (+1, +4, +9, &hellip;), breaking continuous linear chains. However, keys hashing to the same initial index follow identical probe sequences, creating secondary clustering.</li>
+          <li><strong>Double Hashing:</strong> P(K, i) = i &middot; h<sub>2</sub>(K), where h<sub>2</sub>(K) is an auxiliary hash function that returns an offset co-prime to M. Double hashing eliminates both primary and secondary clustering, distributing probes uniformly across the array.</li>
+          <li><strong>Tombstone Deletion Marker:</strong> In open addressing, deleting an entry cannot simply clear the slot to NULL, as this would break subsequent probe sequences for keys inserted after collisions. Instead, deleted slots are marked with a special sentinel value known as a tombstone. Lookups treat tombstones as occupied slots and continue probing, while insertions can reuse them as empty space.</li>
+        </ul>
+
+        <h3 id="load-factors">Load Factors, Rehashing Penalties, and Dynamic Resizing</h3>
+        <p>The operational performance of a hash table depends on its Load Factor (&alpha;), defined as the ratio of stored elements N to total bucket capacity M:</p>
+
+        <div class="formula-card">
+          &alpha; = N / M
+        </div>
+
+        <p>As &alpha; &rarr; 1.0 in open addressing (or &alpha; &gt; 1.0 in separate chaining), collisions multiply, extending probe sequences and collision chains toward O(N) execution time.</p>
+      </section>
+
+      <!-- Page 9 -->
+      <section id="hash-engines" class="content-section">
+        <p>To maintain average O(1) performance, hash tables enforce an upper load factor threshold (typically &alpha;<sub>max</sub> = 0.75). When the internal load factor crosses this limit:</p>
+        <ol>
+          <li>A new bucket array is allocated, typically doubling the previous capacity (M<sub>new</sub> = 2 &times; M<sub>old</sub>).</li>
+          <li><strong>Rehashing Execution:</strong> Because the modulo divisor changes (M<sub>new</sub> &ne; M<sub>old</sub>), each key's target bucket index shifts:
+            <div class="formula-card" style="margin: 0.5rem 0;">Index<sub>new</sub> = h(K) mod M<sub>new</sub></div>
+          </li>
+        </ol>
+
+        <p>Every existing entry must be re-evaluated and migrated to its newly calculated index in the new array. While this operation incurs an occasional O(N) latency spike, geometric capacity scaling maintains an amortized cost of O(1) per insertion over time.</p>
+
+        <h3>Internal Engine Architectures: CPython, OpenJDK, and Google V8</h3>
+        <p>Languages implement associative mappings with distinct optimizations tailored to their type systems and performance goals:</p>
+        <ul>
+          <li><strong>Python Dictionaries (<code>dict</code>):</strong> Historically, Python dictionaries used a sparse open-addressing table where each slot held key, value, and hash pointers, wasting significant memory. Modern Python uses a split-table compact layout: a dense array (<code>entries</code>) stores compact structs of <code>[hash, key_pointer, value_pointer]</code> in insertion order, while a sparse hash table array contains only small index pointers referencing offsets into the dense array. This design reduces memory consumption by 30% to 60% while inherently preserving dictionary insertion order without secondary linked lists.</li>
+          <li><strong>Java HashMap:</strong> Java initializes a flat bucket array of <code>Node&lt;K, V&gt;</code> references (default capacity 16, load factor 0.75) and resolves collisions via separate chaining. If keys implement the Comparable interface, bucket degradation beyond 8 elements transforms the linked list chain into a Red-Black Tree (<code>TreeNode&lt;K, V&gt;</code>) using natural object ordering to guarantee O(log N) worst-case lookup performance.</li>
+          <li><strong>JavaScript Map vs. Plain Object (V8 Engine):</strong> Plain Objects (<code>{}</code>) assume property keys are relatively static. V8 assign dynamic Hidden Classes (Shapes) to plain objects to track their memory layout. Known property accesses compile down to single-instruction direct memory offsets via Inline Caches (IC). If properties are frequently added or deleted dynamically, the engine deoptimizes the object into a slow "dictionary mode" backed by a standard hash table. In contrast, ECMAScript-compliant Map instances are designed for high-churn dynamic key collections. V8 backs Map using a variant of Tyler Close's OrderedHashTable algorithm. The structure combines a hash lookup table with an internal contiguous sequence array, providing average O(1) lookups while preserving key insertion order deterministically.</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python: Insertion-Ordered Compact Hash Table</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Python Dictionary: Insertion-Ordered Compact Hash Table
+user_session = {}
+user_session["account_id"] = 10492
+user_session["role"] = "administrator"
+val = user_session.get("account_id") # Average O(1) lookup</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java: HashMap Chaining & Treeification</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// Java HashMap: Chaining with Dynamic Red-Black Treeification
+import java.util.HashMap;
+
+public class MapDemonstration {
+    public static void main(String[] args) {
+        HashMap&lt;String, Integer&gt; lookupTable = new HashMap&lt;&gt;();
+        lookupTable.put("session_id", 9941);
+        lookupTable.put("timeout_seconds", 3600);
+        int session = lookupTable.getOrDefault("session_id", 0); // Average O(1)
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 10 -->
+      <section id="hierarchical-structures" class="content-section">
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TypeScript Map: V8 OrderedHashTable Backing</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// TypeScript Map: V8 OrderedHashTable Backing
+const lookupMap: Map&lt;string, number&gt; = new Map();
+lookupMap.set("session_id", 9941);
+lookupMap.set("timeout_seconds", 3600);
+const session = lookupMap.get("session_id"); // Deterministic O(1) lookup</code></pre>
+        </div>
+
+        <h2>Hierarchical and Non-Linear Data Structures</h2>
+        <p>Hierarchical data structures depart from linear memory layouts to represent multi-tiered relationships, relational networks, and prioritize elements by relative importance.</p>
+
+        <h3 id="tree-topologies">Tree Topologies and Formal Terminology</h3>
+        <p>A tree is an undirected, connected acyclic graph. In software systems, trees are typically rooted: data flows downward from a single entry point.</p>
+        <ul>
+          <li><strong>Root:</strong> The singular apex node lacking incoming edges.</li>
+          <li><strong>Edge:</strong> The directional pointer linking a parent node to a child node.</li>
+          <li><strong>Leaf:</strong> Any terminal node that possesses zero children.</li>
+          <li><strong>Subtree:</strong> The tree formed by any node and all of its descendants.</li>
+          <li><strong>Depth:</strong> The number of edges traversed from the root node downward to a specific node. The depth of the root is 0.</li>
+          <li><strong>Height:</strong> The length of the longest path of edges from a specific node downward to a leaf. The height of a single-node tree is 0.</li>
+          <li><strong>Tree Height:</strong> The height of the root node, representing the overall maximum depth of the data structure.</li>
+        </ul>
+
+        <h3>Binary Search Trees and the Degenerate Skew Trap</h3>
+        <p>A Binary Tree constrains every node to a maximum of two child nodes, designated left and right.</p>
+        <p>A Binary Search Tree (BST) organizes its nodes to maintain the BST Invariant:</p>
+
+        <div class="formula-card">
+          &forall; x &isin; LeftSubtree(Node), Value(x) &lt; Value(Node)<br>
+          &forall; y &isin; RightSubtree(Node), Value(y) &gt; Value(Node)
+        </div>
+
+        <p>This ordering property enables binary search logic across dynamic data: to find a value, a traversal checks the current node and branches left if the target is smaller, or right if it is larger.</p>
+        
+        <p>In a balanced BST with N nodes, height is mathematically constrained to &approx; log<sub>2</sub> N. Traversals from root to leaf eliminate half of the remaining search space at every step, yielding O(log N) time complexity for search, insertion, and deletion.</p>
+
+        <h4>The Degenerate Tree Trap</h4>
+        <p>If sequential, pre-sorted data (e.g., 10, 20, 30, 40, 50) is inserted naively into an unbalancing BST, each incoming node is placed exclusively as the right child of the preceding node.</p>
+        
+        <p>This degrades the tree topology into a skewed degenerate tree—functionally equivalent to a singly linked list. Tree height scales directly to N, and search complexity collapses from optimal logarithmic time O(log N) to linear time O(N).</p>
+
+        <h3 id="balanced-trees">Self-Balancing Topologies: AVL and Red-Black Trees</h3>
+        <p>To prevent tree degeneration under skewed input data, self-balancing binary search trees enforce structural invariants through targeted pointer operations known as tree rotations.</p>
+        
+        <ul>
+          <li><strong>AVL Trees (Adelson-Velsky and Landis):</strong> Enforce strict balance. For every node, the height difference between its left and right subtrees (the Balance Factor) cannot exceed &plusmn;1:
+            <div class="formula-card" style="margin: 0.5rem 0;">
+              BalanceFactor = |Height(Left) - Height(Right)| &le; 1
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Page 11 -->
+      <section id="binary-heaps" class="content-section">
+        <p>If an insertion or deletion violates this constraint, the tree restores balance using single or double rotations (Left-Left, Right-Right, Left-Right, Right-Left). AVL trees provide fast O(log N) lookups because their strict balance minimizes overall height, making them well-suited for read-heavy workloads.</p>
+        
+        <ul>
+          <li><strong>Red-Black Trees:</strong> Enforce a more relaxed balance constraint using node coloring rules:
+            <ol>
+              <li>Every node is colored either red or black.</li>
+              <li>The root node is always black.</li>
+              <li>Red nodes cannot have red children (no two consecutive red nodes along any path).</li>
+              <li>Every path from a node to any of its descendant NULL pointers must traverse the exact same count of black nodes (Black-Height invariant).</li>
+            </ol>
+          </li>
+        </ul>
+
+        <p>These rules ensure that the longest path from root to leaf is at most twice the length of the shortest path, bounding tree height strictly beneath 2 log<sub>2</sub>(N + 1). Because Red-Black trees require fewer rotations during dynamic modifications than AVL trees, they are widely used to back standard library associative containers, including C++ <code>std::map</code>, Java <code>java.util.TreeMap</code>, and Java's treeified <code>HashMap</code> collision buckets.</p>
+
+        <h3>Binary Heaps, Priority Queues, and Floyd's Linear Heapify</h3>
+        <p>A Priority Queue is an abstract data type that retrieves elements based on priority rather than arrival sequence: extracting an element always returns the item with the highest (or lowest) key value. A Binary Heap is an efficient data structure for implementing priority queues.</p>
+        
+        <p>A Binary Heap is a complete binary tree—meaning every level is completely filled, with the possible exception of the bottom level, which is populated strictly from left to right. Heaps maintain a structural invariant:</p>
+        <ul>
+          <li><strong>Max-Heap Invariant:</strong> The key of any node is &le; the key of its parent: <code>Key(Parent(i)) &ge; Key(i)</code></li>
+          <li><strong>Min-Heap Invariant:</strong> The key of any node is &ge; the key of its parent: <code>Key(Parent(i)) &le; Key(i)</code></li>
+        </ul>
+
+        <h4>Array-Backed Heap Representation</h4>
+        <p>Because a binary heap is a complete binary tree, it can be mapped directly into a flat, contiguous 1D array without requiring node pointers. For any element stored at zero-based array index i:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>TARGET NODE</th>
+                <th>ARRAY INDEX CALCULATION FORMULA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Parent Node</strong></td>
+                <td>&lfloor; (i - 1) / 2 &rfloor;</td>
+              </tr>
+              <tr>
+                <td><strong>Left Child Node</strong></td>
+                <td>2i + 1</td>
+              </tr>
+              <tr>
+                <td><strong>Right Child Node</strong></td>
+                <td>2i + 2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Heap Operations: Sifting and Extraction</h4>
+        <ul>
+          <li><strong>Insertion (sift-up / bubble-up):</strong> The new element is placed at the first available position at the end of the array to preserve the complete tree property. It is then repeatedly compared with its parent: if the heap invariant is violated, it swaps positions with the parent, repeating up the tree until the invariant is restored. Cost: O(log N).</li>
+          <li><strong>Extraction (sift-down / sink):</strong> Extracting the root element leaves a structural void. The last element in the array is moved to index 0, and the array length is decremented by 1. The new root is then compared with its children: if it violates the heap invariant, it swaps positions with its highest-priority child, repeating down the tree until the invariant is restored. Cost: O(log N).</li>
+        </ul>
+
+        <h4>Linear-Time Heap Construction: Floyd's Algorithm</h4>
+        <p>Constructing a binary heap from an unsorted array of N elements can be accomplished naively by calling insert N times, which runs in O(N log N) time. Robert W. Floyd introduced an in-place bottom-up construction algorithm that builds the heap in strictly O(N) linear time.</p>
+      </section>
+
+      <!-- Page 12 -->
+      <section id="graph-representations" class="content-section">
+        <p>Floyd's algorithm bypasses the leaves—which trivially satisfy the heap invariant—and processes internal nodes in reverse index order, starting from the parent of the last element:</p>
+
+        <div class="formula-card">
+          Last Internal Node Index = &lfloor; N / 2 &rfloor; - 1
+        </div>
+
+        <p>The algorithm calls sift-down on each internal node, progressing backward to the root at index 0.</p>
+        
+        <p>To prove that Floyd's algorithm runs in O(N) time, observe that the number of nodes at height h in a complete binary tree of N elements is at most &lceil; N / 2<sup>h+1</sup> &rceil;. Because the maximum work to sift down a node at height h is proportional to h, total work S across all nodes is bounded by:</p>
+
+        <div class="formula-card">
+          S = &sum;<sub>h=0</sub><sup>&lfloor; log<sub>2</sub> N &rfloor;</sup> &lceil; N / 2<sup>h+1</sup> &rceil; &middot; O(h) = O(N &sum;<sub>h=0</sub><sup>&lfloor; log<sub>2</sub> N &rfloor;</sup> h / 2<sup>h</sup>)
+        </div>
+
+        <p>Extending this summation to infinity isolates the standard geometric-arithmetic series:</p>
+
+        <div class="formula-card">
+          &sum;<sub>h=0</sub><sup>&infin;</sup> h / 2<sup>h</sup> = 1/2 + 2/4 + 3/8 + 4/16 + &hellip; = 2
+        </div>
+
+        <p>Substituting this constant series summation back into the equation confirms the linear bound:</p>
+
+        <div class="formula-card">
+          S = O(N &times; 2) = O(N)
+        </div>
+
+        <p>Building heaps via Floyd's algorithm executes in linear time because the vast majority of nodes reside at or near the bottom of the tree, where maximum traversal paths are short. For example, half of all elements (N/2) are leaves that require zero work, while only a single node (the root) requires the full log<sub>2</sub> N traversal path.</p>
+
+        <h2>Graph Representations: Adjacency Matrices vs. Adjacency Lists</h2>
+        <p>A graph G = (V, E) consists of a set of vertices (nodes) V connected by a set of edges E:</p>
+        <ul>
+          <li><strong>Directed vs. Undirected:</strong> Directed edges enforce unidirectional traversal (u &rarr; v); undirected edges permit bidirectional movement (u &harr; v).</li>
+          <li><strong>Weighted vs. Unweighted:</strong> Weighted edges carry numeric traversal costs or capacities; unweighted edges represent uniform connections.</li>
+          <li><strong>Cyclic vs. Acyclic:</strong> Cyclic graphs contain paths that loop back to an already-visited vertex. A Directed Acyclic Graph (DAG) contains directed edges with no closed loops, making it the standard structure for task orchestration, build pipelines, and compiler dependency resolution.</li>
+        </ul>
+
+        <p>Graphs are represented in memory using two primary data structures:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>STRUCTURAL ATTRIBUTE</th>
+                <th>ADJACENCY MATRIX</th>
+                <th>ADJACENCY LIST</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Internal Representation</strong></td>
+                <td>2D Array of dimensions |V| &times; |V|</td>
+                <td>Array or Map of dynamic lists or sets</td>
+              </tr>
+              <tr>
+                <td><strong>Total Memory Complexity</strong></td>
+                <td>&Theta;(V<sup>2</sup>)</td>
+                <td>&Theta;(V + E)</td>
+              </tr>
+              <tr>
+                <td><strong>Edge Existence Query (u &rarr; v)</strong></td>
+                <td>O(1) constant time lookup</td>
+                <td>O(degree(u)) scan time</td>
+              </tr>
+              <tr>
+                <td><strong>Iterating All Neighbors of u</strong></td>
+                <td>&Theta;(V) (must scan entire row)</td>
+                <td>&Theta;(degree(u)) (optimal)</td>
+              </tr>
+              <tr>
+                <td><strong>Node Addition</strong></td>
+                <td>O(V<sup>2</sup>) reallocation cost</td>
+                <td>O(1) amortized append</td>
+              </tr>
+              <tr>
+                <td><strong>Memory Locality</strong></td>
+                <td>High (contiguous rows)</td>
+                <td>Lower (scattered list nodes)</td>
+              </tr>
+              <tr>
+                <td><strong>Optimal Domain</strong></td>
+                <td>Dense graphs where E &approx; V<sup>2</sup></td>
+                <td>Sparse graphs where E &ll; V<sup>2</sup></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>In production environments (such as road networks, social graphs, and distributed service topologies), graphs are typically sparse, with each vertex connecting to only a small subset of the total node population (E &ll; V<sup>2</sup>). As a result, the Adjacency List is the standard representation for most systems applications, avoiding the quadratic memory footprint of large matrices.</p>
+      </section>
+
+      <!-- Page 13 -->
+      <section id="traversal-algorithms" class="content-section">
+        <h2>Fundamental Algorithms and Traversal Paradigms</h2>
+        <p>Algorithms implement targeted computational steps over structured memory layouts to execute search, order data, and discover connectivity pathways.</p>
+
+        <h3 id="searching">Searching Mechanics: Linear Scans vs. Binary Search Invariants</h3>
+        <p>Searching identifies the presence or memory offset of a target value within a dataset:</p>
+        <ul>
+          <li><strong>Linear Search:</strong> Iterates through every element sequentially from index 0 to N-1. It requires no initial ordering, operates across both contiguous and node-based structures, and exhibits a time complexity of O(N).</li>
+          <li><strong>Binary Search:</strong> Operates exclusively on pre-sorted, random-access contiguous sequences (e.g., sorted arrays). It probes the exact midpoint of the search interval: if the target is smaller, the search continues in the left half; if larger, it branches into the right half. Binary search halving mechanics are expressed by the recurrence:
+            <div class="formula-card" style="margin: 0.5rem 0;">T(N) = T(N / 2) + O(1) &rArr; O(log N)</div>
+          </li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java: Idiomatic Binary Search with Overflow Prevention</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// Idiomatic Binary Search with Unsigned Overflow Prevention
+public class BinarySearchVerification {
+    public static int search(int[] array, int target) {
+        int low = 0;
+        int high = array.length - 1; // Inclusive search bounds: [low, high]
+        while (low <= high) { // Invariant: target must reside within [low, high]
+            // Standard (low + high) / 2 triggers signed 32-bit integer overflow when low + high > 2^31-1
+            int mid = low + ((high - low) >>> 1); // Safe unsigned bit-shift bisection
+            if (array[mid] == target) {
+                return mid; // Target identified
+            } else if (array[mid] < target) {
+                low = mid + 1; // Discard left half
+            } else {
+                high = mid - 1; // Discard right half
+            }
+        }
+        return -1; // Target does not exist
+    }
+}</code></pre>
+        </div>
+
+        <p>Computing the midpoint via <code>low + ((high - low) &gt;&gt;&gt; 1)</code> prevents signed 32-bit integer overflow. In massive datasets containing more than 2<sup>30</sup> entries, naive midpoint calculations such as <code>(low + high) / 2</code> exceed the maximum positive integer value (2<sup>31</sup> - 1 = 2,147,483,647), overflowing into negative integers and causing out-of-bounds array faults.</p>
+
+        <h3 id="sorting-quadratic">Quadratic Sorting Mechanics: Bubble, Selection, and Insertion Sort</h3>
+        <p>Quadratic sorting algorithms execute in O(N<sup>2</sup>) time. While inefficient on large datasets, their minimal code footprint and low operational overhead make them useful in specialized scenarios, such as small subproblems within hybrid sorting pipelines:</p>
+        
+        <ul>
+          <li><strong>Bubble Sort:</strong> Iterates through the array, comparing adjacent elements and swapping them if they are out of order. Each complete pass guarantees that the maximum element of the unsorted segment bubbles up to its final position at the end of the array. Best case: O(N) with an early-exit flag. Average/Worst case: O(N<sup>2</sup>). Swaps: O(N<sup>2</sup>).</li>
+          <li><strong>Selection Sort:</strong> Divides the array into a sorted prefix and an unsorted suffix. It scans the unsorted suffix to identify the minimum element, swapping it into place at the end of the sorted prefix. Best/Average/Worst case: &Theta;(N<sup>2</sup>) comparisons. However, it performs at most O(N) swaps, making it useful when write cycles to storage media (such as EEPROM or flash memory) are costly.</li>
+        </ul>
+      </section>
+
+      <!-- Page 14 -->
+      <section id="divide-conquer" class="content-section">
+        <ul>
+          <li><strong>Insertion Sort:</strong> Iterates through the array, taking each element and inserting it into its correct relative position within the already-sorted prefix by shifting larger elements to the right.</li>
+        </ul>
+
+        <p><strong>The Nearly-Sorted Advantage:</strong> If an input array is already sorted (or nearly sorted, where elements are within a small distance k of their target positions), the inner shift loop terminates almost immediately. In this scenario, Insertion Sort executes in near-linear O(N) time with minimal constant overhead, outperforming complex divide-and-conquer algorithms. Because of this property, production sorting pipelines (such as Timsort in Python and Dual-Pivot Quicksort in Java) switch to Insertion Sort when recursion partitions drop below 16 to 32 elements.</p>
+
+        <h3>Divide-and-Conquer Sorting: Merge Sort and Quick Sort</h3>
+        <p>Divide-and-conquer sorting algorithms break down problem sets recursively into smaller subproblems, sort those subproblems, and recombine them to achieve O(N log N) operational efficiency.</p>
+
+        <h4>Merge Sort</h4>
+        <p>Merge Sort bisects the array into equal halves recursively until base-case single-element arrays remain. It then merges these sorted subarrays back together in sorted order.</p>
+        <ul>
+          <li><strong>Recurrence:</strong> T(N) = 2T(N/2) + &Theta;(N) &rArr; &Theta;(N log N) across all input distributions.</li>
+          <li><strong>Stability:</strong> Merge Sort is stable. When comparing two equivalent keys, elements retain their relative positions from the original input array. This is critical when sorting multi-attribute datasets (e.g., sorting users by timestamp, then by country code).</li>
+          <li><strong>Memory Overhead:</strong> Standard array-based merge sort is not in-place. Merging two sorted contiguous slices requires allocating an auxiliary scratchpad array of size O(N) to assemble elements before writing them back to the primary array.</li>
+        </ul>
+
+        <h4>Quick Sort</h4>
+        <p>Quick Sort selects a pivot element, reorders the array so that elements smaller than the pivot precede it and larger elements follow it (the partition step), and then recurses on the resulting partitions.</p>
+        <ul>
+          <li><strong>Average Time Complexity:</strong> &Theta;(N log N).</li>
+          <li><strong>Space Complexity:</strong> Operates in-place with O(1) auxiliary data storage, but consumes O(log N) average call-stack space for recursion frames (O(N) in the worst case).</li>
+          <li><strong>Instability:</strong> Quick Sort is unstable. Partitioning swaps elements across wide array spans, which can invert the relative order of duplicate keys.</li>
+        </ul>
+
+        <h4>Partitioning Schemes: Lomuto vs. Hoare</h4>
+        <p>The partitioning step is the core mechanism of Quicksort. Two primary partitioning schemes are used:</p>
+        <ul>
+          <li><strong>Lomuto Partition Scheme:</strong> Chooses the final element as the pivot. A pointer i tracks the boundary of elements smaller than the pivot, while a scan index j steps forward. When A[j] &le; pivot, i increments and A[i] swaps with A[j]. Lomuto's logic is straightforward to implement, but it performs an average of three times as many swaps as Hoare's scheme and degrades toward O(N<sup>2</sup>) time when sorting arrays containing large numbers of duplicate keys.</li>
+          <li><strong>Hoare Partition Scheme:</strong> Sets two pointers at opposite ends of the array that advance toward each other until they identify an inverted pair (A[left] &ge; pivot and A[right] &le; pivot), which are then swapped. Hoare's approach performs significantly fewer swaps on average and handles duplicate keys efficiently, maintaining balanced partitions where Lomuto falters.</li>
+        </ul>
+      </section>
+
+      <!-- Page 15 -->
+      <section class="content-section">
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python: Quick Sort with Hoare Partitioning</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># Python Quick Sort with Hoare Partitioning Scheme
+def quicksort_hoare(array, low, high):
+    if low < high:
+        split_point = hoare_partition(array, low, high)
+        quicksort_hoare(array, low, split_point)
+        quicksort_hoare(array, split_point + 1, high)
+
+def hoare_partition(array, low, high):
+    pivot = array[low + ((high - low) // 2)]
+    left = low - 1
+    right = high + 1
+    while True:
+        left += 1
+        while array[left] < pivot:
+            left += 1
+        right -= 1
+        while array[right] > pivot:
+            right -= 1
+        if left >= right:
+            return right
+        array[left], array[right] = array[right], array[left]</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java: Stable Merge Sort Implementation</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// Java Stable Merge Sort Implementation
+public class MergeSortSystem {
+    public static void sort(int[] array) {
+        int[] aux = new int[array.length];
+        mergeSort(array, aux, 0, array.length - 1);
+    }
+
+    private static void mergeSort(int[] array, int[] aux, int low, int high) {
+        if (low >= high) return;
+        int mid = low + ((high - low) / 2);
+        mergeSort(array, aux, low, mid);
+        mergeSort(array, aux, mid + 1, high);
+        merge(array, aux, low, mid, high);
+    }
+
+    private static void merge(int[] array, int[] aux, int low, int mid, int high) {
+        System.arraycopy(array, low, aux, low, high - low + 1);
+        int i = low;
+        int j = mid + 1;
+        int k = low;
+        while (i <= mid && j <= high) {
+            if (aux[i] <= aux[j]) { // Invariant: <= guarantees sorting stability
+                array[k++] = aux[i++];
+            } else {
+                array[k++] = aux[j++];
+            }
+        }
+        while (i <= mid) {
+            array[k++] = aux[i++];
+        }
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 16 -->
+      <section id="graph-traversals" class="content-section">
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TypeScript: Tree Traversals</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// TypeScript Tree Traversals
+class BinaryTreeNode {
+    value: number;
+    left: BinaryTreeNode | null = null;
+    right: BinaryTreeNode | null = null;
+    constructor(value: number) { this.value = value; }
+}
+
+function inOrderTraversal(node: BinaryTreeNode | null, accumulator: number[] = []): number[] {
+    if (node === null) return accumulator;
+    inOrderTraversal(node.left, accumulator); // Traverse left subtree
+    accumulator.push(node.value); // Visit root
+    inOrderTraversal(node.right, accumulator); // Traverse right subtree
+    return accumulator;
+}</code></pre>
+        </div>
+
+        <h2>Graph and Tree Traversals: Depth-First Search vs. Breadth-First Search</h2>
+        <p>Graph and tree traversals systematically visit every vertex and evaluate every edge in a network.</p>
+
+        <h3>Depth-First Search (DFS)</h3>
+        <p>DFS explores as deeply as possible along each branch before backtracking. It can be implemented recursively using the runtime call stack or iteratively using an explicit Stack data structure.</p>
+        
+        <p>In trees, DFS supports three primary traversal orders based on when the parent node is processed:</p>
+        <ol>
+          <li><strong>Pre-Order (Node &rarr; Left &rarr; Right):</strong> Evaluates the root before traversing its subtrees. Used to clone trees, serialize structures to disk, and parse expression syntax trees.</li>
+          <li><strong>In-Order (Left &rarr; Node &rarr; Right):</strong> Traverses the left subtree, evaluates the current node, and then traverses the right subtree. Traversing a Binary Search Tree in-order visits the nodes in ascending sorted order.</li>
+          <li><strong>Post-Order (Left &rarr; Right &rarr; Node):</strong> Explores all descendant subtrees before evaluating the node itself. Used for bottom-up operations, such as freeing memory in unmanaged environments (e.g., C/C++ <code>free</code>), computing directory disk usage, and evaluating reverse-Polish mathematical expressions.</li>
+        </ol>
+
+        <h4>Cycle Prevention in Graph DFS:</h4>
+        <p>Unlike trees, graphs can contain cycles. Traversals must maintain a visited set or bit-vector to track evaluated vertices. Visiting an unvisited node adds it to the visited set; if a neighbor already resides in the set, the traversal skips it to avoid infinite loops.</p>
+
+        <h3>Breadth-First Search (BFS)</h3>
+        <p>BFS explores a graph level by level, visiting all direct neighbors at distance d before proceeding to nodes at distance d + 1. It is implemented iteratively using a Queue.</p>
+
+        <h4>BFS Execution Lifecycle:</h4>
+        <ol>
+          <li>Initialize a FIFO Queue and enqueue the origin root node.</li>
+          <li>Mark the origin node as visited.</li>
+          <li>While the queue contains elements:
+            <ul>
+              <li>Dequeue the front vertex u.</li>
+              <li>Iterate over all unvisited adjacent neighbors of u.</li>
+              <li>For each unvisited neighbor v: mark v as visited and enqueue v.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h4>Unweighted Shortest Path Optimality in Breadth-First Search</h4>
+        <p>A fundamental property of Breadth-First Search is that it naturally computes the single-source shortest path on any unweighted graph (or any graph where all edges share an identical weight).</p>
+      </section>
+
+      <!-- Page 17 -->
+      <section class="content-section">
+        <p>To understand this property, consider the mechanics of the FIFO queue:</p>
+        <ul>
+          <li>Let <code>dist(u)</code> represent the shortest path distance from an origin S to any node u, measured in edge count.</li>
+          <li>When S is enqueued, <code>dist(S) = 0</code>.</li>
+          <li>The queue maintains a structural invariant: at any point during execution, it contains vertices with distances that are either all equal to some integer k, or split between k and k + 1:
+            <div class="formula-card" style="margin: 0.5rem 0;">
+              Q = [ v<sub>1</sub>, v<sub>2</sub>, &hellip;, v<sub>i</sub> (distance = k), v<sub>i+1</sub>, &hellip;, v<sub>m</sub> (distance = k+1) ]
+            </div>
+          </li>
+          <li>When a vertex u at distance k is dequeued, its unvisited neighbors are assigned distance <code>dist(v) = dist(u) + 1 = k + 1</code> and appended to the back of the queue.</li>
+        </ul>
+
+        <p>Because the algorithm processes nodes strictly in non-decreasing order of distance, the first time BFS discovers an unvisited node v, it has reached that node via the minimum possible number of edges. This allows BFS to compute unweighted shortest paths in &Theta;(V + E) time, outperforming general-purpose weighted graph algorithms like Dijkstra's (O((V + E) log V)).</p>
+
+        <h2 id="decision-matrix">Architectural Decision Matrix and Systems Synthesis</h2>
+        <p>Choosing the right data structure requires balancing theoretical time complexity against real-world hardware constraints, memory access patterns, and runtime overhead:</p>
+      </section>
+
+      <!-- Page 18 -->
+      <section class="content-section">
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>DATA STRUCTURE</th>
+                <th>ACCESS TIME</th>
+                <th>INSERTION TIME</th>
+                <th>DELETION TIME</th>
+                <th>MEMORY OVERHEAD</th>
+                <th>CPU CACHE BEHAVIOR</th>
+                <th>OPTIMAL ARCHITECTURAL DOMAIN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Static Array</strong></td>
+                <td>&Theta;(1)</td>
+                <td>O(N) (shifts)</td>
+                <td>O(N) (shifts)</td>
+                <td>None (fixed payload footprint)</td>
+                <td>Optimal (contiguous cache lines)</td>
+                <td>Fixed datasets, mathematical matrices, low-level DSP buffers.</td>
+              </tr>
+              <tr>
+                <td><strong>Dynamic Array</strong></td>
+                <td>&Theta;(1)</td>
+                <td>Amortized O(1)</td>
+                <td>O(N) (tail: O(1))</td>
+                <td>Low (unused capacity)</td>
+                <td>High (dense memory packing)</td>
+                <td>General sequence storage; read/append-heavy workloads.</td>
+              </tr>
+              <tr>
+                <td><strong>Singly Linked List</strong></td>
+                <td>&Theta;(N)</td>
+                <td>O(1) (at head)</td>
+                <td>O(1) (with ref)</td>
+                <td>Moderate (pointers + headers)</td>
+                <td>Poor (pointer chasing)</td>
+                <td>Memory-constrained stacks; zero continuous memory.</td>
+              </tr>
+              <tr>
+                <td><strong>Doubly Linked List</strong></td>
+                <td>&Theta;(N)</td>
+                <td>O(1) (known)</td>
+                <td>O(1) (direct excision)</td>
+                <td>High (2 pointers/node)</td>
+                <td>Poor (cache misses)</td>
+                <td>LRU cache eviction lists; bidirectional traversal.</td>
+              </tr>
+              <tr>
+                <td><strong>Hash Table</strong></td>
+                <td>Average O(1)</td>
+                <td>Average O(1)</td>
+                <td>Average O(1)</td>
+                <td>High (sparse buckets)</td>
+                <td>Variable (open addr: high; chaining: poor)</td>
+                <td>Key-value lookups, indexing databases, relationship caches.</td>
+              </tr>
+              <tr>
+                <td><strong>Binary Search Tree</strong></td>
+                <td>&Theta;(log N)</td>
+                <td>&Theta;(log N)</td>
+                <td>&Theta;(log N)</td>
+                <td>High (child pointers)</td>
+                <td>Moderate to poor</td>
+                <td>Dynamic sorted datasets, range-query filters, priority ranking.</td>
+              </tr>
+              <tr>
+                <td><strong>Binary Heap</strong></td>
+                <td>Root: &Theta;(1)</td>
+                <td>O(log N)</td>
+                <td>O(log N)</td>
+                <td>Low (flat array)</td>
+                <td>High (contiguous array)</td>
+                <td>Priority queues, OS task schedulers, heapsort, Dijkstra's.</td>
+              </tr>
+              <tr>
+                <td><strong>Adjacency Matrix</strong></td>
+                <td>O(1) (edge check)</td>
+                <td>O(V<sup>2</sup>)</td>
+                <td>O(1)</td>
+                <td>High (&Theta;(V<sup>2</sup>))</td>
+                <td>High across rows</td>
+                <td>Dense graphs (E &approx; V<sup>2</sup>); connectivity lookups.</td>
+              </tr>
+              <tr>
+                <td><strong>Adjacency List</strong></td>
+                <td>O(deg(u))</td>
+                <td>O(1) amortized</td>
+                <td>O(deg(u))</td>
+                <td>Low</td>
+                <td>Variable</td>
+                <td>Sparse graphs (E &ll; V<sup>2</sup>); BFS/DFS traversals.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Understanding these mechanical trade-offs bridges the gap between theoretical algorithm design and high-performance software engineering. By selecting data structures that harmonize with CPU cache hierarchies, memory allocators, and asymptotic growth boundaries, engineers can design robust, high-throughput systems capable of scaling reliably under intense production workloads.</p>
+
+        <div class="page-nav-footer">
+          <a href="programming-languages.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Languages &amp; Runtimes</span>
+          </a>
+          <a href="operating-systems.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Operating Systems Fundamentals</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

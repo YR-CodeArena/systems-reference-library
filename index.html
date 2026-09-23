@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Systems Reference Library | Master Software Architecture &amp; Engineering Manuals</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn active">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Portal Hero -->
+  <main>
+    <section class="portal-hero">
+      <span class="portal-tagline">⟦ SYSTEM SPECIFICATION // 統合仕様書 // PRODUCTION GRADE ⟧</span>
+      <h1>Computer Systems &amp; Software Engineering Manuals</h1>
+      <p>A rigorous, word-for-word digital reference curriculum compiled directly from foundational systems engineering specifications and authoritative masterclasses. Featuring full architectural mechanics, mathematical derivations, low-level data structures, protocol specifications, runtime internals, and production implementations with one-click copyable code snippets.</p>
+    </section>
+
+    <!-- Track 1: Core Systems Architecture -->
+    <div style="max-width: 1400px; margin: 2.5rem auto 1rem auto; padding: 0 2rem;">
+      <h2 style="font-size: 1.6rem; color: var(--text-primary); border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <span>⟦ PART I ⟧ Core Systems Architecture, Protocols &amp; Foundations</span>
+        <span style="font-size: 0.85rem; color: var(--accent-secondary); font-weight: 700;">[ 基礎システムアーキテクチャ ]</span>
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Foundational computer systems manuals exploring hardware abstractions, networking wire mechanics, storage engines, execution runtimes, and kernel privilege boundaries.
+      </p>
+    </div>
+
+    <!-- Portal Cards Grid Track 1 -->
+    <div class="portal-grid" style="margin-top: 0;">
+      <!-- Card 1 -->
+      <a href="networking.html" class="portal-card">
+        <span class="card-num-badge">VOL.01 [ 通信プロトコル ] &bull; 19 PAGES</span>
+        <h2>Computer Networking &amp; Distributed Wire Protocols</h2>
+        <p>Layering mechanics from physical transceivers to user-space runtimes. In-depth analysis of the 7-Layer OSI vs 4-Layer TCP/IP stack, packet encapsulation, TCP state machines, 3-way and 4-way handshakes, sliding window flow control, Reno vs CUBIC vs BBR congestion control, UDP datagrams, HTTP/1.1 vs HTTP/2 vs HTTP/3 (QUIC), IPC primitives, and complete gRPC Protobuf wire formats with Python, Java, and TypeScript implementations.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">OSI vs TCP/IP</li>
+          <li class="card-topic-tag">Packet Encapsulation</li>
+          <li class="card-topic-tag">TCP Reno/CUBIC/BBR</li>
+          <li class="card-topic-tag">HTTP/3 &amp; QUIC</li>
+          <li class="card-topic-tag">Unix Domain Sockets</li>
+          <li class="card-topic-tag">gRPC &amp; Protobuf</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="databases.html" class="portal-card">
+        <span class="card-num-badge">VOL.02 [ データベース構造 ] &bull; 16 PAGES</span>
+        <h2>Database Management Systems and Storage Engines</h2>
+        <p>Relational storage engine internals, slotted pages, system catalogs, and formal ACID primitives. Deep-dive into ARIES recovery, steal/no-steal &amp; force/no-force buffer policies, transaction isolation levels, read phenomena (G1, A2, A3, Write Skew), 2PL vs MVCC (Postgres xmin/xmax and InnoDB undo chains), hardware storage hierarchies, B+ Tree mathematical fan-out and shallow height proofs, Redis in-memory internals, MongoDB WiredTiger, Cassandra LSM-Trees, and Neo4j Index-Free Adjacency.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">ACID &amp; ARIES</li>
+          <li class="card-topic-tag">2PL vs MVCC</li>
+          <li class="card-topic-tag">B+ Trees vs BST</li>
+          <li class="card-topic-tag">asyncpg Transactions</li>
+          <li class="card-topic-tag">Redis Data Structures</li>
+          <li class="card-topic-tag">Cassandra LSM &amp; SSTables</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="programming-languages.html" class="portal-card">
+        <span class="card-num-badge">VOL.03 [ プログラミング言語 ] &bull; 18 PAGES</span>
+        <h2>Programming Languages, Execution Engines &amp; Memory</h2>
+        <p>The compiler translation pipeline from source code to silicon: lexical analysis, AST construction, type proof checking, SSA/TAC optimization, and register allocation. Comprehensive comparison of Pure AOT (C/Rust/Go), Pure Interpreted, JVM HotSpot (C1/C2 JIT), CPython PEP 659 &amp; 744, and V8 Ignition/Sparkplug/Maglev/TurboFan. Memory mechanics of the Call Stack vs Managed Heap, pointer tracing, pass-by-value proof across languages, vtables and inline caches, C3 MRO linearization, and functional pipelines.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">Compiler Pipeline</li>
+          <li class="card-topic-tag">JVM vs CPython vs V8</li>
+          <li class="card-topic-tag">Stack vs Heap</li>
+          <li class="card-topic-tag">Call-by-Sharing Proof</li>
+          <li class="card-topic-tag">vtables &amp; Inline Caches</li>
+          <li class="card-topic-tag">C3 Linearization</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="data-structures.html" class="portal-card">
+        <span class="card-num-badge">VOL.04 [ データ構造とアルゴリズム ] &bull; 18 PAGES</span>
+        <h2>Foundational Computer Science and Data Architecture</h2>
+        <p>Asymptotic measurement vs empirical wall-clock time, mathematical formalization of Big-O, complexity hierarchies, and auxiliary space bounds. Static array memory arithmetic, geometric resizing proof via amortized analysis, node-based linked lists, memory wall and CPU cache lines, circular ring buffers with bitwise modulo, hash table mechanics (separate chaining, open addressing, Robin Hood, tombstones), AVL and Red-Black trees, Floyd's linear-time heapify proof, graph adjacency representations, binary search overflow prevention, and Lomuto vs Hoare Quicksort.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">Formal Big-O Proofs</li>
+          <li class="card-topic-tag">Amortized Analysis</li>
+          <li class="card-topic-tag">Memory Wall &amp; L1-L3</li>
+          <li class="card-topic-tag">Hash Collision Strategies</li>
+          <li class="card-topic-tag">Floyd's O(N) Heapify</li>
+          <li class="card-topic-tag">Lomuto vs Hoare</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 5 -->
+      <a href="operating-systems.html" class="portal-card">
+        <span class="card-num-badge">VOL.05 [ オペレーティングシステム ] &bull; 10 PAGES</span>
+        <h2>Operating Systems &amp; System Programming Fundamentals</h2>
+        <p>Kernel privilege boundaries, Ring 0 vs Ring 3, microarchitectural CPL enforcement, and General Protection Faults. Low-level x86-64 SYSCALL and SYSRET register conventions and context switches. Memory layouts (text, data, bss, heap, stack, task_struct), thread models, POSIX threads, multiprocessing vs multithreading tradeoffs, race conditions with machine-level walkthroughs, Linux futex uncontended/contended paths, 4 Coffman conditions for deadlocks, select vs poll vs epoll/kqueue, Libuv 6-phase event loop, and Nginx master-worker architectures.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">Ring 0 vs Ring 3</li>
+          <li class="card-topic-tag">x86-64 SYSCALL / SYSRET</li>
+          <li class="card-topic-tag">Process Memory Layout</li>
+          <li class="card-topic-tag">Futex Mechanics</li>
+          <li class="card-topic-tag">Deadlocks &amp; Coffman</li>
+          <li class="card-topic-tag">epoll vs select vs poll</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Track 2: Applied Languages, Internals & Engineering Workflows -->
+    <div style="max-width: 1400px; margin: 3.5rem auto 1rem auto; padding: 0 2rem;">
+      <h2 style="font-size: 1.6rem; color: var(--text-primary); border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <span>⟦ PART II ⟧ Applied Languages, Internals &amp; Engineering Workflows</span>
+        <span style="font-size: 0.85rem; color: var(--accent-secondary); font-weight: 700;">[ 言語エンジン &amp; 運用基盤 ]</span>
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Specialized engineering manuals covering distributed version control mechanics, full-stack Python development, CPython runtime internals &amp; free-threading, PostgreSQL database engineering, and modern Java object architecture.
+      </p>
+    </div>
+
+    <!-- Portal Cards Grid Track 2 -->
+    <div class="portal-grid" style="margin-top: 0;">
+      <!-- Card 6 -->
+      <a href="git-github.html" class="portal-card">
+        <span class="card-num-badge">VOL.06 [ Git分散バージョン管理 ] &bull; 8 PAGES</span>
+        <h2>Comprehensive Git &amp; GitHub Master Notes</h2>
+        <p>Complete master guide based on Hitesh Choudhary's (Chai aur Code) comprehensive course. Covers the 3-state architecture (Working Tree, Staging Index, Commit History), full SHA-1 content-addressable storage, Branching mechanics, Remote workflow (origin, upstream, push -u), Fast-Forward vs Three-Way Merge, Merge Conflicts resolution, Git Stash mechanics, Hard vs Soft vs Mixed Resets, Git Revert safety, Git Rebase rewriting, and a complete Cheat Sheet table.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">3-State Architecture</li>
+          <li class="card-topic-tag">Fast-Forward &amp; 3-Way</li>
+          <li class="card-topic-tag">Conflict Markers</li>
+          <li class="card-topic-tag">Soft vs Mixed vs Hard</li>
+          <li class="card-topic-tag">Rebase vs Merge</li>
+          <li class="card-topic-tag">Master Cheat Sheet</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 7 -->
+      <a href="python-masterclass.html" class="portal-card">
+        <span class="card-num-badge">VOL.07 [ Python言語マスター ] &bull; 26 PAGES</span>
+        <h2>Python 3 Masterclass: Zero to Hero Handbook</h2>
+        <p>Deeply explanatory developer and data analyst reference guide structured from the Bro Code 12-Hour Masterclass. 25 comprehensive modules covering Python fundamentals, string slicing, arithmetic &amp; math, collections (Lists, Tuples, Sets, Dictionaries), functions &amp; *args/**kwargs, OOP, inheritance, polymorphism, Duck Typing, classmethods &amp; staticmethods, property decorators, exception handling, File I/O, PyQt5 GUI development, threading, and public API data consumption.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">Python Syntax &amp; Math</li>
+          <li class="card-topic-tag">Collections &amp; Slicing</li>
+          <li class="card-topic-tag">OOP &amp; Inheritance</li>
+          <li class="card-topic-tag">@property &amp; Decorators</li>
+          <li class="card-topic-tag">PyQt5 GUI Applications</li>
+          <li class="card-topic-tag">Threading &amp; REST APIs</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 8 -->
+      <a href="python-runtime.html" class="portal-card">
+        <span class="card-num-badge">VOL.08 [ CPythonランタイム仕様 ] &bull; 31 PAGES</span>
+        <h2>Python Architecture &amp; CPython Runtime Notes</h2>
+        <p>The definitive master reference manual from CPython internals to advanced concurrency across 30 chapters and 6 comprehensive parts. In-depth examination of the CPython compiler and evaluation loop (ceval.c), PyObject headers &amp; ob_refcnt, PyMalloc 4-tier memory allocator, the Global Interpreter Lock (GIL), PEP 703 free-threading in Python 3.13+, PEP 684 per-interpreter GIL, C3 MRO linearization, generators, and AsyncIO event loops with a complete concurrency decision matrix.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">CPython ceval.c</li>
+          <li class="card-topic-tag">PyObject &amp; Reference Counting</li>
+          <li class="card-topic-tag">PyMalloc Arenas &amp; Pools</li>
+          <li class="card-topic-tag">PEP 703 Free-Threading</li>
+          <li class="card-topic-tag">PEP 684 Subinterpreters</li>
+          <li class="card-topic-tag">AsyncIO Event Loops</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 9 -->
+      <a href="postgresql.html" class="portal-card">
+        <span class="card-num-badge">VOL.09 [ PostgreSQLデータベース設計 ] &bull; 16 PAGES</span>
+        <h2>PostgreSQL Master Notes: Zero to Hero</h2>
+        <p>Complete developer and data analyst reference guide across 17 structured modules. Covers RDBMS relational theory vs spreadsheets, psql meta-commands cheat sheet, DDL &amp; DML CRUD operations, data types and integrity constraints, SERIAL sequences desynchronization fix, pattern matching wildcards, aggregate analytics with GROUP BY, string manipulation workshop, ALTER TABLE mechanics, CASE WHEN logic, joins (Cross, Inner, Left, Right, 3-table), Views, Stored Procedures, UDFs, Window Functions (OVER, ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD), CTEs, and automated Triggers.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">psql Meta-Commands</li>
+          <li class="card-topic-tag">CRUD &amp; SERIAL Sequences</li>
+          <li class="card-topic-tag">Relational Joins &amp; Views</li>
+          <li class="card-topic-tag">Stored Procedures &amp; UDFs</li>
+          <li class="card-topic-tag">Window Analytical Functions</li>
+          <li class="card-topic-tag">CTEs &amp; Table Triggers</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 10 -->
+      <a href="java-masterclass.html" class="portal-card">
+        <span class="card-num-badge">VOL.10 [ Java仮想マシン仕様 ] &bull; 21 PAGES</span>
+        <h2>The Complete Java Master Reference Manual</h2>
+        <p>Comprehensive Core &amp; Advanced Java notes across 20 expanded chapters. Deep architectural exploration of the WORA execution model, bytecode compilation, JIT HotSpot acceleration, JDK vs JRE vs JVM stacks, Stack vs Heap memory allocation, Primitives vs Reference types, Scanner input buffer trap and cleanup rules, PEMDAS operator precedence, Enhanced Switch expressions (Java 14+), short-circuit logic, String Constant Pool and immutability, OOP Pillars, ArrayList &amp; HashMap, Generics, Try-With-Resources File I/O, java.time, and multi-threading thread lifecycle management.</p>
+        <ul class="card-topics-list">
+          <li class="card-topic-tag">WORA &amp; HotSpot JIT</li>
+          <li class="card-topic-tag">Stack vs Heap Mechanics</li>
+          <li class="card-topic-tag">Scanner Buffer Trap</li>
+          <li class="card-topic-tag">Enhanced Switch Expressions</li>
+          <li class="card-topic-tag">OOP Pillars &amp; Composition</li>
+          <li class="card-topic-tag">Concurrency &amp; Thread Lifecycle</li>
+        </ul>
+        <div class="card-footer-cta">
+          <span>Read Reference Manual</span>
+          <span>&rarr;</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

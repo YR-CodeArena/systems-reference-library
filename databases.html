@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Database Management Systems & Storage Engines | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (16 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#relational-architecture">Relational DB Architecture</a></li>
+        <li class="depth-2"><a href="#schema-foundations">Relational Schema Foundations</a></li>
+        <li class="depth-2"><a href="#acid-primitives">ACID Properties & Primitives</a></li>
+        <li class="depth-2"><a href="#isolation-levels">Isolation Levels & Read Phenomena</a></li>
+        <li class="depth-2"><a href="#concurrency-2pl-mvcc">Concurrency: 2PL vs. MVCC</a></li>
+        <li><a href="#indexing-storage">Indexing & Physical Storage</a></li>
+        <li class="depth-2"><a href="#hardware-reality">Hardware Latency & Sequential Scan</a></li>
+        <li class="depth-2"><a href="#bst-failure">Failure of BSTs on Disk</a></li>
+        <li class="depth-2"><a href="#b-trees">B-Tree & B+ Tree Data Structures</a></li>
+        <li class="depth-2"><a href="#b-plus-dominance">Why B+ Trees Dominate Disk</a></li>
+        <li><a href="#transaction-code">Transaction Implementations</a></li>
+        <li class="depth-2"><a href="#python-trans">Python (asyncpg)</a></li>
+        <li class="depth-2"><a href="#java-trans">Java (JDBC)</a></li>
+        <li class="depth-2"><a href="#ts-trans">TypeScript (Node.js pg)</a></li>
+        <li><a href="#nosql-paradigms">NoSQL Paradigms & Storage</a></li>
+        <li class="depth-2"><a href="#redis-arch">Key-Value: Redis Architecture</a></li>
+        <li class="depth-2"><a href="#mongo-arch">Document: MongoDB Architecture</a></li>
+        <li class="depth-2"><a href="#cassandra-arch">Column-Family: Apache Cassandra</a></li>
+        <li class="depth-2"><a href="#neo4j-arch">Graph: Neo4j & Index-Free Adjacency</a></li>
+        <li><a href="#systems-synthesis">Systems Synthesis: DB Selection</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 2 &bull; 16 Pages</span>
+        </div>
+        <h1 class="doc-title">Database Management Systems and Storage Engines</h1>
+        <p class="doc-subtitle">Architecture, Concurrency Control, and Physical Data Structures &bull; Comprehensive Technical Reference Manual</p>
+      </div>
+
+      <!-- Page 1 -->
+      <section id="relational-architecture" class="content-section">
+        <h2>Relational Database Architecture and Transactional Guarantees</h2>
+
+        <h3 id="schema-foundations">Relational Schema Foundations</h3>
+        <p>Relational Database Management Systems (RDBMS) structure information according to the principles of Edgar F. Codd's relational model. At the logical tier, data is organized into relations (tables), which consist of attributes (columns) and tuples (rows). The fundamental strength of the relational model lies in the decoupling of logical data representation from physical disk layout. While software developers interact with declarative Structured Query Language (SQL) statements that view tables as sets of typed records, the underlying database engine maps these constructs to fixed-size disk blocks, slotted-page records, and auxiliary access structures.</p>
+        
+        <p>A relational schema defines the structural blueprint, typed attributes, and integrity rules governing a database. Entity integrity requires that every relation possesses a primary key—a unique, non-null set of attributes that unambiguously distinguishes each tuple. Referential integrity guarantees valid associations across distinct tables through foreign keys, which mandate that a referencing attribute must match an existing primary key value in the referenced relation or remain explicitly null.</p>
+        
+        <p>The physical realization of a relational table diverges significantly from its logical presentation. Storage engines organize database files into discrete operational layers:</p>
+        
+        <p>The physical representation serializes tabular data into uniform disk blocks (pages), typically configured between 4 KB and 16 KB. Within each page, engines employ a slotted-page architecture, where an array of slot pointers at the beginning of the block tracks byte offsets to variable-length tuple records written from the bottom of the page upward. This prevents internal fragmentation and allows individual tuples to be updated without shifting subsequent records across physical storage addresses.</p>
+        
+        <p>The system catalog maintains metadata relations—such as <code>pg_class</code> and <code>pg_attribute</code> in PostgreSQL or <code>INFORMATION_SCHEMA</code> in MySQL—that map logical table names to physical operating system file descriptors. Auxiliary secondary indexes mirror subsets of attribute values, maintaining pointers to physical tuple identifiers to accelerate selective read paths without altering the underlying table storage.</p>
+        
+        <p>Integrity constraints operate as active database assertions. Check constraints validate boolean expressions prior to committing an insertion or update, while unique constraints prevent duplicate values by constructing an underlying unique index structure.</p>
+
+        <h3 id="acid-primitives">The ACID Properties Grounded in System Primitives</h3>
+        <p>Transactions represent atomic, logical units of work executed against a database state. To preserve correctness during concurrent execution and software crashes, storage engines enforce the ACID contract: Atomicity, Consistency, Isolation, and Durability.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Transaction Lifecycle State Transitions</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>Transaction Lifecycle State Transitions:
+
+[ Active ] ----(Operation Failure)----&gt; [ Failed ]
+    |                                        |
+(All Ops OK)                            (WAL Undo / Rollback)
+    v                                        v
+[ Partially Committed ]                 [ Aborted ]
+    |
+(fsync() WAL)
+    v
+[ Committed ]</code></pre>
+        </div>
+
+        <h4>Atomicity</h4>
+        <p>Atomicity requires that all operations within a transaction boundary either execute to complete persistence or leave the database entirely unmodified. The canonical parallel is a bank wire transfer: debiting $500 from Account A and crediting $500 to Account B.</p>
+      </section>
+
+      <!-- Page 2 -->
+      <section class="content-section">
+        <p>If the database crashes or loses network connectivity after executing the debit but before completing the credit, atomicity guarantees that the partial modification is detected upon system recovery and rolled back, preventing the loss of funds.</p>
+        
+        <p>Under the hood, storage engines achieve atomicity via Write-Ahead Logging (WAL) and recovery algorithms, most notably the ARIES (Algorithm for Recovery and Isolation Exploiting Semantics) protocol. When a transaction modifies a data page residing in the volatile buffer pool, the database does not synchronously push the modified page to disk. Instead, it records the exact delta of the mutation within an append-only WAL buffer.</p>
+        
+        <p>Buffer managers govern memory flushing through two orthogonal policies: steal/no-steal and force/no-force. Modern engines implement a steal policy, allowing the buffer manager to write dirty memory pages modified by uncommitted transactions to disk when RAM is constrained. This policy necessitates undo logging, wherein the WAL record captures the before-image (prior state) of the data. If a transaction aborts or fails midway, the recovery subsystem walks the log backwards, applying undo images to revert the disk blocks to their original, pre-transaction state.</p>
+
+        <h4>Consistency</h4>
+        <p>Consistency ensures that a transaction shifts the database from one valid state to another valid state, preserving all defined invariants, referential relationships, and check constraints. Consider a municipal zoning ordinance dictating that an urban building cannot exceed twenty floors. If an architectural plan requests thirty stories, the zoning board rejects the permit outright. Similarly, if a transaction attempts to insert an order record referencing a non-existent <code>customer_id</code>, the database constraint evaluator intercepts the execution, throws a foreign key violation, and causes the transaction to abort, maintaining relational integrity.</p>
+        
+        <p>Database consistency (the "C" in ACID) must be distinguished from distributed systems consistency (the "C" in the CAP theorem):</p>
+        <ul>
+          <li>In ACID, consistency is defined by application-level schemas, validating user constraints, triggers, and relational foreign keys.</li>
+          <li>In CAP, consistency refers to linearizability—ensuring that every read request receives the most recently committed write across distributed, networked nodes.</li>
+        </ul>
+
+        <h4>Isolation</h4>
+        <p>Isolation guarantees that concurrently executing transactions do not observe each other's intermediate, half-completed states, providing an abstraction wherein each transaction operates as if it were the sole unit of execution running on the hardware.</p>
+        
+        <p>This behavior mirrors an archival reading room. If multiple scholars require access to a fragile manuscript, the librarian either grants exclusive access to one researcher at a time or provides read-only photocopies. If two scholars were permitted to annotate the identical manuscript page simultaneously, they would overwrite and corrupt each other's textual analysis.</p>
+        
+        <p>Without isolation, interleaved execution can generate concurrency anomalies such as lost updates or transient read errors. Database engines balance concurrency throughput against performance by providing distinct isolation tiers, implemented via Two-Phase Locking (2PL) or Multi-Version Concurrency Control (MVCC).</p>
+
+        <h4>Durability</h4>
+        <p>Durability guarantees that once a transaction receives a commit confirmation, its modifications persist permanently, surviving subsequent application crashes, operating system panics, or hardware power outages.</p>
+        
+        <p>Durability parallels the legal recording of a property deed in a county registry. Once the registrar validates the signatures, applies the official physical seal, and archives the parchment within a fireproof vault, ownership remains legally binding, even if the courthouse suffers an electrical failure shortly thereafter.</p>
+        
+        <p>Storage engines guarantee durability using a no-force policy, meaning dirty data pages do not need to be flushed to table files upon commit. Instead, durability relies on synchronously flushing append-only redo logs to disk. Before the engine confirms a commit to the client, it executes an explicit operating system system call—such as <code>fsync()</code> on POSIX or <code>FlushFileBuffers()</code> on Windows—to force the operating system cache and disk controller buffers to flush all relevant WAL records to persistent physical media (such as NVMe flash or magnetic platters). If power fails an instant later, the engine restarts, scans the WAL from the last known checkpoint, and reapplies all committed mutations using the redo log entries.</p>
+
+        <h3 id="isolation-levels">Transaction Isolation Levels and Read Phenomena</h3>
+        <p>The ANSI SQL-92 standard defines four transaction isolation levels to allow systems to balance concurrency against read phenomena.</p>
+      </section>
+
+      <!-- Page 3 -->
+      <section id="concurrency-2pl-mvcc" class="content-section">
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>ISOLATION LEVEL</th>
+                <th>DIRTY READ (G1)</th>
+                <th>NON-REPEATABLE READ (A2)</th>
+                <th>PHANTOM READ (A3)</th>
+                <th>WRITE SKEW</th>
+                <th>IMPLEMENTATION PRIMITIVE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Read Uncommitted</strong></td>
+                <td>Permitted</td>
+                <td>Permitted</td>
+                <td>Permitted</td>
+                <td>Permitted</td>
+                <td>Unlatched memory reads; dirty memory pages inspected without locks.</td>
+              </tr>
+              <tr>
+                <td><strong>Read Committed</strong></td>
+                <td>Suppressed</td>
+                <td>Permitted</td>
+                <td>Permitted</td>
+                <td>Permitted</td>
+                <td>Short-term shared locks or statement-level MVCC snapshots.</td>
+              </tr>
+              <tr>
+                <td><strong>Repeatable Read</strong></td>
+                <td>Suppressed</td>
+                <td>Suppressed</td>
+                <td>Permitted (ANSI) / Suppressed (Postgres/MySQL)</td>
+                <td>Permitted</td>
+                <td>Transaction-level MVCC snapshots or shared locks retained until commit.</td>
+              </tr>
+              <tr>
+                <td><strong>Serializable</strong></td>
+                <td>Suppressed</td>
+                <td>Suppressed</td>
+                <td>Suppressed</td>
+                <td>Suppressed</td>
+                <td>Strict 2PL with predicate locking or Serializable Snapshot Isolation (SSI).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Read Phenomena Mechanics</h4>
+        <ul>
+          <li><strong>Dirty Read (G1):</strong> Transaction T1 updates an attribute without committing. Transaction T2 reads that updated value. Transaction T1 subsequently encounters an operational error and executes a rollback. As a result, T2 has acted upon state that never permanently existed in the database.</li>
+          <li><strong>Non-Repeatable (Fuzzy) Read (A2):</strong> Transaction T1 reads a specific tuple. Transaction T2 updates or deletes that tuple and successfully commits. Transaction T1 re-reads the identical tuple within its original transaction boundary and observes altered attribute values or finds that the record has disappeared.</li>
+          <li><strong>Phantom Read (A3):</strong> Transaction T1 queries a range of records matching a predicate (for example, <code>SELECT * FROM employees WHERE department_id = 4</code>). Transaction T2 inserts a new record matching that predicate (e.g., an employee assigned to department 4) and commits. When T1 re-runs the identical predicate query, it discovers additional "phantom" records that were not present previously.</li>
+          <li><strong>Write Skew Anomaly:</strong> An anomaly permitted under standard Snapshot Isolation that prevents a system from achieving true serializability. Consider an on-call system requiring at least one doctor on duty at all times. Doctors Alice and Bob are concurrently active. Both request leave at the same moment in separate transactions. Transaction T1 reads the active count (two), determines that taking Alice off call satisfies the invariant (&ge; 1), and updates Alice's status. Concurrently, Transaction T2 reads the same snapshot, sees two active doctors, and marks Bob as inactive. Because their write sets are disjoint (updating different rows), both transactions commit successfully. However, the global integrity invariant is broken, leaving zero doctors on duty.</li>
+        </ul>
+
+        <h3>Concurrency Mechanisms: 2PL vs. MVCC</h3>
+        <p>Databases resolve these anomalies using two distinct concurrency architectures: pessimistic locking and multi-version concurrency control.</p>
+
+        <h4>Two-Phase Locking (2PL)</h4>
+        <p>Under 2PL, transactions acquire locks dynamically before reading or writing data:</p>
+        <ul>
+          <li><strong>Shared Locks (S):</strong> Required for read operations. Multiple concurrent transactions can hold shared locks on the same record.</li>
+          <li><strong>Exclusive Locks (X):</strong> Required for write operations. Only a single transaction can hold an exclusive lock on a record.</li>
+          <li><strong>Growing Phase:</strong> The transaction requests and acquires the locks it needs; it cannot release any locks during this phase.</li>
+          <li><strong>Shrinking Phase:</strong> The transaction releases locks gradually; it cannot acquire new locks during this phase.</li>
+          <li><strong>Strict Two-Phase Locking (SS2PL):</strong> To prevent cascading rollbacks, systems hold all exclusive locks until the transaction issues a final commit or rollback.</li>
+        </ul>
+
+        <p>While 2PL ensures serializability, it introduces performance costs: read locks block writers, and write locks block readers, causing lock contention and potential deadlocks under high concurrency.</p>
+      </section>
+
+      <!-- Page 4 -->
+      <section id="indexing-storage" class="content-section">
+        <h3>Multi-Version Concurrency Control (MVCC)</h3>
+        <p>Modern high-throughput engines (such as PostgreSQL and MySQL InnoDB) avoid read-write lock contention by implementing MVCC. The foundational principle of MVCC is that readers never block writers, and writers never block readers. Rather than mutating records in place, the engine preserves multiple concurrent physical versions of each record.</p>
+        
+        <p>In PostgreSQL, every heap tuple stores internal transaction tracking headers:</p>
+        <ul>
+          <li><code>xmin</code>: The transaction identifier (XID) of the transaction that inserted the tuple.</li>
+          <li><code>xmax</code>: The transaction identifier that updated or deleted the tuple, which remains set to 0 for active, un-mutated records.</li>
+        </ul>
+
+        <p>When an <code>UPDATE</code> executes, PostgreSQL inserts an entirely new physical tuple with its <code>xmin</code> set to the current transaction ID, while updating the old tuple's <code>xmax</code> to that same transaction ID. The engine does not overwrite the original bytes.</p>
+        
+        <p>When a concurrent transaction executes a <code>SELECT</code>, the database builds an in-memory visibility snapshot containing:</p>
+        <ul>
+          <li>A list of active, uncommitted transaction IDs.</li>
+          <li>The lowest active transaction ID (<code>xmin_snapshot</code>).</li>
+          <li>The highest assigned transaction ID (<code>xmax_snapshot</code>).</li>
+        </ul>
+
+        <p>The engine checks each tuple's headers against this snapshot:</p>
+        <ul>
+          <li>If <code>xmin</code> is uncommitted or belongs to a transaction active when the snapshot was taken, the tuple is invisible.</li>
+          <li>If <code>xmin</code> is committed and precedes the snapshot boundary, the tuple is visible.</li>
+          <li>If <code>xmax</code> is set and committed prior to the snapshot, the tuple represents an expired historical state and is skipped.</li>
+        </ul>
+
+        <p>MySQL InnoDB handles versioning differently: it modifies clustered index pages in place and writes the historical record state to a separate undo log tablespace. Each clustered index entry retains hidden columns: <code>DB_TRX_ID</code> (the transaction ID that executed the latest write) and <code>DB_ROLL_PTR</code> (a pointer back to the undo log containing the prior version). If an active query needs an older view of a row, it traverses the <code>DB_ROLL_PTR</code> undo chain backward to reconstruct the historical record on the fly.</p>
+
+        <h2>Database Indexing Mechanics and Physical Storage Engines</h2>
+        <p>System latency differences between volatile RAM and persistent storage disks dictate how storage engines structure index files.</p>
+
+        <h3 id="hardware-reality">The Hardware Reality and the Sequential Scan Bottleneck</h3>
+        <p>Storage hardware latencies vary across several orders of magnitude:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>STORAGE HIERARCHY LAYER</th>
+                <th>ACCESS LATENCY SCALE</th>
+                <th>RELATIVE DELAY FACTOR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CPU L1/L2 Cache</strong></td>
+                <td>0.5 - 4 ns</td>
+                <td>1&times; (Baseline)</td>
+              </tr>
+              <tr>
+                <td><strong>Main Memory (DRAM)</strong></td>
+                <td>50 - 100 ns</td>
+                <td>&sim; 25&times; to 100&times;</td>
+              </tr>
+              <tr>
+                <td><strong>NVMe Solid-State Drive (SSD)</strong></td>
+                <td>10 - 50 &mu;s</td>
+                <td>&sim; 10,000&times; to 50,000&times;</td>
+              </tr>
+              <tr>
+                <td><strong>Magnetic Hard Disk (HDD)</strong></td>
+                <td>5 - 10 ms</td>
+                <td>&sim; 1,000,000&times; to 10,000,000&times;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Storage devices transfer data in fixed-size blocks (pages), typically 4 KB, 8 KB, or 16 KB. When a database executes a query on an unindexed column (such as <code>SELECT * FROM accounts WHERE owner_ssn = '000-12-3456'</code>), it has no way to locate the target record directly on disk. It falls back to a sequential table scan, reading every single disk page allocated to that table into the buffer cache and evaluating each tuple one by one.</p>
+        
+        <p>For an accounts table with 10,000,000 rows at an average tuple size of 200 bytes, the raw dataset occupies roughly 2 GB:</p>
+
+        <div class="formula-card">
+          Total Table Pages = (10,000,000 &times; 200 bytes) / 16,384 bytes/page &approx; 122,070 pages
+        </div>
+
+        <p>Resolving this query via a sequential scan requires loading 122,070 individual pages from disk. This consumes massive I/O bandwidth, evicts useful cached data from the buffer pool, and costs &Omathcal;(N) algorithmic complexity, where N is the number of rows in the table.</p>
+      </section>
+
+      <!-- Page 5 -->
+      <section id="bst-failure" class="content-section">
+        <h3>The Failure of Binary Search Trees on Secondary Storage</h3>
+        <p>To accelerate point lookups, engineers might turn to classic in-memory balanced trees, such as Binary Search Trees (BST), AVL trees, or Red-Black trees. However, these structures perform poorly when stored on secondary storage media.</p>
+        
+        <p>Binary search trees enforce a branching factor of two (B = 2). Every node contains a single key and points to two child subtrees. For a table of N = 1,000,000,000 (one billion) rows, the height h of a balanced binary search tree is:</p>
+
+        <div class="formula-card">
+          h = &lceil; log_2(1,000,000,000) &rceil; &approx; 30 levels
+        </div>
+
+        <p>This 30-level depth creates severe performance bottlenecks on disk:</p>
+        <ul>
+          <li>Binary search tree nodes are allocated dynamically across memory addresses. On disk, traversing to a child node requires reading a new, non-contiguous block. Navigating a 30-level tree requires up to 30 random disk reads. On an HDD averaging 10 ms per random seek, an individual point lookup can take up to 300 ms. On an SSD, 30 random reads generate severe read amplification and saturate drive controllers.</li>
+          <li>Standard database pages are sized between 4 KB and 16 KB. A binary tree node containing one 8-byte integer key and two 8-byte child pointers consumes only 24 bytes of data. Packing a 24-byte node into an isolated 4 KB disk page leaves over 99% of that fetched block completely unused, wasting I/O throughput.</li>
+          <li>Finally, logically adjacent nodes in a binary tree traversal often reside on non-contiguous physical pages. This prevents operating system prefetch buffers from anticipating upcoming reads, eliminating sequential I/O advantages.</li>
+        </ul>
+
+        <h3 id="b-trees">The B-Tree and B+ Tree Data Structures</h3>
+        <p>To address the limitations of binary trees on secondary storage, Rudolf Bayer and Edward M. McCreight introduced the B-Tree in 1970. The B-Tree generalizes the binary tree into a self-balancing, multi-way search tree where the size of each node is tuned to match the host system's physical disk page size (typically 4 KB to 16 KB).</p>
+        
+        <p>In a classic B-Tree, every internal and leaf node stores keys alongside their full data records (or direct record pointers). If an exact-match query targets a key residing near the root of the tree, the search can terminate early without traversing down to the leaf level. However, storing full data records within internal nodes consumes valuable page capacity, which reduces the total number of routing keys that can fit into an internal block. This lowers the node's fan-out and increases the overall tree height.</p>
+        
+        <p>The B+ Tree refines this design by decoupling index routing from data storage:</p>
+        <ul>
+          <li><strong>Internal Routing Nodes:</strong> Internal nodes contain only search keys and child page pointers. They hold no data payloads or row pointers. Their sole responsibility is to direct searches down the tree.</li>
+          <li><strong>Leaf Data Nodes:</strong> Every indexed key is replicated at the leaf tier, where it is stored alongside the full row payload (in a clustered index) or a tuple pointer (in a secondary index).</li>
+          <li><strong>Sequential Leaf Chaining:</strong> All leaf nodes are connected via bidirectional sibling pointers, forming a continuous doubly linked list of ordered pages.</li>
+        </ul>
+
+        <h3 id="b-plus-dominance">Why B+ Trees Dominate Disk Storage Over Binary Search Trees</h3>
+        <p>Database storage engines rely on B+ Trees over Binary Search Trees (and standard B-Trees) because of three architectural advantages:</p>
+
+        <h4>1. Page Sizing and Massive Fan-Out</h4>
+        <p>Because internal B+ Tree nodes store only search keys and page pointers, engines can pack hundreds or thousands of child routes into a single disk page.</p>
+        
+        <p>Consider an indexing layout within a standard 16 KB (16,384-byte) database page:</p>
+        <ul>
+          <li>Key: 8-byte integer (BIGINT).</li>
+          <li>Child Pointer: 8-byte disk block identifier.</li>
+          <li>Page Overhead: 64 bytes for page headers and allocation metadata.</li>
+        </ul>
+
+        <p>Let B represent the branching factor (the total number of child pointers an internal node can hold). A node with B child pointers contains B - 1 keys:</p>
+      </section>
+
+      <!-- Page 6 -->
+      <section class="content-section">
+        <div class="formula-card">
+          Page Capacity Allocation = (B - 1) &times; sizeof(Key) + B &times; sizeof(Pointer) + PageHeader<br>
+          16,384 &ge; (B - 1) &times; 8 + B &times; 8 + 64<br>
+          16,384 &ge; 16B + 56 &implies; 16B &le; 16,328 &implies; B &approx; 1,020
+        </div>
+
+        <p>Sizing internal nodes to match 16 KB pages yields a fan-out of more than 1,000 children per node.</p>
+        
+        <p>If a classic B-Tree instead stores 8-byte record pointers alongside each key in its internal nodes, the entry size grows from 16 bytes to 24 bytes. This drops the branching factor from B &approx; 1,020 to B &approx; 679—a greater than 30% reduction in routing capacity that directly increases tree depth.</p>
+
+        <h4>2. Extremely Shallow Tree Height</h4>
+        <p>This high fan-out keeps the B+ Tree exceptionally shallow, even when indexing billions of rows. The maximum height h required to index N records given a fan-out B is:</p>
+
+        <div class="formula-card">
+          h &approx; &lceil; log_B N &rceil;
+        </div>
+
+        <p>Using a conservative average fan-out of B = 500 to account for partially filled pages during operational splits:</p>
+        <ul>
+          <li>For N = 10,000,000 (10 million rows):
+            <div class="formula-card" style="margin: 0.5rem 0;">h &approx; &lceil; log_500(10,000,000) &rceil; = &lceil; 2.59 &rceil; = 3 levels</div>
+          </li>
+          <li>For N = 1,000,000,000 (1 billion rows):
+            <div class="formula-card" style="margin: 0.5rem 0;">h &approx; &lceil; log_500(1,000,000,000) &rceil; = &lceil; 3.33 &rceil; = 4 levels</div>
+          </li>
+        </ul>
+
+        <p>Because the tree is shallow, the root node (Level 1) and most Level 2 internal nodes reside permanently pinned in the database's in-memory buffer pool. Resolving a point query among one billion records typically requires traversing down three or four levels, with the first two resolved directly from RAM. The engine can locate any record with only one or two physical disk I/O operations, bringing lookup times down to sub-millisecond ranges.</p>
+
+        <h4>3. Range Queries and Sequential Leaf Linking</h4>
+        <p>Relational queries frequently retrieve ordered ranges of records rather than isolated keys (such as <code>WHERE created_at BETWEEN '2026-01-01' AND '2026-01-31'</code> or queries driving <code>ORDER BY</code> and <code>GROUP BY</code> operations).</p>
+        
+        <p>In a classic B-Tree, keys are scattered across all levels of the tree. Executing a range query requires an in-order tree traversal: descending to a leaf, reading a key, climbing back to the parent, descending into the sibling branch, and repeating this traversal across disparate memory and disk spaces. This pattern causes frequent random page faults and destroys CPU cache locality.</p>
+        
+        <p>In a B+ Tree, every indexed key exists in the leaf tier, and all leaves are linked sequentially via a doubly linked list. Executing a range query requires only a single &Omathcal;(log_B N) point search to locate the leaf containing the range's lower bound. Once that leaf is loaded, the engine simply walks the linked list horizontally until it hits the upper bound.</p>
+        
+        <p>Because leaf pages are laid out contiguously or in near-contiguous extent groups on disk, the storage controller can trigger hardware-level read-ahead prefetching, streaming the requested range into memory via sequential I/O patterns.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>ATTRIBUTE</th>
+                <th>BINARY SEARCH TREE (BST)</th>
+                <th>CLASSIC B-TREE</th>
+                <th>B+ TREE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Branching Factor (B)</strong></td>
+                <td>2</td>
+                <td>Moderate (e.g., 200 - 600)</td>
+                <td>High (e.g., 500 - 1,500+)</td>
+              </tr>
+              <tr>
+                <td><strong>Height for 10^9 Elements</strong></td>
+                <td>&approx; 30 levels</td>
+                <td>&approx; 4 levels</td>
+                <td>&approx; 3 to 4 levels</td>
+              </tr>
+              <tr>
+                <td><strong>Page-Alignment Efficiency</strong></td>
+                <td>Poor (high page fragmentation)</td>
+                <td>Moderate (nodes match pages, but keys take space)</td>
+                <td>Optimal (internal nodes hold only routing keys)</td>
+              </tr>
+              <tr>
+                <td><strong>Early Termination</strong></td>
+                <td>Supported on match</td>
+                <td>Supported on match</td>
+                <td>Unsupported (all lookups navigate to leaf)</td>
+              </tr>
+              <tr>
+                <td><strong>Range Query Complexity</strong></td>
+                <td>&Omathcal;(K log_2 N) tree traversals</td>
+                <td>&Omathcal;(K log_B N) tree traversals</td>
+                <td>&Omathcal;(log_B N + K) sequential leaf walk</td>
+              </tr>
+              <tr>
+                <td><strong>Optimal Storage Medium</strong></td>
+                <td>Main Memory (DRAM)</td>
+                <td>Special file systems / caches</td>
+                <td>Persistent block storage (SSD/HDD)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Page 7 -->
+      <section id="transaction-code" class="content-section">
+        <h2>Practical Transaction Implementation Across Enterprise Languages</h2>
+        <p>Production database drivers provide explicit control over transaction boundaries, isolation levels, and error-handling routines. The following implementations illustrate connection pooling, manual commit demarcation, and rollback error-handling across Python, Java, and TypeScript.</p>
+
+        <h3 id="python-trans">Python Transaction Implementation (Async Engine Pattern)</h3>
+        <p>Modern asynchronous Python architectures use low-level asynchronous drivers like <code>asyncpg</code> or <code>psycopg</code> to manage connection lifecycles and transactions without blocking the event loop. The following example demonstrates manual transaction control, parameterized queries, savepoint rollbacks, and connection release using modern <code>asyncio</code>:</p>
+
+        <!-- Page 8 & 9 code -->
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (asyncpg Funds Transfer)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import asyncio
+import logging
+from typing import Optional
+import asyncpg
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+async def execute_funds_transfer(
+    pool: asyncpg.Pool,
+    sender_id: int,
+    receiver_id: int,
+    amount: float
+) -> bool:
+    # Executes an atomic balance transfer between two accounts under
+    # READ COMMITTED isolation with explicit exception handling.
+    conn: Optional[asyncpg.Connection] = None
+    try:
+        # Acquire dedicated physical connection from pool
+        conn = await pool.acquire()
+        # Open transaction block (issues BEGIN under the hood)
+        async with conn.transaction(isolation='read_committed'):
+            # Step 1: Check and debit sender account
+            sender_balance = await conn.fetchval(
+                "SELECT balance FROM accounts WHERE id = $1 FOR UPDATE",
+                sender_id
+            )
+            if sender_balance is None:
+                raise ValueError(f"Sender account {sender_id} does not exist.")
+            if sender_balance < amount:
+                raise ValueError(f"Insufficient funds: Balance {sender_balance} < {amount}")
+
+            await conn.execute(
+                "UPDATE accounts SET balance = balance - $1 WHERE id = $2",
+                amount, sender_id
+            )
+
+            # Step 2: Establish savepoint for conditional operations
+            async with conn.transaction():
+                # Step 3: Credit receiver account
+                receiver_exists = await conn.fetchval(
+                    "SELECT 1 FROM accounts WHERE id = $1 FOR UPDATE",
+                    receiver_id
+                )
+                if not receiver_exists:
+                    raise ValueError(f"Receiver account {receiver_id} does not exist.")
+
+                await conn.execute(
+                    "UPDATE accounts SET balance = balance + $1 WHERE id = $2",
+                    amount, receiver_id
+                )
+
+                # Record audit log entry
+                await conn.execute(
+                    "INSERT INTO audit_logs (sender_id, receiver_id, transferred_amount) VALUES ($1, $2, $3)",
+                    sender_id, receiver_id, amount
+                )
+
+            # Context manager exits successfully -> issues COMMIT
+            logger.info("Funds transfer committed successfully.")
+            return True
+    except (asyncpg.PostgresError, ValueError) as exc:
+        # Context manager automatically executes ROLLBACK on raised exception
+        logger.error("Transaction aborted and rolled back. Cause: %s", exc)
+        return False
+    finally:
+        if conn is not None:
+            # Always return physical connection back to connection pool
+            await pool.release(conn)</code></pre>
+        </div>
+
+        <h3 id="java-trans">Java Transaction Implementation (Enterprise JDBC Pattern)</h3>
+        <p>Java applications managing relational databases without an abstraction framework like Spring rely directly on the Java Database Connectivity (JDBC) API. By default, JDBC runs in auto-commit mode. To construct a multi-statement transaction, applications must disable auto-commit, execute operations using <code>PreparedStatement</code>, explicitly call <code>commit()</code>, and handle errors with <code>rollback()</code>.</p>
+
+        <!-- Page 10 & 11 code -->
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (AccountService.java JDBC)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>package com.engine.database;
+
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Savepoint;
+import javax.sql.DataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public final class AccountService {
+    private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
+    private final DataSource dataSource;
+
+    public AccountService(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public boolean transferFunds(long senderId, long receiverId, BigDecimal amount) {
+        String selectForUpdate = "SELECT balance FROM accounts WHERE id = ? FOR UPDATE";
+        String debitQuery = "UPDATE accounts SET balance = balance - ? WHERE id = ?";
+        String creditQuery = "UPDATE accounts SET balance = balance + ? WHERE id = ?";
+
+        Connection conn = null;
+        Savepoint savepoint = null;
+
+        try {
+            conn = dataSource.getConnection();
+            // Step 1: Demarcate transaction boundary (disable auto-commit)
+            conn.setAutoCommit(false);
+            conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+
+            // Step 2: Validate sender balance with row-level lock
+            try (PreparedStatement checkStmt = conn.prepareStatement(selectForUpdate)) {
+                checkStmt.setLong(1, senderId);
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (!rs.next()) {
+                        throw new SQLException("Sender account not found: " + senderId);
+                    }
+                    BigDecimal currentBalance = rs.getBigDecimal("balance");
+                    if (currentBalance.compareTo(amount) < 0) {
+                        throw new SQLException("Insufficient funds: " + currentBalance);
+                    }
+                }
+            }
+
+            // Step 3: Debit sender
+            try (PreparedStatement debitStmt = conn.prepareStatement(debitQuery)) {
+                debitStmt.setBigDecimal(1, amount);
+                debitStmt.setLong(2, senderId);
+                debitStmt.executeUpdate();
+            }
+
+            // Step 4: Create intermediate savepoint before secondary operations
+            savepoint = conn.setSavepoint("Debited_Savepoint");
+
+            // Step 5: Credit receiver
+            try (PreparedStatement creditStmt = conn.prepareStatement(creditQuery)) {
+                creditStmt.setBigDecimal(1, amount);
+                creditStmt.setLong(2, receiverId);
+                int rowsUpdated = creditStmt.executeUpdate();
+                if (rowsUpdated == 0) {
+                    throw new SQLException("Receiver account not found: " + receiverId);
+                }
+            }
+
+            // Step 6: Explicit commit makes all changes permanent
+            conn.commit();
+            logger.info("Transaction committed successfully for sender: {}", senderId);
+            return true;
+        } catch (SQLException e) {
+            logger.error("Transaction failed. Initiating rollback sequence.", e);
+            if (conn != null) {
+                try {
+                    // Rollback entire unit of work
+                    conn.rollback();
+                    logger.warn("Transaction rolled back successfully.");
+                } catch (SQLException rollbackEx) {
+                    logger.error("Critical failure during rollback execution.", rollbackEx);
+                }
+            }
+            return false;
+        } finally {
+            if (conn != null) {
+                try {
+                    // Reset auto-commit state before returning to pool
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException closeEx) {
+                    logger.error("Error returning connection to pool.", closeEx);
+                }
+            }
+        }
+    }
+}</code></pre>
+        </div>
+
+        <h3 id="ts-trans">TypeScript / Node.js Transaction Implementation</h3>
+        <p>In server-side Node.js environments, applications often manage PostgreSQL transactions using the <code>pg</code> client library. The implementation pattern requires acquiring a dedicated client from the pool, issuing explicit SQL commands (<code>BEGIN</code>, <code>COMMIT</code>, <code>ROLLBACK</code>), and cleaning up the client in a <code>finally</code> block.</p>
+
+        <!-- Page 12 & 13 code -->
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TypeScript (BankTransferManager pg)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>import { Pool, PoolClient } from 'pg';
+
+export interface TransferResult {
+    success: boolean;
+    error?: string;
+}
+
+export class BankTransferManager {
+    private pool: Pool;
+
+    constructor(pool: Pool) {
+        this.pool = pool;
+    }
+
+    public async executeTransfer(
+        senderId: number,
+        receiverId: number,
+        amount: number
+    ): Promise&lt;TransferResult&gt; {
+        // Acquire single isolated client from pool
+        const client: PoolClient = await this.pool.connect();
+        try {
+            // Explicitly begin the database transaction
+            await client.query('BEGIN TRANSACTION ISOLATION LEVEL READ COMMITTED;');
+
+            // Validate sender balance with exclusive lock
+            const checkQuery = `
+                SELECT balance FROM accounts 
+                WHERE id = $1 FOR UPDATE;
+            `;
+            const checkResult = await client.query(checkQuery, [senderId]);
+            if (checkResult.rowCount === 0) {
+                throw new Error(`Sender account ${senderId} not found.`);
+            }
+
+            const currentBalance = parseFloat(checkResult.rows[0].balance);
+            if (currentBalance < amount) {
+                throw new Error(`Insufficient funds: ${currentBalance} < ${amount}`);
+            }
+
+            // Debit sender
+            const debitQuery = `
+                UPDATE accounts 
+                SET balance = balance - $1 
+                WHERE id = $2;
+            `;
+            await client.query(debitQuery, [amount, senderId]);
+
+            // Credit receiver
+            const creditQuery = `
+                UPDATE accounts 
+                SET balance = balance + $1 
+                WHERE id = $2;
+            `;
+            const creditResult = await client.query(creditQuery, [amount, receiverId]);
+            if (creditResult.rowCount === 0) {
+                throw new Error(`Receiver account ${receiverId} not found.`);
+            }
+
+            // Persist the transaction permanently
+            await client.query('COMMIT;');
+            return { success: true };
+        } catch (error) {
+            // Roll back all pending mutations on error
+            try {
+                await client.query('ROLLBACK;');
+            } catch (rollbackError) {
+                console.error('Failure during rollback execution:', rollbackError);
+            }
+            return {
+                success: false,
+                error: error instanceof Error ? error.message : 'Unknown database error'
+            };
+        } finally {
+            // Always release client back to pool
+            client.release();
+        }
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 13 continued & Page 14 -->
+      <section id="nosql-paradigms" class="content-section">
+        <h2>NoSQL Paradigms and Non-Relational Storage Architectures</h2>
+        <p>While relational databases provide strong consistency, referential integrity, and expressive SQL queries, workloads characterized by high write ingestion, semi-structured schemas, sub-millisecond latency budgets, or complex graph traversals often benefit from non-relational storage engines.</p>
+
+        <h3 id="redis-arch">Key-Value Stores: Redis Architecture</h3>
+        <p>Redis (Remote Dictionary Server) is an open-source, in-memory data structure store that delivers sub-millisecond operations by retaining its entire working dataset in RAM.</p>
+        
+        <p>Redis processes incoming commands on a single execution thread using non-blocking I/O multiplexing primitives (such as Linux <code>epoll</code> or macOS <code>kqueue</code>). This single-threaded model eliminates CPU thread context-switching overhead, removes the need for internal locking primitives on data structures, prevents multi-threaded deadlocks, and guarantees that every command executes atomically relative to other client requests.</p>
+        
+        <p>Redis wraps raw values inside a generic <code>redisObject</code> header that maps logical types to optimized physical C representations based on payload size:</p>
+        <ul>
+          <li><strong>Simple Dynamic Strings (SDS):</strong> Instead of bare null-terminated C string buffers (<code>char*</code>), Redis wraps strings in an SDS struct containing the string buffer alongside explicit metadata: byte length (<code>len</code>), remaining capacity (<code>alloc</code>), and operational flags. This architecture provides &Omathcal;(1) time complexity for length queries, prevents buffer overflows, and provides binary safety for arbitrary byte streams.</li>
+          <li><strong>Dictionaries (Dict):</strong> Redis implements hash tables using two internal arrays (<code>ht[0]</code> and <code>ht[1]</code>). When the ratio of entries to buckets exceeds configured thresholds, Redis resizes the dictionary using progressive rehashing. Instead of migrating millions of keys in a single blocking pass, it migrates a small batch of bucket entries alongside each incoming command, distributing the rebalancing cost over regular runtime traffic.</li>
+          <li><strong>Skip Lists (Skiplist):</strong> Redis Sorted Sets (ZSets) use a combination of a hash table (for &Omathcal;(1) element score lookups) and a Skip List (to keep elements ordered by score). Skip Lists are probabilistic, multi-level linked lists that offer &Omathcal;(log N) insertion, search, and deletion without requiring the complex rotational balancing of Red-Black or AVL trees.</li>
+          <li><strong>Ziplists and Quicklists:</strong> For small Lists, Hashes, and Sorted Sets, traditional linked lists waste memory because node pointers (<code>prev</code> and <code>next</code>) consume 16 bytes of metadata for even a 1-byte value. Redis optimizes this using a Ziplist—a contiguous block of memory where elements are packed sequentially with variable-length length prefixes, improving CPU cache locality and eliminating pointer overhead. Modern Redis implementations wrap these into a Quicklist: a doubly linked list whose individual nodes are compact Ziplists.</li>
+        </ul>
+
+        <p>To maintain persistence across system restarts without degrading memory performance, Redis provides two options: point-in-time binary snapshots (RDB) generated in the background via Copy-on-Write <code>fork()</code> child processes, and an append-only log (AOF) that records every write command to disk with configurable <code>fsync</code> policies (<code>always</code>, <code>everysec</code>, or <code>no</code>).</p>
+
+        <h3 id="mongo-arch">Document Stores: MongoDB Architecture</h3>
+        <p>MongoDB models data as semi-structured documents, organizing them into collections rather than rigid relational tables.</p>
+        
+        <p>MongoDB serializes document objects into BSON (Binary JSON). BSON extends plain JSON by adding explicit binary type tags (such as Date, int32, int64, ObjectId, and raw byte arrays) and prefixing fields with explicit byte lengths. These length prefixes allow the query engine to jump across unindexed fields without scanning every byte of a document.</p>
+        
+        <p>Document storage engines rely on two fundamental modeling strategies:</p>
+        <ul>
+          <li><strong>Embedding:</strong> Nested child structures reside directly inside the parent document, keeping related data co-located within the same contiguous memory and disk space. This design eliminates runtime multi-table joins, allowing single-point read operations to retrieve complete composite aggregates in a single disk read.</li>
+          <li><strong>Referencing:</strong> The document stores an identifier referencing a record in a separate collection. This pattern mirrors relational foreign keys, helping prevent unbounded document growth when modeling many-to-many relationships.</li>
+        </ul>
+
+        <p>MongoDB relies on the WiredTiger storage engine to manage memory pages and disk I/O. WiredTiger maintains an in-memory cache (typically 50% of total physical RAM minus 1 GB) where documents reside uncompressed to minimize CPU evaluation costs. When dirty pages are evicted from the cache to persistent disk storage, WiredTiger compresses them using Snappy or zlib, reducing the engine's physical storage footprint. Crash durability is ensured through a combination of write-ahead logging (the journal) and periodic checkpoints (defaulting to once every 60 seconds), which flush consistent snapshots of modified cache pages to disk.</p>
+
+        <h3 id="cassandra-arch">Column-Family Stores: Apache Cassandra</h3>
+        <p>Apache Cassandra is a distributed, wide-column database engine designed to handle high-volume write workloads with linear horizontal scalability and no single point of failure.</p>
+        
+        <p>Relational engines using B+ Trees perform updates in place by navigating to specific leaf pages on disk and modifying bytes. This design introduces random disk I/O, which can saturate write channels under heavy ingestion. Cassandra avoids in-place updates entirely, using a Log-Structured Merge-Tree (LSM-Tree) engine that transforms random mutations into sequential writes.</p>
+        
+        <p>Cassandra's write pipeline proceeds through four main stages:</p>
+        <ol>
+          <li><strong>CommitLog Append:</strong> When an INSERT or UPDATE arrives, the node appends the mutation sequentially to the on-disk CommitLog. This append-only operation avoids random disk seeks, allowing the engine to ensure crash recovery with minimal latency.</li>
+          <li><strong>Memtable Ingestion:</strong> Once recorded in the CommitLog, the data is written to the Memtable—an in-memory write buffer backed by a sorted structure like a <code>ConcurrentSkipListMap</code>.</li>
+          <li><strong>Client Acknowledgment:</strong> As soon as the mutation is safely buffered in both the CommitLog and the Memtable, the node acknowledges the write to the client.</li>
+          <li><strong>SSTable Flushing:</strong> When the Memtable reaches its configured size threshold (typically between 256 MB and 1 GB), it flushes sequentially to disk as an immutable SSTable (Sorted String Table). Because the in-memory Memtable is already sorted by partition key, the flush operation writes the file sequentially without requiring an on-disk sort.</li>
+        </ol>
+
+        <p>Once written, SSTables are completely immutable. Updates and deletes do not overwrite data in place; deletes simply write an append-only marker called a tombstone. Because mutations accumulate across multiple immutable SSTables, reading a record can require checking multiple files on disk.</p>
+        
+        <p>Cassandra optimizes the read path using three mechanisms:</p>
+        <ul>
+          <li><strong>Bloom Filters:</strong> Each SSTable carries an in-memory Bloom filter that checks whether a partition key exists in the file. If the filter reports that a key is absent, the engine skips the SSTable entirely, avoiding an unnecessary disk read.</li>
+          <li><strong>Partition Summary &amp; Index:</strong> If the Bloom filter reports a match, the engine consults an in-memory partition summary to locate the matching page within the on-disk partition index, which points directly to the byte offset of the record within the primary data file.</li>
+          <li><strong>Compaction:</strong> To resolve read amplification (where queries must consult many SSTable files), background compaction executes a multi-way merge-sort across existing SSTables, combines the latest cell versions based on their timestamps, purges expired tombstones, and outputs a consolidated new SSTable file.</li>
+        </ul>
+
+        <h3 id="neo4j-arch">Graph Databases: Neo4j and Index-Free Adjacency</h3>
+        <p>Relational databases model entity relationships using foreign key references, reconstructing connections at query time by joining tables across common columns. When traversing relationships across multiple hops (such as finding friends-of-friends or tracking fraud rings across transaction networks), an RDBMS must execute multiple cascading joins (T1 &#8904; T2 &#8904; T3 &hellip;). The processing cost of these joins scales with the total number of records in the intermediate tables, leading to exponential latency degradation on deep traversals.</p>
+        
+        <p>Neo4j avoids relational join tables using Index-Free Adjacency (IFA). Instead of maintaining a separate global index to match relationships, each node physically stores direct disk pointers (record IDs) to its adjacent relationship records, and each relationship record points directly to its start and end nodes.</p>
+        
+        <p>Neo4j structures its primary store files into fixed-size binary records:</p>
+        <ul>
+          <li><strong>Node Store (<code>neostore.nodestore.db</code>):</strong> Nodes are stored as fixed-size records, traditionally 15 bytes in size. This includes an in-use flag (1 byte), the ID of the first relationship in the node's relationship chain (4 bytes), the ID of the first property record in the property store (4 bytes), label allocations (5 bytes), and an operational flag (1 byte).</li>
+          <li><strong>Relationship Store (<code>neostore.relationshipstore.db</code>):</strong> Relationships are stored as fixed-size records, traditionally 34 bytes in size. This includes start and end node IDs (4 bytes each), a pointer to relationship type metadata (4 bytes), pointers to the previous and next relationship records for both the start and end nodes (16 bytes total, forming two interleaved doubly linked lists), a pointer to the first property record (4 bytes), and directional flags (2 bytes).</li>
+        </ul>
+
+        <p>Because these records are fixed in size, calculating their exact physical location on disk does not require an index search. The engine computes the target byte offset directly via arithmetic:</p>
+
+        <div class="formula-card">
+          Physical Byte Offset = Record ID &times; Fixed Record Size
+        </div>
+
+        <p>Finding node record ID 2,000 in a 15-byte node store requires reading directly from file offset 2,000 &times; 15 = 30,000.</p>
+        
+        <p>Traversing a relationship in Neo4j is an &Omathcal;(1) pointer dereference. In an RDBMS, the cost of traversing a multi-hop path scales with the total number of records in the database (&Omathcal;(log N) per step). With Index-Free Adjacency, Neo4j's traversal cost depends only on the size of the local subgraph being explored:</p>
+
+        <div class="formula-card">
+          Traversal Complexity &approx; &Omathcal;(k^d)
+        </div>
+
+        <p>where k represents the average node degree (number of connected edges) and d represents the traversal depth. Query latency remains consistent whether the wider database contains ten thousand nodes or ten billion nodes.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>PARADIGM</th>
+                <th>EXEMPLAR ENGINE</th>
+                <th>CORE DATA STRUCTURE</th>
+                <th>OPTIMAL WORKLOAD</th>
+                <th>PRIMARY TRADE-OFF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Relational (RDBMS)</strong></td>
+                <td>PostgreSQL / MySQL</td>
+                <td>B+ Tree, Heap Pages, WAL</td>
+                <td>Structured schemas, strict ACID, multi-table joins</td>
+                <td>In-place write amplification; high join latency on deep recursive traversals</td>
+              </tr>
+              <tr>
+                <td><strong>In-Memory Key-Value</strong></td>
+                <td>Redis</td>
+                <td>Dict, SDS, Skiplist, Quicklist</td>
+                <td>Caching, session stores, fast queues, real-time counters</td>
+                <td>Constrained by physical RAM; single thread caps single-core CPU throughput</td>
+              </tr>
+              <tr>
+                <td><strong>Document Store</strong></td>
+                <td>MongoDB</td>
+                <td>BSON, WiredTiger B-Trees, Cache Checkpoints</td>
+                <td>Hierarchical aggregates, product catalogs, polymorphic records</td>
+                <td>High document growth causes record relocations; joins across collections are inefficient</td>
+              </tr>
+              <tr>
+                <td><strong>Wide-Column Store</strong></td>
+                <td>Apache Cassandra</td>
+                <td>LSM-Tree: CommitLog, Memtable, SSTables</td>
+                <td>Write-heavy telemetry, time-series data, multi-datacenter replication</td>
+                <td>Read amplification under compaction lag; inflexible ad-hoc queries without partition keys</td>
+              </tr>
+              <tr>
+                <td><strong>Native Graph Engine</strong></td>
+                <td>Neo4j</td>
+                <td>Index-Free Adjacency, Fixed-Size Binary Records</td>
+                <td>Social networks, fraud detection, recommendation engines</td>
+                <td>Memory-intensive record caching; sharding across distributed clusters is complex</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Page 16 -->
+      <section id="systems-synthesis" class="content-section">
+        <h2>Systems Synthesis: Database Selection and Architecture</h2>
+        <p>Selecting a database storage engine requires matching an application's operational access patterns to the physical mechanisms of the underlying data structures. Storage engines are designed around distinct operational trade-offs rather than universal performance advantages:</p>
+        
+        <ul>
+          <li><strong>Relational B+ Tree engines (such as PostgreSQL and MySQL):</strong> Remain the baseline for transactional business systems that demand strict entity consistency, complex relational constraints, low-latency point reads, and ordered range scans. However, because they perform in-place updates on fixed-size disk blocks, they can experience I/O bottlenecks under heavy write ingestion.</li>
+          <li><strong>In-memory key-value engines (such as Redis):</strong> Are ideal when access latencies must remain under a millisecond and the working dataset fits within system RAM. While their single-threaded event loop eliminates lock contention and context-switching overhead, the high cost of memory means they are most often deployed as auxiliary caching or coordination layers alongside persistent disk stores.</li>
+          <li><strong>Document engines (such as MongoDB):</strong> Excel when data naturally forms hierarchical domain aggregates, allowing related attributes to be fetched together in a single read without multi-table joins. However, embedding data requires careful schema design to avoid unbounded document growth and manage update amplification.</li>
+          <li><strong>Log-Structured Merge-Tree engines (such as Apache Cassandra):</strong> Are built for write-heavy, append-only workloads, including distributed event streams and time-series metrics. They maximize write ingestion by converting random updates into sequential disk operations, using background compaction, Bloom filters, and partition indexes to manage the resulting read amplification.</li>
+          <li><strong>Native graph engines (such as Neo4j):</strong> Are necessary when entity connections are central to the query workload. By using index-free adjacency and fixed-size record files, they compute multi-hop traversals via constant-time pointer arithmetic, avoiding the join-table performance cliffs common in relational databases.</li>
+        </ul>
+
+        <p>Modern system architectures rarely rely on a single database paradigm. Instead, they use polyglot persistence, pairing complementary storage engines to handle different parts of the application workload. Understanding the core trade-offs between B+ Trees, LSM-Trees, in-memory structures, and index-free graph stores allows engineers to match query semantics to hardware realities, building scalable, durable, and high-performance backend systems.</p>
+
+        <div class="page-nav-footer">
+          <a href="networking.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Computer Networking &amp; Wire Protocols</span>
+          </a>
+          <a href="programming-languages.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Programming Languages &amp; Runtimes</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

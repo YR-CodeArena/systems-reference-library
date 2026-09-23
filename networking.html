@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Computer Networking & Distributed Wire Protocols | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (19 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#network-layering">Network Layering Architecture</a></li>
+        <li class="depth-2"><a href="#osi-vs-tcpip">OSI vs. 4-Layer TCP/IP Stack</a></li>
+        <li class="depth-2"><a href="#encapsulation">Encapsulation & Decapsulation</a></li>
+        <li><a href="#transport-protocols">Transport Layer: TCP vs. UDP</a></li>
+        <li class="depth-2"><a href="#tcp-mechanics">TCP Mechanics & Handshakes</a></li>
+        <li class="depth-2"><a href="#flow-control">Flow Control: Sliding Window</a></li>
+        <li class="depth-2"><a href="#congestion-control">Congestion Control Algorithms</a></li>
+        <li class="depth-2"><a href="#udp-mechanics">UDP Architecture & Mechanics</a></li>
+        <li class="depth-2"><a href="#transport-code">Transport Implementations</a></li>
+        <li><a href="#application-protocols">Application Protocols & Web</a></li>
+        <li class="depth-2"><a href="#http11">HTTP/1.1 & HoL Blocking</a></li>
+        <li class="depth-2"><a href="#http2">HTTP/2: Framing & HPACK</a></li>
+        <li class="depth-2"><a href="#http3-quic">HTTP/3 and QUIC over UDP</a></li>
+        <li><a href="#ipc-rpc">IPC & Remote Procedure Calls</a></li>
+        <li class="depth-2"><a href="#local-ipc">Local Single-Host IPC</a></li>
+        <li class="depth-2"><a href="#rest-architectures">RESTful Architectures</a></li>
+        <li class="depth-2"><a href="#rpc-architecture">RPC Execution Lifecycle</a></li>
+        <li class="depth-2"><a href="#grpc-protobuf">gRPC & Protobuf Mechanics</a></li>
+        <li class="depth-2"><a href="#grpc-patterns">Four gRPC Patterns</a></li>
+        <li class="depth-2"><a href="#grpc-implementations">gRPC Implementations</a></li>
+        <li><a href="#architectural-synthesis">Architectural Synthesis</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 1 &bull; 19 Pages</span>
+        </div>
+        <h1 class="doc-title">Computer Networking and Distributed Wire Protocols</h1>
+        <p class="doc-subtitle">Architectural Reference Guide: Layering Mechanics, Wire Protocols, and High-Performance Communication</p>
+      </div>
+
+      <!-- Page 1 -->
+      <section id="network-layering" class="content-section">
+        <h2>Network Layering Architecture and Packet Transformation Mechanics</h2>
+
+        <h3 id="osi-vs-tcpip">Conceptual Foundations: The 7-Layer OSI Model vs. The Practical 4-Layer TCP/IP Stack</h3>
+        <p>Modern network engineering relies on layered abstractions to isolate physical transmission constraints from application logic. An intuitive analogy is an international diplomatic postal exchange. When an ambassador drafts a message, the text is authored in a specific language to convey meaning, representing the application tier.</p>
+        
+        <p>The consular staff may translate the message into an agreed-upon diplomatic cipher or compressed script, functioning as the presentation tier, and attach tracking credentials that correlate the transmission with an ongoing diplomatic exchange, representing session management.</p>
+        
+        <p>Consular couriers then divide the dispatch into standardized, sequentially numbered envelopes, recording dispatch receipts to track potential loss, which corresponds to the transport tier. Regional dispatchers append national routing coordinates to guide the dispatch through intermediate transit nations, embodying the internetwork routing tier.</p>
+        
+        <p>Local logistics carriers enclose the envelopes in weather-resistant pouches tagged for specific physical transfer modes, such as rail or air freight, functioning as the data link tier, until physical locomotives or aircraft physically transport the medium over geographic terrain, representing the physical tier.</p>
+        
+        <p>The Open Systems Interconnection (OSI) 7-layer model, formulated by the International Organization for Standardization (ISO), was conceived as a formal architectural blueprint. Concurrently, the practical requirements of the Defense Advanced Research Projects Agency (DARPA) yielded the 4-layer TCP/IP Internet protocol suite, which forms the operational framework of global internetworking.</p>
+        
+        <p>The TCP/IP stack consolidated the upper three OSI tiers—Application, Presentation, and Session—into a unified Application Layer, shifting syntax translation, session management, and encryption entirely into user-space runtimes. Similarly, the OSI Data Link and Physical layers were consolidated into the Link (or Network Access) Layer, encapsulating device drivers, physical network interface cards (NICs), and medium access controls.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>OSI LAYER</th>
+                <th>FUNCTIONAL RESPONSIBILITY</th>
+                <th>TCP/IP LAYER</th>
+                <th>PRACTICAL PROTOCOLS</th>
+                <th>OPERATING BOUNDARY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>7. Application</strong></td>
+                <td>Human-computer interaction and application-specific protocol semantics</td>
+                <td>Application</td>
+                <td>HTTP/1.1, HTTP/2, DNS, gRPC, SSH, SMTP</td>
+                <td>User Space Runtime</td>
+              </tr>
+              <tr>
+                <td><strong>6. Presentation</strong></td>
+                <td>Data serialization, character encoding, encryption, and payload compression</td>
+                <td>Application</td>
+                <td>TLS 1.3, Protocol Buffers, JSON, ASCII</td>
+                <td>User Space Runtime</td>
+              </tr>
+              <tr>
+                <td><strong>5. Session</strong></td>
+                <td>Stateful connection coordination, checkpointing, and authentication tokens</td>
+                <td>Application</td>
+                <td>SOCKS5, RPC Session Handlers, NetBIOS</td>
+                <td>User Space Runtime</td>
+              </tr>
+              <tr>
+                <td><strong>4. Transport</strong></td>
+                <td>End-to-end host process-to-process delivery, flow control, and reliability</td>
+                <td>Transport</td>
+                <td>TCP, UDP, QUIC</td>
+                <td>Kernel Network Subsystem / User Space (QUIC)</td>
+              </tr>
+              <tr>
+                <td><strong>3. Network</strong></td>
+                <td>Logical host-to-host packet routing across heterogeneous networks</td>
+                <td>Internet</td>
+                <td>IPv4, IPv6, ICMP, BGP, OSPF</td>
+                <td>Kernel Network Subsystem</td>
+              </tr>
+              <tr>
+                <td><strong>2. Data Link</strong></td>
+                <td>Frame transmission between adjacent network nodes over a shared medium</td>
+                <td>Network Access</td>
+                <td>Ethernet (IEEE 802.3), Wi-Fi (802.11), ARP</td>
+                <td>Kernel Driver / Network Interface Card</td>
+              </tr>
+              <tr>
+                <td><strong>1. Physical</strong></td>
+                <td>Unstructured raw bit-stream transmission across physical hardware mediums</td>
+                <td>Network Access</td>
+                <td>1000BASE-T Copper, Single-Mode Optical Fiber</td>
+                <td>Physical Transceiver / Physical Medium</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Page 2 -->
+      <section id="encapsulation" class="content-section">
+        <p>The theoretical OSI model strictly decoupled presentation and session management from application semantics. However, the commercial Internet adopted TCP/IP because it eliminated redundant processing boundaries, avoided duplicate state synchronization across intermediate layers, and allowed user-space applications to manage end-to-end reliability semantics directly.</p>
+
+        <h3>Encapsulation and Decapsulation Mechanics</h3>
+        <p>When an application issues a network transmission, the data undergoes encapsulation as it descends through the system architecture. At each boundary, the operating system kernel or network interface wraps the payload in an additional protocol header, producing a specialized Protocol Data Unit (PDU).</p>
+        
+        <p>During transmission, an application process writes raw bytes to an active socket descriptor. The operating system kernel intercepts this user-space buffer and allocates a kernel packet tracking structure, such as <code>struct sk_buff</code> in the Linux kernel.</p>
+        
+        <p>The transport subsystem prepends a TCP or UDP header containing process-level port addresses, transmission counters, and window parameters, constructing a Segment (for TCP) or a Datagram (for UDP). This unit moves to the Internet subsystem, which prepends an IP header containing source and destination network addresses, Time-to-Live (TTL) decrements, and routing metadata, creating a Packet. The packet then reaches the network device driver, which prepends a Media Access Control (MAC) framing header and appends a Frame Check Sequence (FCS) cyclic redundancy check (CRC-32), producing an Ethernet Frame.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>PROTOCOL DATA UNIT (PDU)</th>
+                <th>LAYER ORIGIN</th>
+                <th>FRAMING HEADERS AND TRAILERS</th>
+                <th>NOMINAL OVERHEAD</th>
+                <th>CRITICAL HEADER PARAMETERS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Application Payload</strong></td>
+                <td>Application</td>
+                <td>Application-specific headers</td>
+                <td>Variable</td>
+                <td><code>Content-Type</code>, <code>:method</code>, gRPC flags</td>
+              </tr>
+              <tr>
+                <td><strong>Transport Segment / Datagram</strong></td>
+                <td>Transport</td>
+                <td>TCP Header or UDP Header</td>
+                <td>TCP: 20-60 bytes; UDP: 8 bytes</td>
+                <td>Source/Dest Port, Sequence Number, ACK Number, Window Size</td>
+              </tr>
+              <tr>
+                <td><strong>Internet Packet</strong></td>
+                <td>Internet</td>
+                <td>IPv4 Header or IPv6 Header</td>
+                <td>IPv4: 20-60 bytes; IPv6: 40 bytes</td>
+                <td>Source/Dest IP Address, TTL/Hop Limit, Next Protocol</td>
+              </tr>
+              <tr>
+                <td><strong>Network Frame</strong></td>
+                <td>Network Access</td>
+                <td>Ethernet II Header &amp; FCS Trailer</td>
+                <td>Header: 14 bytes; Trailer: 4 bytes</td>
+                <td>Source/Dest MAC Address, EtherType, CRC-32 Checksum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Upon reaching the target host, hardware and software decapsulate the data stream in reverse:</p>
+        <ol>
+          <li>The physical transceiver converts physical electrical pulses, optical wavelengths, or radio-frequency modulations into raw binary bit streams, directing them into the FIFO ring buffer of the receiving NIC.</li>
+          <li>The network interface card evaluates the Frame Check Sequence trailer against the frame content via hardware-level CRC-32 calculation. Frames exhibiting checksum mismatches are dropped. Valid frames have their destination MAC verified against the interface address; if accepted, the NIC initiates a Direct Memory Access (DMA) transfer to copy the frame into kernel memory and signals the CPU via an interrupt line or NAPI polling loop.</li>
+          <li>The network driver decapsulates the 14-byte Ethernet header, checks the EtherType value (such as 0x0800 for IPv4), and dispatches the payload to the IP subsystem.</li>
+          <li>The Internet layer validates the IP header integrity, decrements the TTL counter, evaluates intermediate fragmentation flags, verifies that the destination IP matches a host address, and identifies the upper-layer transport protocol via the IPv4 Protocol octet (e.g., value 6 for TCP, value 17 for UDP).</li>
+          <li>The transport layer strips the transport header. The kernel inspects the four-tuple comprised of (Source IP, Source Port, Destination IP, Destination Port) to locate the corresponding Protocol Control Block (PCB) bound to an open socket. For TCP, the kernel updates sequence trackers, calculates acknowledgment offsets, verifies sliding windows, and appends the payload bytes to the socket's receive buffer.</li>
+          <li>The blocked user-space application, notified via an event notification system call such as <code>epoll_wait</code> or a thread unpark event, executes a <code>read()</code> or <code>recv()</code> invocation, prompting the kernel to copy the bare payload from kernel space into application memory space.</li>
+        </ol>
+      </section>
+
+      <!-- Page 3 -->
+      <section id="transport-protocols" class="content-section">
+        <h2>Transport Layer Protocols: TCP Reliability vs. UDP Throughput</h2>
+
+        <h3 id="tcp-mechanics">Transmission Control Protocol (TCP) Mechanics</h3>
+        <p>TCP (RFC 793, RFC 5681) provides a connection-oriented, reliable, strictly in-order byte-stream delivery service over the inherently unreliable, packet-dropping, and out-of-order Internet Protocol.</p>
+        
+        <p>An operational analogy is an administrative telephone call between corporate accounting dispatchers. Before financial transfers occur, both parties establish contact, verify identities, synchronize operational ledgers, confirm the receipt of each ledger entry, regulate throughput to match processing speeds, and formally close the line when the exchange concludes.</p>
+
+        <h4>Connection Establishment: The 3-Way Handshake</h4>
+        <p>A TCP connection initializes through a three-phase synchronization exchange:</p>
+        <ol>
+          <li><strong>SYN Transmission:</strong> The client generates a pseudo-random 32-bit Initial Sequence Number (<code>ISN_c</code>) to guard against sequence prediction attacks and cross-connection collisions caused by delayed packets from earlier connections. It enters the <code>SYN_SENT</code> state and transmits a segment with the SYN control bit asserted, advertising its Maximum Segment Size (MSS), Window Scale factor, and Selective Acknowledgment (SACK) permissions.</li>
+          <li><strong>SYN-ACK Transmission:</strong> The listening host receives the SYN and records a half-open connection entry in its kernel SYN Queue. The server generates its own sequence number (<code>ISN_s</code>), sets both the SYN and ACK flags, sets the acknowledgment number field to <code>ISN_c + 1</code>, and transmits the segment. The server enters the <code>SYN_RCVD</code> state.</li>
+          <li><strong>ACK Transmission:</strong> The client verifies the acknowledgment, moves its local socket state to <code>ESTABLISHED</code>, and sends an ACK packet containing sequence number <code>ISN_c + 1</code> and acknowledgment number <code>ISN_s + 1</code>. The server receives this segment, shifts the connection entry from the SYN Queue into the Accept Queue (the backlog retrieved by user-space <code>accept()</code> calls), and enters <code>ESTABLISHED</code>. Application payloads may be piggybacked starting with this third packet.</li>
+        </ol>
+
+        <h4>Connection Teardown: The 4-Way Handshake</h4>
+        <p>Because TCP connections operate in full-duplex mode, each direction of data transfer must be terminated independently:</p>
+        <ol>
+          <li><strong>Active FIN Transmission:</strong> When an application finishes data transmission, it issues a <code>close()</code> or <code>shutdown()</code> system call, prompting the local TCP stack to transmit a segment with the FIN control bit asserted (sequence number u) and transition to <code>FIN_WAIT_1</code>.</li>
+          <li><strong>Passive ACK Transmission:</strong> The remote endpoint acknowledges receipt of the FIN by returning an ACK segment with acknowledgment number u + 1. The remote endpoint moves to <code>CLOSE_WAIT</code>, while the initiator enters <code>FIN_WAIT_2</code>. The remote endpoint may continue transmitting pending data to the initiator during this half-closed state.</li>
+          <li><strong>Passive FIN Transmission:</strong> Once the remote application finishes transmitting its remaining data, its local stack transmits a FIN segment (sequence number w) and moves to <code>LAST_ACK</code>.</li>
+          <li><strong>Final ACK and TIME_WAIT Transition:</strong> The initiator receives the passive FIN, returns an ACK with acknowledgment number w + 1, and transitions to <code>TIME_WAIT</code>. The remote endpoint receives this acknowledgment and immediately transitions to <code>CLOSED</code>.</li>
+        </ol>
+
+        <p>The socket initiating the active close remains held in the <code>TIME_WAIT</code> state for twice the Maximum Segment Lifetime (2 &times; MSL, conventionally 60 to 120 seconds). This waiting period serves two purposes:</p>
+        <ul>
+          <li>It guarantees that final acknowledgments reach the remote endpoint. If the final ACK is dropped, the remote host retransmits its FIN. If the initiator were in a <code>CLOSED</code> state rather than <code>TIME_WAIT</code>, it would respond with an abrupt RST (Reset) packet instead of completing the clean teardown sequence.</li>
+          <li>It ensures that lingering, out-of-order segments from the closed session expire in intermediate transit queues before a new socket reusing the same 4-tuple (Source IP, Source Port, Destination IP, Destination Port) can be allocated.</li>
+        </ul>
+
+        <h3 id="flow-control">Flow Control: The Sliding Window Protocol</h3>
+        <p>Flow control is an end-to-end mechanism that prevents a sender from overwhelming the physical receive buffer of a destination host. The receiving operating system allocates a bounded buffer (<code>SO_RCVBUF</code>) for each active socket.</p>
+        
+        <p>The receiver advertises its available storage capacity using the 16-bit Window Size field in the TCP header, multiplied by the Window Scale factor negotiated during the initial handshake. This metric is the Receiver Window (<code>rwnd</code>).</p>
+      </section>
+
+      <!-- Page 4 -->
+      <section id="congestion-control" class="content-section">
+        <p>The receiver calculates its available buffer space using the following relation:</p>
+        
+        <div class="formula-card">
+          rwnd = MaxRcvBuffer - (LastByteReceived - LastByteReadByApp)
+        </div>
+
+        <p>where <code>(LastByteReceived - LastByteReadByApp)</code> represents data buffered in the kernel that has not yet been consumed by the user application.</p>
+        
+        <p>The sender calculates its transmission ceiling using:</p>
+        
+        <div class="formula-card">
+          EffectiveSendWindow = min(cwnd, rwnd) - (LastByteSent - LastByteAcked)
+        </div>
+
+        <p>where <code>cwnd</code> denotes the Congestion Window calculated by the sender's congestion control engine.</p>
+        
+        <p>If the application consumes data slower than the arrival rate, <code>rwnd</code> shrinks toward zero. When <code>rwnd</code> reaches 0, the sender halts new data transmission and begins sending periodic Zero-Window Probes (segments carrying a 1-byte payload) to prompt the receiver to return an updated window size, preventing deadlocks when the buffer drains.</p>
+
+        <h3>Congestion Control Algorithms</h3>
+        <p>While flow control protects the receiver's local memory buffers, congestion control prevents senders from overwhelming intermediate routing equipment across the wider network. Unchecked transmissions lead to buffer overflow at intermediate switches, high packet drop rates, retransmission storms, and network breakdown (congestion collapse).</p>
+        
+        <p>The sender tracks network capacity using the Congestion Window (<code>cwnd</code>), calculated dynamically in bytes or Maximum Segment Sizes (MSS). The effective sending boundary is always bounded by:</p>
+        
+        <div class="formula-card">
+          Sending Limit = min(cwnd, rwnd)
+        </div>
+
+        <h4>1. Slow Start</h4>
+        <p>When establishing a connection or recovering from a timeout, the available bandwidth of the path is unknown. The congestion window initializes to a conservative baseline (traditionally 1 MSS; standardized to 10 MSS per RFC 6928).</p>
+        <ul>
+          <li>For each arriving ACK that confirms previously unacknowledged data, <code>cwnd</code> increases by 1 MSS:
+            <div class="formula-card" style="margin: 0.5rem 0;">cwnd &larr; cwnd + MSS</div>
+          </li>
+          <li>Because a full window of segments generates an equal number of acknowledgments per Round-Trip Time (RTT), <code>cwnd</code> doubles every RTT (2, 4, 8, 16, &hellip;), exhibiting exponential growth.</li>
+          <li>Exponential growth continues until <code>cwnd</code> reaches the Slow Start Threshold (<code>ssthresh</code>), prompting a switch to Congestion Avoidance.</li>
+        </ul>
+
+        <h4>2. Congestion Avoidance</h4>
+        <p>To probe for available bandwidth safely without inducing packet loss, the growth rate shifts from exponential to linear:</p>
+        <ul>
+          <li>The window grows by approximately 1 MSS per complete round-trip time, regardless of the individual acknowledgment cadence. For every received valid ACK:
+            <div class="formula-card" style="margin: 0.5rem 0;">cwnd &larr; cwnd + (MSS &times; MSS) / cwnd</div>
+          </li>
+          <li>This Additive Increase phase incrementally tests network capacity until packet loss is detected.</li>
+        </ul>
+
+        <h4>3. Loss Detection, Fast Retransmit, and Fast Recovery</h4>
+        <p>When an isolated segment drops while subsequent packets transit successfully, the receiver generates a duplicate of its last continuous ACK for every out-of-order segment that arrives.</p>
+        <ul>
+          <li><strong>Fast Retransmit:</strong> Receipt of three duplicate ACKs (four identical ACKs total) serves as a signal that a segment was lost, bypassing the slower Retransmission Timeout (RTO) timer. The sender immediately retransmits the missing segment.</li>
+          <li><strong>Fast Recovery (TCP Reno):</strong> Rather than resetting <code>cwnd</code> to 1 MSS (as occurred in early TCP Tahoe), TCP Reno sets:
+            <div class="formula-card" style="margin: 0.5rem 0;">
+              ssthresh &larr; cwnd / 2<br>
+              cwnd &larr; ssthresh + 3 &times; MSS
+            </div>
+            to reflect the packets that triggered the duplicate ACKs, and continues transmitting new segments if allowed by the window.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Page 5 -->
+      <section class="content-section">
+        <ul>
+          <li><strong>RTO Expiration:</strong> If loss is severe enough that no duplicate ACKs return, the Retransmission Timeout timer expires. The sender sets <code>ssthresh &larr; cwnd / 2</code>, resets <code>cwnd &larr; 1 MSS</code>, and reverts to the Slow Start phase.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>DIMENSION</th>
+                <th>TCP RENO (RFC 5681)</th>
+                <th>TCP CUBIC (RFC 8312)</th>
+                <th>TCP BBR (BOTTLENECK BANDWIDTH AND RTT)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Congestion Signal</strong></td>
+                <td>Packet drop detection (AIMD: Additive Increase / Multiplicative Decrease)</td>
+                <td>Packet drop detection (Time elapsed since the prior loss event)</td>
+                <td>Measured bottleneck bandwidth (BtlBw) and minimum propagation delay (RTprop)</td>
+              </tr>
+              <tr>
+                <td><strong>Window Growth Function</strong></td>
+                <td>Linear increase: <code>cwnd += 1 MSS</code> per RTT during avoidance</td>
+                <td>Cubic function: <code>W_cubic(t) = C(t - K)^3 + W_max</code> (C: scale factor, K: inflection offset)</td>
+                <td>Pacing rate model: Transmits at <code>BtlBw &times; pacing_gain</code>; <code>cwnd = 2 &times; BDP</code></td>
+              </tr>
+              <tr>
+                <td><strong>Loss Event Response</strong></td>
+                <td>Halves cwnd: <code>ssthresh = cwnd / 2</code>, <code>cwnd = ssthresh</code></td>
+                <td>Multiplicative window reduction: <code>W_max = cwnd</code>, <code>cwnd = cwnd &times; 0.7</code></td>
+                <td>Ignores transient loss; adjusts rate only when delivery rates drop persistently</td>
+              </tr>
+              <tr>
+                <td><strong>High BDP Performance</strong></td>
+                <td>Low; requires hours to recover window sizes across 10+ Gbps high-latency links</td>
+                <td>High; window growth scales quickly and is independent of RTT</td>
+                <td>High; achieves link capacity without overfilling intermediate queues</td>
+              </tr>
+              <tr>
+                <td><strong>Bufferbloat Mitigation</strong></td>
+                <td>Low; drives deep router queues to maximum capacity until loss occurs</td>
+                <td>Low; fills intermediate buffers until packet drops occur</td>
+                <td>High; limits packet queues to prevent bufferbloat</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Transport-Level Head-of-Line (HoL) Blocking</h3>
+        <p>TCP provides an ordered, continuous byte-stream abstraction to the application layer. This requires the receiving kernel to withhold bytes N+1, N+2, &hellip; from the application if byte N is dropped or corrupted in transit.</p>
+        
+        <p>Even if subsequent packets arrive at the network interface without issue, the operating system kernel holds them in out-of-order staging queues within the TCP stack. The application layer's <code>read()</code> system call blocks or returns no new data until the sender retransmits byte N and the receiver acknowledges it.</p>
+        
+        <p>This condition is known as Transport-Level Head-of-Line Blocking. On lossy networks, such as cellular connections experiencing signal drops, a single dropped segment stalls all independent application streams multiplexed over that single TCP connection, causing sudden latency spikes in higher-level protocols like HTTP/2.</p>
+
+        <h3 id="udp-mechanics">User Datagram Protocol (UDP) Architecture and Mechanics</h3>
+        <p>UDP (RFC 768) is a connectionless, unacknowledged transport protocol. It operates without handshakes, delivery guarantees, retransmissions, ordering enforcement, flow control, or congestion control.</p>
+        
+        <p>An analogy is a live broadcast radio transmission. The broadcaster transmits signals directly into the environment. If atmospheric noise disrupts three seconds of sound, the station does not pause or rewind the broadcast. Instead, receiving radios continue decoding new incoming signals as they arrive.</p>
+        
+        <p>UDP encapsulates payloads using an 8-byte header:</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>BYTE OFFSET</th>
+                <th>FIELD IDENTIFIER</th>
+                <th>BIT WIDTH</th>
+                <th>FUNCTIONAL DESCRIPTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0x00</td>
+                <td><strong>Source Port</strong></td>
+                <td>16</td>
+                <td>Originating port; optional, used for routing return datagrams.</td>
+              </tr>
+              <tr>
+                <td>0x02</td>
+                <td><strong>Destination Port</strong></td>
+                <td>16</td>
+                <td>Target port mapping the packet to a specific listening socket descriptor.</td>
+              </tr>
+              <tr>
+                <td>0x04</td>
+                <td><strong>Length</strong></td>
+                <td>16</td>
+                <td>Total size of the datagram (header plus payload) in bytes (minimum value of 8).</td>
+              </tr>
+              <tr>
+                <td>0x06</td>
+                <td><strong>Checksum</strong></td>
+                <td>16</td>
+                <td>One's complement checksum covering the IP pseudo-header, UDP header, and payload data.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Because UDP datagrams have a small, fixed 8-byte header and use no internal state machines, they introduce negligible memory overhead within the operating system kernel. Packets are dispatched directly to the Internet layer as independent, self-contained units.</p>
+      </section>
+
+      <!-- Page 6 -->
+      <section id="transport-code" class="content-section">
+        <h3>High-Throughput and Real-Time Workloads</h3>
+        <ul>
+          <li><strong>Domain Name System (DNS) Resolutions:</strong> Standard DNS lookups typically fit inside a single network datagram. Using UDP avoids the overhead of connection handshakes and teardowns for small, single-packet request-response pairs. If a datagram drops, the client runtime re-issues the query after a brief timeout.</li>
+          <li><strong>Real-Time Voice and Video Streaming (RTP/WebRTC):</strong> Voice and interactive video communications require low end-to-end latency, typically under 150 milliseconds. If an audio frame representing 20 milliseconds of sound drops, retransmitting it 100 milliseconds later is useless because the audio stream has already advanced. Dropping the damaged frame and interpolating the audio preserves real-time synchronization.</li>
+          <li><strong>Multiplayer Online Gaming (Tick Synchronization):</strong> Game servers broadcast world-state snapshots 60 to 128 times per second. Snapshot T61 completely supersedes snapshot T60. Pausing the network stream to wait for a retransmitted T60 frame would stall rendering pipelines and disrupt player input.</li>
+          <li><strong>Custom Application-Layer Transport Protocols (QUIC):</strong> Modern transport features—such as reliable delivery, stream multiplexing, and cryptographic handshakes—can be implemented in user-space libraries on top of standard UDP datagrams, bypassing traditional operating system kernel update cycles.</li>
+        </ul>
+
+        <h3>Comparative Transport Implementations</h3>
+        <h4>Python: TCP Echo vs. UDP Messaging</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (TCP Echo Server)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># tcp_server.py
+import socket
+
+def run_tcp_server(host: str = "127.0.0.1", port: int = 9000) -> None:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_sock:
+        server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server_sock.bind((host, port))
+        server_sock.listen(128)
+        print(f"[TCP] Server listening on {host}:{port}")
+        connection, client_address = server_sock.accept()
+        with connection:
+            print(f"[TCP] Connection accepted from {client_address}")
+            while True:
+                data_chunk = connection.recv(4096)
+                if not data_chunk:
+                    break
+                connection.sendall(data_chunk)</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (UDP Messaging Server)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># udp_server.py
+def run_udp_server(host: str = "127.0.0.1", port: int = 9001) -> None:
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as server_sock:
+        server_sock.bind((host, port))
+        print(f"[UDP] Server bound to {host}:{port}")
+        while True:
+            payload, client_address = server_sock.recvfrom(4096)
+            server_sock.sendto(payload, client_address)</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 7 -->
+      <section class="content-section">
+        <h3>Java: Non-Blocking NIO Channels</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (NioTcpEchoServer.java)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// NioTcpEchoServer.java
+package com.network.transport;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+
+public class NioTcpEchoServer {
+    public static void main(String[] args) throws IOException {
+        try (ServerSocketChannel serverChannel = ServerSocketChannel.open()) {
+            serverChannel.bind(new InetSocketAddress("127.0.0.1", 9000));
+            System.out.println("[Java NIO TCP] Listening on port 9000");
+            try (SocketChannel clientChannel = serverChannel.accept()) {
+                ByteBuffer memoryBuffer = ByteBuffer.allocateDirect(4096);
+                while (clientChannel.read(memoryBuffer) != -1) {
+                    memoryBuffer.flip();
+                    clientChannel.write(memoryBuffer);
+                    memoryBuffer.clear();
+                }
+            }
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (NioUdpEchoServer.java)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// NioUdpEchoServer.java
+package com.network.transport;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.DatagramChannel;
+
+public class NioUdpEchoServer {
+    public static void main(String[] args) throws IOException {
+        try (DatagramChannel datagramChannel = DatagramChannel.open()) {
+            datagramChannel.bind(new InetSocketAddress("127.0.0.1", 9001));
+            System.out.println("[Java NIO UDP] Bound to port 9001");
+            ByteBuffer memoryBuffer = ByteBuffer.allocateDirect(4096);
+            while (true) {
+                memoryBuffer.clear();
+                SocketAddress remoteSource = datagramChannel.receive(memoryBuffer);
+                memoryBuffer.flip();
+                datagramChannel.send(memoryBuffer, remoteSource);
+            }
+        }
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 8 -->
+      <section id="application-protocols" class="content-section">
+        <h3>TypeScript: Node.js Stream and Datagram Modules</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TypeScript (transport_servers.ts)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// transport_servers.ts
+import * as net from "net";
+import * as dgram from "dgram";
+
+// TCP Stream Server
+const tcpServer = net.createServer((socket: net.Socket) => {
+  console.log(`[Node TCP] Connection established: ${socket.remoteAddress}:${socket.remotePort}`);
+  socket.on("data", (chunk: Buffer) => {
+    socket.write(chunk);
+  });
+  socket.on("end", () => {
+    console.log("[Node TCP] Connection terminated cleanly.");
+  });
+});
+
+tcpServer.listen(9000, "127.0.0.1", () => {
+  console.log("[Node TCP] Echo server listening on 127.0.0.1:9000");
+});
+
+// UDP Datagram Server
+const udpServer = dgram.createSocket("udp4");
+
+udpServer.on("message", (messageBuffer: Buffer, remoteInfo: dgram.RemoteInfo) => {
+  udpServer.send(messageBuffer, remoteInfo.port, remoteInfo.address);
+});
+
+udpServer.bind(9001, "127.0.0.1", () => {
+  console.log("[Node UDP] Datagram server active on 127.0.0.1:9001");
+});</code></pre>
+        </div>
+
+        <h2>Application Protocols and the Evolution of the Web</h2>
+
+        <h3 id="http11">HTTP/1.1: ASCII Framing and Application-Level Head-of-Line Blocking</h3>
+        <p>HTTP/1.1 (RFC 2616, RFC 7230) was designed around human-readable, plaintext ASCII framing. Each request and response consists of a start line, followed by CRLF-delimited header fields, a terminating empty line, and an optional message payload:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">HTTP/1.1 Request Payload</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>GET /api/v1/orders/100 HTTP/1.1
+Host: api.service.internal
+User-Agent: SystemsMonitor/2.0
+Accept: application/json
+Connection: keep-alive</code></pre>
+        </div>
+
+        <h4>Persistent Connections and Application Head-of-Line Bottlenecks</h4>
+        <p>Early HTTP/1.0 required a complete TCP 3-way handshake and 4-way teardown for every individual resource transfer, introducing significant latency overhead. HTTP/1.1 introduced persistent connections via the <code>Connection: keep-alive</code> header, allowing a single TCP connection to serve multiple sequential requests.</p>
+        
+        <p>HTTP/1.1 also specified HTTP Pipelining, which permitted clients to send multiple requests without waiting for intermediate responses. However, HTTP/1.1 strictly required servers to return responses in the exact chronological order that the requests were received.</p>
+      </section>
+
+      <!-- Page 9 -->
+      <section id="http2" class="content-section">
+        <p>If a client requested a computationally expensive report followed by small image assets, the server could not send the completed image assets over the wire until the heavy report finished processing and streaming. This constraint created Application-Level Head-of-Line (HoL) Blocking.</p>
+        
+        <p>Because a slow or hung response stalled all downstream transfers, web browsers disabled pipelining by default. Instead, browsers worked around the limitation using techniques like domain sharding (opening up to six parallel TCP connections per host) and resource bundling (such as CSS/JS concatenation and image sprites).</p>
+
+        <h3>HTTP/2: Binary Framing, Multiplexing, and HPACK</h3>
+        <p>HTTP/2 (RFC 7540) retained standard HTTP application semantics—such as methods, status codes, and URI structures—while replacing plaintext ASCII formatting with a structured Binary Framing Layer.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>FIELD OFFSET / WIDTH</th>
+                <th>FRAMING PARAMETER</th>
+                <th>ARCHITECTURAL FUNCTIONALITY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>24 bits</td>
+                <td><strong>Length</strong></td>
+                <td>Explicit byte length of the frame payload (up to 2^24 - 1 = 16 MB).</td>
+              </tr>
+              <tr>
+                <td>8 bits</td>
+                <td><strong>Type</strong></td>
+                <td>Identifies the frame purpose (0x0 DATA, 0x1 HEADERS, 0x4 SETTINGS, 0x8 WINDOW_UPDATE).</td>
+              </tr>
+              <tr>
+                <td>8 bits</td>
+                <td><strong>Flags</strong></td>
+                <td>Frame-specific boolean flags (e.g., 0x1 END_STREAM, 0x4 END_HEADERS).</td>
+              </tr>
+              <tr>
+                <td>1 bit</td>
+                <td><strong>Reserved (R)</strong></td>
+                <td>Unused bit reserved for future extensions; must remain 0x0.</td>
+              </tr>
+              <tr>
+                <td>31 bits</td>
+                <td><strong>Stream Identifier</strong></td>
+                <td>Identifies which logical stream the frame belongs to; value 0x0 is reserved for connection control.</td>
+              </tr>
+              <tr>
+                <td>Variable</td>
+                <td><strong>Frame Payload</strong></td>
+                <td>The raw payload data defined by the frame Type and Length.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Multiplexing Across a Single TCP Connection</h4>
+        <p>In HTTP/2, multiple independent bidirectional request-response exchanges—known as streams—are broken into discrete binary frames and interleaved across a single long-lived TCP connection.</p>
+        
+        <p>A large file download on Stream 1 no longer stalls a CSS download on Stream 3. Instead, the server interleaves DATA frames from both streams onto the connection. The receiver reads the 31-bit Stream ID in each frame header to route payloads to their appropriate stream buffers, enabling full multiplexing.</p>
+
+        <h4>HPACK Header Compression (RFC 7541)</h4>
+        <p>In HTTP/1.1, verbose headers such as User-Agent and Cookie were repeatedly transmitted in plaintext, wasting bandwidth. HTTP/2 introduced the HPACK compression standard, which was designed to defend against security vulnerabilities like the CRIME exploit:</p>
+        <ul>
+          <li><strong>Static Table:</strong> An immutable reference table containing 61 common HTTP headers and values (e.g., index 2 maps to <code>GET /</code>, index 14 maps to status 200). Transmitting these headers requires sending only the table index encoded as a variable-length integer.</li>
+          <li><strong>Dynamic Table:</strong> A connection-scoped, stateful First-In, First-Out (FIFO) table that caches newly encountered headers across both endpoints. If an application transmits a large authorization token, subsequent requests reference its assigned dynamic index in a single byte.</li>
+          <li><strong>Static Huffman Coding:</strong> Pre-computed canonical Huffman tables compress header names and string values, reducing raw header sizes by roughly 30%.</li>
+        </ul>
+
+        <h4>The HTTP/2 Architectural Limitation: Compounded HoL Blocking</h4>
+        <p>While HTTP/2 eliminated Application-Level Head-of-Line blocking, it consolidated all logical streams onto a single shared TCP connection.</p>
+        
+        <p>Because TCP guarantees an ordered byte stream, if an intermediate network drops a single TCP segment containing data for Stream 1, the receiving kernel halts delivery of all subsequent data on that socket.</p>
+      </section>
+
+      <!-- Page 10 -->
+      <section id="http3-quic" class="content-section">
+        <p>Even if segments for Streams 3, 5, and 7 arrive without errors, they remain blocked in the kernel receive buffer. On lossy networks (such as mobile connections with packet drop rates exceeding 2%), HTTP/2 often underperforms HTTP/1.1 configurations that use multiple parallel TCP sockets.</p>
+
+        <h3>HTTP/3 and QUIC: Transport Reinvention Over UDP</h3>
+        <p>To eliminate transport-layer Head-of-Line blocking, the Internet Engineering Task Force (IETF) standardized QUIC (RFC 9000) and HTTP/3 (RFC 9114). QUIC implements transport-layer reliability, congestion control, and connection tracking in user space on top of connectionless UDP datagrams.</p>
+
+        <h4>Independent Stream Demultiplexing Without Transport HoL</h4>
+        <p>QUIC natively manages streams within the transport protocol itself, rather than layering them over a separate transport abstraction as HTTP/2 does. Each QUIC stream maintains its own independent sliding window, sequence tracking, and flow control.</p>
+        
+        <p>If a UDP datagram carrying data for Stream 1 is lost in transit, only Stream 1 pauses to await retransmission. The operating system kernel immediately passes datagrams carrying data for Streams 3, 5, and 7 to the user-space QUIC engine. The application layer consumes healthy streams without delay, resolving the Head-of-Line blocking problem.</p>
+
+        <h4>Integrated Handshakes: 0-RTT and 1-RTT</h4>
+        <p>Legacy deployments using HTTP/2 over TLS 1.3 over TCP require multiple sequential round-trips:</p>
+        
+        <div class="formula-card">
+          TCP Handshake = 1 RTT (SYN &rarr; SYN-ACK &rarr; ACK)<br>
+          TLS 1.3 Handshake = 1 RTT (ClientHello &rarr; ServerHello / Certificate &rarr; Finished)<br>
+          Total latency before transmitting application data = 2 RTTs (or 3 RTTs under TLS 1.2).
+        </div>
+
+        <p>QUIC integrates transport parameter negotiation directly with the TLS 1.3 cryptographic handshake (RFC 9001):</p>
+        <ul>
+          <li><strong>Initial Connection (1-RTT):</strong> The client sends a QUIC Initial packet that bundles transport configuration with the TLS 1.3 ClientHello. The server returns its transport parameters alongside the ServerHello. Application data transfer begins after a single network round-trip.</li>
+          <li><strong>Session Resumption (0-RTT):</strong> When reconnecting to a previously visited server, the client uses cached cryptographic keys and server configurations. The client can include encrypted application payloads in its very first outgoing UDP datagram, achieving zero round-trip latency.</li>
+        </ul>
+
+        <h4>Connection Migration</h4>
+        <p>TCP connections are identified by an operating system 4-tuple: (Source IP, Source Port, Destination IP, Destination Port). If a mobile device transitions from an office Wi-Fi network to a 5G cellular connection, the physical network interface changes, altering the client IP address. Under TCP, this invalidates the 4-tuple, causing active connections to fail with broken pipes and requiring new handshakes.</p>
+        
+        <p>QUIC decouples connection state from network-layer addressing by assigning each session a unique, random Connection ID (CID) in the packet header. When a client changes networks, it continues sending packets with the same Connection ID from its new IP address. The server reads the Connection ID, updates its internal routing table to match the client's new IP and port, and continues transmitting without connection resets or handshake renegotiation.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>ARCHITECTURAL FEATURE</th>
+                <th>HTTP/1.1 (RFC 7230)</th>
+                <th>HTTP/2 (RFC 7540)</th>
+                <th>HTTP/3 (RFC 9114)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Transport Layer Base</strong></td>
+                <td>TCP</td>
+                <td>TCP</td>
+                <td>QUIC (over UDP)</td>
+              </tr>
+              <tr>
+                <td><strong>Wire Protocol Layout</strong></td>
+                <td>Plaintext ASCII text lines</td>
+                <td>Binary Framing Layer</td>
+                <td>Binary QUIC Frames</td>
+              </tr>
+              <tr>
+                <td><strong>Stream Multiplexing</strong></td>
+                <td>Unsupported (Sequential Pipelining)</td>
+                <td>Stream multiplexing over a single TCP socket</td>
+                <td>Independent native streams inside the QUIC engine</td>
+              </tr>
+              <tr>
+                <td><strong>Head-of-Line Vulnerability</strong></td>
+                <td>Application and Transport layers</td>
+                <td>Transport layer (due to single TCP connection)</td>
+                <td>None; loss isolated to individual streams</td>
+              </tr>
+              <tr>
+                <td><strong>Header Compression</strong></td>
+                <td>None; headers retransmitted as text</td>
+                <td>HPACK (Static + Dynamic Tables + Huffman)</td>
+                <td>QPACK (Non-blocking, out-of-order dynamic indexing)</td>
+              </tr>
+              <tr>
+                <td><strong>Connection Setup Cost</strong></td>
+                <td>1 RTT (Cleartext); 2-3 RTTs (with TLS)</td>
+                <td>1 RTT (Cleartext); 2 RTTs (with TLS 1.3)</td>
+                <td>1 RTT initial; 0-RTT resumption</td>
+              </tr>
+              <tr>
+                <td><strong>Network IP Migration</strong></td>
+                <td>Broken; connection resets on 4-tuple change</td>
+                <td>Broken; connection resets on 4-tuple change</td>
+                <td>Supported via Connection IDs (CID)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Page 11 -->
+      <section id="ipc-rpc" class="content-section">
+        <h2>Inter-Process Communication (IPC) and Remote Procedure Calls (RPC)</h2>
+
+        <h3 id="local-ipc">Local Single-Host IPC Architecture</h3>
+        <p>When processes communicate on the same physical machine, using network sockets introduces unnecessary overhead, including IP routing lookups, port translations, and checksum calculations. Modern operating systems provide low-overhead Inter-Process Communication (IPC) primitives designed specifically for local communication.</p>
+        
+        <p>In standard IPC mechanisms like Unix Domain Sockets and named pipes, data transfer requires two context switches and two memory copies: the sending process executes a <code>write()</code> system call that copies data from user space into a kernel buffer, and the receiving process executes a <code>read()</code> system call that copies data from the kernel buffer into its own user-space memory.</p>
+        
+        <p>Shared memory avoids this overhead entirely. Processes map the same physical memory frames directly into their respective virtual address spaces, allowing data to be exchanged with zero system calls and zero intermediate kernel memory copies.</p>
+        
+        <ul>
+          <li><strong>1. Anonymous Pipes:</strong> Created via the <code>pipe()</code> system call, anonymous pipes are unidirectional, byte-oriented communication channels that return two file descriptors: a write endpoint (<code>fd[1]</code>) and a read endpoint (<code>fd[0]</code>). Data flows through a kernel-managed circular buffer (typically 64 KB on modern Linux). Communication is restricted to processes that share common parentage established via <code>fork()</code>.</li>
+          <li><strong>2. Named Pipes (FIFOs):</strong> Created using the <code>mkfifo()</code> system call, named pipes expose a presence in the local filesystem hierarchy (such as <code>/tmp/service.fifo</code>). They operate similarly to anonymous pipes through a kernel ring buffer, but allow unrelated processes to communicate by opening the named path. Named pipes are unidirectional by default and block on <code>open()</code> until both reader and writer endpoints connect.</li>
+          <li><strong>3. Unix Domain Sockets (UDS):</strong> Created via <code>socket(AF_UNIX, SOCK_STREAM)</code> or <code>socket(AF_UNIX, SOCK_DGRAM)</code>, Unix Domain Sockets provide standard socket semantics while operating entirely within the operating system kernel's memory space.
+            <ul>
+              <li><strong>Transport Stack Bypass:</strong> UDS eliminates IP routing logic, TCP sequence calculations, segment checksums, network loopback drivers, and packet fragmentation constraints.</li>
+              <li><strong>Ancillary Descriptors:</strong> UDS supports passing open file descriptors between distinct processes using <code>sendmsg()</code> with <code>SCM_RIGHTS</code> control messages. It also allows processes to authenticate each other by inspecting cryptographically verified process credentials (UID, GID, PID) via <code>SO_PEERCRED</code>.</li>
+            </ul>
+          </li>
+          <li><strong>4. Shared Memory (shm_open, mmap):</strong> Shared memory provides the highest-throughput IPC mechanism available on modern systems. Processes invoke <code>shm_open()</code> followed by <code>mmap()</code> to map the same physical RAM pages into their respective virtual address spaces. Data written by Process A is immediately visible to Process B at the hardware memory controller level, bypassing the operating system kernel and eliminating data-copying overhead. Because the kernel does not intermediate memory access, applications must coordinate concurrent reads and writes themselves using synchronization primitives such as POSIX semaphores, process-shared mutexes (<code>PTHREAD_PROCESS_SHARED</code>), lock-free ring buffers, or Linux futex (Fast Userspace Mutex) system calls.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>IPC MECHANISM</th>
+                <th>ROUND-TRIP LATENCY (4 KB MESSAGE)</th>
+                <th>BULK TRANSFER THROUGHPUT</th>
+                <th>OPERATING SYSTEM SYSCALL OVERHEAD</th>
+                <th>RECOMMENDED PRODUCTION USE CASES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Shared Memory + Futex</strong></td>
+                <td>&sim; 500 - 1,000 ns</td>
+                <td>&sim; 40 - 60 GB/s (Memory-bound)</td>
+                <td>Zero syscalls during steady-state data transfer</td>
+                <td>AI model tensor sharing, shared-memory databases, HFT trading systems</td>
+              </tr>
+              <tr>
+                <td><strong>Unix Domain Socket (UDS)</strong></td>
+                <td>&sim; 2,000 - 5,000 ns</td>
+                <td>&sim; 8 - 12 GB/s (Kernel copy-bound)</td>
+                <td>Two syscalls per exchange (write and read)</td>
+                <td>Microservice proxies, Docker daemon APIs, local Redis access</td>
+              </tr>
+              <tr>
+                <td><strong>Named Pipe (FIFO)</strong></td>
+                <td>&sim; 3,000 - 7,000 ns</td>
+                <td>&sim; 5 - 10 GB/s</td>
+                <td>Two syscalls per exchange (write and read)</td>
+                <td>Shell command pipelines, simple process streaming</td>
+              </tr>
+              <tr>
+                <td><strong>TCP Loopback (127.0.0.1)</strong></td>
+                <td>&sim; 10,000 - 20,000 ns</td>
+                <td>&sim; 3 - 6 GB/s</td>
+                <td>Multiple syscalls + full TCP/IP packet processing</td>
+                <td>Local network emulation, cross-platform local development</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Page 12 -->
+      <section id="rest-architectures" class="content-section">
+        <h3>Distributed IPC: Network Sockets and RESTful Architectures</h3>
+        <p>When process boundaries cross physical host machine limits, inter-process communication relies on network sockets bound to the Internet layer (<code>AF_INET</code> or <code>AF_INET6</code>).</p>
+
+        <h4>RESTful Architectures Over HTTP</h4>
+        <p>Representational State Transfer (REST) has served as the standard architectural model for public web services. It relies on standard HTTP semantics:</p>
+        <ul>
+          <li><strong>Statelessness:</strong> Every request contains all necessary credentials and parameters; the server retains no client session context between requests.</li>
+          <li><strong>Resource Orientation:</strong> Resources are identified via standard URI paths (e.g., <code>/api/v1/orders/123</code>).</li>
+          <li><strong>Standard Verbs:</strong> Operations map to standard HTTP methods: GET (safe/idempotent reads), POST (non-idempotent creations), PUT (idempotent mutations), and DELETE (idempotent deletions).</li>
+          <li><strong>JSON Serialization:</strong> Payloads are formatted as human-readable JSON strings.</li>
+        </ul>
+
+        <h4>Shortcomings of REST/JSON in High-Performance Microservices</h4>
+        <p>While REST over JSON provides broad developer accessibility and browser compatibility, it introduces performance bottlenecks in high-throughput internal microservice meshes:</p>
+        <ul>
+          <li><strong>CPU Overhead from Text Parsing:</strong> JSON is a text format. Converting native in-memory objects (integers, floats, nested structures) into ASCII text and parsing them back requires significant CPU work, including memory allocations, character escaping, and string scanning.</li>
+          <li><strong>Payload Bloat:</strong> JSON repeatedly serializes structural metadata. In a response containing thousands of records, the field keys ("order_id", "timestamp", "amount") are serialized as ASCII characters alongside every single value, inflating packet sizes.</li>
+          <li><strong>Lack of Strict Typings:</strong> JSON lacks native support for strict schemas, typed enumerations, or byte streams. Applications must handle schema validation, null checks, and type coercion in user code at runtime.</li>
+          <li><strong>Request/Response Limitations:</strong> REST patterns typically adhere to a strict request/response cycle over HTTP/1.1, lacking standard primitives for bidirectional streaming or server pushes.</li>
+        </ul>
+
+        <h3 id="rpc-architecture">Remote Procedure Calls (RPC) Architecture</h3>
+        <p>Remote Procedure Call (RPC) frameworks abstract distributed network communication into familiar local function invocations. Instead of constructing manual HTTP requests, formatting URLs, and parsing JSON responses, an engineer invokes a local function signature:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">RPC Local Signature</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>OrderResponse response = orderService.processOrder(orderRequest);</code></pre>
+        </div>
+
+        <p>Under the hood, the RPC framework marshals the parameters, routes the request across physical networks, and returns the computed result as a typed return value.</p>
+
+        <h4>Detailed RPC Execution Lifecycle</h4>
+        <p>An end-to-end Remote Procedure Call executes across several distinct stages:</p>
+        <ol>
+          <li>The client application invokes a procedure signature on a locally generated Client Stub.</li>
+          <li>The Client Stub marshals (serializes) native in-memory function arguments into an optimized binary wire format and applies type checks against a pre-compiled schema contract.</li>
+          <li>The Client Stub passes the serialized binary payload to the local RPC transport layer, which attaches routing metadata (such as stream identifiers, service endpoints, and tracing tokens) and writes the data to the network socket.</li>
+          <li>The transport layer routes the packets across intermediate switches and routers as TCP/IP or UDP/QUIC segments to the destination host.</li>
+          <li>The server's network stack receives the binary frames and routes them to the Server Skeleton (also known as the Server Dispatcher).</li>
+          <li>The Server Skeleton unmarshals (deserializes) the binary payload into native runtime memory objects.</li>
+          <li>The Skeleton locates the target method on the service implementation and invokes it with the unmarshalled parameters.</li>
+          <li>The service method executes its business logic and produces a return object.</li>
+          <li>The Server Skeleton marshals the return object into binary data and sends it back across the network socket.</li>
+          <li>The Client Stub receives the response, unmarshals the payload into native client objects, and returns execution control to the calling application thread.</li>
+        </ol>
+      </section>
+
+      <!-- Page 13 -->
+      <section id="grpc-protobuf" class="content-section">
+        <h3>gRPC and Protocol Buffers (Protobuf)</h3>
+        <p>Developed by Google, gRPC is an open-source, high-performance RPC framework that uses Protocol Buffers (Protobuf) as its Interface Definition Language (IDL) and underlying wire format.</p>
+
+        <h4>Protocol Buffers Wire Format Mechanics</h4>
+        <p>Unlike JSON, which transmits raw field strings, Protobuf strips all field names, whitespace, and structural formatting from the wire format. Fields are identified purely by compact integer field numbers declared in a <code>.proto</code> schema file.</p>
+        
+        <p>Data is encoded as a stream of binary Tag-Length-Value (TLV) or Tag-Value (TV) records:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Protobuf Binary Record Layout</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// Conceptual layout of a Protobuf binary record
+[ Tag: Varint ((Field_Number &lt;&lt; 3) | Wire_Type) ]
+[ Length: Varint (Only present for Wire Type 2: LEN) ]
+[ Value: Raw binary payload ]</code></pre>
+        </div>
+
+        <p>Every record begins with a tag that merges the field's integer identifier and its low-level wire type into a single variable-length integer:</p>
+
+        <div class="formula-card">
+          Tag = (Field Number &lt;&lt; 3) | Wire Type
+        </div>
+
+        <p>Because the wire type occupies the lowest 3 bits, field numbers 1 through 15 fit within a single byte, minimizing framing overhead for common fields.</p>
+        <p><em>(Note: Wire types 3 and 4 represent legacy start/end groups and are deprecated in modern Protocol Buffers).</em></p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>WIRE TYPE ID</th>
+                <th>WIRE TYPE NAME</th>
+                <th>ENCODING STRUCTURE</th>
+                <th>ASSOCIATED DATA TYPES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td><strong>VARINT</strong></td>
+                <td>Variable-width integer (1 to 10 bytes)</td>
+                <td><code>int32, int64, uint32, uint64, sint32, sint64, bool, enum</code></td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td><strong>I64</strong></td>
+                <td>Fixed 64-bit integer or double (8 bytes)</td>
+                <td><code>fixed64, sfixed64, double</code></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><strong>LEN</strong></td>
+                <td>Length-delimited: Varint length prefix followed by data</td>
+                <td><code>string, bytes, embedded messages, packed repeated fields</code></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><strong>I32</strong></td>
+                <td>Fixed 32-bit integer or float (4 bytes)</td>
+                <td><code>fixed32, sfixed32, float</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Base-128 Varints encode unsigned integers using one or more 8-bit bytes. The Most Significant Bit (MSB, or continuation bit) of each byte indicates whether more bytes follow:</p>
+        <ul>
+          <li>If MSB = 1, the following byte belongs to this integer.</li>
+          <li>If MSB = 0, this byte is the final byte of the integer. The lower 7 bits of each byte store the payload in little-endian order.</li>
+        </ul>
+
+        <p>Tracing the encoding of the integer value 150:</p>
+        <ul>
+          <li>The value is represented in binary: <code>150_10 = 10010110_2</code>.</li>
+          <li>The bits are divided into 7-bit groups, starting from the least significant bits: <code>0010110</code> (value 22) and <code>0000001</code> (value 1).</li>
+          <li>Setting the MSB continuation bits gives <code>10010110</code> (0x96) for the first byte and <code>00000001</code> (0x01) for the terminating byte.</li>
+        </ul>
+      </section>
+
+      <!-- Page 14 -->
+      <section id="grpc-patterns" class="content-section">
+        <p>The resulting byte sequence on the wire is <code>0x96 0x01</code>. The decoder reads 0x96, drops the MSB to yield 0010110, reads 0x01, drops the MSB to yield 0000001, reverses the little-endian ordering to concatenate 00000010010110, and reconstructs 128 + 16 + 4 + 2 = 150.</p>
+        
+        <p>Standard two's complement representations of negative numbers (e.g., -1) use all 1s across high-order bits, forcing a standard int64 to consume a full 10 bytes as a varint. To optimize this, Protobuf provides <code>sint32</code> and <code>sint64</code>, which map signed values onto positive values using ZigZag encoding:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">ZigZag Mapping Logic</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>0 &rarr; 0
+-1 &rarr; 1
+1 &rarr; 2
+-2 &rarr; 3
+ZigZag32(n) = (n &lt;&lt; 1) ^ (n &gt;&gt; 31)
+ZigZag64(n) = (n &lt;&lt; 1) ^ (n &gt;&gt; 63)</code></pre>
+        </div>
+
+        <p>Small negative integers (such as -1 or -2) compress down to 1 or 2 bytes on the wire instead of 10.</p>
+        
+        <p>Because Protobuf messages with wire type 2 (LEN) explicitly prefix the length of strings, byte arrays, and submessages, parsers do not need to scan the content for delimiter characters. The deserializer can point runtime memory references directly to the underlying raw buffer slices without allocating new memory on the heap.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>PERFORMANCE DIMENSION</th>
+                <th>JSON OVER REST</th>
+                <th>PROTOCOL BUFFERS OVER GRPC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Payload Format</strong></td>
+                <td>Plaintext UTF-8 string</td>
+                <td>Compact binary encoding</td>
+              </tr>
+              <tr>
+                <td><strong>Field Identification</strong></td>
+                <td>Redundant string field keys serialized per object</td>
+                <td>1-byte to 2-byte integer tags</td>
+              </tr>
+              <tr>
+                <td><strong>Schema Contract</strong></td>
+                <td>Optional (OpenAPI/Swagger external contracts)</td>
+                <td>Mandatory compiled .proto schema file</td>
+              </tr>
+              <tr>
+                <td><strong>Parsing CPU Complexity</strong></td>
+                <td>High; requires string scanning, validation, allocations</td>
+                <td>Low; direct bit-shift decodes and zero-copy slice borrowing</td>
+              </tr>
+              <tr>
+                <td><strong>Payload Compression</strong></td>
+                <td>Requires external stream compression (gzip/brotli)</td>
+                <td>Native Varint, ZigZag, and TLV binary compression</td>
+              </tr>
+              <tr>
+                <td><strong>Streaming Paradigms</strong></td>
+                <td>Limited; long-polling, SSE, or WebSocket upgrades</td>
+                <td>Native Unary, Client, Server, and Bidirectional streaming</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>The Four gRPC Communication Patterns over HTTP/2</h3>
+        <p>gRPC implements all remote procedure calls as HTTP/2 streams. Every gRPC call sends an HTTP/2 HEADERS frame specifying the target path (e.g., <code>/:path = /ecommerce.OrderService/ProcessOrder</code>), followed by DATA frames containing the Protobuf binary payload, and concludes with an HTTP/2 trailer containing the <code>grpc-status</code> code.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>GRPC COMMUNICATION PATTERN</th>
+                <th>CLIENT TRANSMISSION</th>
+                <th>SERVER TRANSMISSION</th>
+                <th>PRIMARY PRODUCTION USE CASES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Unary RPC</strong></td>
+                <td>Single request frame with END_STREAM flag</td>
+                <td>Single response frame followed by trailers with grpc-status</td>
+                <td>CRUD APIs, database lookups, payment processing</td>
+              </tr>
+              <tr>
+                <td><strong>Server-Streaming RPC</strong></td>
+                <td>Single request frame with END_STREAM flag</td>
+                <td>Stream of multiple DATA frames terminating with trailers</td>
+                <td>Real-time telemetry, market feeds, long-polling replacements</td>
+              </tr>
+              <tr>
+                <td><strong>Client-Streaming RPC</strong></td>
+                <td>Stream of multiple DATA frames terminating with END_STREAM</td>
+                <td>Single response frame followed by trailers with grpc-status</td>
+                <td>Bulk file uploads, edge telemetry ingestion, IoT metrics</td>
+              </tr>
+              <tr>
+                <td><strong>Bidirectional-Streaming RPC</strong></td>
+                <td>Continuous stream of interleaved DATA frames</td>
+                <td>Continuous stream of interleaved DATA frames</td>
+                <td>Chat systems, interactive multiplayer sessions, real-time sync</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Unary RPC:</strong> The client transmits a single request frame and waits for a single response frame from the server, functioning similarly to a traditional synchronous function call.</li>
+          <li><strong>Server-Streaming RPC:</strong> The client sends an initial request frame, and the server responds with a stream of multiple messages over time, terminating the stream with trailing metadata containing the final status code.</li>
+          <li><strong>Client-Streaming RPC:</strong> The client transmits an open stream of multiple data frames to the server; once the client finishes and asserts the END_STREAM flag, the server processes the accumulated data and returns a single summary response frame.</li>
+          <li><strong>Bidirectional-Streaming RPC:</strong> Both endpoints initiate read and write streams that operate concurrently and asynchronously over a single HTTP/2 connection. The server can respond immediately to each incoming frame, buffer frames before replying, or push messages independently of client activity.</li>
+        </ul>
+      </section>
+
+      <!-- Page 15 -->
+      <section id="grpc-implementations" class="content-section">
+        <h3>Comparative gRPC Implementations</h3>
+        <h4>1. Interface Definition Language (IDL): order_service.proto</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Protobuf (order_service.proto)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>syntax = "proto3";
+
+package ecommerce;
+
+option java_package = "com.ecommerce.grpc";
+option java_multiple_files = true;
+
+message OrderRequest {
+    string order_id = 1;
+    string customer_id = 2;
+    double total_amount = 3;
+}
+
+message OrderResponse {
+    string order_id = 1;
+    string status = 2;
+    int64 timestamp = 3;
+}
+
+service OrderService {
+    // Unary Pattern
+    rpc ProcessOrder(OrderRequest) returns (OrderResponse);
+
+    // Bidirectional Streaming Pattern
+    rpc StreamOrders(stream OrderRequest) returns (stream OrderResponse);
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 16 -->
+      <section class="content-section">
+        <h4>2. Python Implementation</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (order_server.py)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code># order_server.py
+import time
+from concurrent import futures
+import grpc
+import order_service_pb2
+import order_service_pb2_grpc
+
+class OrderServiceServicer(order_service_pb2_grpc.OrderServiceServicer):
+    def ProcessOrder(self, request, context):
+        return order_service_pb2.OrderResponse(
+            order_id=request.order_id,
+            status="PROCESSED_PYTHON",
+            timestamp=int(time.time())
+        )
+
+    def StreamOrders(self, request_iterator, context):
+        for incoming_order in request_iterator:
+            yield order_service_pb2.OrderResponse(
+                order_id=incoming_order.order_id,
+                status=f"ACK_PYTHON: {incoming_order.total_amount}",
+                timestamp=int(time.time())
+            )
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    order_service_pb2_grpc.add_OrderServiceServicer_to_server(OrderServiceServicer(), server)
+    server.add_insecure_port("[::]:50051")
+    print("[Python gRPC] Server running on port 50051")
+    server.start()
+    server.wait_for_termination()
+
+if __name__ == "__main__":
+    serve()</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 17 -->
+      <section class="content-section">
+        <h4>3. Java Implementation</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (OrderServiceImpl.java)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// OrderServiceImpl.java
+package com.ecommerce.grpc;
+
+import io.grpc.stub.StreamObserver;
+
+public class OrderServiceImpl extends OrderServiceGrpc.OrderServiceImplBase {
+    @Override
+    public void processOrder(OrderRequest request, StreamObserver&lt;OrderResponse&gt; responseObserver) {
+        OrderResponse response = OrderResponse.newBuilder()
+            .setOrderId(request.getOrderId())
+            .setStatus("PROCESSED_JAVA")
+            .setTimestamp(System.currentTimeMillis())
+            .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver&lt;OrderRequest&gt; streamOrders(StreamObserver&lt;OrderResponse&gt; responseObserver) {
+        return new StreamObserver&lt;OrderRequest&gt;() {
+            @Override
+            public void onNext(OrderRequest order) {
+                OrderResponse response = OrderResponse.newBuilder()
+                    .setOrderId(order.getOrderId())
+                    .setStatus("ACK_JAVA: " + order.getTotalAmount())
+                    .setTimestamp(System.currentTimeMillis())
+                    .build();
+                responseObserver.onNext(response);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                System.err.println("Stream error encountered: " + t.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+    }
+}</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (OrderServer.java)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// OrderServer.java
+package com.ecommerce.grpc;
+
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+import java.io.IOException;
+
+public class OrderServer {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Server server = ServerBuilder.forPort(50051)
+            .addService(new OrderServiceImpl())
+            .build()
+            .start();
+        System.out.println("[Java gRPC] Server bound to port 50051");
+        server.awaitTermination();
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 18 -->
+      <section class="content-section">
+        <h4>4. TypeScript Implementation</h4>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">TypeScript (order_server.ts)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>// order_server.ts
+import * as grpc from "@grpc/grpc-js";
+import * as protoLoader from "@grpc/proto-loader";
+import { ProtoGrpcType } from "./generated/order_service";
+import { OrderServiceHandlers } from "./generated/ecommerce/OrderService";
+import { OrderRequest } from "./generated/ecommerce/OrderRequest";
+import { OrderResponse } from "./generated/ecommerce/OrderResponse";
+
+const packageDefinition = protoLoader.loadSync("order_service.proto", {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+});
+
+const proto = (grpc.loadPackageDefinition(packageDefinition) as unknown) as ProtoGrpcType;
+
+const orderHandlers: OrderServiceHandlers = {
+    ProcessOrder(call, callback) {
+        const request = call.request;
+        const response: OrderResponse = {
+            order_id: request.order_id,
+            status: "PROCESSED_TYPESCRIPT",
+            timestamp: Date.now(),
+        };
+        callback(null, response);
+    },
+    StreamOrders(call) {
+        call.on("data", (request: OrderRequest) => {
+            const response: OrderResponse = {
+                order_id: request.order_id,
+                status: `ACK_TYPESCRIPT: ${request.total_amount}`,
+                timestamp: Date.now(),
+            };
+            call.write(response);
+        });
+        call.on("end", () => {
+            call.end();
+        });
+    },
+};
+
+const server = new grpc.Server();
+server.addService(proto.ecommerce.OrderService.service, orderHandlers);
+server.bindAsync("0.0.0.0:50051", grpc.ServerCredentials.createInsecure(), (error, port) => {
+    if (error) {
+        console.error(`Binding failed: ${error.message}`);
+        return;
+    }
+    console.log(`[TypeScript gRPC] Server active on port ${port}`);
+});</code></pre>
+        </div>
+
+        <h2 id="architectural-synthesis">Architectural Synthesis: The Systems Engineering Trade-off Frontier</h2>
+        <p>Building distributed architectures requires balancing tradeoffs across network layering, transport choices, and IPC mechanisms. The transition from HTTP/1.1 to HTTP/2 and HTTP/3 reflects a continuous effort to eliminate Head-of-Line blocking across both application and transport layers.</p>
+        
+        <p>When architecting high-throughput, low-latency backends, engineers select communication primitives based on locality and application performance constraints.</p>
+      </section>
+
+      <!-- Page 19 -->
+      <section class="content-section">
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>ENGINEERING DOMAIN</th>
+                <th>SELECTED PROTOCOL / MECHANISM</th>
+                <th>DOMINANT TRADE-OFF ADVANTAGE</th>
+                <th>PRIMARY ENGINEERING CONSTRAINT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Local Inter-Process Data Sharing</strong></td>
+                <td>Shared Memory (shm_open, mmap, futex)</td>
+                <td>Maximum throughput (&sim; 50 GB/s), sub-microsecond latency</td>
+                <td>Requires manual memory synchronization; limited to single host</td>
+              </tr>
+              <tr>
+                <td><strong>Local Inter-Service Orchestration</strong></td>
+                <td>Unix Domain Sockets (UDS)</td>
+                <td>Bypasses network stack; lower latency and higher throughput than loopback</td>
+                <td>Limited to single host filesystem namespace</td>
+              </tr>
+              <tr>
+                <td><strong>Internal Cluster RPC Communication</strong></td>
+                <td>gRPC over HTTP/2 (Protobuf IDL)</td>
+                <td>Low parsing overhead, compact binary payloads, bidirectional streaming</td>
+                <td>Requires schema management; less accessible to web browsers</td>
+              </tr>
+              <tr>
+                <td><strong>Public Web and Mobile APIs</strong></td>
+                <td>HTTP/3 over QUIC</td>
+                <td>Eliminates transport HoL blocking; 0-RTT resumption; connection migration</td>
+                <td>Increased user-space CPU load; requires UDP firewall traversal</td>
+              </tr>
+              <tr>
+                <td><strong>Real-Time Telemetry and Streaming</strong></td>
+                <td>Raw UDP Datagrams</td>
+                <td>Minimal header overhead (8 bytes), zero connection handshakes</td>
+                <td>No ordering or delivery guarantees; packet loss must be handled by application</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Local Colocated Microservices:</strong> Communicating via network sockets over the loopback interface (127.0.0.1) introduces unnecessary serialization, checksums, and context switching. Replacing TCP loopback with Unix Domain Sockets yields lower latency (&sim; 2 to 5 &mu;s vs &sim; 10 to 20 &mu;s) and higher throughput. For ultra-high-throughput data transfers like inter-process model inference, shared memory (shm_open, mmap) bypasses the kernel entirely to deliver near-memory-bus speeds (&gt; 40 GB/s).</li>
+          <li><strong>Internal Service Meshes:</strong> Replacing external-facing REST/JSON over HTTP/1.1 with gRPC/Protobuf over HTTP/2 reduces CPU deserialization bottlenecks and bandwidth consumption. Compact Tag-Length-Value encoding, varints, and static typing improve serialization efficiency and simplify API maintenance.</li>
+          <li><strong>Edge-to-Client Communication Over Unstable Networks:</strong> HTTP/3 over QUIC resolves transport-layer Head-of-Line blocking by running independent multiplexed streams on top of UDP. Features like 0-RTT/1-RTT connection setup and Connection ID-based network migration maintain high performance across mobile environments and lossy edge networks.</li>
+        </ul>
+
+        <div class="page-nav-footer">
+          <a href="index.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous</span>
+            <span class="nav-card-title">Library Overview Dashboard</span>
+          </a>
+          <a href="databases.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Database Management Systems</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>Operating Systems & System Programming Fundamentals | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (10 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#privilege-boundaries">1. Kernel vs. User Space</a></li>
+        <li class="depth-2"><a href="#hardware-rings">Protection Rings (Ring 0 & 3)</a></li>
+        <li class="depth-2"><a href="#syscall-interface">System Call Interface</a></li>
+        <li class="depth-2"><a href="#syscall-mechanics">x86-64 SYSCALL Mechanics</a></li>
+        <li class="depth-2"><a href="#abi-mapping">Language Abstraction Mapping</a></li>
+        <li><a href="#processes-threads">2. Processes, Threads & Contexts</a></li>
+        <li class="depth-2"><a href="#memory-layout">Virtual Memory Layout & task_struct</a></li>
+        <li class="depth-2"><a href="#thread-abstraction">POSIX Threads Abstraction</a></li>
+        <li class="depth-2"><a href="#process-lifecycle">Process Lifecycle States</a></li>
+        <li class="depth-2"><a href="#context-switching">Context Switching & Overhead</a></li>
+        <li class="depth-2"><a href="#runtimes-concurrency">Python GIL, Loom & Libuv</a></li>
+        <li><a href="#concurrency-hazards">3. Concurrency Hazards & Mutexes</a></li>
+        <li class="depth-2"><a href="#race-conditions">Critical Sections & Race Conditions</a></li>
+        <li class="depth-2"><a href="#futex-mechanics">Mutex & Linux Futex Mechanics</a></li>
+        <li class="depth-2"><a href="#semaphores">Semaphores: Counting vs Binary</a></li>
+        <li class="depth-2"><a href="#deadlocks">Deadlocks & 4 Coffman Conditions</a></li>
+        <li class="depth-2"><a href="#hazards-summary">Livelock, Starvation & Inversion</a></li>
+        <li><a href="#io-models">4. I/O Models & Multiplexing</a></li>
+        <li class="depth-2"><a href="#blocking-io">Blocking vs Non-Blocking I/O</a></li>
+        <li class="depth-2"><a href="#multiplexing-evolution">select(), poll() & epoll()</a></li>
+        <li class="depth-2"><a href="#async-engines">Libuv, asyncio & Nginx</a></li>
+        <li><a href="#engineering-takeaways">5. Systems Takeaways</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 5 &bull; 10 Pages</span>
+        </div>
+        <h1 class="doc-title">Operating Systems & System Programming Fundamentals</h1>
+        <p class="doc-subtitle">A Foundational Guide to Kernel Mechanics, Privilege Boundaries, Concurrency, and I/O Architectures</p>
+      </div>
+
+      <!-- Page 1 -->
+      <section id="privilege-boundaries" class="content-section">
+        <p>The architecture of modern computing relies on a fundamental abstraction: hiding the complex mechanics of physical hardware behind structured software boundaries. At the center of this abstraction is the operating system kernel, a privileged software layer responsible for orchestrating hardware access, allocating memory, managing CPU execution contexts, and handling input/output operations. Understanding how the kernel operates and interacts with user applications is essential for building scalable, high-performance, and resilient backend systems.</p>
+
+        <h2>1. Kernel vs. User Space and Privilege Boundaries</h2>
+
+        <h3 id="hardware-rings">Hardware Protection Rings and Privilege Boundaries</h3>
+        <p>Modern microprocessors enforce access control through hardware-enforced privilege levels known as protection rings. On the x86-64 architecture, four privilege rings exist (Ring 0 through Ring 3), though general-purpose operating systems primarily utilize two: Ring 0 for Kernel Space and Ring 3 for User Space.</p>
+        
+        <p><strong>Ring 0</strong> represents the most privileged execution mode. Software executing in Ring 0 possesses unrestricted access to CPU instructions, physical memory, hardware device registers, and critical control registers, such as CR0, CR3, and CR4. The operating system kernel, core system drivers, and low-level hardware routines execute exclusively within Ring 0.</p>
+        
+        <p><strong>Ring 3</strong> represents a restricted execution environment reserved for user applications, language runtimes, and application background services. Software executing in Ring 3 cannot execute privileged CPU instructions, modify system control registers, or directly address memory outside its assigned virtual memory bounds.</p>
+        
+        <p>This privilege boundary is enforced at the microarchitectural level by the CPU's Current Privilege Level (CPL), embedded within the lower bits of the Code Segment selector register (CS). If an application executing in Ring 3 attempts to execute a restricted instruction—such as disabling interrupts via <code>CLI</code> or issuing direct I/O commands—the CPU hardware generates a General Protection Fault exception (<code>#GP</code>), immediately halting execution and handing control to the kernel's fault handler routine.</p>
+
+        <div class="analogy-card">
+          <div class="analogy-header">Analogy</div>
+          <p>An intuitive analogy for this privilege structure is a commercial banking system. User space corresponds to the bank's public lobby, where customers can walk around, fill out deposit slips, and inspect their account statements. Kernel space corresponds to the bank vault. A customer in the lobby cannot walk into the vault and retrieve cash directly; doing so triggers a security alarm (a processor exception). Instead, the customer must interact with a bank teller through a secure window, passing a formalized request slip. The teller, acting as the kernel, validates the customer's identity, enters the vault on their behalf, performs the transaction, and hands back the requested cash across the window interface.</p>
+        </div>
+
+        <h3 id="syscall-interface">The System Call Interface</h3>
+        <p>Because user-space applications cannot interact directly with physical hardware, operations such as reading a file from disk, allocating physical RAM, creating execution threads, or transmitting data over a network socket must be requested from the kernel. The System Call (Syscall) interface serves as the formal API between Ring 3 and Ring 0.</p>
+      </section>
+
+      <!-- Page 2 -->
+      <section id="syscall-mechanics" class="content-section">
+        <p>Standard system call operations include:</p>
+        <ul>
+          <li><code>read()</code> and <code>write()</code>: Transferring bytes between user-space memory buffers and file descriptors.</li>
+          <li><code>fork()</code> and <code>execve()</code>: Creating child processes and replacing execution contexts with binary executables.</li>
+          <li><code>socket()</code>, <code>bind()</code>, and <code>connect()</code>: Allocating and establishing network communication endpoints.</li>
+          <li><code>mmap()</code> and <code>brk()</code>: Adjusting virtual memory allocations and mapping file contents into process memory.</li>
+        </ul>
+
+        <h3>x86-64 System Call Execution Mechanics</h3>
+        <p>Transitioning from user space to kernel space requires a hardware-assisted context switch. Older 32-bit x86 systems relied on software interrupts (<code>INT 0x80</code>), which incurred noticeable CPU performance overhead due to gate descriptor lookups. Modern x86-64 architectures implement fast system call execution instructions: <code>SYSCALL</code> for entering Ring 0 and <code>SYSRET</code> for returning to Ring 3.</p>
+
+        <h4>Step-by-Step Execution Sequence of an x86-64 System Call:</h4>
+        <ol>
+          <li><strong>Register Setup in User Space:</strong> The application or library wrapper loads the designated system call number into the RAX register. Arguments are placed into standard hardware registers according to the Linux System V AMD64 ABI:
+            <ul>
+              <li>First Argument: <code>RDI</code></li>
+              <li>Second Argument: <code>RSI</code></li>
+              <li>Third Argument: <code>RDX</code></li>
+              <li>Fourth Argument: <code>R10</code> (The user-space C ABI uses RCX for the 4th argument, but the x86-64 SYSCALL instruction overwrites RCX to store the return instruction pointer; thus, the kernel ABI uses R10).</li>
+              <li>Fifth Argument: <code>R8</code></li>
+              <li>Sixth Argument: <code>R9</code></li>
+            </ul>
+          </li>
+          <li><strong>Execution of the SYSCALL Instruction:</strong> The program executes the SYSCALL instruction. The CPU hardware performs the following steps atomically:
+            <ul>
+              <li>Saves the instruction pointer of the next user-space instruction into the <code>RCX</code> register.</li>
+              <li>Saves the CPU status flags register (<code>RFLAGS</code>) into the <code>R11</code> register.</li>
+              <li>Changes the CPU Current Privilege Level (CPL) from 3 to 0.</li>
+              <li>Loads the kernel entry point instruction pointer from the Model-Specific Register <code>MSR_LSTAR</code> into <code>RIP</code>.</li>
+              <li>Disables interrupts by updating <code>RFLAGS</code>.</li>
+            </ul>
+          </li>
+          <li><strong>Kernel Stack Switch and Context Preservation (<code>entry_SYSCALL_64</code>):</strong> Control jumps to the kernel's <code>entry_SYSCALL_64</code> assembly handler. Because the user-space stack pointer (<code>RSP</code>) cannot be trusted by Ring 0 code, the kernel executes <code>SWAPGS</code> to retrieve the per-CPU kernel data area and swaps <code>RSP</code> to a dedicated kernel-mode stack pointer. The kernel then pushes user-space CPU register values onto the kernel stack, constructing a <code>pt_regs</code> structure that preserves the complete state of the suspended process.</li>
+          <li><strong>Table Lookup and Execution:</strong> The kernel validates the system call identifier in <code>RAX</code> against its upper boundary (<code>_NR_syscall_max</code>). It then indexes into the <code>sys_call_table</code> array of function pointers: <code>sys_call_table[RAX](RDI, RSI, RDX, R10, R8, R9)</code>. If RAX contains 1, the kernel dispatches execution to <code>sys_write()</code>.</li>
+          <li><strong>Kernel Return via SYSRET:</strong> Upon completing the operation, the kernel writes the return status into <code>RAX</code>. If an error occurred, a negative error value (such as <code>-EACCES</code>) is placed in <code>RAX</code>. The kernel restores saved user registers from <code>pt_regs</code>, restores <code>RSP</code> to the user stack, and issues <code>SYSRET</code>. <code>SYSRET</code> atomically restores <code>RIP</code> from <code>RCX</code>, restores <code>RFLAGS</code> from <code>R11</code>, and sets the CPU privilege level back to Ring 3.</li>
+        </ol>
+      </section>
+
+      <!-- Page 3 -->
+      <section id="abi-mapping" class="content-section">
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>ABI ATTRIBUTE</th>
+                <th>SYSTEM V C LANGUAGE ABI (USER SPACE)</th>
+                <th>LINUX X86-64 SYSTEM CALL ABI (KERNEL SPACE)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Syscall Identifier</strong></td>
+                <td>Not Applicable (Symbolic Function Invocation)</td>
+                <td>Stored in <code>RAX</code> register</td>
+              </tr>
+              <tr>
+                <td><strong>Argument 1 Slot</strong></td>
+                <td><code>RDI</code></td>
+                <td><code>RDI</code></td>
+              </tr>
+              <tr>
+                <td><strong>Argument 2 Slot</strong></td>
+                <td><code>RSI</code></td>
+                <td><code>RSI</code></td>
+              </tr>
+              <tr>
+                <td><strong>Argument 3 Slot</strong></td>
+                <td><code>RDX</code></td>
+                <td><code>RDX</code></td>
+              </tr>
+              <tr>
+                <td><strong>Argument 4 Slot</strong></td>
+                <td><code>RCX</code></td>
+                <td><code>R10</code> (RCX is clobbered by CPU SYSCALL)</td>
+              </tr>
+              <tr>
+                <td><strong>Argument 5 Slot</strong></td>
+                <td><code>R8</code></td>
+                <td><code>R8</code></td>
+              </tr>
+              <tr>
+                <td><strong>Argument 6 Slot</strong></td>
+                <td><code>R9</code></td>
+                <td><code>R9</code></td>
+              </tr>
+              <tr>
+                <td><strong>Clobbered Registers</strong></td>
+                <td>Callee-saved standard applied</td>
+                <td><code>RCX</code> (stores return RIP), <code>R11</code> (stores RFLAGS)</td>
+              </tr>
+              <tr>
+                <td><strong>Return Instruction</strong></td>
+                <td><code>RET</code> instruction</td>
+                <td><code>SYSRET</code> instruction</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Language Abstraction Mapping</h3>
+        <p>High-level programming runtimes wrap system call instructions behind standard interfaces to maintain portability across platforms:</p>
+        <ul>
+          <li><strong>C (glibc):</strong> Standard C libraries like <code>glibc</code> wrap system calls in C functions. Calling <code>read()</code> executes an inline assembly wrapper that assigns <code>RAX = 0</code>, populates argument registers, executes <code>SYSCALL</code>, and evaluates <code>RAX</code> upon return. If RAX is negative, glibc stores the absolute error code in the thread-local <code>errno</code> variable and returns -1.</li>
+          <li><strong>Python:</strong> Python handles system calls through standard library modules such as <code>os</code>. Executing <code>os.read(fd, n)</code> triggers underlying C calls within the CPython interpreter runtime, converting Python objects into native integers before invoking glibc functions.</li>
+          <li><strong>Java:</strong> Java uses the Java Native Interface (JNI) inside the JVM to execute system calls for operations like NIO file channel reads. The JVM handles memory pinning for garbage-collected arrays before invoking native kernel functions and translates negative return codes into Java exceptions.</li>
+          <li><strong>JavaScript (Node.js):</strong> JavaScript inside Node.js delegates file system and network operations to C++ bindings, which invoke the Libuv library. Libuv formats system call arguments and executes them either directly on the main event loop or via background worker threads.</li>
+        </ul>
+
+        <h2 id="processes-threads">2. Processes, Threads, and Execution Contexts</h2>
+
+        <h3 id="memory-layout">The Process Abstraction &amp; Memory Layout</h3>
+        <p>A process is an isolated, independent unit of resource allocation managed by the operating system. Each process runs in its own virtual address space, isolating it from other software running on the machine.</p>
+        
+        <p>The kernel assigns each process an isolated Virtual Memory Space mapped to physical RAM via multi-level page tables. Arranged from low to high virtual addresses, the layout consists of:</p>
+        <ul>
+          <li><strong>Text Segment (<code>.text</code>):</strong> Read-only area storing compiled machine code instructions.</li>
+          <li><strong>Initialized Data Segment (<code>.data</code>):</strong> Read-write segment storing global and static variables explicitly initialized by the programmer.</li>
+          <li><strong>Uninitialized Data Segment (<code>.bss</code>):</strong> Segment storing uninitialized global and static variables, zero-filled by the kernel at initialization.</li>
+        </ul>
+      </section>
+
+      <!-- Page 4 -->
+      <section id="thread-abstraction" class="content-section">
+        <ul>
+          <li><strong>Process Heap:</strong> Dynamic memory allocation area growing upward toward higher addresses via <code>brk()</code> or <code>sbrk()</code> system call adjustments.</li>
+          <li><strong>Memory Mapping Region:</strong> Space reserved for mapped files, shared libraries, and anonymous memory mappings created via <code>mmap()</code>.</li>
+          <li><strong>User Call Stack:</strong> Stack frame structure growing downward toward lower memory addresses, storing local variables, function arguments, and return pointers.</li>
+          <li><strong>Kernel Virtual Memory:</strong> Mapped into the upper address region, accessible only when the CPU is operating in Ring 0.</li>
+        </ul>
+
+        <p>Beyond memory boundaries, the kernel tracks process metadata using structures like <code>struct task_struct</code> in Linux. This metadata includes the Process Identifier (PID), a File Descriptor Table mapping file integer descriptors to open kernel file objects, security credentials (UID, GID), signal disposition tables, and environment variables.</p>
+
+        <div class="analogy-card">
+          <div class="analogy-header">Analogy</div>
+          <p>An intuitive analogy for processes versus threads is a software engineering company operating out of an office building. A Process is an entire office floor leased by a separate business unit. The floor has locked access doors (isolated virtual address space), its own master lease contract, and private file storage cabinets (file descriptor tables). A Thread is an individual employee working on that floor. All employees belonging to the same business unit share access to the floor's common work areas, conference rooms, and filing cabinets (Heap, Data Segments, and File Descriptors). However, each worker maintains their own desk drawers, personal notepad, and task list (Private Call Stack, CPU Register set, and Program Counter).</p>
+        </div>
+
+        <h3>The Thread Abstraction (POSIX Threads)</h3>
+        <p>A thread represents an execution context within a host process. A process can contain multiple threads running concurrently, sharing process-level resources while executing independently.</p>
+        
+        <p>Threads within the same process share access to the process text segment, global data segments, heap allocation space, open file descriptors, signal handlers, and working directory state. Conversely, each thread maintains its own execution call stack, stack pointer register (<code>RSP</code>), program counter register (<code>RIP</code>), general-purpose CPU registers, and Thread-Local Storage (TLS) memory areas.</p>
+
+        <h3 id="process-lifecycle">The Process Lifecycle</h3>
+        <p>The operating system scheduler manages process execution state through well-defined transitions:</p>
+        <ul>
+          <li><strong>New:</strong> The kernel allocates process identifiers, memory pages, and kernel structures via <code>fork()</code> or <code>clone()</code>.</li>
+          <li><strong>Ready:</strong> The process is fully loaded into memory and waiting in a run queue for CPU assignment.</li>
+          <li><strong>Running:</strong> The CPU is executing instructions from the process's thread contexts.</li>
+          <li><strong>Waiting / Blocked:</strong> The process is paused while awaiting an external event, such as disk read completion or network socket data.</li>
+          <li><strong>Terminated:</strong> Execution is finished or halted by a signal. Virtual memory pages are reclaimed, while process exit status is retained in the process table until collected by a parent process via <code>waitpid()</code>.</li>
+        </ul>
+
+        <h3 id="context-switching">Context Switching Mechanics and Microarchitectural Costs</h3>
+        <p>A context switch occurs when the kernel scheduler suspends execution of a running process or thread to resume execution of another.</p>
+
+        <h4>Sequence of Operations During a Context Switch:</h4>
+        <ol>
+          <li><strong>Interrupt Trigger:</strong> A system timer interrupt fires (preemptive scheduling) or the running thread executes a blocking system call (voluntary yielding).</li>
+          <li><strong>Privilege Transition:</strong> The CPU switches to Ring 0 and jumps to the scheduler interrupt handler routine.</li>
+          <li><strong>Register State Preservation:</strong> The current execution registers (<code>RIP</code>, <code>RSP</code>, general-purpose registers, floating-point units) are saved into the thread's kernel stack structure (<code>pt_regs</code> and <code>task_struct</code>).</li>
+        </ol>
+      </section>
+
+      <!-- Page 5 -->
+      <section id="runtimes-concurrency" class="content-section">
+        <ol start="4">
+          <li><strong>Scheduler Dispatch:</strong> The kernel scheduling algorithm (such as Linux Completely Fair Scheduler) selects the next thread from the run queue.</li>
+          <li><strong>Address Space Switch (Process Context Switch):</strong> If switching between threads of different processes, the kernel updates the <code>CR3</code> control register to point to the incoming process's page table directory.</li>
+          <li><strong>State Restoration:</strong> The kernel restores saved hardware registers from the incoming thread's structure, sets <code>RSP</code> and <code>RIP</code>, and executes <code>SYSRET</code> or <code>IRET</code> to resume execution.</li>
+        </ol>
+
+        <h4>Microarchitectural Overhead:</h4>
+        <p>Switching between threads within the same process retains memory mappings, minimizing performance impacts. However, switching between distinct processes introduces measurable latency:</p>
+        <ul>
+          <li><strong>Cache Invalidation:</strong> The incoming process accesses different data addresses, causing cache misses across CPU L1, L2, and L3 caches.</li>
+          <li><strong>TLB Flushes:</strong> The Translation Lookaside Buffer caches virtual-to-physical page address translations. Reloading CR3 invalidates non-global TLB entries, requiring subsequent memory operations to walk physical page tables.</li>
+          <li><strong>PCID Optimizations:</strong> Modern x86-64 processors support Process Context Identifiers (PCID). PCID tags TLB entries with address space identifiers, allowing CR3 updates without flushing cached translations, which mitigates context switch penalties.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>PERFORMANCE &amp; ARCHITECTURE DIMENSION</th>
+                <th>MULTIPROCESSING (SEPARATE PROCESSES)</th>
+                <th>MULTITHREADING (THREADS IN SAME PROCESS)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Virtual Memory Boundaries</strong></td>
+                <td>Completely Isolated per Process</td>
+                <td>Fully Shared across Threads</td>
+              </tr>
+              <tr>
+                <td><strong>Fault Isolation</strong></td>
+                <td>High (Crash in one process leaves others unaffected)</td>
+                <td>Low (Memory corruption in one thread crashes entire process)</td>
+              </tr>
+              <tr>
+                <td><strong>Context Switch Overhead</strong></td>
+                <td>Heavy (Requires CR3 swap, triggering TLB invalidations)</td>
+                <td>Lightweight (Registers swapped; CR3 page tables retained)</td>
+              </tr>
+              <tr>
+                <td><strong>Inter-Thread Communication</strong></td>
+                <td>Inter-Process Communication (Sockets, Pipes, Shared Memory)</td>
+                <td>Direct Pointer References (Shared Heap and Global Memory)</td>
+              </tr>
+              <tr>
+                <td><strong>Creation Cost</strong></td>
+                <td>High (Page tables, descriptor tables cloned)</td>
+                <td>Low (Allocates stack space and thread control structures)</td>
+              </tr>
+              <tr>
+                <td><strong>Primary Systems Application</strong></td>
+                <td>Isolated workers, CPU-bound tasks in interpreted environments</td>
+                <td>I/O concurrency pipelines, shared-state caches</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Multi-Language Execution Frameworks</h3>
+        <ul>
+          <li><strong>Python (CPython):</strong> CPython uses a Global Interpreter Lock (GIL) to prevent multiple native threads from executing Python bytecode simultaneously. For CPU-bound tasks, CPython threads cannot scale across multiple CPU cores, requiring developers to use the <code>multiprocessing</code> module to spawn isolated processes. For I/O-bound tasks, CPython threads release the GIL during blocking system calls, enabling parallel I/O execution.</li>
+          <li><strong>Java (JVM):</strong> Java traditionally mapped every <code>java.lang.Thread</code> instance directly to a 1:1 kernel POSIX thread. While efficient for parallel CPU workloads, this model limits scaling to thousands of concurrent connections due to thread stack memory footprint and context-switch costs. JDK 21 introduced Virtual Threads (Project Loom), which multiplex a large number of user-mode virtual threads across a smaller pool of native OS worker threads. When a virtual thread executes a blocking I/O operation, the JVM unmounts it from its native thread, allowing other virtual threads to run without triggering an OS-level context switch.</li>
+          <li><strong>JavaScript (Node.js):</strong> JavaScript inside Node.js executes application code on a single thread event loop. To process CPU-heavy workloads without blocking event processing, developers use the <code>worker_threads</code> module to spawn isolated execution contexts running on dedicated threads. Operations that lack non-blocking system support—such as disk I/O, DNS lookups, and crypto routines—are offloaded to Libuv's background thread pool (default size 4).</li>
+        </ul>
+      </section>
+
+      <!-- Page 6 -->
+      <section id="concurrency-hazards" class="content-section">
+        <h2>3. Concurrency Hazards and Synchronization Primitives</h2>
+
+        <h3 id="race-conditions">Critical Sections and Race Conditions</h3>
+        <p>A race condition occurs when concurrent threads access and modify shared memory without synchronization, producing non-deterministic results based on thread scheduling timing. A critical section refers to code that accesses shared mutable resources and must execute atomically.</p>
+
+        <h4>Step-by-Step Race Condition Walkthrough:</h4>
+        <p>Consider two threads executing <code>counter++</code> on a shared global variable initialized to 0. At the machine level, the increment operation expands into three assembly instructions: loading memory into a register, adding 1, and writing the register value back to memory.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>TEMPORAL SEQUENCE</th>
+                <th>CORE 1 (THREAD A) INSTRUCTION EXECUTION</th>
+                <th>CORE 2 (THREAD B) INSTRUCTION EXECUTION</th>
+                <th>REGISTER STATE (EAX_A / EAX_B)</th>
+                <th>VALUE IN RAM (COUNTER)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>T_0</strong></td>
+                <td>Reads counter ( <code>MOV EAX, [counter]</code> )</td>
+                <td>Idle</td>
+                <td><code>EAX_A = 0</code></td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>T_1</strong></td>
+                <td>Increments register ( <code>ADD EAX, 1</code> )</td>
+                <td>Reads counter ( <code>MOV EAX, [counter]</code> )</td>
+                <td><code>EAX_A = 1</code> , <code>EAX_B = 0</code></td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>T_2</strong></td>
+                <td>Preempted before store</td>
+                <td>Increments register ( <code>ADD EAX, 1</code> )</td>
+                <td><code>EAX_A = 1</code> , <code>EAX_B = 1</code></td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>T_3</strong></td>
+                <td>Writes register ( <code>MOV [counter], EAX</code> )</td>
+                <td>Writes register ( <code>MOV [counter], EAX</code> )</td>
+                <td><code>EAX_A = 1</code> , <code>EAX_B = 1</code></td>
+                <td>1 (Lost Update)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Although two increments occurred, the stored value is 1 instead of 2 because Thread B wrote its result using stale state.</p>
+
+        <h3 id="futex-mechanics">Mutual Exclusion (Mutex) and Linux Futex Mechanics</h3>
+        <p>A Mutex provides mutual exclusion, ensuring only one thread executes inside a critical section at a time.</p>
+        <p>Modern operating systems use Fast Userspace Mutexes (futex) to avoid system call penalties during lock acquisition:</p>
+        <ul>
+          <li><strong>Uncontended Path (Userspace Fast Path):</strong> Thread A requests an unlocked mutex. It executes an atomic hardware instruction (such as <code>LOCK CMPXCHG</code> on x86) to swap the lock state from 0 (unlocked) to 1 (locked). Because the lock was free, the operation succeeds entirely in Ring 3 without issuing a system call.</li>
+          <li><strong>Contended Path (Kernel Slow Path):</strong> If Thread B attempts to acquire the lock while Thread A holds it, its atomic instruction fails. Thread B then issues a <code>futex()</code> system call (<code>sys_futex</code>) with the <code>FUTEX_WAIT</code> command. The kernel updates Thread B's state to Blocked and adds its <code>task_struct</code> to a kernel wait queue.</li>
+          <li><strong>Unlock Operation:</strong> When Thread A finishes, it sets the lock state back to 0. If waiting threads exist, it issues a <code>futex()</code> call with <code>FUTEX_WAKE</code>, instructing the kernel scheduler to wake Thread B and move it back to the Ready run queue.</li>
+        </ul>
+      </section>
+
+      <!-- Page 7 -->
+      <section id="semaphores" class="content-section">
+        <h3>Semaphores: Counting vs. Binary</h3>
+        <p>A Semaphore is an integer variable S accessed through two atomic operations: <code>wait()</code> (or P), which decrements S and blocks if S &le; 0, and <code>signal()</code> (or V), which increments S and unblocks waiting threads.</p>
+        <ul>
+          <li><strong>Binary Semaphore:</strong> The value S is restricted to 0 or 1. It operates similarly to a mutex, but with a structural distinction: a Mutex requires the thread holding the lock to release it, whereas a Semaphore can be signaled by any thread, making it suitable for event notification.</li>
+          <li><strong>Counting Semaphore:</strong> The value S is initialized to N, representing N available resource units (such as a pool of database connections). Threads execute <code>wait()</code> to consume a slot, blocking when S &le; 0. Releasing resources via <code>signal()</code> increments S and wakes waiting threads.</li>
+        </ul>
+
+        <h3 id="deadlocks">Deadlocks and the Four Coffman Conditions</h3>
+        <p>A Deadlock occurs when concurrent threads are permanently blocked, each holding a resource required by another thread in the group. A deadlock can form if and only if all four Coffman conditions are present simultaneously:</p>
+        <ol>
+          <li><strong>Mutual Exclusion:</strong> Shared resources cannot be accessed concurrently; only one thread holds a resource at a time.</li>
+          <li><strong>Hold and Wait:</strong> A thread holding a resource can request additional resources held by other threads without releasing its current allocations.</li>
+          <li><strong>No Preemption:</strong> Allocated resources cannot be forcibly reclaimed from a thread; they must be released voluntarily.</li>
+          <li><strong>Circular Wait:</strong> A closed chain of threads exists where each thread waits for a resource held by the next thread in the chain.</li>
+        </ol>
+
+        <h4>Deadlock Mitigation Strategies:</h4>
+        <ul>
+          <li><strong>Hierarchical Lock Ordering:</strong> Enforce an application-wide acquisition order for locks. If all threads acquire Lock A before Lock B, circular wait conditions cannot occur.</li>
+          <li><strong>Non-Blocking Acquisition:</strong> Use try-lock primitives like <code>pthread_mutex_trylock()</code>. If a thread fails to acquire a secondary lock, it releases its existing locks, backs off, and retries later.</li>
+          <li><strong>Deadlock Avoidance:</strong> Use runtime checks (such as the Banker's Algorithm) to evaluate resource allocation requests and ensure the system remains in a safe state before granting access.</li>
+        </ul>
+
+        <h3 id="hazards-summary">Additional Concurrency Hazards</h3>
+        <ul>
+          <li><strong>Livelock:</strong> Threads continually modify their execution states in response to each other without making forward progress, consuming CPU cycles while remaining stuck.</li>
+          <li><strong>Starvation:</strong> A thread is repeatedly denied access to resources or CPU time because higher-priority threads consistently monopolize the scheduler.</li>
+          <li><strong>Priority Inversion:</strong> A low-priority thread holding a lock blocks a high-priority thread waiting for the same lock. If an intermediate-priority thread preempts the low-priority thread on the CPU, the high-priority thread is indirectly delayed by a lower-priority task.</li>
+          <li><strong>Priority Inheritance Protocol:</strong> Mitigates Priority Inversion by temporarily raising the priority of the lock-holding low-priority thread to match that of the waiting high-priority thread, allowing it to complete its critical section quickly and release the lock.</li>
+        </ul>
+      </section>
+
+      <!-- Page 8 -->
+      <section id="io-models" class="content-section">
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>SYNCHRONIZATION PRIMITIVE / HAZARD</th>
+                <th>SYSTEM FUNCTION</th>
+                <th>OPERATIONAL HAZARDS</th>
+                <th>MITIGATION TECHNIQUE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Mutex</strong></td>
+                <td>Provides exclusive critical section ownership</td>
+                <td>Deadlocks, Lock Contention, Priority Inversion</td>
+                <td>Enforce strict acquisition ordering; keep critical sections brief</td>
+              </tr>
+              <tr>
+                <td><strong>Counting Semaphore</strong></td>
+                <td>Tracks resource pool allocations</td>
+                <td>Resource Exhaustion, Deadlocks</td>
+                <td>Use managed resource pools; enforce timeout limits</td>
+              </tr>
+              <tr>
+                <td><strong>Futex</strong></td>
+                <td>Provides fast user-space locking with kernel wait queues</td>
+                <td>Indefinite sleeping on state corruption</td>
+                <td>Managed via standard runtime lock abstractions (pthreads)</td>
+              </tr>
+              <tr>
+                <td><strong>Priority Inversion</strong></td>
+                <td>Context hazard where lower-priority threads delay higher-priority tasks</td>
+                <td>System unresponsiveness, elevated latencies</td>
+                <td>Enable Priority Inheritance Protocols on locks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>4. I/O Models, Multiplexing, and Modern Asynchronous Web Engines</h2>
+
+        <h3 id="blocking-io">Blocking vs. Non-Blocking I/O</h3>
+        <p>Operating system I/O transfers bytes between memory buffers and physical devices like network interfaces or disk controllers.</p>
+        
+        <p>In <strong>Blocking I/O</strong>, when an application executes <code>read()</code> on a network socket, the kernel suspends the thread, updating its state to Blocked. The thread yields the CPU until the network interface receives data, copies it into kernel memory, and transfers it to the application's user-space buffer. While suspended, the thread cannot perform other tasks, requiring multi-threaded designs to scale concurrent operations.</p>
+        
+        <p>In <strong>Non-Blocking I/O</strong>, an application configures a file descriptor with the <code>O_NONBLOCK</code> flag using <code>fcntl()</code>. When a thread executes <code>read()</code> on a non-blocking socket, the kernel checks the receive buffer. If data is present, it copies the bytes and returns immediately. If no data is available, the kernel does not suspend the thread; instead, it returns an error code immediately, setting <code>errno</code> to <code>EWOULDBLOCK</code> or <code>EAGAIN</code>.</p>
+        
+        <p>While non-blocking sockets prevent thread suspension, polling them in a loop (busy-waiting) wastes CPU cycles, highlighting the need for efficient I/O multiplexing.</p>
+
+        <h3 id="multiplexing-evolution">Evolution of I/O Multiplexing</h3>
+        <p>I/O Multiplexing allows an application thread to monitor thousands of socket file descriptors simultaneously, waiting until one or more become ready for read or write operations.</p>
+
+        <h4>1. select() System Call:</h4>
+        <p>Introduced in early Unix versions, <code>select()</code> monitors file descriptors using fixed-size bitmasks.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">C (select Syscall Signature)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);</code></pre>
+        </div>
+
+        <p>The application populates bitmasks where set bits represent file descriptors. Calling <code>select()</code> copies these bitmasks across the user-kernel boundary into Ring 0. The kernel scans all descriptors sequentially (O(N) complexity), modifies the bitmasks to signal ready descriptors, and returns. It requires an O(N) scan and overwrites bitmasks in place. Additionally, <code>FD_SETSIZE</code> caps descriptor limits (typically to 1024).</p>
+
+        <h4>2. poll() System Call:</h4>
+        <p><code>poll()</code> replaced bitmasks with an array of <code>struct pollfd</code> elements.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">C (poll Syscall Signature)</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>struct pollfd {
+    int fd;         // File descriptor
+    short events;   // Requested events mask
+    short revents;  // Returned events mask
+};
+int poll(struct pollfd *fds, nfds_t nfds, int timeout);</code></pre>
+        </div>
+      </section>
+
+      <!-- Page 9 -->
+      <section class="content-section">
+        <p>This eliminates bitmask reallocation and removes the 1024-descriptor limit. However, <code>poll()</code> still requires an O(N) kernel scan and copies the full array on every call.</p>
+
+        <h4>3. Event-Driven Notifications: epoll (Linux) and kqueue (macOS/BSD)</h4>
+        <p>Modern operating systems manage multiplexing state directly in kernel memory using APIs like Linux <code>epoll</code>.</p>
+        
+        <p><code>epoll</code> separates monitoring into three distinct system calls:</p>
+        <ul>
+          <li><code>epoll_create1()</code>: Allocates an epoll memory structure in the kernel and returns a file descriptor referencing it.</li>
+          <li><code>epoll_ctl()</code>: Registers, modifies, or removes file descriptors to monitor within the kernel structure.</li>
+          <li><code>epoll_wait()</code>: Suspends the calling thread until monitored sockets become ready, returning an array containing only ready descriptors.</li>
+        </ul>
+
+        <p>Inside the kernel, <code>epoll</code> relies on two main data structures:</p>
+        <ul>
+          <li><strong>Red-Black Tree:</strong> Stores monitored file descriptors registered via <code>epoll_ctl()</code>. Inserting, modifying, or removing descriptors runs in O(log N) time. Descriptors persist across calls, eliminating repetitive memory copies.</li>
+          <li><strong>Ready Doubly-Linked List:</strong> Stores references to ready file descriptors. When network packets arrive, the network interface card (NIC) fires a hardware interrupt. The kernel's driver executes a callback that appends ready descriptors directly to the list.</li>
+        </ul>
+
+        <p>When an application calls <code>epoll_wait()</code>, the kernel checks the ready list. If non-empty, it copies references to ready descriptors into the user buffer and returns in O(1) time relative to total monitored sockets.</p>
+
+        <div class="table-wrapper">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>SCALABILITY METRIC</th>
+                <th>SELECT()</th>
+                <th>POLL()</th>
+                <th>EPOLL (LINUX) / KQUEUE (BSD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Kernel Data Structure</strong></td>
+                <td>Fixed Bitmaps ( <code>fd_set</code> )</td>
+                <td>Variable Array ( <code>pollfd</code> )</td>
+                <td>Red-Black Tree + Ready Doubly-Linked List</td>
+              </tr>
+              <tr>
+                <td><strong>Max Descriptor Limit</strong></td>
+                <td>Typically 1024 ( <code>FD_SETSIZE</code> )</td>
+                <td>Unbounded (System open file limit)</td>
+                <td>Unbounded (System open file limit)</td>
+              </tr>
+              <tr>
+                <td><strong>User-to-Kernel Memory Copy</strong></td>
+                <td>Copies full set on every call</td>
+                <td>Copies full array on every call</td>
+                <td>Registered once via <code>epoll_ctl()</code>; no re-copies</td>
+              </tr>
+              <tr>
+                <td><strong>Search Complexity</strong></td>
+                <td>O(N) linear scan over descriptor range</td>
+                <td>O(N) linear scan over array</td>
+                <td>O(1) lookup over Ready List</td>
+              </tr>
+              <tr>
+                <td><strong>Performance Scaling</strong></td>
+                <td>Degrades as monitored descriptors (N) grow</td>
+                <td>Degrades as monitored descriptors (N) grow</td>
+                <td>Scales with active descriptors (M), independent of total monitored (N)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="async-engines">Asynchronous Web Engine Implementations</h3>
+        <h4>Node.js &amp; Libuv Runtime:</h4>
+        <p>Node.js uses the Libuv C library to execute its event loop and manage non-blocking I/O operations. The event loop runs on the main execution thread, executing through six distinct phases in deterministic order during each iteration:</p>
+        <ol>
+          <li><strong>Timers Phase:</strong> Executes callbacks scheduled by <code>setTimeout()</code> and <code>setInterval()</code>.</li>
+          <li><strong>Pending Callbacks Phase:</strong> Processes deferred system-level I/O callbacks, such as TCP socket errors.</li>
+          <li><strong>Idle, Prepare Phase:</strong> Performs internal Libuv operations between iterations.</li>
+          <li><strong>Poll Phase:</strong> Core phase. Libuv calls <code>epoll_wait()</code> to block for I/O events and execute associated callbacks.</li>
+        </ol>
+      </section>
+
+      <!-- Page 10 -->
+      <section id="engineering-takeaways" class="content-section">
+        <ol start="5">
+          <li><strong>Check Phase:</strong> Executes callbacks scheduled via <code>setImmediate()</code>.</li>
+          <li><strong>Close Callbacks Phase:</strong> Executes resource cleanup handlers, such as <code>socket.on('close', ...)</code>.</li>
+        </ol>
+
+        <p>JavaScript microtasks run outside the main Libuv phases. Whenever the V8 execution stack clears, the runtime drains the microtask queue (<code>process.nextTick()</code> queue first, followed by Promise microtasks) before the loop advances. Operations lacking non-blocking OS support are offloaded to Libuv's worker thread pool (default size 4).</p>
+
+        <h4>Python asyncio Event Loop:</h4>
+        <p>Python's <code>asyncio</code> library provides single-threaded asynchronous execution using coroutines defined with <code>async def</code>. When a coroutine awaits an I/O operation via <code>await</code>, it yields control back to the event loop. Underneath, asyncio uses <code>selectors.DefaultSelector()</code>, which automatically selects <code>EpollSelector</code> on Linux or <code>KqueueSelector</code> on macOS. The loop registers file descriptors, polls for readiness via <code>epoll_wait()</code>, and resumes coroutine execution when data is ready.</p>
+
+        <h4>Nginx Master-Worker Architecture:</h4>
+        <p>Nginx uses an asynchronous, event-driven master-worker architecture designed for high throughput. The Master Process executes with root privileges to read configurations, bind network sockets, allocate shared memory, and manage worker processes. Worker Processes are unprivileged processes spawned to match available CPU cores. Each worker executes an independent, non-blocking loop using <code>epoll</code> or <code>kqueue</code>, handling thousands of socket connections concurrently on a single thread. Because workers run as separate processes, memory corruption in one worker does not impact others.</p>
+
+        <h2>5. Systems Engineering Takeaways</h2>
+        <ul>
+          <li><strong>Minimize Kernel Transitions:</strong> Crossing the Ring 3 to Ring 0 boundary incurs context preservation overhead. High-performance software uses vectored I/O (<code>readv()</code>, <code>writev()</code>) or memory-mapped files (<code>mmap()</code>) to batch data transfers and reduce system call counts.</li>
+          <li><strong>Align Thread Models with Workload Characteristics:</strong>
+            <ul>
+              <li>For I/O-bound workloads, non-blocking multiplexing models (epoll, Node.js Libuv, Java Virtual Threads, Python asyncio) yield high connection density with low memory footprints.</li>
+              <li>For CPU-bound workloads, use multi-process architectures or core-matched thread pools to bypass lock contention (such as Python's GIL) and avoid context-switching overhead.</li>
+            </ul>
+          </li>
+          <li><strong>Prevent Concurrency Pitfalls:</strong> Enforce a global lock hierarchy to eliminate circular wait conditions. Use atomic user-space primitives and futex-backed synchronization instead of heavyweight kernel locks. Size thread pools carefully to fit physical hardware bounds, avoiding thread-over-subscription that leads to TLB invalidation and cache churn.</li>
+          <li><strong>Leverage Event-Driven I/O Multiplexing:</strong> Use O(1) event notifications (<code>epoll</code> / <code>kqueue</code>) to scale concurrent socket handling. Offload blocking file operations and compute-heavy tasks to background thread pools to keep primary event loops responsive.</li>
+        </ul>
+
+        <div class="page-nav-footer">
+          <a href="data-structures.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Foundational Computer Science</span>
+          </a>
+          <a href="git-github.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Comprehensive Git &amp; GitHub</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

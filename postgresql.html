@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <title>PostgreSQL Master Notes: Zero to Hero | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+    <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–05</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownRuntimes">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Languages &amp; Runtimes</span>
+            <span class="dropdown-badge">VOL.06–10</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="sidebar-title">
+        <span>Contents (16 Pages)</span>
+      </div>
+      <ul class="toc-nav">
+        <li><a href="#overview">Overview &amp; Roadmap</a></li>
+        <li><a href="#module-1">1. Foundations &amp; Architecture</a></li>
+        <li class="depth-2"><a href="#mod-1-1">1.1 What is a Database?</a></li>
+        <li class="depth-2"><a href="#mod-1-2">1.2 RDBMS vs Excel</a></li>
+        <li class="depth-2"><a href="#mod-1-3">1.3 DBMS vs RDBMS</a></li>
+        <li class="depth-2"><a href="#mod-1-4">1.4 Why PostgreSQL?</a></li>
+        <li class="depth-2"><a href="#mod-1-5">1.5 SQL vs PostgreSQL</a></li>
+        <li><a href="#module-2">2. Installation &amp; Architecture</a></li>
+        <li class="depth-2"><a href="#mod-2-1">2.1 Default Parameters</a></li>
+        <li class="depth-2"><a href="#mod-2-2">2.2 pgAdmin 4 vs psql</a></li>
+        <li class="depth-2"><a href="#mod-2-3">2.3 Essential psql Commands</a></li>
+        <li class="depth-2"><a href="#mod-2-4">2.4 Object Hierarchy</a></li>
+        <li><a href="#module-3">3. Database &amp; Table CRUD</a></li>
+        <li class="depth-2"><a href="#mod-3-1">3.1 Database Management</a></li>
+        <li class="depth-2"><a href="#mod-3-2">3.2 Table Creation</a></li>
+        <li class="depth-2"><a href="#mod-3-3">3.3 4 Core CRUD Operations</a></li>
+        <li><a href="#module-4">4. Data Types &amp; Constraints</a></li>
+        <li class="depth-2"><a href="#mod-4-1">4.1 Comprehensive Data Types</a></li>
+        <li class="depth-2"><a href="#mod-4-2">4.2 Integrity Constraints</a></li>
+        <li class="depth-2"><a href="#mod-4-3">4.3 SERIAL Sequence Mechanics</a></li>
+        <li class="depth-2"><a href="#mod-4-4">4.4 Bank Employee Case Study</a></li>
+        <li><a href="#module-5">5. Filtering &amp; Wildcards</a></li>
+        <li class="depth-2"><a href="#mod-5-1">5.1 Comparison &amp; Logic</a></li>
+        <li class="depth-2"><a href="#mod-5-2">5.2 IN &amp; BETWEEN</a></li>
+        <li class="depth-2"><a href="#mod-5-3">5.3 Distinct, Sort, Pagination</a></li>
+        <li class="depth-2"><a href="#mod-5-4">5.4 Wildcard Patterns (LIKE)</a></li>
+        <li><a href="#module-6">6. Aggregates &amp; GROUP BY</a></li>
+        <li class="depth-2"><a href="#mod-6-1">6.1 Aggregate Functions</a></li>
+        <li class="depth-2"><a href="#mod-6-2">6.2 GROUP BY Mechanics</a></li>
+        <li><a href="#module-7">7. String Manipulation</a></li>
+        <li class="depth-2"><a href="#mod-7-1">7.1 String Function Suite</a></li>
+        <li class="depth-2"><a href="#mod-7-2">7.2 Workshop Solutions</a></li>
+        <li><a href="#module-8">8. Schema Alterations (ALTER)</a></li>
+        <li class="depth-2"><a href="#mod-8-1">8.1 Mutation Syntax</a></li>
+        <li class="depth-2"><a href="#mod-8-2">8.2 Named CHECK Constraints</a></li>
+        <li><a href="#module-9">9. Conditional Logic (CASE)</a></li>
+        <li class="depth-2"><a href="#mod-9-1">9.1 Multi-Tier Classification</a></li>
+        <li class="depth-2"><a href="#mod-9-2">9.2 Bonus Calculations</a></li>
+        <li class="depth-2"><a href="#mod-9-3">9.3 CASE with GROUP BY</a></li>
+        <li><a href="#module-10">10. Relational Architecture &amp; FKs</a></li>
+        <li class="depth-2"><a href="#mod-10-1">10.1 Normalization &amp; Cardinality</a></li>
+        <li class="depth-2"><a href="#mod-10-2">10.2 Foreign Key Mechanics</a></li>
+        <li><a href="#module-11">11. SQL Joins</a></li>
+        <li class="depth-2"><a href="#mod-11-1">11.1 Join Types Overview</a></li>
+        <li class="depth-2"><a href="#mod-11-2">11.2 N:M Many-to-Many Join</a></li>
+        <li><a href="#module-12">12. E-Commerce Store Project</a></li>
+        <li><a href="#module-13">13. Views, HAVING &amp; ROLLUP</a></li>
+        <li class="depth-2"><a href="#mod-13-1">13.1 Database Views</a></li>
+        <li class="depth-2"><a href="#mod-13-2">13.2 HAVING vs WHERE</a></li>
+        <li class="depth-2"><a href="#mod-13-3">13.3 Subtotals with ROLLUP</a></li>
+        <li><a href="#module-14">14. Procedures &amp; UDFs</a></li>
+        <li class="depth-2"><a href="#mod-14-1">14.1 Stored Procedures</a></li>
+        <li class="depth-2"><a href="#mod-14-2">14.2 User Defined Functions</a></li>
+        <li><a href="#module-15">15. Window Functions</a></li>
+        <li class="depth-2"><a href="#mod-15-1">15.1 Window Functions Overview</a></li>
+        <li class="depth-2"><a href="#mod-15-2">15.2 OVER() Running Metrics</a></li>
+        <li class="depth-2"><a href="#mod-15-3">15.3 Ranking Functions</a></li>
+        <li class="depth-2"><a href="#mod-15-4">15.4 Offset LAG &amp; LEAD</a></li>
+        <li><a href="#module-16">16. Common Table Expressions</a></li>
+        <li><a href="#module-17">17. Triggers &amp; Master Cheat Sheet</a></li>
+        <li class="depth-2"><a href="#mod-17-1">17.1 Triggers &amp; Audit Workflows</a></li>
+        <li class="depth-2"><a href="#mod-17-2">17.2 Master Cheat Sheet</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="doc-hero" id="overview">
+        <div class="doc-badge-row">
+          <span class="doc-badge">Reference Manual</span>
+          <span class="doc-badge pdf-tag">PDF Document 9 &bull; 16 Pages</span>
+        </div>
+        <h1 class="doc-title">PostgreSQL Master Notes: Zero to Hero</h1>
+        <p class="doc-subtitle">Complete Developer &amp; Data Analyst Reference Guide &mdash; Syntax, Architecture &amp; Practical Examples</p>
+      </div>
+
+<section class="content-section">
+        <h2>Handbook Overview &amp; Learning Roadmap</h2>
+        <p>These comprehensive notes capture every detail, explanation, code block, and practical architectural model from the complete PostgreSQL Masterclass. Designed as a standalone technical handbook, you can seamlessly refer back to this document months or years after learning to review syntax, database design patterns, procedural logic, analytics, and performance optimization techniques.</p>
+      </section>
+
+      <!-- Module 1 -->
+      <section class="content-section" id="module-1">
+        <h2>Module 1: Foundations of Databases &amp; PostgreSQL Architecture</h2>
+
+        <h3 id="mod-1-1">1.1 What is a Database?</h3>
+        <p>A Database is an organized, structured collection of data stored electronically, paired with systematic methods to access, manipulate, and manage that data. Consider an physical analogy: finding a specific science book in a chaotic pile of millions of unorganized books is virtually impossible. However, in a structured library categorized by subject, index, author, and shelf position, retrieval takes seconds. Databases enforce this structured categorization electronically.</p>
+
+        <h3 id="mod-1-2">1.2 Why Use a Relational Database Instead of Excel / Spreadsheets?</h3>
+        <p>While Microsoft Excel or spreadsheets present data in rows and columns, they fail catastrophically when scaled for enterprise applications:</p>
+        <ul>
+          <li><strong>Scalability &amp; Performance:</strong> Spreadsheets crash or freeze when handling millions of rows. Relational databases easily index and manage billions of rows with sub-second response times.</li>
+          <li><strong>Concurrent Access:</strong> Spreadsheets suffer file-locking issues when multiple users or web apps read/write simultaneously. Databases support thousands of concurrent transactions via Multi-Version Concurrency Control (MVCC).</li>
+          <li><strong>Data Integrity &amp; ACID Compliance:</strong> Databases enforce strict constraint rules (foreign keys, check constraints) ensuring invalid data cannot corrupt the system.</li>
+          <li><strong>Security &amp; Granular Permissions:</strong> Databases restrict access down to specific columns, rows, or schemas.</li>
+        </ul>
+
+        <h3 id="mod-1-3">1.3 DBMS vs. RDBMS</h3>
+        <ul>
+          <li><strong>DBMS (Database Management System):</strong> Software acting as a bridge between user applications and physical data storage (e.g., file systems, key-value stores).</li>
+          <li><strong>RDBMS (Relational Database Management System):</strong> A specialized subset of DBMS that stores data strictly in two-dimensional structured tables (rows and columns) using SQL (Structured Query Language) to establish mathematical relations between tables via primary and foreign keys.</li>
+        </ul>
+
+        <h3 id="mod-1-4">1.4 Database Engine Landscape &amp; Why Choose PostgreSQL?</h3>
+        <p>Common database engines include PostgreSQL, MySQL, Oracle, MongoDB (NoSQL document store), Redis (in-memory key-value), MariaDB, and SQLite. PostgreSQL is widely recognized as the world's most advanced open-source relational database due to its:</p>
+        <ul>
+          <li>Full ACID (Atomicity, Consistency, Isolation, Durability) compliance out-of-the-box.</li>
+          <li>Extensible architecture supporting rich native data types (JSONB, Arrays, UUID, PostGIS spatial data).</li>
+          <li>High enterprise industry demand in backend architecture, fintech, data analytics, and AI/ML ecosystems.</li>
+        </ul>
+
+        <h3 id="mod-1-5">1.5 SQL vs. PostgreSQL</h3>
+        <p>SQL (Structured Query Language) is the standardized declarative language used to query databases. PostgreSQL is the actual database management software tool that implements SQL alongside advanced procedural extensions (<code>PL/pgSQL</code>).</p>
+      </section>
+
+      <!-- Module 2 -->
+      <section class="content-section" id="module-2">
+        <h2>Module 2: Installation, Client Interfaces &amp; System Architecture</h2>
+
+        <h3 id="mod-2-1">2.1 Default Installation Configuration Parameters</h3>
+        <p>Regardless of operating system (Windows, macOS, Linux/CentOS/Ubuntu), standard PostgreSQL setups initialize with:</p>
+        <ul>
+          <li><strong>Default Superuser Account:</strong> <code>postgres</code></li>
+          <li><strong>Default Listening Port:</strong> <code>5432</code></li>
+          <li><strong>Default Initial Database:</strong> <code>postgres</code></li>
+        </ul>
+
+        <h3 id="mod-2-2">2.2 PostgreSQL Client Tools: pgAdmin 4 vs. psql CLI</h3>
+        <ul>
+          <li><strong>pgAdmin 4:</strong> Web/Desktop Graphical User Interface (GUI) dashboard for schema visualization, query execution, server performance monitoring, and graphical database administration.</li>
+          <li><strong>psql (SQL Shell):</strong> Powerful interactive Command Line Interface (CLI) tool preferred by developers and DBAs for scripting, fast query execution, and remote server management.</li>
+        </ul>
+        <div class="analogy-box">
+          <span class="badge">Environment Variable Configuration (Windows/Linux/macOS)</span>
+          <p>To execute <code>psql</code> directly from any system terminal, append the PostgreSQL installation binary path (e.g., <code>C:\Program Files\PostgreSQL\&lt;version&gt;\bin</code>) to system Environment Variables (<code>PATH</code>).</p>
+        </div>
+
+        <h3 id="mod-2-3">2.3 Essential psql Meta-Commands Cheat Sheet</h3>
+        <p><code>psql</code> meta-commands begin with a backslash (<code>\</code>) and operate independently of SQL semi-colon rules:</p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Meta-Command</th>
+                <th>Description / Purpose</th>
+                <th>Example Usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>\l</code> or <code>\list</code></td>
+                <td>Lists all databases present on the connected server instance.</td>
+                <td><code>\l</code></td>
+              </tr>
+              <tr>
+                <td><code>\c &lt;dbname&gt;</code></td>
+                <td>Connects / switches current session to specified database.</td>
+                <td><code>\c bank_db</code></td>
+              </tr>
+              <tr>
+                <td><code>\dt</code></td>
+                <td>Lists all tables in the active schema (defaults to <code>public</code>).</td>
+                <td><code>\dt</code></td>
+              </tr>
+              <tr>
+                <td><code>\d &lt;table&gt;</code></td>
+                <td>Describes schema breakdown (columns, types, modifiers, indexes, FKs).</td>
+                <td><code>\d employee</code></td>
+              </tr>
+              <tr>
+                <td><code>\dn</code></td>
+                <td>Lists all schemas available in the active database.</td>
+                <td><code>\dn</code></td>
+              </tr>
+              <tr>
+                <td><code>\df</code></td>
+                <td>Lists all user-defined functions and procedures.</td>
+                <td><code>\df</code></td>
+              </tr>
+              <tr>
+                <td><code>\du</code></td>
+                <td>Lists all database roles, users, and assigned privileges.</td>
+                <td><code>\du</code></td>
+              </tr>
+              <tr>
+                <td><code>\password &lt;user&gt;</code></td>
+                <td>Prompts to securely update the password for a database user.</td>
+                <td><code>\password postgres</code></td>
+              </tr>
+              <tr>
+                <td><code>\q</code></td>
+                <td>Quits/exits the psql terminal session safely.</td>
+                <td><code>\q</code></td>
+              </tr>
+              <tr>
+                <td><code>Ctrl + L</code> or <code>\! cls</code></td>
+                <td>Clears terminal screen buffer.</td>
+                <td><code>Ctrl + L</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="mod-2-4">2.4 PostgreSQL Architectural Organizational Hierarchy</h3>
+        <p>Data objects in PostgreSQL follow a strict logical hierarchy:</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">text</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code>PostgreSQL Server Instance
+  └── Database (e.g., bank_db)
+       └── Schema (e.g., public, hr, accounting)
+            ├── Tables (Rows & Columns)
+            ├── Views (Virtual Query Tables)
+            └── Functions & Triggers</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 3 -->
+      <section class="content-section" id="module-3">
+        <h2>Module 3: Database &amp; Table Management + Core CRUD Operations</h2>
+
+        <h3 id="mod-3-1">3.1 Database Management Syntax</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Create a new database
+CREATE DATABASE person_db;
+
+-- List existing databases via System Catalog Query
+SELECT datname FROM pg_database;
+
+-- Drop (Delete) a database (Must disconnect active sessions first)
+DROP DATABASE person_db;</code></pre>
+        </div>
+
+        <h3 id="mod-3-2">3.2 Table Creation Syntax &amp; Conventions</h3>
+        <p>SQL syntax is case-insensitive (e.g., <code>CREATE TABLE</code> vs <code>create table</code>), but industry standard practice dictates using UPPERCASE for SQL keywords and lowercase for table/column identifiers.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">CREATE TABLE person (
+    id INT,
+    name VARCHAR(100),
+    city VARCHAR(100)
+);</code></pre>
+        </div>
+
+        <h3 id="mod-3-3">3.3 The 4 Core CRUD Operations</h3>
+        <p>CRUD represents the fundamental data operations: Create, Read, Update, and Delete.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- 1. CREATE (Insert Records)
+-- Single record insertion specifying target columns
+INSERT INTO person (id, name, city) VALUES (101, 'Raju', 'Delhi');
+
+-- Multi-row bulk insertion
+INSERT INTO person (id, name, city) VALUES 
+(102, 'Shyam', 'Mumbai'),
+(103, 'Paul', 'Chennai');
+
+-- Positional insertion (omitting column list requires providing ALL values in exact schema order)
+INSERT INTO person VALUES (104, 'Alex', 'Pune');
+
+-- 2. READ (Query Records)
+-- Fetch all columns and rows
+SELECT * FROM person;
+
+-- Projection: Fetch specific columns only
+SELECT name, city FROM person;
+
+-- 3. UPDATE (Modify Existing Records)
+-- CRITICAL: Always pair UPDATE with a WHERE clause to target specific rows
+UPDATE person 
+SET city = 'Bangalore' 
+WHERE name = 'Raju';
+
+-- 4. DELETE (Remove Records)
+-- Delete specific row based on condition
+DELETE FROM person 
+WHERE id = 104;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 4 -->
+      <section class="content-section" id="module-4">
+        <h2>Module 4: Deep Dive into Data Types &amp; Integrity Constraints</h2>
+
+        <div class="analogy-box" style="border-left-color: var(--accent-red);">
+          <span class="badge" style="background-color: var(--accent-red); color: white;">WARNING &mdash; The Unbounded Update/Delete Pitfall</span>
+          <p>Executing <code>UPDATE person SET city = 'Bangalore';</code> or <code>DELETE FROM person;</code> without a <code>WHERE</code> clause will modify or wipe out <strong>EVERY SINGLE ROW</strong> in the table! Always test filtering logic with <code>SELECT</code> before executing mutation commands.</p>
+        </div>
+
+        <h3 id="mod-4-1">4.1 Comprehensive PostgreSQL Data Types</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Data Type</th>
+                <th>Storage Size</th>
+                <th>Range / Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="5"><strong>Numeric</strong></td>
+                <td><code>SMALLINT</code></td>
+                <td>2 Bytes</td>
+                <td>-32,768 to +32,767</td>
+              </tr>
+              <tr>
+                <td><code>INT / INTEGER</code></td>
+                <td>4 Bytes</td>
+                <td>-2.14 Billion to +2.14 Billion (Standard Integer)</td>
+              </tr>
+              <tr>
+                <td><code>BIGINT</code></td>
+                <td>8 Bytes</td>
+                <td>-9&times;10<sup>18</sup> to +9&times;10<sup>18</sup> (For massive counters/IDs)</td>
+              </tr>
+              <tr>
+                <td><code>DECIMAL(p,s) / NUMERIC(p,s)</code></td>
+                <td>Variable</td>
+                <td>Exact numeric precision. <code>p</code> = Total digits, <code>s</code> = Digits after decimal point. E.g., <code>DECIMAL(5,2)</code> stores up to 999.99.</td>
+              </tr>
+              <tr>
+                <td><code>SERIAL / BIGSERIAL</code></td>
+                <td>4 / 8 Bytes</td>
+                <td>Auto-incrementing integer sequence generator (1 to 2.14B+).</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Character / Text</strong></td>
+                <td><code>VARCHAR(n)</code></td>
+                <td>Variable</td>
+                <td>Variable length string with specified maximum length limit <code>n</code>.</td>
+              </tr>
+              <tr>
+                <td><code>CHAR(n)</code></td>
+                <td>Fixed</td>
+                <td>Fixed length string; right-padded with blank spaces if shorter than <code>n</code>.</td>
+              </tr>
+              <tr>
+                <td><code>TEXT</code></td>
+                <td>Variable</td>
+                <td>Unlimited length string storage (Optimal for long narrative text).</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Date / Time</strong></td>
+                <td><code>DATE</code></td>
+                <td>4 Bytes</td>
+                <td>Calendar date (<code>YYYY-MM-DD</code>).</td>
+              </tr>
+              <tr>
+                <td><code>TIME</code></td>
+                <td>8 Bytes</td>
+                <td>Time of day (<code>HH:MM:SS</code>).</td>
+              </tr>
+              <tr>
+                <td><code>TIMESTAMP / TIMESTAMPTZ</code></td>
+                <td>8 Bytes</td>
+                <td>Combined Date &amp; Time (<code>TIMESTAMPTZ</code> adds timezone awareness).</td>
+              </tr>
+              <tr>
+                <td><strong>Boolean</strong></td>
+                <td><code>BOOLEAN</code></td>
+                <td>1 Byte</td>
+                <td>State values: <code>TRUE</code>, <code>FALSE</code>, or <code>NULL</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="mod-4-2">4.2 Data Integrity Constraints Explained</h3>
+        <ul>
+          <li><strong>PRIMARY KEY:</strong> Uniquely identifies each record in a table. Internally enforces both <code>UNIQUE</code> and <code>NOT NULL</code>, automatically building a B-tree index. A table can possess only one Primary Key.</li>
+          <li><strong>NOT NULL:</strong> Prevents columns from storing empty/missing <code>NULL</code> values.</li>
+          <li><strong>UNIQUE:</strong> Ensures every entry in a column is distinct across all rows. (Unlike Primary Keys, allows storing <code>NULL</code> unless paired with <code>NOT NULL</code>).</li>
+          <li><strong>DEFAULT:</strong> Assigns an automatic baseline value if no value is explicitly supplied during insertion (e.g., <code>DEFAULT 30000.00</code> or dynamic server functions like <code>DEFAULT CURRENT_DATE</code>).</li>
+          <li><strong>CHECK:</strong> Enforces boolean expressions to validate inputs before insertion/update (e.g., <code>CHECK (age &gt;= 18)</code>).</li>
+        </ul>
+
+        <h3 id="mod-4-3">4.3 Mechanics of Auto-Increment Sequences (SERIAL)</h3>
+        <p>When a column is declared as <code>SERIAL</code>, PostgreSQL automatically executes three background tasks:</p>
+        <ol>
+          <li>Creates a sequence object named <code>&lt;table&gt;_&lt;column&gt;_seq</code>.</li>
+          <li>Sets column default to <code>nextval('sequence_name')</code>.</li>
+          <li>Assigns sequence ownership to the table column.</li>
+        </ol>
+
+        <h4>Handling Sequence Desynchronization / Primary Key Collisions</h4>
+        <p>If manual numeric insertions occur on a <code>SERIAL</code> column (e.g. explicitly forcing <code>emp_id = 1</code>), the background sequence pointer does not auto-advance. Subsequent automated inserts will trigger a duplicate key error! Fix this by inspecting sequence state and resetting pointer offset:</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Inspect current sequence value
+SELECT currval('employee_emp_id_seq');
+
+-- Set sequence counter to match max existing primary key ID
+SELECT setval('employee_emp_id_seq', (SELECT MAX(emp_id) FROM employee));</code></pre>
+        </div>
+
+        <h3 id="mod-4-4">4.4 Practical Case Study: Bank Employee Database Schema</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Create Bank Database
+CREATE DATABASE bank_db;
+
+-- Connect to bank_db
+\c bank_db
+
+-- Define Employee Schema with Advanced Constraints
+CREATE TABLE employee (
+    emp_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    department VARCHAR(50),
+    salary DECIMAL(10, 2) DEFAULT 30000.00,
+    hire_date DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+-- Seed Initial Dataset (10 Employees)
+INSERT INTO employee (first_name, last_name, email, department, salary, hire_date) VALUES
+('Raj', 'Sharma', 'raj.sharma@bank.com', 'IT', 50000.00, '2023-01-15'),
+('Priya', 'Singh', 'priya.singh@bank.com', 'HR', 45000.00, '2023-02-20'),
+('Arjun', 'Verma', 'arjun.verma@bank.com', 'IT', 55000.00, '2023-03-10'),
+('Suman', 'Rao', 'suman.rao@bank.com', 'Finance', 60000.00, '2023-04-05'),
+('Kavita', 'Patel', 'kavita.patel@bank.com', 'HR', 47000.00, '2023-05-12'),
+('Amit', 'Kumar', 'amit.kumar@bank.com', 'Marketing', 52000.00, '2023-06-18'),
+('Anjali', 'Mehta', 'anjali.mehta@bank.com', 'Finance', 61000.00, '2023-07-22'),
+('Rahul', 'Dravid', 'rahul.dravid@bank.com', 'IT', 48000.00, '2023-08-30'),
+('Neha', 'Gupta', 'neha.gupta@bank.com', 'IT', 53000.00, '2023-09-14'),
+('Vijay', 'Mallya', 'vijay.mallya@bank.com', 'Marketing', 50000.00, '2023-10-01');</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 5 -->
+      <section class="content-section" id="module-5">
+        <h2>Module 5: SQL Clauses, Filtering &amp; Logical Operators</h2>
+
+        <h3 id="mod-5-1">5.1 Comparison &amp; Logical Operators</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Exact Match
+SELECT * FROM employee WHERE emp_id = 5;
+
+-- Relational Filtering (Salary >= 50,000)
+SELECT * FROM employee WHERE salary >= 50000.00;
+
+-- Logical AND (Both conditions must be TRUE)
+SELECT * FROM employee WHERE department = 'IT' AND salary > 50000.00;
+
+-- Logical OR (Either condition TRUE)
+SELECT * FROM employee WHERE department = 'HR' OR department = 'Finance';</code></pre>
+        </div>
+
+        <h3 id="mod-5-2">5.2 Set Matching (IN) &amp; Range Search (BETWEEN)</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Replacing repetitive OR conditions using IN
+SELECT * FROM employee WHERE department IN ('IT', 'Finance', 'HR');
+
+-- Negation: Exclude specific departments
+SELECT * FROM employee WHERE department NOT IN ('Marketing');
+
+-- Inclusive Range Search using BETWEEN
+SELECT * FROM employee WHERE salary BETWEEN 40000.00 AND 60000.00;</code></pre>
+        </div>
+
+        <h3 id="mod-5-3">5.3 Result Presentation: Distinct, Sorting &amp; Pagination</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Extract distinct unique values from a column
+SELECT DISTINCT department FROM employee;
+
+-- Sort records ascending (Default)
+SELECT * FROM employee ORDER BY first_name ASC;
+
+-- Sort records descending by salary
+SELECT * FROM employee ORDER BY salary DESC;
+
+-- Pagination: Limit output to top 3 highest earners
+SELECT * FROM employee ORDER BY salary DESC LIMIT 3 OFFSET 0;</code></pre>
+        </div>
+
+        <h3 id="mod-5-4">5.4 Pattern Matching Wildcards (LIKE &amp; ILIKE)</h3>
+        <p>The <code>LIKE</code> operator performs case-sensitive pattern matching, whereas <code>ILIKE</code> is PostgreSQL's case-insensitive extension.</p>
+        <ul>
+          <li><code>%</code> Wildcard: Matches zero, one, or multiple characters.</li>
+          <li><code>_</code> Wildcard: Matches exactly one character.</li>
+        </ul>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Names starting with 'A'
+SELECT * FROM employee WHERE first_name LIKE 'A%';
+
+-- Names ending with 'a'
+SELECT * FROM employee WHERE first_name LIKE '%a';
+
+-- Names containing letter 'i' anywhere
+SELECT * FROM employee WHERE first_name LIKE '%i%';
+
+-- Names where the SECOND character is exactly 'a' (e.g., Raj, Rahul)
+SELECT * FROM employee WHERE first_name LIKE '_a%';
+
+-- Names containing exactly 4 characters (4 underscores)
+SELECT * FROM employee WHERE first_name LIKE '____';
+
+-- Filter departments having exactly 2 characters (e.g., IT, HR)
+SELECT * FROM employee WHERE department LIKE '__';</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 6 -->
+      <section class="content-section" id="module-6">
+        <h2>Module 6: Aggregate Functions &amp; Categorical Grouping Mechanics</h2>
+
+        <h3 id="mod-6-1">6.1 Standard Aggregate Functions</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Total employee headcount
+SELECT COUNT(emp_id) AS total_employees FROM employee;
+
+-- Cumulative total payroll budget
+SELECT SUM(salary) AS total_payroll FROM employee;
+
+-- Average organization salary
+SELECT AVG(salary) AS average_salary FROM employee;
+
+-- Salary boundary extremes
+SELECT MIN(salary) AS lowest_salary, MAX(salary) AS highest_salary FROM employee;</code></pre>
+        </div>
+
+        <h3 id="mod-6-2">6.2 Categorical Grouping (GROUP BY)</h3>
+        <p>The <code>GROUP BY</code> clause categorizes individual table rows into distinct summary buckets based on common values in specified columns.</p>
+        <div class="analogy-box">
+          <span class="badge">Golden Rule of GROUP BY</span>
+          <p>Any non-aggregated column present in the <code>SELECT</code> projection list <strong>MUST</strong> be explicitly included in the <code>GROUP BY</code> clause!</p>
+        </div>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Count headcount per department
+SELECT department, COUNT(emp_id) AS headcount 
+FROM employee 
+GROUP BY department;
+
+-- Total payroll expense per department
+SELECT department, SUM(salary) AS department_payroll 
+FROM employee 
+GROUP BY department;
+
+-- Departmental salary averages and max earner bounds
+SELECT department, AVG(salary) AS avg_sal, MAX(salary) AS max_sal 
+FROM employee 
+GROUP BY department;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 7 -->
+      <section class="content-section" id="module-7">
+        <h2>Module 7: PostgreSQL String Manipulation Functions &amp; Workshop</h2>
+
+        <h3 id="mod-7-1">7.1 Native String Function Suite</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Function</th>
+                <th>Description</th>
+                <th>Example &amp; Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CONCAT(s1, s2)</code></td>
+                <td>Combines strings together; treats <code>NULL</code> as empty string.</td>
+                <td><code>CONCAT('Hello', 'World') &rarr; 'HelloWorld'</code></td>
+              </tr>
+              <tr>
+                <td><code>CONCAT_WS(sep, s1, s2)</code></td>
+                <td>Concatenates strings With Separator as first argument.</td>
+                <td><code>CONCAT_WS('-', '101', 'Raj', 'IT') &rarr; '101-Raj-IT'</code></td>
+              </tr>
+              <tr>
+                <td><code>SUBSTRING(s FROM p FOR l)</code></td>
+                <td>Extracts text substring starting at position <code>p</code> for length <code>l</code>.</td>
+                <td><code>SUBSTRING('Hello World' FROM 1 FOR 5) &rarr; 'Hello'</code></td>
+              </tr>
+              <tr>
+                <td><code>REPLACE(s, src, tgt)</code></td>
+                <td>Replaces occurrences of substring <code>src</code> with <code>tgt</code>.</td>
+                <td><code>REPLACE('IT Dept', 'IT', 'Tech') &rarr; 'Tech Dept'</code></td>
+              </tr>
+              <tr>
+                <td><code>LENGTH(s)</code></td>
+                <td>Returns character count length of string.</td>
+                <td><code>LENGTH('PostgreSQL') &rarr; 10</code></td>
+              </tr>
+              <tr>
+                <td><code>UPPER(s) / LOWER(s)</code></td>
+                <td>Converts text characters to Upper or Lower case.</td>
+                <td><code>UPPER('post') &rarr; 'POST'</code></td>
+              </tr>
+              <tr>
+                <td><code>TRIM(s)</code></td>
+                <td>Strips leading and trailing spaces.</td>
+                <td><code>TRIM(' data ') &rarr; 'data'</code></td>
+              </tr>
+              <tr>
+                <td><code>POSITION(sub IN s)</code></td>
+                <td>Returns 1-based character position index of substring.</td>
+                <td><code>POSITION('om' IN 'Thomas') &rarr; 3</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="mod-7-2">7.2 Practical Workshop Exercises &amp; Solutions</h3>
+        
+        <h4>EXERCISE SOLUTION 1 &mdash; COLON-SEPARATED FORMATTING</h4>
+        <p><em>Goal: Output "EmpID : FirstName : LastName : Department"</em></p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">SELECT CONCAT_WS(' : ', emp_id, first_name, last_name, department) AS formatted_profile 
+FROM employee;</code></pre>
+        </div>
+
+        <h4>EXERCISE SOLUTION 2 &mdash; NESTED FUNCTIONS: COMBINED FULL NAME + UPPERCASE DEPT</h4>
+        <p><em>Goal: "EmpID : Full Name : UPPERCASE_DEPT"</em></p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">SELECT CONCAT_WS(' : ', 
+    emp_id, 
+    CONCAT_WS(' ', first_name, last_name), 
+    UPPER(department)
+) AS custom_employee_card 
+FROM employee;</code></pre>
+        </div>
+
+        <h4>EXERCISE SOLUTION 3 &mdash; CUSTOM EMPLOYEE IDENTIFICATION BADGE GENERATOR</h4>
+        <p><em>Goal: Prefix Employee ID with First Letter of Department (e.g. 'I1' for IT Emp #1)</em></p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">SELECT first_name, 
+       CONCAT(LEFT(department, 1), emp_id) AS custom_emp_code 
+FROM employee;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 8 -->
+      <section class="content-section" id="module-8">
+        <h2>Module 8: Schema Alterations (<code>ALTER TABLE</code>) &amp; Advanced Constraints</h2>
+
+        <h3 id="mod-8-1">8.1 Table Schema Mutation Syntax</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Add a new column with default value
+ALTER TABLE person ADD COLUMN age INT DEFAULT 0;
+
+-- Drop an existing column
+ALTER TABLE person DROP COLUMN age;
+
+-- Rename a column identifier
+ALTER TABLE person RENAME COLUMN name TO first_name;
+
+-- Modify data type and expand size capacity
+ALTER TABLE person ALTER COLUMN first_name SET DATA TYPE VARCHAR(150);
+
+-- Add / Drop NOT NULL constraint
+ALTER TABLE person ALTER COLUMN first_name SET NOT NULL;
+ALTER TABLE person ALTER COLUMN first_name DROP NOT NULL;
+
+-- Set / Drop DEFAULT values
+ALTER TABLE person ALTER COLUMN city SET DEFAULT 'Unknown';
+ALTER TABLE person ALTER COLUMN city DROP DEFAULT;</code></pre>
+        </div>
+
+        <h3 id="mod-8-2">8.2 Table Validation Rules via <code>CHECK</code> Constraints</h3>
+        <p><code>CHECK</code> constraints evaluate expressions on insertion/update. Explicitly naming constraints using <code>CONSTRAINT &lt;name&gt;</code> ensures readable database logs when validations fail.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Add mobile column
+ALTER TABLE person ADD COLUMN mobile VARCHAR(15);
+
+-- Add explicit named CHECK constraint enforcing mobile length >= 10
+ALTER TABLE person 
+ADD CONSTRAINT mobile_num_min_10_digits 
+CHECK (LENGTH(mobile) >= 10);
+
+-- Testing validation failure (Triggers error: "mobile_num_min_10_digits" violated)
+-- INSERT INTO person (first_name, mobile) VALUES ('Test', '123');
+
+-- Drop named constraint
+ALTER TABLE person DROP CONSTRAINT mobile_num_min_10_digits;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 9 -->
+      <section class="content-section" id="module-9">
+        <h2>Module 9: Conditional Logic with <code>CASE WHEN</code> Expressions</h2>
+
+        <h3 id="mod-9-1">9.1 <code>CASE WHEN</code> Syntax &amp; Multi-Tier Classification</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">SELECT first_name, salary,
+    CASE 
+        WHEN salary >= 55000.00 THEN 'High Salary'
+        WHEN salary BETWEEN 48000.00 AND 54999.99 THEN 'Mid Salary'
+        ELSE 'Low Salary'
+    END AS salary_tier
+FROM employee;</code></pre>
+        </div>
+
+        <h3 id="mod-9-2">9.2 Mathematical Operations &amp; Bonus Calculations</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Calculate 10% annual bonus rounded to 2 decimal places
+SELECT first_name, salary,
+    ROUND(
+        CASE 
+            WHEN salary > 0 THEN salary * 0.10
+            ELSE 0
+        END, 2
+    ) AS annual_bonus
+FROM employee;</code></pre>
+        </div>
+
+        <h3 id="mod-9-3">9.3 Combining <code>CASE</code> Expressions with <code>GROUP BY</code> Aggregations</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">SELECT 
+    CASE 
+        WHEN salary >= 55000.00 THEN 'High Tier'
+        WHEN salary BETWEEN 48000.00 AND 54999.99 THEN 'Mid Tier'
+        ELSE 'Low Tier'
+    END AS tier_category,
+    COUNT(emp_id) AS total_employees
+FROM employee
+GROUP BY 
+    CASE 
+        WHEN salary >= 55000.00 THEN 'High Tier'
+        WHEN salary BETWEEN 48000.00 AND 54999.99 THEN 'Mid Tier'
+        ELSE 'Low Tier'
+    END;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 10 -->
+      <section class="content-section" id="module-10">
+        <h2>Module 10: Relational Architecture &amp; Foreign Key Mechanics</h2>
+
+        <h3 id="mod-10-1">10.1 Relational Normalization &amp; Table Cardinality</h3>
+        <ul>
+          <li><strong>One-to-One (1:1):</strong> Each row in Table A corresponds strictly to one row in Table B (e.g. Employee &harr; Passport Details).</li>
+          <li><strong>One-to-Many (1:N):</strong> One row in Table A associates with multiple rows in Table B (e.g. One Customer &harr; Multiple Orders; One Department &harr; Multiple Employees). Most common architectural relationship.</li>
+          <li><strong>Many-to-Many (N:M):</strong> Multiple records in Table A map to multiple records in Table B (e.g. Students &harr; Courses; Authors &harr; Books). Implemented physically via an intermediary Junction / Associative Table containing composite foreign keys.</li>
+        </ul>
+
+        <h3 id="mod-10-2">10.2 Foreign Key Mechanics &amp; Referencing Rules</h3>
+        <p>A Foreign Key is a column in a child table referencing the Primary Key of a parent table. Foreign keys enforce referential integrity: records cannot be inserted into a child table referencing a non-existent parent ID.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Parent Table: Customers
+CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- Child Table: Orders (Contains Foreign Key)
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    order_date DATE DEFAULT CURRENT_DATE,
+    price DECIMAL(10, 2),
+    customer_id INT,
+    CONSTRAINT fk_customer 
+        FOREIGN KEY (customer_id) 
+        REFERENCES customers(customer_id)
+);
+
+-- Populate Data
+INSERT INTO customers (customer_name, email) VALUES 
+('Raju', 'raju@gmail.com'),
+('Shyam', 'shyam@gmail.com'),
+('Paul', 'paul@gmail.com');
+
+INSERT INTO orders (order_date, price, customer_id) VALUES 
+('2024-01-10', 250.00, 1),
+('2024-01-12', 300.00, 1),
+('2024-01-15', 700.00, 2);</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 11 -->
+      <section class="content-section" id="module-11">
+        <h2>Module 11: SQL Joins &mdash; Multi-Table Data Retrieval</h2>
+
+        <h3 id="mod-11-1">11.1 Relational Join Types Overview</h3>
+        <ul>
+          <li><strong>CROSS JOIN:</strong> Returns Cartesian product (combines every row of Left table with every row of Right table).</li>
+          <li><strong>INNER JOIN:</strong> Returns ONLY records where join predicate condition matches in BOTH tables.</li>
+          <li><strong>LEFT JOIN (LEFT OUTER JOIN):</strong> Returns ALL rows from the Left table + matching records from the Right table (unmatched right side columns render as <code>NULL</code>).</li>
+          <li><strong>RIGHT JOIN (RIGHT OUTER JOIN):</strong> Returns ALL rows from the Right table + matching records from the Left table.</li>
+        </ul>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- INNER JOIN: Fetch orders paired with customer details (Excludes customers without orders)
+SELECT c.customer_name, o.order_id, o.order_date, o.price
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id;
+
+-- LEFT JOIN: Fetch ALL customers including those who have placed ZERO orders
+SELECT c.customer_name, o.order_id, o.price
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id;
+
+-- JOIN WITH AGGREGATION: Total customer spend
+SELECT c.customer_name, COUNT(o.order_id) AS total_orders, SUM(o.price) AS total_spent
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_name;</code></pre>
+        </div>
+
+        <h3 id="mod-11-2">11.2 Many-to-Many Relationship Implementation (3-Table Join)</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Primary Table 1: Students
+CREATE TABLE students (
+    student_id SERIAL PRIMARY KEY,
+    student_name VARCHAR(100) NOT NULL
+);
+
+-- Primary Table 2: Courses
+CREATE TABLE courses (
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    fee DECIMAL(10, 2)
+);
+
+-- Intermediary Junction Table: Enrollments
+CREATE TABLE enrollments (
+    enrollment_id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES students(student_id),
+    course_id INT REFERENCES courses(course_id),
+    enroll_date DATE DEFAULT CURRENT_DATE
+);
+
+-- Seed Junction Data
+INSERT INTO students (student_name) VALUES ('Raju'), ('Shyam'), ('Alex');
+INSERT INTO courses (course_name, fee) VALUES ('Maths', 500.00), ('Physics', 600.00);
+INSERT INTO enrollments (student_id, course_id) VALUES (1, 1), (1, 2), (2, 1);
+
+-- 3-TABLE JOIN QUERY: Fetch Student Names, Enrolled Course Names & Fees
+SELECT s.student_name, c.course_name, c.fee, e.enroll_date
+FROM enrollments e
+JOIN students s ON e.student_id = s.student_id
+JOIN courses c ON e.course_id = c.course_id;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 12 -->
+      <section class="content-section" id="module-12">
+        <h2>Module 12: End-to-End E-Commerce Store Project</h2>
+        <p>This hands-on architecture combines 1:N and N:M relationships across 4 core enterprise tables: <code>store_customers</code>, <code>store_orders</code>, <code>store_products</code>, and <code>order_items</code>.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- 1. Create E-Commerce Tables
+CREATE TABLE store_customers (
+    cust_id SERIAL PRIMARY KEY,
+    cust_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE store_orders (
+    order_id SERIAL PRIMARY KEY,
+    order_date DATE DEFAULT CURRENT_DATE,
+    cust_id INT REFERENCES store_customers(cust_id)
+);
+
+CREATE TABLE store_products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    unit_price DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE order_items (
+    item_id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES store_orders(order_id),
+    product_id INT REFERENCES store_products(product_id),
+    quantity INT NOT NULL DEFAULT 1
+);
+
+-- 2. Seed E-Commerce Data
+INSERT INTO store_customers (cust_name) VALUES ('Raju'), ('Shyam'), ('Paul');
+INSERT INTO store_orders (cust_id) VALUES (1), (2); -- Order 1 (Raju), Order 2 (Shyam)
+INSERT INTO store_products (product_name, unit_price) VALUES 
+('Laptop', 55000.00), ('Mouse', 500.00), ('Keyboard', 800.00);
+INSERT INTO order_items (order_id, product_id, quantity) VALUES 
+(1, 1, 1), -- Raju bought 1 Laptop
+(1, 2, 2), -- Raju bought 2 Mice
+(2, 3, 1); -- Shyam bought 1 Keyboard
+
+-- 3. Master 4-Table Analytical Billing Query
+SELECT 
+    c.cust_name,
+    o.order_id,
+    o.order_date,
+    p.product_name,
+    p.unit_price,
+    oi.quantity,
+    (oi.quantity * p.unit_price) AS line_item_total
+FROM order_items oi
+JOIN store_orders o ON oi.order_id = o.order_id
+JOIN store_customers c ON o.cust_id = c.cust_id
+JOIN store_products p ON oi.product_id = p.product_id;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 13 -->
+      <section class="content-section" id="module-13">
+        <h2>Module 13: Database Views, <code>HAVING</code> Clause &amp; Subtotals</h2>
+
+        <h3 id="mod-13-1">13.1 Database Views (<code>CREATE VIEW</code>)</h3>
+        <p>A View is a saved virtual table encapsulating complex multi-table joins. Views do NOT duplicate underlying data; they dynamically execute stored query logic upon access.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Encapsulate complex e-commerce join query into a View
+CREATE VIEW billing_info_view AS
+SELECT 
+    c.cust_name, o.order_id, p.product_name, p.unit_price, oi.quantity,
+    (oi.quantity * p.unit_price) AS line_item_total
+FROM order_items oi
+JOIN store_orders o ON oi.order_id = o.order_id
+JOIN store_customers c ON o.cust_id = c.cust_id
+JOIN store_products p ON oi.product_id = p.product_id;
+
+-- Query Virtual View cleanly as a normal table
+SELECT * FROM billing_info_view WHERE line_item_total > 1000.00;</code></pre>
+        </div>
+
+        <h3 id="mod-13-2">13.2 The <code>HAVING</code> Clause vs. <code>WHERE</code> Clause</h3>
+        <p><strong>Key Distinction:</strong></p>
+        <ul>
+          <li><code>WHERE</code> filters individual raw rows <strong>BEFORE</strong> aggregation occurs.</li>
+          <li><code>HAVING</code> filters categorical group summary rows <strong>AFTER</strong> <code>GROUP BY</code> calculations complete.</li>
+        </ul>
+        <p><em>Note: Attempting <code>WHERE SUM(sales) &gt; 1000</code> triggers a SQL compilation syntax error! Use <code>HAVING</code> instead.</em></p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Find product categories generating total revenue exceeding $1,000
+SELECT product_name, SUM(line_item_total) AS total_revenue
+FROM billing_info_view
+GROUP BY product_name
+HAVING SUM(line_item_total) > 1000.00;</code></pre>
+        </div>
+
+        <h3 id="mod-13-3">13.3 Hierarchical Subtotals with <code>ROLLUP</code></h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- ROLLUP auto-generates subtotal and grand total summary rows
+-- COALESCE replaces NULL headers in summary rows with 'GRAND TOTAL'
+SELECT 
+    COALESCE(product_name, 'GRAND TOTAL') AS product_label,
+    SUM(line_item_total) AS revenue
+FROM billing_info_view
+GROUP BY ROLLUP(product_name);</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 14 -->
+      <section class="content-section" id="module-14">
+        <h2>Module 14: Stored Routines &mdash; Stored Procedures &amp; User Defined Functions</h2>
+
+        <h3 id="mod-14-1">14.1 Stored Procedures (<code>CREATE PROCEDURE</code>)</h3>
+        <p>Stored Procedures contain precompiled procedural SQL statements stored on the database server. They execute action operations (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) and are invoked using the <code>CALL</code> statement.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Create Procedure to update employee salary safely
+CREATE OR REPLACE PROCEDURE update_emp_salary(
+    p_emp_id INT,
+    p_new_salary DECIMAL(10, 2)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE employee 
+    SET salary = p_new_salary 
+    WHERE emp_id = p_emp_id;
+END;
+$$;
+
+-- Invoke Procedure using CALL
+CALL update_emp_salary(3, 71000.00);</code></pre>
+        </div>
+
+        <h3 id="mod-14-2">14.2 User Defined Functions (UDFs)</h3>
+        <p>User Defined Functions (UDFs) compute values or return dynamic result tables. Unlike Procedures, Functions are called inline directly inside <code>SELECT</code> statements.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Create Function returning a result table of top earners for a given department
+CREATE OR REPLACE FUNCTION get_dept_max_earner(p_dept_name VARCHAR)
+RETURNS TABLE(r_emp_id INT, r_first_name VARCHAR, r_salary DECIMAL)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT emp_id, first_name, salary
+    FROM employee
+    WHERE department = p_dept_name
+      AND salary = (SELECT MAX(salary) FROM employee WHERE department = p_dept_name);
+END;
+$$;
+
+-- Query Function inline via SELECT
+SELECT * FROM get_dept_max_earner('IT');</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 15 -->
+      <section class="content-section" id="module-15">
+        <h2>Module 15: Window Functions &amp; Analytical SQL</h2>
+
+        <h3 id="mod-15-1">15.1 What are Window Functions?</h3>
+        <p>Window Functions perform calculations across sets of related table rows (a "window") <strong>WITHOUT</strong> collapsing individual rows into single summary lines (unlike <code>GROUP BY</code>). Every original row retains its identity while displaying calculated window values.</p>
+
+        <h3 id="mod-15-2">15.2 The <code>OVER()</code> Clause Mechanics: Running Totals &amp; Averages</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Calculate Running Cumulative Salary Total ordered by salary ASC
+SELECT first_name, salary,
+    SUM(salary) OVER(ORDER BY salary ASC) AS running_total,
+    AVG(salary) OVER(ORDER BY salary ASC) AS running_avg
+FROM employee;</code></pre>
+        </div>
+
+        <h3 id="mod-15-3">15.3 Window Ranking Functions: <code>ROW_NUMBER</code>, <code>RANK</code>, and <code>DENSE_RANK</code></h3>
+        <ul>
+          <li><code>ROW_NUMBER()</code>: Assigns a unique sequential integer counter to every row.</li>
+          <li><code>RANK()</code>: Assigns rank; leaves gaps when ties occur (e.g. 1, 1, 3).</li>
+          <li><code>DENSE_RANK()</code>: Assigns rank; leaves <strong>NO gaps</strong> when ties occur (e.g. 1, 1, 2).</li>
+        </ul>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Ranking Employees Organization-Wide by Salary
+SELECT first_name, salary,
+    ROW_NUMBER() OVER(ORDER BY salary DESC) AS row_num,
+    RANK() OVER(ORDER BY salary DESC) AS rank_with_gaps,
+    DENSE_RANK() OVER(ORDER BY salary DESC) AS dense_rank_no_gaps
+FROM employee;
+
+-- Partitioned Ranking: Rank Employees WITHIN EACH DEPARTMENT independently
+SELECT first_name, department, salary,
+    DENSE_RANK() OVER(PARTITION BY department ORDER BY salary DESC) AS dept_rank
+FROM employee;</code></pre>
+        </div>
+
+        <h3 id="mod-15-4">15.4 Offset Window Functions: <code>LAG</code>, <code>LEAD</code> &amp; Delta Metrics</h3>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Compare employee salary against the salary of the next higher earner (LEAD)
+SELECT first_name, salary,
+    LEAD(salary) OVER(ORDER BY salary DESC) AS next_higher_salary,
+    (salary - LEAD(salary) OVER(ORDER BY salary DESC)) AS salary_delta
+FROM employee;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 16 -->
+      <section class="content-section" id="module-16">
+        <h2>Module 16: Common Table Expressions (CTEs) &mdash; The <code>WITH</code> Clause</h2>
+
+        <h3>16.1 What is a Common Table Expression (CTE)?</h3>
+        <p>A CTE (Common Table Expression) is a temporary named result set defined using the <code>WITH</code> keyword. CTEs modularize complex multi-stage analytical queries, serving as a clean alternative to deeply nested inline subqueries. A CTE exists only during execution of the main query.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- Define CTE calculating departmental average salaries
+WITH dept_avg_cte AS (
+    SELECT department, AVG(salary) AS avg_dept_salary
+    FROM employee
+    GROUP BY department
+)
+-- Main Query joining employee table with CTE result set
+SELECT e.first_name, e.department, e.salary, ROUND(d.avg_dept_salary, 2) AS dept_avg
+FROM employee e
+JOIN dept_avg_cte d ON e.department = d.department
+WHERE e.salary > d.avg_dept_salary;</code></pre>
+        </div>
+      </section>
+
+      <!-- Module 17 -->
+      <section class="content-section" id="module-17">
+        <h2>Module 17: Database Triggers &amp; Master Cheat Sheet</h2>
+
+        <h3 id="mod-17-1">17.1 What is a Database Trigger?</h3>
+        <p>A Trigger is an event-driven callback procedure automatically executed by PostgreSQL whenever a specified mutation event (<code>BEFORE</code> or <code>AFTER</code> <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>) occurs on a target table.</p>
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">sql</span>
+            <button class="copy-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code class="language-sql">-- 1. Create Trigger Function enforcing non-negative salaries
+CREATE OR REPLACE FUNCTION sanitize_salary_func()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- Intercept attempted negative salary updates and automatically reset to 0.00
+    IF NEW.salary < 0 THEN
+        NEW.salary := 0.00;
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+-- 2. Bind Trigger to Employee Table
+CREATE TRIGGER trg_sanitize_salary
+BEFORE INSERT OR UPDATE ON employee
+FOR EACH ROW
+EXECUTE FUNCTION sanitize_salary_func();
+
+-- Test Trigger Execution
+UPDATE employee SET salary = -50000.00 WHERE emp_id = 1;
+
+-- Verification Query: Salary for emp_id 1 is automatically reset to 0.00!
+SELECT emp_id, first_name, salary FROM employee WHERE emp_id = 1;</code></pre>
+        </div>
+
+        <h3 id="mod-17-2">17.2 PostgreSQL Master Cheat Sheet &amp; Quick Syntax Reference</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>SQL / psql Command Syntax</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3"><strong>psql Shell</strong></td>
+                <td><code>\c dbname</code></td>
+                <td>Connect / switch to specified database.</td>
+              </tr>
+              <tr>
+                <td><code>\dt / \d table</code></td>
+                <td>List all tables / describe specific table schema.</td>
+              </tr>
+              <tr>
+                <td><code>\l</code></td>
+                <td>List all databases on server.</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>DDL Schema</strong></td>
+                <td><code>CREATE TABLE t (col TYPE PRIMARY KEY...);</code></td>
+                <td>Create table with primary key and data types.</td>
+              </tr>
+              <tr>
+                <td><code>ALTER TABLE t ADD COLUMN col TYPE;</code></td>
+                <td>Add new column to table schema.</td>
+              </tr>
+              <tr>
+                <td><code>ALTER TABLE t DROP COLUMN col;</code></td>
+                <td>Remove column from table schema.</td>
+              </tr>
+              <tr>
+                <td><code>DROP TABLE t; / DROP DATABASE db;</code></td>
+                <td>Permanently delete table or database.</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>DML Mutation</strong></td>
+                <td><code>INSERT INTO t (cols) VALUES (vals);</code></td>
+                <td>Insert new records into table.</td>
+              </tr>
+              <tr>
+                <td><code>UPDATE t SET col=val WHERE cond;</code></td>
+                <td>Update existing records matching condition.</td>
+              </tr>
+              <tr>
+                <td><code>DELETE FROM t WHERE cond;</code></td>
+                <td>Delete records matching condition.</td>
+              </tr>
+              <tr>
+                <td><code>TRUNCATE TABLE t;</code></td>
+                <td>Wipe all rows instantly without scanning.</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>DQL Queries</strong></td>
+                <td><code>SELECT DISTINCT col FROM t;</code></td>
+                <td>Retrieve unique column values.</td>
+              </tr>
+              <tr>
+                <td><code>SELECT * FROM t WHERE col LIKE 'A%';</code></td>
+                <td>Pattern matching filter starting with 'A'.</td>
+              </tr>
+              <tr>
+                <td><code>SELECT col, COUNT(*) FROM t GROUP BY col;</code></td>
+                <td>Aggregate metrics grouped by category.</td>
+              </tr>
+              <tr>
+                <td><code>SELECT * FROM t ORDER BY col DESC LIMIT n;</code></td>
+                <td>Sort records and limit result row count.</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Joins &amp; Views</strong></td>
+                <td><code>SELECT * FROM t1 JOIN t2 ON t1.id = t2.id;</code></td>
+                <td>Inner join matching rows between tables.</td>
+              </tr>
+              <tr>
+                <td><code>SELECT * FROM t1 LEFT JOIN t2 ON t1.id = t2.id;</code></td>
+                <td>Left outer join returning all left records.</td>
+              </tr>
+              <tr>
+                <td><code>CREATE VIEW v AS SELECT...;</code></td>
+                <td>Save complex query as virtual view.</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Advanced SQL</strong></td>
+                <td><code>WITH cte AS (...) SELECT * FROM cte;</code></td>
+                <td>Define temporary named result set (CTE).</td>
+              </tr>
+              <tr>
+                <td><code>SUM(col) OVER(PARTITION BY cat ORDER BY id)</code></td>
+                <td>Window aggregate running sum calculation.</td>
+              </tr>
+              <tr>
+                <td><code>DENSE_RANK() OVER(ORDER BY col DESC)</code></td>
+                <td>Dense ranking window calculation without gaps.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="page-nav-footer">
+          <a href="python-runtime.html" class="nav-card-link">
+            <span class="nav-card-direction">&larr; Previous Manual</span>
+            <span class="nav-card-title">Python Architecture &amp; Runtime</span>
+          </a>
+          <a href="java-masterclass.html" class="nav-card-link" style="text-align: right;">
+            <span class="nav-card-direction">Next Manual &rarr;</span>
+            <span class="nav-card-title">Java Master Reference Manual</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
