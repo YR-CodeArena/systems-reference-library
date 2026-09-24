@@ -2500,28 +2500,30 @@ body::before {
 
 /* Background Video Architecture for Overview Page */
 .video-bg-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -3;
-  overflow: hidden;
-  pointer-events: none;
-  background-color: #080c14;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  width: 100dvw !important;
+  height: 100dvh !important;
+  z-index: -5 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  background-color: #080c14 !important;
 }
 
 .bg-video-element {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  pointer-events: none;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: translate(-50%, -50%) !important;
+  object-fit: cover !important;
+  pointer-events: none !important;
 }
 
 /* Background Audio Toggle Button in Header */

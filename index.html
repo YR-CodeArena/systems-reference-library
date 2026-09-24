@@ -6,13 +6,13 @@
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)">
   <title>Systems Reference Library | Master Software Architecture &amp; Engineering Manuals</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260925_fixedbg">
 <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
 </head>
 <body class="home-page page-home">
-  <!-- Overview Page Cinematic Background Video Container -->
-  <div class="video-bg-container" id="videoBgContainer" aria-hidden="true">
-    <video id="bgVideo" class="bg-video-element" autoplay loop muted playsinline preload="auto">
+  <!-- Overview Page Cinematic Background Video Container (Fixed Background Layer) -->
+  <div class="video-bg-container" id="videoBgContainer" aria-hidden="true" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; width: 100dvw !important; height: 100dvh !important; z-index: -5 !important; overflow: hidden !important; pointer-events: none !important; background-color: #080c14 !important;">
+    <video id="bgVideo" class="bg-video-element" autoplay loop muted playsinline preload="auto" style="position: absolute !important; top: 50% !important; left: 50% !important; min-width: 100% !important; min-height: 100% !important; width: 100% !important; height: 100% !important; transform: translate(-50%, -50%) !important; object-fit: cover !important; pointer-events: none !important;">
       <source src="assets/videos/overview_bg.mp4" type="video/mp4">
       <source src="assets/videos/vidssave.com Chinatsu &amp; Taiki &#x1F499; _ Blue Box AMV _ Mahiye Jinna Sohna [Hindi Amv_Edit] 4k&#x2728; 1080P.mp4" type="video/mp4">
     </video>
@@ -752,6 +752,6 @@
 
   <script src="assets/js/skulpt.min.js"></script>
   <script src="assets/js/skulpt-stdlib.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=20260925_fixedbg"></script>
 </body>
 </html>
