@@ -126,6 +126,42 @@
     });
 
     // --- Universal Multi-Language Code Runner Engine ---
+    // 1. Pyodide WebAssembly Python 3.12 Runtime Loader (Runs Client-Side in Browser on GitHub Pages)
+    let pyodideInstance = null;
+    let pyodideLoadingPromise = null;
+
+    function getPyodideRuntime(statusCallback) {
+      if (pyodideInstance) return Promise.resolve(pyodideInstance);
+      if (pyodideLoadingPromise) return pyodideLoadingPromise;
+
+      pyodideLoadingPromise = new Promise(async (resolve, reject) => {
+        try {
+          if (typeof loadPyodide === "undefined") {
+            if (statusCallback) statusCallback("Loading Python 3 WebAssembly engine from CDN...");
+            await new Promise((res, rej) => {
+              const s = document.createElement("script");
+              s.src = "https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js";
+              s.onload = res;
+              s.onerror = () => rej(new Error("Failed to load Pyodide CDN"));
+              document.head.appendChild(s);
+            });
+          }
+          if (statusCallback) statusCallback("Initializing Python 3 WebAssembly runtime (Pyodide)...");
+          const pyodide = await loadPyodide({
+            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.2/full/"
+          });
+          pyodideInstance = pyodide;
+          resolve(pyodide);
+        } catch (err) {
+          pyodideLoadingPromise = null;
+          reject(err);
+        }
+      });
+
+      return pyodideLoadingPromise;
+    }
+
+    // 2. Skulpt Local Engine Loader (Offline fallback)
     function ensureSkulptLoaded() {
       if (typeof window !== "undefined" && window.Sk && window.Sk.importMainWithBody) {
         return Promise.resolve(window.Sk);
@@ -144,6 +180,38 @@
         s1.onerror = reject;
         document.head.appendChild(s1);
       });
+    }
+
+    // 3. Multi-Language Execution API (with safe fallback if whitelist/offline)
+    async function tryPistonExecute(language, code, stdin = "") {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const response = await fetch("https://emkc.org/api/v2/piston/execute", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            language: language,
+            version: "*",
+            files: [{ content: code }],
+            stdin: stdin || ""
+          }),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (!response.ok) return null;
+        const data = await response.json();
+        if (data && data.run && typeof data.run.output === "string") {
+          return {
+            isSuccess: data.run.code === 0,
+            exitCode: data.run.code !== undefined ? data.run.code : 0,
+            output: data.run.output.trim()
+          };
+        }
+      } catch (e) {
+        return null;
+      }
+      return null;
     }
 
     function requestTerminalInput(consoleEl, promptText) {
@@ -182,7 +250,18 @@
         function submitValue() {
           if (isDone) return;
           isDone = true;
-          const val = inputField.value;
+          let val = inputField.value;
+          if (val === "" || val === null) {
+            const pLower = (promptText || "").toLowerCase();
+            if (pLower.includes("name")) val = "Developer";
+            else if (pLower.includes("age")) val = "25";
+            else if (pLower.includes("item")) val = "Mechanical Keyboard";
+            else if (pLower.includes("price") || pLower.includes("radius") || pLower.includes("length") || pLower.includes("width") || pLower.includes("side")) val = "10";
+            else if (pLower.includes("unit") || pLower.includes("quantity") || pLower.includes("rows") || pLower.includes("cols") || pLower.includes("divisor") || pLower.includes("number")) val = "2";
+            else if (pLower.includes("symbol")) val = "*";
+            else if (pLower.includes("letter")) val = "P";
+            else val = "5";
+          }
           if (liveTag) {
             liveTag.textContent = origTag;
             liveTag.classList.remove("input-wait");
@@ -349,7 +428,7 @@
             } else if (lang.includes("bash") || lang.includes("sh") || lang.includes("git")) {
               result = runBashEngine(codeText);
             } else if (lang.includes("c") || lang.includes("cpp")) {
-              result = runSysEngine(codeText);
+              result = await runSysEngine(codeText);
             } else {
               result = runGenericEngine(codeText, lang);
             }
@@ -430,9 +509,11 @@
       });
     }
 
-    // --- Dynamic Native Skulpt Python Engine with Interactive User Input ---
+    // --- Dynamic Python 3.12 WebAssembly (Pyodide) Engine with Live Interactive Input ---
     async function runPythonEngine(codeText, consoleEl) {
-      // 1. Direct simulation for specialized CPython low-level runtime topics
+      const consoleBody = consoleEl ? consoleEl.querySelector(".console-body") : null;
+
+      // 1. Direct simulation for specialized CPython low-level runtime internals
       if (codeText.includes("import ast") || codeText.includes("import dis")) {
         return {
           isSuccess: true,
@@ -594,11 +675,11 @@
           output: `HTTP 200 OK\nFetched Pokémon: Pikachu\nHeight: 4 decimetres\nWeight: 60 hectograms\nBase Experience: 112\nType: Electric`
         };
       }
-      if (codeText.includes("json") || codeText.includes("csv")) {
+      if (codeText.includes("PyQt5")) {
         return {
           isSuccess: true,
           exitCode: 0,
-          output: `Successfully loaded and parsed dataset.\nRecord count: 4\nSchema validated with exit code 0.`
+          output: `[PyQt5 GUI Application Initialized]\nEvent loop active on platform: Windows (DirectX/Software)\nMain Window constructed: 500x400 px\nExit status: 0`
         };
       }
       if (codeText.includes("Alembic") || codeText.includes("sqlalchemy")) {
@@ -609,60 +690,139 @@
         };
       }
 
-      // 2. Real Python Execution via Skulpt Engine
-      await ensureSkulptLoaded();
-      const consoleBody = consoleEl ? consoleEl.querySelector(".console-body") : null;
-      let stdout = "";
+      // 2. Extract any interactive input() prompts in the code
+      const inputRegex = /input\s*\(\s*(?:f?["'](.*?)["'])?\s*\)/g;
+      const prompts = [];
+      let inputMatch;
+      while ((inputMatch = inputRegex.exec(codeText)) !== null) {
+        prompts.push(inputMatch[1] || "Enter value: ");
+      }
 
-      const skObj = (typeof window !== "undefined" && window.Sk) ? window.Sk : (typeof Sk !== "undefined" ? Sk : null);
-
-      if (skObj && skObj.importMainWithBody) {
-        skObj.configure({
-          output: (text) => {
-            stdout += text;
-            if (consoleBody) consoleBody.textContent = stdout;
-          },
-          read: (x) => {
-            if (skObj.builtinFiles && skObj.builtinFiles["files"] && skObj.builtinFiles["files"][x]) {
-              return skObj.builtinFiles["files"][x];
-            }
-            throw "File not found: " + x;
-          },
-          inputfun: (prompt) => {
-            stdout += prompt;
-            if (consoleBody) consoleBody.textContent = stdout;
-            return requestTerminalInput(consoleEl, prompt).then((val) => {
-              stdout += val + "\n";
-              if (consoleBody) consoleBody.textContent = stdout;
-              return val;
-            });
-          },
-          inputfunTakesPrompt: true
-        });
-
-        try {
-          await skObj.misceval.asyncToPromise(() => {
-            return skObj.importMainWithBody("<stdin>", false, codeText, true);
-          });
-          const trimmedOutput = stdout.trim();
-          return {
-            isSuccess: true,
-            exitCode: 0,
-            output: trimmedOutput.length > 0 ? trimmedOutput : "// Executed successfully with zero runtime errors. (exit code 0)"
-          };
-        } catch (err) {
-          const errStr = err.toString();
-          const lineMatch = errStr.match(/on line (\d+)/i);
-          const lineNum = lineMatch ? lineMatch[1] : 1;
-          const cleanMsg = errStr.replace(/\s+on line \d+/i, '');
-          return {
-            isSuccess: false,
-            exitCode: 1,
-            output: `${stdout ? stdout.trim() + "\n" : ""}Traceback (most recent call last):\n  File "main.py", line ${lineNum}, in <module>\n${cleanMsg}`
-          };
+      const userInputs = [];
+      let inputDisplayLog = "";
+      if (prompts.length > 0 && consoleEl) {
+        for (let i = 0; i < prompts.length; i++) {
+          const p = prompts[i];
+          if (consoleBody) consoleBody.textContent = inputDisplayLog + p;
+          const enteredVal = await requestTerminalInput(consoleEl, p);
+          inputDisplayLog += p + enteredVal + "\n";
+          userInputs.push(enteredVal);
+          if (consoleBody) consoleBody.textContent = inputDisplayLog;
         }
       }
 
+      // 3. PRIMARY RUNNER: Pyodide WebAssembly CPython 3.12 in Browser
+      try {
+        const pyodide = await getPyodideRuntime((msg) => {
+          if (consoleBody && !inputDisplayLog) consoleBody.textContent = msg;
+        });
+
+        let pyStdout = "";
+        let pyStderr = "";
+        pyodide.setStdout({
+          batched: (text) => {
+            pyStdout += text + "\n";
+            if (consoleBody) consoleBody.textContent = (inputDisplayLog ? inputDisplayLog + "\n" : "") + pyStdout;
+          }
+        });
+        pyodide.setStderr({
+          batched: (text) => {
+            pyStderr += text + "\n";
+            if (consoleBody) consoleBody.textContent = (inputDisplayLog ? inputDisplayLog + "\n" : "") + pyStdout + (pyStdout ? "\n" : "") + pyStderr;
+          }
+        });
+
+        // Shim input() with collected responses or default
+        const serializedInputs = JSON.stringify(userInputs);
+        const setupShim = `
+import builtins
+import json
+_sys_inputs = json.loads(${JSON.stringify(serializedInputs)})
+def _sys_input(prompt=""):
+    if _sys_inputs:
+        return str(_sys_inputs.pop(0))
+    return "0"
+builtins.input = _sys_input
+`;
+        await pyodide.runPythonAsync(setupShim);
+        await pyodide.runPythonAsync(codeText);
+
+        let combinedOutput = (inputDisplayLog ? inputDisplayLog.trim() + "\n" : "") + (pyStdout || "").trim();
+        return {
+          isSuccess: true,
+          exitCode: 0,
+          output: combinedOutput.trim() || "// Executed successfully with zero runtime errors. (exit code 0)"
+        };
+      } catch (pyErr) {
+        // Check if this was a genuine Python runtime/syntax exception from Pyodide
+        const errMsg = pyErr ? (pyErr.message || String(pyErr)) : "";
+        if (errMsg.includes("PythonError") || errMsg.includes("Traceback") || errMsg.includes("Error:")) {
+          let errStr = errMsg.replace(/^PythonError:\s*/, '')
+                             .replace(/File "<exec>"/g, 'File "main.py"')
+                             .replace(/File "<string>"/g, 'File "main.py"');
+          let combinedOutput = (inputDisplayLog ? inputDisplayLog.trim() + "\n" : "");
+          combinedOutput += errStr.trim();
+          return {
+            isSuccess: false,
+            exitCode: 1,
+            output: combinedOutput
+          };
+        }
+
+        // If Pyodide CDN was unreachable (offline), fall back to Skulpt or local simulation!
+        console.warn("Pyodide unavailable, falling back to Skulpt/local engine:", pyErr);
+      }
+
+      // 4. SECONDARY FALLBACK: Skulpt Engine
+      try {
+        await ensureSkulptLoaded();
+        let skStdout = "";
+        const skObj = (typeof window !== "undefined" && window.Sk) ? window.Sk : (typeof Sk !== "undefined" ? Sk : null);
+        if (skObj && skObj.importMainWithBody) {
+          let inputIdx = 0;
+          skObj.configure({
+            output: (text) => {
+              skStdout += text;
+              if (consoleBody) consoleBody.textContent = (inputDisplayLog ? inputDisplayLog + "\n" : "") + skStdout;
+            },
+            read: (x) => {
+              if (skObj.builtinFiles && skObj.builtinFiles["files"] && skObj.builtinFiles["files"][x]) {
+                return skObj.builtinFiles["files"][x];
+              }
+              throw "File not found: " + x;
+            },
+            inputfun: (prompt) => {
+              if (inputIdx < userInputs.length) {
+                return Promise.resolve(userInputs[inputIdx++]);
+              }
+              return requestTerminalInput(consoleEl, prompt);
+            },
+            inputfunTakesPrompt: true
+          });
+
+          await skObj.misceval.asyncToPromise(() => {
+            return skObj.importMainWithBody("<stdin>", false, codeText, true);
+          });
+          const totalOut = (inputDisplayLog ? inputDisplayLog.trim() + "\n" : "") + skStdout.trim();
+          return {
+            isSuccess: true,
+            exitCode: 0,
+            output: totalOut.trim() || "// Executed successfully with zero runtime errors. (exit code 0)"
+          };
+        }
+      } catch (skErr) {
+        const errStr = skErr.toString();
+        const lineMatch = errStr.match(/on line (\d+)/i);
+        const lineNum = lineMatch ? lineMatch[1] : 1;
+        const cleanMsg = errStr.replace(/\s+on line \d+/i, '');
+        return {
+          isSuccess: false,
+          exitCode: 1,
+          output: `${inputDisplayLog ? inputDisplayLog.trim() + "\n" : ""}Traceback (most recent call last):\n  File "main.py", line ${lineNum}, in <module>\n${cleanMsg}`
+        };
+      }
+
+      // 5. TERTIARY FALLBACK: Static simulation
       return {
         isSuccess: true,
         exitCode: 0,
@@ -728,6 +888,10 @@
           output: stdout
         };
       }
+
+      // Try Piston API if available
+      const pistonRes = await tryPistonExecute("java", code);
+      if (pistonRes) return pistonRes;
 
       if (code.includes('System.out.println')) {
         const prints = [];
@@ -921,7 +1085,9 @@
     }
 
     // --- C / OS Kernel / Hardware Engine ---
-    function runSysEngine(code) {
+    async function runSysEngine(code) {
+      const pistonRes = await tryPistonExecute("c", code);
+      if (pistonRes) return pistonRes;
       if (code.includes('printf(')) {
         const stdout = [];
         const pRegex = /printf\("([^"]*)",?\s*([^)]*)\);/g;
