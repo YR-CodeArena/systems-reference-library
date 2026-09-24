@@ -12,7 +12,7 @@
   <div id="reading-progress"></div>
 
   <!-- Header -->
-    <header class="site-header">
+      <header class="site-header">
     <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
       <div class="brand-icon">SR</div>
       <div class="brand-text-block">
@@ -20,7 +20,7 @@
           <span class="brand-title">Systems Reference</span>
           <span class="brand-status-tag">● ONLINE // 稼働中</span>
         </div>
-        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
       </div>
     </a>
 
@@ -37,7 +37,7 @@
           <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
             <span>🌐</span>
             <span>Core Architecture</span>
-            <span class="dropdown-badge">VOL.01–05</span>
+            <span class="dropdown-badge">VOL.01–06</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -80,15 +80,22 @@
                   <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
                 </div>
               </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
             </div>
           </div>
         </li>
 
-        <li class="nav-dropdown" id="dropdownRuntimes">
+        <li class="nav-dropdown" id="dropdownBackend">
           <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
             <span>⚡</span>
-            <span>Languages &amp; Runtimes</span>
-            <span class="dropdown-badge">VOL.06–10</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -97,38 +104,82 @@
             </div>
             <div class="dropdown-grid">
               <a href="git-github.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.06</span>
+                <span class="card-vol-tag">VOL.07</span>
                 <div class="card-text">
                   <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
                   <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
                 </div>
               </a>
               <a href="python-masterclass.html" class="dropdown-card active" role="menuitem">
-                <span class="card-vol-tag">VOL.07</span>
+                <span class="card-vol-tag">VOL.08</span>
                 <div class="card-text">
                   <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
                   <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
                 </div>
               </a>
               <a href="python-runtime.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.08</span>
+                <span class="card-vol-tag">VOL.09</span>
                 <div class="card-text">
-                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
-                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
                 </div>
               </a>
               <a href="postgresql.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.09</span>
+                <span class="card-vol-tag">VOL.11</span>
                 <div class="card-text">
-                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
-                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
                 </div>
               </a>
               <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.10</span>
+                <span class="card-vol-tag">VOL.12</span>
                 <div class="card-text">
-                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
-                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
                 </div>
               </a>
             </div>
@@ -205,6 +256,59 @@
       <section id="mod1" class="content-section">
         <h2>Module 1: Language Architecture, Environment Setup &amp; Execution Model</h2>
 
+<div class="diagram-card" id="diagram-python-mro">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 8.1 // OOP INTERNALS</span>
+      <h3 class="diagram-title">Python Method Resolution Order (MRO) C3 Linearization</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-mro" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-mro" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-mro" class="diagram-svg" viewBox="0 0 940 300" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(470, 30)">
+        <rect x="-80" y="0" width="160" height="40" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+        <text x="0" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#a7f3d0">object (Root)</text>
+      </g>
+      <g transform="translate(320, 100)">
+        <rect x="-70" y="0" width="140" height="40" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+        <text x="0" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#93c5fd">Class B</text>
+      </g>
+      <g transform="translate(620, 100)">
+        <rect x="-70" y="0" width="140" height="40" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+        <text x="0" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#93c5fd">Class C</text>
+      </g>
+      <g transform="translate(470, 180)">
+        <rect x="-90" y="0" width="180" height="45" rx="6" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+        <text x="0" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="#fbcfe8">Class D(B, C)</text>
+      </g>
+      <!-- Inheritance arrows -->
+      <line x1="420" y1="180" x2="340" y2="140" stroke="#ec4899" stroke-width="1.8" stroke-dasharray="4,2"/>
+      <line x1="520" y1="180" x2="600" y2="140" stroke="#ec4899" stroke-width="1.8" stroke-dasharray="4,2"/>
+      <line x1="330" y1="100" x2="440" y2="70" stroke="#3b82f6" stroke-width="1.8"/>
+      <line x1="610" y1="100" x2="500" y2="70" stroke="#3b82f6" stroke-width="1.8"/>
+      <!-- Linear order flow -->
+      <text x="470" y="265" text-anchor="middle" font-size="12" font-family="monospace" fill="#fde68a">
+        RESOLVED C3 MRO: [D &rarr; B &rarr; C &rarr; object]
+      </text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 8.1 C3 Linearization:</strong> Python uses the C3 Superclass Linearization algorithm to determine method resolution order across complex multiple inheritance diamonds, guaranteeing monotonicity and preserving local precedence order.
+  </div>
+</div>
+
+
+
         <h3>1.1 Understanding the Python Execution Architecture</h3>
         <p>Python is a high-level, interpreted, dynamically-typed, multi-paradigm programming language created by Guido van Rossum and released in 1991. Unlike statically compiled languages such as C, C++, or Rust, which convert source code directly into architecture-specific machine code binaries before execution, Python utilizes a multi-tier compilation and execution pipeline:</p>
         <ul>
@@ -232,10 +336,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Hello World and Comments</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># This is a single-line comment. The Python interpreter completely ignores comments.
 # Comments provide human-readable documentation explaining complex logic or assumptions.
@@ -313,10 +423,16 @@ print("It's really good!")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Demonstrating Data Types &amp; F-Strings</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># 1. Strings (Textual Data)
 first_name = "Bro"
@@ -377,10 +493,16 @@ else:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Type Conversion and Inspection</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>name = "Bro Code"
 age = 25
@@ -420,10 +542,16 @@ print(bool(""))           # Output: False (Useful for validating empty user inpu
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Accepting &amp; Type Casting User Input</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Basic Text Input
 name = input("What is your name?: ")
@@ -448,10 +576,16 @@ print(f"The calculated area is: {area} cm²")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Interactive Shopping Cart Calculator</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Prompting user for shopping cart details
 item = input("What item would you like to buy?: ")
@@ -562,10 +696,16 @@ print(f"Total cost: ${total:.2f}")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Demonstrating Native &amp; Math Module Functions</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import math
 
@@ -597,10 +737,16 @@ print(math.floor(9.9))  # Output: 9</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Geometry Formula Implementations</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import math
 
@@ -632,10 +778,16 @@ print(f"Calculated Hypotenuse (Side C): {round(hypotenuse, 2)}")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Multi-Branch Conditional Execution</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>age = int(input("Enter your age: "))
 
@@ -666,10 +818,16 @@ else:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Match-Case Syntax Implementation</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>def get_day_of_week(day_num):
     match day_num:
@@ -722,10 +880,16 @@ print(is_weekend("Sunday")) # Output: True</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Logical Operator Chains &amp; Chained Comparisons</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>temp = 25
 is_raining = False
@@ -762,10 +926,16 @@ if not is_raining:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Conditional Expressions Examples</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>num = 5
 age = 20
@@ -868,10 +1038,16 @@ print(access_level) # Output: "Full Access"</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — String Slicing &amp; Negative Indexing</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>credit_number = "1234-5678-9012-3456"
 
@@ -904,10 +1080,16 @@ print(reversed_str) # Output: "6543-2109-8765-4321"</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Format Specifier Demonstrations</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>price1 = 3.14159
 price2 = -987.65
@@ -945,10 +1127,16 @@ print(f"Price: ${price3:,.2f}") # Output: "Price: $1,200.50"</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Input Validation with While Loops</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Input Validation: Continuously re-prompt until valid name provided
 name = input("Enter your name: ")
@@ -971,10 +1159,16 @@ print(f"You are {age} years old.")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — For Loop Variations</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Iterate over Range 1 to 10 (stop number 11 is EXCLUSIVE)
 for x in range(1, 11):
@@ -1000,10 +1194,16 @@ for x in range(1, 11, 2):
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Continue and Break Statements</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Skip unlucky number 13 using continue
 for x in range(1, 21):
@@ -1024,10 +1224,16 @@ for x in range(1, 21):
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Printing Character Grid with Nested Loops</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>rows = int(input("Enter number of rows: "))
 cols = int(input("Enter number of columns: "))
@@ -1101,10 +1307,16 @@ for x in range(rows):         # Outer loop controls rows
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Complete List Methods Demonstrations</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>fruits = ["apple", "orange", "banana", "coconut"]
 
@@ -1132,10 +1344,16 @@ fruits.clear()                         # Empties entire list</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Set Operations &amp; Tuple Mechanics</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Sets (Unordered, Unique)
 color_set = {"red", "green", "blue", "red"} # Duplicate "red" is automatically discarded
@@ -1156,10 +1374,16 @@ print(coordinates.index(20.0)) # Find index location</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Dictionary CRUD Operations &amp; Methods</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>capitals = {
     "USA": "Washington D.C.",
@@ -1200,10 +1424,16 @@ for country, capital in capitals.items():
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — 2D List Access &amp; Coordinate Indexing</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>fruits = ["apple", "orange", "banana"]
 vegetables = ["celery", "carrots", "potatoes"]
@@ -1227,10 +1457,16 @@ print(groceries[2][1]) # Output: "fish" (Row 2, Col 1)</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Matrix Iteration and Numpad Example</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Iterating over 2D Grocery Matrix
 for category in groceries:      # Outer loop iterates rows
@@ -1263,10 +1499,16 @@ for row in numpad:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Membership Operator Tests</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>word = "APPLE"
 letter = input("Guess a letter: ").upper()
@@ -1296,10 +1538,16 @@ if student in grades:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — List Comprehensions Comparison</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Traditional Imperative Approach (Requires 4 lines):
 doubles_traditional = []
@@ -1338,10 +1586,16 @@ print(even_nums)     # Output: [-2, -4, -6, 8]</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Functions and Return Values</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Function Definition with Parameters
 def happy_birthday(name, age):
@@ -1373,10 +1627,16 @@ print(f"Total: {total}, Product: {product}")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Default &amp; Keyword Argument Usage</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Default Arguments
 def net_price(list_price, discount=0.0, tax=0.05):
@@ -1410,10 +1670,16 @@ hello(greeting="Hello", last_name="Squarepants", title="Mr.", first_name="Sponge
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Utilizing *args and **kwargs</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># 1. *args Example: Dynamic Summation Function
 def add_all(*args):
@@ -1460,10 +1726,16 @@ shipping_label("Dr.", "Spongebob", "Squarepants", street="123 Conch St", city="B
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Custom Module Definition &amp; Importing Mechanics</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># --- Custom Module File: example_math.py ---
 pi = 3.14159
@@ -1515,10 +1787,16 @@ print(pi)                     # Output: 3.14159</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Plain Text File Operations</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>file_path = "output.txt"
 
@@ -1541,10 +1819,16 @@ with open(file_path, "r") as file:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — JSON Serialization &amp; Deserialization</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import json
 
@@ -1571,10 +1855,16 @@ with open(json_path, "r") as file:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Tabular CSV File Operations</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import csv
 
@@ -1612,10 +1902,16 @@ with open(csv_path, "r") as file:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Comprehensive Exception Handling Block</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>try:
     # Dangerous Code Block: Operations that may trigger runtime errors
@@ -1664,10 +1960,16 @@ finally:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Complete OOP Class Definition</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>class Student:
     # Class Variable (Shared across all student instances)
@@ -1713,10 +2015,16 @@ student1.study()</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Inheritance, super(), and Polymorphism</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Parent Superclass
 class Shape:
@@ -1761,10 +2069,16 @@ for shape in shapes:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Getter and Setter Property Methods</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>class Rectangle:
     def __init__(self, width, height):
@@ -1802,10 +2116,16 @@ print(rect.width)   # Calls @property getter!</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Implementing Dunder Methods</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>class Book:
     def __init__(self, title, author, pages):
@@ -1841,10 +2161,16 @@ print(f"Total Pages: {book1 + book2}")     # Output: 533</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Custom Decorator Function</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Decorator Function Definition
 def add_sprinkles(func):
@@ -1873,10 +2199,16 @@ get_ice_cream("Vanilla")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Multithreading Concurrent Tasks with Join</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import threading
 import time
@@ -1915,10 +2247,16 @@ print("All concurrent chores are complete!")</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Fetching Pokemon REST API Data</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import requests
 
@@ -1952,10 +2290,16 @@ except requests.exceptions.RequestException as e:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — PyQt5 Main Window Boilerplate</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -1986,10 +2330,16 @@ if __name__ == "__main__":
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python Script — Interactive PyQt5 Application</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>import sys
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QLabel, QPushButton, 
@@ -2147,6 +2497,8 @@ if __name__ == "__main__":
     </svg>
   </button>
 
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
   <div id="reading-progress"></div>
 
   <!-- Header -->
-    <header class="site-header">
+      <header class="site-header">
     <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
       <div class="brand-icon">SR</div>
       <div class="brand-text-block">
@@ -20,7 +20,7 @@
           <span class="brand-title">Systems Reference</span>
           <span class="brand-status-tag">● ONLINE // 稼働中</span>
         </div>
-        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
       </div>
     </a>
 
@@ -37,7 +37,7 @@
           <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
             <span>🌐</span>
             <span>Core Architecture</span>
-            <span class="dropdown-badge">VOL.01–05</span>
+            <span class="dropdown-badge">VOL.01–06</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -80,15 +80,22 @@
                   <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
                 </div>
               </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
             </div>
           </div>
         </li>
 
-        <li class="nav-dropdown" id="dropdownRuntimes">
+        <li class="nav-dropdown" id="dropdownBackend">
           <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
             <span>⚡</span>
-            <span>Languages &amp; Runtimes</span>
-            <span class="dropdown-badge">VOL.06–10</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -97,38 +104,82 @@
             </div>
             <div class="dropdown-grid">
               <a href="git-github.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.06</span>
+                <span class="card-vol-tag">VOL.07</span>
                 <div class="card-text">
                   <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
                   <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
                 </div>
               </a>
               <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.07</span>
+                <span class="card-vol-tag">VOL.08</span>
                 <div class="card-text">
                   <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
                   <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
                 </div>
               </a>
               <a href="python-runtime.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.08</span>
+                <span class="card-vol-tag">VOL.09</span>
                 <div class="card-text">
-                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
-                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
                 </div>
               </a>
               <a href="postgresql.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.09</span>
+                <span class="card-vol-tag">VOL.11</span>
                 <div class="card-text">
-                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
-                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
                 </div>
               </a>
               <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.10</span>
+                <span class="card-vol-tag">VOL.12</span>
                 <div class="card-text">
-                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
-                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
                 </div>
               </a>
             </div>
@@ -199,6 +250,61 @@
       <!-- Page 1 -->
       <section id="algorithmic-efficiency" class="content-section">
         <h2>Algorithmic Efficiency and Computational Complexity</h2>
+
+<div class="diagram-card" id="diagram-rb-tree">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 4.1 // ALGORITHMIC TOPOLOGY</span>
+      <h3 class="diagram-title">Red-Black Tree Balancing &amp; Cache-Line Locality</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-rb" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-rb" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-rb" class="diagram-svg" viewBox="0 0 940 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tree Node Root (Black) -->
+      <g transform="translate(470, 40)">
+        <circle cx="0" cy="0" r="24" fill="#111827" stroke="#3b82f6" stroke-width="2.5"/>
+        <text x="0" y="5" text-anchor="middle" font-size="12" font-weight="700" fill="#93c5fd">20 [B]</text>
+      </g>
+      <!-- Left Child (Red) -->
+      <g transform="translate(320, 120)">
+        <circle cx="0" cy="0" r="24" fill="#7f1d1d" stroke="#ef4444" stroke-width="2.5"/>
+        <text x="0" y="5" text-anchor="middle" font-size="12" font-weight="700" fill="#fecaca">10 [R]</text>
+      </g>
+      <!-- Right Child (Black) -->
+      <g transform="translate(620, 120)">
+        <circle cx="0" cy="0" r="24" fill="#111827" stroke="#3b82f6" stroke-width="2.5"/>
+        <text x="0" y="5" text-anchor="middle" font-size="12" font-weight="700" fill="#93c5fd">30 [B]</text>
+      </g>
+      <!-- Tree links -->
+      <line x1="450" y1="55" x2="335" y2="105" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,2" class="anim-flow-line"/>
+      <line x1="490" y1="55" x2="605" y2="105" stroke="#3b82f6" stroke-width="2"/>
+      <!-- Cache Line Structure -->
+      <g transform="translate(120, 200)">
+        <rect width="700" height="70" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+        <text x="350" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#6ee7b7">CPU L1 CACHE LINE (64 Bytes Continuous Spatial Allocation)</text>
+        <rect x="20" y="35" width="150" height="25" rx="3" fill="#0f172a" stroke="#374151"/><text x="95" y="52" text-anchor="middle" font-size="9" fill="#9ca3af">Header (8B)</text>
+        <rect x="180" y="35" width="150" height="25" rx="3" fill="#0f172a" stroke="#ef4444"/><text x="255" y="52" text-anchor="middle" font-size="9" fill="#fca5a5">Left / Right Pointers (16B)</text>
+        <rect x="340" y="35" width="150" height="25" rx="3" fill="#0f172a" stroke="#3b82f6"/><text x="415" y="52" text-anchor="middle" font-size="9" fill="#93c5fd">Key &bull; Value Payload (16B)</text>
+        <rect x="500" y="35" width="180" height="25" rx="3" fill="#0f172a" stroke="#10b981"/><text x="590" y="52" text-anchor="middle" font-size="9" fill="#6ee7b7">Cache Padding &bull; Alignment (24B)</text>
+      </g>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 4.1 Memory &amp; Tree Topology:</strong> Red-Black self-balancing invariants guarantee O(log N) worst-case search and insertion. Cache-conscious design optimizes node struct layouts to fit within single 64-byte L1 CPU cache lines, eliminating multiple memory bus hops during tree traversal.
+  </div>
+</div>
+
+
 
         <h3 id="empirical-vs-asymptotic">Empirical Execution Time vs. Asymptotic Measurement</h3>
         <p>Evaluating the performance of an algorithm by measuring elapsed wall-clock execution time—such as recording the start and end timestamps of a routine in milliseconds—introduces non-deterministic variables that obscure true computational efficiency. Empirical wall-clock duration reflects the state of the host execution environment rather than the inherent efficiency of the algorithm itself:</p>
@@ -401,10 +507,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python: Dynamic Array Appending</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Python Dynamic Array Appending (Managed via CPython listobject.c)
 dynamic_list = []
@@ -418,10 +530,16 @@ for value in range(10):
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java ArrayList Geometric Expansion</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// Java ArrayList: Contiguous Geometric Expansion
 import java.util.ArrayList;
@@ -439,10 +557,16 @@ public class DynamicArrayDemonstration {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">TypeScript Dynamic Array Backing</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// TypeScript Dynamic Array Backing
 const dynamicVector: number[] = [];
@@ -647,10 +771,16 @@ for (let i = 0; i &lt; 10; i++) {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python: Insertion-Ordered Compact Hash Table</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Python Dictionary: Insertion-Ordered Compact Hash Table
 user_session = {}
@@ -662,10 +792,16 @@ val = user_session.get("account_id") # Average O(1) lookup</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java: HashMap Chaining & Treeification</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// Java HashMap: Chaining with Dynamic Red-Black Treeification
 import java.util.HashMap;
@@ -686,10 +822,16 @@ public class MapDemonstration {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">TypeScript Map: V8 OrderedHashTable Backing</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// TypeScript Map: V8 OrderedHashTable Backing
 const lookupMap: Map&lt;string, number&gt; = new Map();
@@ -916,10 +1058,16 @@ const session = lookupMap.get("session_id"); // Deterministic O(1) lookup</code>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java: Idiomatic Binary Search with Overflow Prevention</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// Idiomatic Binary Search with Unsigned Overflow Prevention
 public class BinarySearchVerification {
@@ -993,10 +1141,16 @@ public class BinarySearchVerification {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python: Quick Sort with Hoare Partitioning</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># Python Quick Sort with Hoare Partitioning Scheme
 def quicksort_hoare(array, low, high):
@@ -1024,10 +1178,16 @@ def hoare_partition(array, low, high):
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java: Stable Merge Sort Implementation</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// Java Stable Merge Sort Implementation
 public class MergeSortSystem {
@@ -1069,10 +1229,16 @@ public class MergeSortSystem {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">TypeScript: Tree Traversals</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// TypeScript Tree Traversals
 class BinaryTreeNode {
@@ -1270,6 +1436,8 @@ function inOrderTraversal(node: BinaryTreeNode | null, accumulator: number[] = [
     </svg>
   </button>
 
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)">
+  <title>High-Concurrency Java 21 &amp; Enterprise Reactive Systems | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–06</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownBackend">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Backend Systems <span class="card-kanji">[低遅延]</span></div>
+                  <div class="card-sub">PEP 703 Free-Threading &bull; ASGI &bull; Pydantic V2 Rust &bull; SSE</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.11</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.12</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="toc-title">Table of Contents</div>
+      <ul class="toc-nav">
+        <li><a href="#overview">Overview &amp; Executive Summary</a></li>
+        <li><a href="#jvm-memory-mechanics">1. Java 21 JVM Architecture &amp; Memory Mechanics</a>
+          <ul class="toc-subnav">
+            <li><a href="#memory-topologies">Physical and Logical Memory Topologies</a></li>
+            <li><a href="#diagram-jvm-memory">Diagram: Java 21 Memory Topology</a></li>
+            <li><a href="#gc-engineering">Garbage Collection: G1GC vs Generational ZGC</a></li>
+            <li><a href="#telemetry-diagnostics">Performance Diagnostics, Telemetry &amp; Dumps</a></li>
+            <li><a href="#jmh-microbenchmarking">Microbenchmarking Rigor &amp; JMH Benchmark Suite</a></li>
+          </ul>
+        </li>
+        <li><a href="#loom-hardware-primitives">2. Modern Concurrency: Project Loom &amp; Hardware Primitives</a>
+          <ul class="toc-subnav">
+            <li><a href="#virtual-threads-internals">Project Loom &amp; Virtual Threads Under the Hood</a></li>
+            <li><a href="#diagram-loom-concurrency">Diagram: Project Loom M:N Scheduling</a></li>
+            <li><a href="#thread-pinning">Thread Pinning Hazard &amp; ReentrantLock Remediation</a></li>
+            <li><a href="#jmm-lock-free">Non-Blocking Algorithms &amp; Java Memory Model (JMM)</a></li>
+            <li><a href="#code-lock-free-stack">Code: Lock-Free Stack with VarHandle</a></li>
+            <li><a href="#lmax-disruptor">The LMAX Disruptor: Mechanical Sympathy</a></li>
+            <li><a href="#disruptor-internals">Diagram: Disruptor RingBuffer &amp; False Sharing</a></li>
+            <li><a href="#code-padded-sequence">Code: Padded Atomic Sequence</a></li>
+          </ul>
+        </li>
+        <li><a href="#enterprise-microservices">3. Enterprise Microservice Stack: Spring Boot 3 &amp; Reactive</a>
+          <ul class="toc-subnav">
+            <li><a href="#spring-boot-aot">Spring Boot 3, Jakarta EE &amp; GraalVM AOT Compilation</a></li>
+            <li><a href="#reactive-streams">Reactive Programming &amp; Reactive Streams Specification</a></li>
+            <li><a href="#clean-microservice-contracts">Clean Microservice Design: MapStruct &amp; RFC 7807</a></li>
+            <li><a href="#distributed-ecosystem">Distributed Ecosystem: Gateway, Consul, Eureka &amp; Config</a></li>
+          </ul>
+        </li>
+        <li><a href="#system-blueprints">4. Architectural Synthesis &amp; System Blueprints</a>
+          <ul class="toc-subnav">
+            <li><a href="#code-trading-pipeline">High-Throughput Processing Blueprint: Trading Pipeline</a></li>
+            <li><a href="#fmea-matrix">Production Failure Mode &amp; Effects Analysis (FMEA)</a></li>
+          </ul>
+        </li>
+        <li><a href="#architectural-conclusions">5. Architectural Conclusions</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-header">
+        <span class="doc-badge">Volume 13 &bull; 23 Pages &bull; JVM &amp; Reactive</span>
+        <h1 class="doc-title">High-Concurrency Java 21 and Enterprise Reactive Systems</h1>
+        <p class="doc-subtitle">Architectural Foundations, Runtime Internals, and Non-Blocking Engineering</p>
+        <div class="doc-meta-row">
+          <span>Author: Enterprise Distributed Systems Engineering</span>
+          <span>Coverage: Loom Internals, ZGC Colored Pointers, JMM Fences, LMAX Disruptor, Spring Boot 3 Reactive</span>
+          <span>Interactive: Runnable Code Blocks + Animated SVG Diagrams</span>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <section id="overview" class="content-section">
+        <h2>Overview &amp; Executive Summary</h2>
+        <p>High-throughput distributed systems demand an exact understanding of runtime mechanics. The Java Virtual Machine (HotSpot JVM) abstracts physical hardware while exposing critical configuration vectors that govern thread execution, object allocation, and garbage collection [cite: 76]. Modern enterprise architectures balance the resource efficiency of asynchronous runtimes against maintainable operational models, unifying non-blocking reactive pipelines with hardware-aligned primitives.</p>
+      </section>
+
+      <!-- Section 1 -->
+      <section id="jvm-memory-mechanics" class="content-section">
+        <h2>1. Java 21 JVM Architecture and Memory Management Mechanics</h2>
+
+        <h3 id="memory-topologies">Physical and Logical Memory Topologies</h3>
+        <p>The HotSpot JVM logically partitions memory into distinct regions to balance allocation throughput and reclamation overhead. These logical regions reside entirely within the operating system process virtual address space, mapped across physical dynamic random-access memory (DRAM) [cite: 76].</p>
+
+        <p>The memory topology divides into the Java Heap Space, which is subject to garbage collection, and Off-Heap native process allocations. The Java Heap contains the Young Generation—comprising an Eden space and two Survivor spaces (S0 and S1)—and the Tenured Old Generation. The Off-Heap space accommodates the Metaspace, native memory utilized by C++ runtimes and Direct ByteBuffers, and JVM platform thread call stacks [cite: 76].</p>
+
+        <p>The Eden space serves as the initial point of allocation for virtually all dynamic object instances and arrays. High allocation rates are sustained through Thread-Local Allocation Buffers (TLABs). A TLAB is a dedicated chunk of Eden memory assigned directly to an execution thread. Allocation within a TLAB requires only a bump-pointer operation: <code>Top = Top + Size</code> [cite: 76]. This pointer adjustment eliminates synchronization against a global heap pointer. If an allocation exceeds the remaining TLAB capacity, the runtime either retires the current TLAB and allocates a fresh one or allocates directly into the global Eden via an atomic instruction [cite: 76].</p>
+
+        <p>Surrounding the Eden space are two Survivor spaces (S0 and S1), configured with identical dimensions. At any point in time, one survivor space acts as the active evacuation target while the other remains empty. Live objects surviving an Eden collection are copied to the active survivor space. The roles of the survivor spaces alternate on each minor garbage collection invocation [cite: 76].</p>
+
+        <p>The Tenured or Old Generation occupies the remaining heap capacity, housing long-lived objects. Objects transition into Tenured space after surviving a specified number of collection cycles, governed by an aging threshold stored within the object header. Allocations that exceed half the size of a TLAB or surpass configured humongous thresholds can bypass the Young generation entirely, avoiding memory evacuation copy penalties [cite: 76].</p>
+
+        <p>Metaspace, introduced to replace Permanent Generation (PermGen), resides in native process memory. Metaspace stores runtime class definitions, method bytecode, method annotations, the constant pool, method dispatch tables (vtable and itable), and internal HotSpot C++ metadata representations (InstanceKlass) [cite: 76]. When Compressed Class Pointers are active (<code>-XX:+UseCompressedClassPointers</code>), Metaspace is logically divided into two distinct allocations [cite: 76]:</p>
+        <ul>
+          <li><strong>Class Space:</strong> A contiguous native memory block (defaulting to 1 GB, configured via <code>-XX:CompressedClassSpaceSize</code>) storing instances of Klass structures. This permits HotSpot to reference class metadata via 32-bit compressed pointers within the object header [cite: 76].</li>
+          <li><strong>Non-Class Space:</strong> Dynamically allocated native chunks (Metachunks) requested from the OS via <code>mmap</code> or <code>malloc</code>, holding executable bytecode, annotations, constant pools, and JIT-compiled symbols [cite: 76].</li>
+        </ul>
+
+        <p>Each platform thread created by the JVM receives an isolated, linear native call stack allocated directly via underlying operating system thread primitives, such as <code>pthread_create</code>. Stack sizing is governed by the <code>-Xss</code> flag, which defaults to 1024 KB on modern 64-bit architectures. Every method invocation pushes a discrete stack frame containing three components [cite: 76]:</p>
+        <ol>
+          <li><strong>The Local Variable Array (LVA):</strong> A zero-indexed structure holding primitive values, references to heap objects, and the invocation instance reference (<code>this</code> at index 0 for instance methods). Long and double values consume two consecutive slots.</li>
+          <li><strong>The Operand Stack:</strong> A Last-In-First-Out (LIFO) register space utilized by the JVM bytecode execution engine to push operands, compute intermediate expressions, and pop results to invoke method dispatches.</li>
+          <li><strong>Frame Data:</strong> Containing dynamic link references to the runtime constant pool of the current class to resolve late binding and method dispatches, along with method completion and exception dispatch tables.</li>
+        </ol>
+
+        <div class="formula-card">
+          <div class="formula-header">// SYSTEM FORMULA [数理仕様] &bull; Platform Thread DRAM Footprint</div>
+          <p>Platform thread stack memory is distinct from the heap. Allocating 5,000 platform threads reserves significant physical memory:</p>
+          <div class="formula-math">5,000 &times; 1 MB &approx; 4.88 GB of off-heap DRAM</div>
+        </div>
+
+        <p>On 64-bit architectures, heap objects follow an explicit physical memory layout:</p>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Byte Offset</th>
+                <th>Header Component</th>
+                <th>Compressed OOPs Active (-XX:+UseCompressedOops)</th>
+                <th>64-bit Uncompressed (-XX:-UseCompressedOops)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>0x00 - 0x07</code></td>
+                <td><strong>Mark Word</strong></td>
+                <td>64 bits (8 bytes)</td>
+                <td>64 bits (8 bytes)</td>
+              </tr>
+              <tr>
+                <td><code>0x08 - 0x0B</code></td>
+                <td><strong>Klass Pointer</strong></td>
+                <td>32 bits (4 bytes)</td>
+                <td>64 bits (8 bytes, spanning through 0x0F)</td>
+              </tr>
+              <tr>
+                <td><code>0x0C - 0x0F</code></td>
+                <td><strong>Array Length</strong></td>
+                <td>32 bits (4 bytes, present only on array types)</td>
+                <td>32 bits (4 bytes, present only on array types)</td>
+              </tr>
+              <tr>
+                <td>Subsequent</td>
+                <td><strong>Instance Fields</strong></td>
+                <td>Variable (aligned by field size: 8B, 4B, 2B, 1B)</td>
+                <td>Variable (aligned by field size: 8B, 4B, 2B, 1B)</td>
+              </tr>
+              <tr>
+                <td>Terminal</td>
+                <td><strong>Padding</strong></td>
+                <td>0 to 7 bytes (aligns allocation to 8-byte boundary)</td>
+                <td>0 to 7 bytes (aligns allocation to 8-byte boundary)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ANIMATED DIAGRAM 1: JVM MEMORY TOPOLOGY -->
+        <div id="diagram-jvm-memory" class="diagram-card">
+          <div class="diagram-header">
+            <div class="diagram-title-group">
+              <span class="diagram-badge">⟦ ARCHITECTURAL SPEC // システム仕様図 07 ⟧</span>
+              <span class="diagram-title">Java 21 JVM Memory Topology: On-Heap vs Off-Heap Subsystems</span>
+            </div>
+            <div class="diagram-controls">
+              <button class="diagram-btn play-pause-btn" type="button">⏸ Pause Animation</button>
+            </div>
+          </div>
+          <div class="diagram-canvas-wrap">
+            <svg class="diagram-svg" viewBox="0 0 920 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Java Heap Region -->
+              <rect x="20" y="20" width="530" height="270" rx="10" fill="var(--bg-tertiary)" stroke="var(--accent-primary)" stroke-width="2"/>
+              <text x="40" y="50" fill="var(--accent-primary)" font-weight="800" font-size="13" letter-spacing="1">JAVA HEAP SPACE (MANAGED BY GC)</text>
+              
+              <!-- Young Generation -->
+              <rect x="40" y="70" width="280" height="200" rx="6" fill="var(--bg-secondary)" stroke="var(--border-strong)"/>
+              <text x="55" y="95" fill="var(--accent-secondary)" font-weight="800" font-size="11">Young Generation (Minor GC)</text>
+              <rect x="55" y="110" width="160" height="70" rx="4" fill="rgba(0,240,255,0.1)" stroke="var(--accent-primary)"/>
+              <text x="65" y="130" fill="var(--accent-primary)" font-size="11" font-weight="700">Eden Space</text>
+              <text x="65" y="150" fill="var(--text-secondary)" font-size="9" font-family="monospace">TLAB Bump-Pointer</text>
+              <text x="65" y="165" fill="#4ade80" font-size="9" font-family="monospace">Top = Top + Size</text>
+              
+              <rect x="225" y="110" width="85" height="32" rx="4" fill="var(--bg-tertiary)" stroke="var(--border-subtle)"/>
+              <text x="235" y="130" fill="var(--text-primary)" font-size="10" font-family="monospace">Survivor S0</text>
+              <rect x="225" y="148" width="85" height="32" rx="4" fill="var(--bg-tertiary)" stroke="var(--border-subtle)"/>
+              <text x="235" y="168" fill="var(--text-primary)" font-size="10" font-family="monospace">Survivor S1</text>
+
+              <text x="55" y="250" fill="var(--text-muted)" font-size="10">&bull; Survival Rate: P(survival) &approx; C &bull; e^(-&lambda;t)</text>
+
+              <!-- Old Generation -->
+              <rect x="340" y="70" width="190" height="200" rx="6" fill="var(--bg-secondary)" stroke="var(--border-strong)"/>
+              <text x="355" y="95" fill="#f59e0b" font-weight="800" font-size="11">Tenured Old Gen</text>
+              <rect x="355" y="110" width="160" height="140" rx="4" fill="rgba(245,158,11,0.1)" stroke="#f59e0b"/>
+              <text x="370" y="135" fill="#f59e0b" font-size="11" font-weight="700">Tenured Objects</text>
+              <text x="370" y="155" fill="var(--text-secondary)" font-size="10">Tenuring Threshold &ge; 15</text>
+              <text x="370" y="175" fill="var(--text-muted)" font-size="9">Humongous allocations</text>
+              <text x="370" y="235" fill="var(--text-muted)" font-size="9">Major GC / Mixed Scan</text>
+
+              <!-- Off-Heap Space -->
+              <rect x="580" y="20" width="320" height="270" rx="10" fill="var(--bg-tertiary)" stroke="var(--accent-secondary)" stroke-width="2"/>
+              <text x="600" y="50" fill="var(--accent-secondary)" font-weight="800" font-size="13" letter-spacing="1">OFF-HEAP NATIVE MEMORY</text>
+              
+              <!-- Metaspace -->
+              <rect x="600" y="70" width="280" height="85" rx="6" fill="var(--bg-secondary)" stroke="var(--border-strong)"/>
+              <text x="615" y="92" fill="var(--accent-cyan)" font-weight="700" font-size="11">Metaspace (Native C++ Chunks)</text>
+              <text x="615" y="112" fill="var(--text-secondary)" font-size="10" font-family="monospace">Class Space (1GB limit, Klass*)</text>
+              <text x="615" y="130" fill="var(--text-muted)" font-size="10" font-family="monospace">Non-Class (Bytecode, JIT symbols)</text>
+
+              <!-- Platform Thread Stacks -->
+              <rect x="600" y="170" width="280" height="100" rx="6" fill="var(--bg-secondary)" stroke="var(--border-strong)"/>
+              <text x="615" y="195" fill="#f43f5e" font-weight="700" font-size="11">Platform Thread Call Stacks</text>
+              <text x="615" y="215" fill="var(--text-secondary)" font-size="10" font-family="monospace">-Xss1m per thread (pthread_create)</text>
+              <text x="615" y="235" fill="var(--text-muted)" font-size="9">Local Variable Array (LVA) + Operand Stack</text>
+              <text x="615" y="255" fill="#fb7185" font-size="9" font-weight="700">&bull; 5,000 threads = ~4.88 GB Native DRAM</text>
+            </svg>
+          </div>
+          <div class="diagram-caption">
+            <strong>Figure 13.1:</strong> Java 21 Memory Topology. On-heap allocations in Eden utilize lock-free TLAB bump-pointer mechanics. Off-heap native memory houses Metaspace (Class and Non-Class chunks) and 1MB native thread stacks.
+          </div>
+        </div>
+
+        <h3 id="gc-engineering">Garbage Collection Engineering: G1GC vs. Generational ZGC</h3>
+        <p>Automatic memory reclamation balances throughput against pause latency. The operational model rests upon the <strong>Weak Generational Hypothesis</strong>: the probability that an object survives decreases exponentially with time elapsed since allocation: <code>P(survival) &approx; C &bull; e^(-&lambda;t)</code> [cite: 76].</p>
+
+        <p><strong>Generational ZGC (JEP 439)</strong>, finalized in Java 21, delivers sub-millisecond maximum pause times (&lt; 1 ms) across terabyte-scale heaps by executing marking, thread-stack scanning, and object relocation concurrently with mutator threads [cite: 76]. To coordinate relocation without Stop-The-World compaction, ZGC uses <strong>Colored Pointers</strong>:</p>
+        <ul>
+          <li><strong>Bits 0–43:</strong> Object Virtual Address Space (up to 16 TB addressable memory).</li>
+          <li><strong>Bit 44:</strong> Finalizable metadata, tracking reachability through finalizers.</li>
+          <li><strong>Bit 45:</strong> Remapped metadata, confirming reference points to resolved address.</li>
+          <li><strong>Bit 46:</strong> Marked0 metadata, identifying live objects in current/alternate cycle.</li>
+          <li><strong>Bit 47:</strong> Marked1 metadata, identifying live objects in alternate cycle.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Collector</th>
+                <th>Max Typical Pause Latency</th>
+                <th>Compaction Strategy</th>
+                <th>Heap Scalability</th>
+                <th>CPU Overhead</th>
+                <th>Primary Use-Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Serial GC</strong></td>
+                <td>High (&gt; 1000 ms)</td>
+                <td>Single-Threaded STW Mark-Sweep-Compact</td>
+                <td>Minimal (&lt; 512 MB)</td>
+                <td>Lowest (1.0&times;)</td>
+                <td>Micro-containers, single-core execution</td>
+              </tr>
+              <tr>
+                <td><strong>Parallel GC</strong></td>
+                <td>High (100 ms &minus; 10 s)</td>
+                <td>Multi-Threaded Parallel STW Mark-Compact</td>
+                <td>Moderate (&lt; 32 GB)</td>
+                <td>Low (1.02&times;)</td>
+                <td>Offline batch processing, maximum throughput</td>
+              </tr>
+              <tr>
+                <td><strong>G1GC</strong></td>
+                <td>Low/Targeted (10 &minus; 200 ms)</td>
+                <td>Incremental STW Copying across regions</td>
+                <td>High (4 GB &minus; 64 GB)</td>
+                <td>Moderate (1.10&times;)</td>
+                <td>Balanced microservices, predictable latency</td>
+              </tr>
+              <tr>
+                <td><strong>Shenandoah</strong></td>
+                <td>Ultra-Low (&lt; 10 ms)</td>
+                <td>Concurrent Evacuation using Brooks/Load Pointers</td>
+                <td>Very High (&gt; 100 GB)</td>
+                <td>High (1.20&times;)</td>
+                <td>Latency-critical systems, low-pause engine</td>
+              </tr>
+              <tr>
+                <td><strong>Non-Gen ZGC</strong></td>
+                <td>Sub-millisecond (&lt; 1 ms)</td>
+                <td>Full Heap Concurrent Relocation via Colored Pointers</td>
+                <td>Extreme (16 GB &minus; 16 TB)</td>
+                <td>High (1.25&times;)</td>
+                <td>Legacy ZGC deployments (deprecated in JDK 23)</td>
+              </tr>
+              <tr>
+                <td><strong>Gen ZGC</strong></td>
+                <td>Sub-millisecond (&lt; 1 ms)</td>
+                <td>Generational Concurrent Relocation</td>
+                <td>Extreme (16 GB &minus; 16 TB)</td>
+                <td>Moderate-High (1.15&times;)</td>
+                <td>Ultra-low latency microservices, trading platforms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="telemetry-diagnostics">Performance Diagnostics, Telemetry, and Memory Analysis</h3>
+        <p>Java Flight Recorder (JFR) operates with an overhead profile typically below 1% to 2%, avoiding global lock contention through hierarchical buffering: thread-local ring buffers &rarr; global in-memory circular buffers &rarr; background disk writer flushing to binary <code>.jfr</code> files.</p>
+
+        <h3 id="jmh-microbenchmarking">Microbenchmarking Rigor and JIT Compilation Dynamics</h3>
+        <p>The HotSpot runtime optimizes execution through tiered compilation (Tiers 0&ndash;4 C1/C2 SSA Sea-of-Nodes). The following Java Microbenchmark Harness (JMH) suite measures the throughput of atomic primitives versus lock-based synchronization, accounting for Dead Code Elimination (DCE) and Constant Folding:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (JMH Concurrency Primitive Benchmark)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package com.architect.benchmark;
+
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.ReentrantLock;
+
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 2, jvmArgs = {"-Xms4g", "-Xmx4g", "-XX:+UseG1GC"})
+@State(Scope.Benchmark)
+public class ConcurrencyPrimitiveBenchmark {
+    private AtomicLong atomicCounter;
+    private ReentrantLock lock;
+    private long bareCounter;
+
+    @Setup(Level.Trial)
+    public void setup() {
+        atomicCounter = new AtomicLong(0);
+        lock = new ReentrantLock();
+        bareCounter = 0L;
+    }
+
+    @Benchmark
+    @Threads(8)
+    public long testAtomicIncrement() {
+        return atomicCounter.incrementAndGet();
+    }
+
+    @Benchmark
+    @Threads(8)
+    public long testLockProtectedIncrement() {
+        lock.lock();
+        try {
+            bareCounter++;
+            return bareCounter;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @Benchmark
+    @Threads(8)
+    public void testBlackholeConsumption(Blackhole bh) {
+        long current = atomicCounter.get();
+        long transformed = current * 31L + 17L;
+        bh.consume(transformed);
+    }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="loom-hardware-primitives" class="content-section">
+        <h2>2. Modern Concurrency Models: Project Loom and Hardware-Aligned Primitives</h2>
+
+        <h3 id="virtual-threads-internals">Project Loom and Virtual Threads Under the Hood</h3>
+        <p>Virtual threads (finalized in Java 21 via JEP 444) decouple logical tasks from operating system threads. The JVM maintains a dedicated internal <code>ForkJoinPool</code> whose threads act as Carrier Threads:</p>
+        <div class="formula-card">
+          <div class="formula-header">// SYSTEM FORMULA [数理仕様] &bull; Default Carrier Thread Pool Sizing</div>
+          <div class="formula-math">Pool Size = Runtime.getRuntime().availableProcessors()</div>
+        </div>
+
+        <!-- ANIMATED DIAGRAM 2: PROJECT LOOM M:N SCHEDULING -->
+        <div id="diagram-loom-concurrency" class="diagram-card">
+          <div class="diagram-header">
+            <div class="diagram-title-group">
+              <span class="diagram-badge">⟦ ARCHITECTURAL SPEC // システム仕様図 08 ⟧</span>
+              <span class="diagram-title">Project Loom: M:N Virtual Thread Carrier Scheduling &amp; Continuation Yield</span>
+            </div>
+            <div class="diagram-controls">
+              <button class="diagram-btn play-pause-btn" type="button">⏸ Pause Animation</button>
+            </div>
+          </div>
+          <div class="diagram-canvas-wrap">
+            <svg class="diagram-svg" viewBox="0 0 900 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- M Virtual Threads -->
+              <rect x="20" y="30" width="220" height="230" rx="8" fill="var(--bg-tertiary)" stroke="var(--accent-primary)" stroke-width="2"/>
+              <text x="35" y="55" fill="var(--accent-primary)" font-weight="800" font-size="11">M VIRTUAL THREADS (~10^6)</text>
+              <rect x="35" y="75" width="190" height="32" rx="4" fill="rgba(0,240,255,0.15)" stroke="var(--accent-primary)"/>
+              <text x="45" y="95" fill="var(--accent-cyan)" font-size="10" font-family="monospace">VThread #1 (Executing)</text>
+              <rect x="35" y="115" width="190" height="32" rx="4" fill="var(--bg-secondary)" stroke="var(--border-subtle)"/>
+              <text x="45" y="135" fill="var(--text-secondary)" font-size="10" font-family="monospace">VThread #2 (Parked on Socket)</text>
+              <rect x="35" y="155" width="190" height="32" rx="4" fill="var(--bg-secondary)" stroke="var(--border-subtle)"/>
+              <text x="45" y="175" fill="var(--text-secondary)" font-size="10" font-family="monospace">VThread #3 (Runnable Queue)</text>
+              <text x="35" y="235" fill="var(--text-muted)" font-size="9">&bull; Stack: Hundreds of bytes on heap</text>
+
+              <!-- Continuation Yield Arrow -->
+              <path d="M 240 131 C 280 131 280 190 320 190" stroke="var(--accent-secondary)" stroke-width="2" stroke-dasharray="5 5" class="anim-flow-line"/>
+              <text x="245" y="120" fill="var(--accent-secondary)" font-size="9" font-weight="700">Continuation.yield()</text>
+
+              <!-- Carrier Thread Pool -->
+              <rect x="330" y="30" width="260" height="230" rx="8" fill="var(--bg-tertiary)" stroke="var(--border-strong)"/>
+              <text x="345" y="55" fill="var(--accent-secondary)" font-weight="800" font-size="11">N CARRIER THREADS (ForkJoinPool)</text>
+              <rect x="345" y="75" width="230" height="42" rx="4" fill="var(--bg-secondary)" stroke="var(--border-subtle)"/>
+              <text x="355" y="95" fill="var(--text-primary)" font-size="10" font-family="monospace">Carrier Worker #1 (Active)</text>
+              <text x="355" y="110" fill="#4ade80" font-size="9">Mounted VThread #1</text>
+              <rect x="345" y="128" width="230" height="42" rx="4" fill="var(--bg-secondary)" stroke="var(--border-subtle)"/>
+              <text x="355" y="148" fill="var(--text-primary)" font-size="10" font-family="monospace">Carrier Worker #2 (Stealing)</text>
+              <text x="355" y="163" fill="var(--accent-primary)" font-size="9">Carrier freed for other tasks!</text>
+              <rect x="345" y="180" width="230" height="42" rx="4" fill="rgba(255,42,133,0.15)" stroke="var(--accent-secondary)"/>
+              <text x="355" y="200" fill="var(--accent-secondary)" font-size="10" font-weight="700">Heap StackChunk</text>
+              <text x="355" y="215" fill="var(--text-muted)" font-size="9">Frames unmounted from native stack</text>
+
+              <!-- Operating System & Hardware -->
+              <rect x="640" y="30" width="240" height="230" rx="8" fill="var(--bg-tertiary)" stroke="var(--border-strong)"/>
+              <text x="655" y="55" fill="#a855f7" font-weight="800" font-size="11">OS &amp; HARDWARE CORES</text>
+              <rect x="655" y="75" width="210" height="60" rx="4" fill="var(--bg-secondary)"/>
+              <text x="665" y="100" fill="#c084fc" font-size="10" font-weight="700">Linux pthreads (1:1 with CPU)</text>
+              <text x="665" y="120" fill="var(--text-secondary)" font-size="9" font-family="monospace">CPU Cores 0 &ndash; 15 (100% busy)</text>
+              <rect x="655" y="150" width="210" height="90" rx="4" fill="var(--bg-secondary)"/>
+              <text x="665" y="175" fill="var(--accent-cyan)" font-size="10" font-weight="700">Non-blocking Poller (epoll)</text>
+              <text x="665" y="195" fill="var(--text-muted)" font-size="9">Signals readiness via socket IRQ</text>
+              <text x="665" y="215" fill="#4ade80" font-size="9">&rarr; LockSupport.unpark()</text>
+
+              <!-- Carrier to OS line -->
+              <line x1="575" y1="96" x2="655" y2="96" stroke="var(--accent-primary)" stroke-width="2" class="anim-flow-line"/>
+              <line x1="655" y1="195" x2="225" y2="135" stroke="var(--accent-cyan)" stroke-width="2" stroke-dasharray="4 4" class="anim-flow-line"/>
+            </svg>
+          </div>
+          <div class="diagram-caption">
+            <strong>Figure 13.2:</strong> Project Loom M:N Execution Framework. Millions of lightweight virtual threads are multiplexed across N carrier threads (ForkJoinPool). Blocking operations invoke <code>Continuation.yield()</code>, unmounting frames into heap <code>StackChunk</code> objects, freeing carrier threads to execute waiting tasks.
+          </div>
+        </div>
+
+        <h3 id="thread-pinning">Thread Pinning Hazard and ReentrantLock Remediation</h3>
+        <p>When a virtual thread becomes pinned, it cannot unmount from its carrier thread upon encountering a blocking operation. As a result, the carrier thread remains blocked, which can exhaust the carrier pool and stall system throughput [cite: 76]. Thread pinning occurs in two scenarios: executing within an intrinsic <code>synchronized</code> block/method, or executing native frames via JNI/FFM [cite: 76].</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java 21 (Thread Pinning Hazard &amp; Remediation)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>public class NetworkDataService {
+    // ANTI-PATTERN: Synchronized monitor pins virtual thread to carrier during blocking socket reads
+    public synchronized String blockingFetchOverMonitor(Socket socket) throws IOException {
+        InputStream in = socket.getInputStream();
+        byte[] buffer = new byte[1024];
+        int read = in.read(buffer);
+        return new String(buffer, 0, read, StandardCharsets.UTF_8);
+    }
+
+    // PRODUCTION RECTIFICATION: ReentrantLock yields carrier thread cleanly
+    private final ReentrantLock lock = new ReentrantLock();
+
+    public String nonPinningFetch(Socket socket) throws IOException {
+        lock.lock();
+        try {
+            InputStream in = socket.getInputStream();
+            byte[] buffer = new byte[1024];
+            int read = in.read(buffer);
+            return new String(buffer, 0, read, StandardCharsets.UTF_8);
+        } finally {
+            lock.unlock();
+        }
+    }
+}</code></pre>
+        </div>
+
+        <h3 id="jmm-lock-free">Non-Blocking Algorithms and the Java Memory Model</h3>
+        <p>Developing lock-free data structures requires aligning application code with the Java Memory Model and hardware memory hierarchies [cite: 76]. To enforce execution order, the JVM emits architecture-specific memory barriers (<code>LoadLoad</code>, <code>StoreStore</code>, <code>LoadStore</code>, and <code>StoreLoad / mfence</code>) [cite: 76].</p>
+
+        <h3 id="code-lock-free-stack">Lock-Free Stack with VarHandle</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (LockFreeNodeStack with VarHandle)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package com.architect.concurrency;
+
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
+
+public class LockFreeNodeStack&lt;T&gt; {
+    public static class Node&lt;T&gt; {
+        final T value;
+        Node&lt;T&gt; next;
+        public Node(T value) { this.value = value; }
+    }
+
+    private volatile Node&lt;T&gt; head;
+    private static final VarHandle HEAD_HANDLE;
+
+    static {
+        try {
+            HEAD_HANDLE = MethodHandles.lookup()
+                .findVarHandle(LockFreeNodeStack.class, "head", Node.class);
+        } catch (ReflectiveOperationException e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    public void push(T item) {
+        Node&lt;T&gt; newHead = new Node&lt;&gt;(item);
+        while (true) {
+            Node&lt;T&gt; currentHead = (Node&lt;T&gt;) HEAD_HANDLE.getAcquire(this);
+            newHead.next = currentHead;
+            if (HEAD_HANDLE.compareAndSet(this, currentHead, newHead)) {
+                return;
+            }
+            Thread.onSpinWait();
+        }
+    }
+
+    public T pop() {
+        while (true) {
+            Node&lt;T&gt; currentHead = (Node&lt;T&gt;) HEAD_HANDLE.getAcquire(this);
+            if (currentHead == null) {
+                return null;
+            }
+            Node&lt;T&gt; nextNode = currentHead.next;
+            if (HEAD_HANDLE.compareAndSet(this, currentHead, nextNode)) {
+                return currentHead.value;
+            }
+            Thread.onSpinWait();
+        }
+    }
+}</code></pre>
+        </div>
+
+        <h3 id="lmax-disruptor"><div id="disruptor-internals"></div>>The LMAX Disruptor: Mechanical Sympathy and Zero-Contention Architectures</h3>
+        <p>The LMAX Disruptor is an ultra-low-latency inter-thread messaging library designed around mechanical sympathy. It replaces lock contention, cache line bouncing, and GC churn using a pre-allocated circular <code>RingBuffer</code> with power-of-two bitwise indexing: <code>Index = Sequence &amp; (N - 1)</code> [cite: 76].</p>
+
+        <h3 id="code-padded-sequence">Padded Atomic Sequence Implementation</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (Disruptor Cache-Padded Atomic Sequence)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package com.architect.disruptor;
+
+class LhsPadding {
+    protected long p1, p2, p3, p4, p5, p6, p7;
+}
+
+class ValueHolder extends LhsPadding {
+    protected volatile long value = 0;
+}
+
+class RhsPadding extends ValueHolder {
+    protected long p9, p10, p11, p12, p13, p14, p15;
+}
+
+public class PaddedAtomicSequence extends RhsPadding {
+    public PaddedAtomicSequence(long initialValue) {
+        this.value = initialValue;
+    }
+    public long get() { return value; }
+    public void set(long value) { this.value = value; }
+    public long sumToPreventOptimization() {
+        return p1 + p2 + p3 + p4 + p5 + p6 + p7 + p9 + p10 + p11 + p12 + p13 + p14 + p15;
+    }
+}</code></pre>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Wait Strategy</th>
+                <th>Latency Profile</th>
+                <th>CPU Core Utilization</th>
+                <th>Operating Mode</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>BusySpinWaitStrategy</strong></td>
+                <td>Lowest (&lt; 50 ns)</td>
+                <td>100% of 1 CPU Core</td>
+                <td>Spins continuously in a tight loop. Eliminates OS thread sleep; suited for low-latency pinned cores.</td>
+              </tr>
+              <tr>
+                <td><strong>YieldingWaitStrategy</strong></td>
+                <td>Low (100 ns)</td>
+                <td>High (100% during active traffic)</td>
+                <td>Spins for 100 cycles, then calls <code>Thread.yield()</code>. Balances low latency against CPU hogging.</td>
+              </tr>
+              <tr>
+                <td><strong>SleepingWaitStrategy</strong></td>
+                <td>Moderate (1 to 5 &mu;s)</td>
+                <td>Low</td>
+                <td>Progressively spins, yields, and parks via <code>LockSupport.parkNanos(1)</code>. Trades latency to conserve CPU.</td>
+              </tr>
+              <tr>
+                <td><strong>BlockingWaitStrategy</strong></td>
+                <td>Highest (5 to 50 &mu;s)</td>
+                <td>Minimal (Zero when idle)</td>
+                <td>Uses internal locks and condition variables (<code>ReentrantLock</code>). Conserves CPU but incurs OS context-switch overhead.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 3 -->
+      <section id="enterprise-microservices" class="content-section">
+        <h2>3. Enterprise Microservice Stack: Spring Boot 3, Reactive Architecture, and Cloud Native Patterns</h2>
+
+        <h3 id="spring-boot-aot">Spring Boot 3, Jakarta EE Migration, and GraalVM AOT Compilation</h3>
+        <p>Spring Boot 3 requires Java 17 as a baseline with native support for Java 21 LTS. GraalVM Native Image uses Ahead-Of-Time (AOT) compilation relying on the <strong>Closed-World Assumption</strong>: all classes and methods reachable at runtime must be discoverable during the build phase [cite: 76].</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (Spring Boot 3 Native AOT RuntimeHints)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package com.architect.config;
+
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
+
+public class NativeAotRuntimeHints implements RuntimeHintsRegistrar {
+    @Override
+    public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+        hints.reflection().registerType(
+            com.architect.dto.PaymentPayload.class,
+            MemberCategory.INVOKE_DECLARED_CONSTRUCTORS,
+            MemberCategory.INVOKE_DECLARED_METHODS,
+            MemberCategory.DECLARED_FIELDS
+        );
+        hints.resources().registerPattern("schema/v1-crypto-rules.json");
+    }
+}</code></pre>
+        </div>
+
+        <p>Spring Boot 3.2+ enables virtual threads across the web layer via a single configuration flag: <code>spring.threads.virtual.enabled=true</code>, replacing Tomcat's standard 200-thread platform pool with <code>Executors.newVirtualThreadPerTaskExecutor()</code> [cite: 76].</p>
+
+        <h3 id="reactive-streams">Reactive Programming and the Reactive Streams Specification</h3>
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Architectural Metric</th>
+                <th>Spring MVC + Platform Threads</th>
+                <th>Spring MVC + Virtual Threads (Loom)</th>
+                <th>Spring WebFlux + Project Reactor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Threading Model</strong></td>
+                <td>1:1 OS Platform Threads</td>
+                <td>M:N User-mode Virtual Threads</td>
+                <td>Event Loop with few worker threads (Netty)</td>
+              </tr>
+              <tr>
+                <td><strong>Programming Paradigm</strong></td>
+                <td>Imperative, Synchronous</td>
+                <td>Imperative, Synchronous</td>
+                <td>Functional, Asynchronous Reactive Streams</td>
+              </tr>
+              <tr>
+                <td><strong>Max Concurrent Requests</strong></td>
+                <td>Limited by thread memory (1k &minus; 5k)</td>
+                <td>Massive (100k &minus; 1M)</td>
+                <td>Massive (100k &minus; 1M)</td>
+              </tr>
+              <tr>
+                <td><strong>Debuggability</strong></td>
+                <td>Clean, readable stack traces</td>
+                <td>Clean, readable stack traces</td>
+                <td>Complex asynchronous traces</td>
+              </tr>
+              <tr>
+                <td><strong>Thread Pinning Risk</strong></td>
+                <td>Not applicable</td>
+                <td>Sensitive to synchronized and native calls</td>
+                <td>Not applicable</td>
+              </tr>
+              <tr>
+                <td><strong>Primary Workload Target</strong></td>
+                <td>Legacy systems, CPU-bound tasks</td>
+                <td>I/O-bound enterprise microservices</td>
+                <td>Streaming APIs, non-blocking hardware I/O</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="clean-microservice-contracts">Clean Microservice Design: High-Performance Contracts and Validation</h3>
+        <p>Enterprise microservices frequently map persistence entities to outbound DTOs. MapStruct runs as a compile-time annotation processor, generating type-safe Java bytecode with zero reflection overhead:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java (MapStruct Compile-Time Mapper)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package com.architect.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+
+public record UserEntity(Long id, String username, String emailAddress, boolean isActive) {}
+public record UserResponseDto(Long userId, String handle, String contactEmail) {}
+
+@Mapper(componentModel = "spring")
+public interface UserMapper {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    @Mapping(source = "id", target = "userId")
+    @Mapping(source = "username", target = "handle")
+    @Mapping(source = "emailAddress", target = "contactEmail")
+    UserResponseDto toResponseDto(UserEntity entity);
+}</code></pre>
+        </div>
+
+        <h3 id="distributed-ecosystem">Distributed Microservice Ecosystem</h3>
+        <p>Enterprise systems distribute load across self-healing topologies using reactive gateways (Spring Cloud Gateway), service registries (Netflix Eureka AP vs HashiCorp Consul CP Raft), centralized configuration (Spring Cloud Config Server &amp; Bus), and client-side load balancing (Spring Cloud Load Balancer WebClient) [cite: 76].</p>
+      </section>
+
+      <!-- Section 4 -->
+      <section id="system-blueprints" class="content-section">
+        <h2>4. Architectural Synthesis and System Blueprints</h2>
+
+        <h3 id="code-trading-pipeline">High-Throughput Processing Blueprint: Trading Pipeline</h3>
+        <p>The following production blueprint combines non-blocking network I/O with an LMAX Disruptor ring buffer to process orders without lock contention [cite: 76]:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java 21 (Spring Boot 3 + LMAX Disruptor + Reactor Pipeline)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package com.architect.pipeline;
+
+import com.lmax.disruptor.RingBuffer;
+import com.lmax.disruptor.dsl.Disruptor;
+import com.lmax.disruptor.util.DaemonThreadFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+import java.util.concurrent.CompletableFuture;
+
+class OrderEvent {
+    private String orderId;
+    private double price;
+    private CompletableFuture&lt;Boolean&gt; completionSignal;
+
+    public void setValues(String orderId, double price, CompletableFuture&lt;Boolean&gt; signal) {
+        this.orderId = orderId;
+        this.price = price;
+        this.completionSignal = signal;
+    }
+    public String getOrderId() { return orderId; }
+    public double getPrice() { return price; }
+    public CompletableFuture&lt;Boolean&gt; getCompletionSignal() { return completionSignal; }
+    public void clear() {
+        this.orderId = null;
+        this.completionSignal = null;
+    }
+}
+
+@SpringBootApplication
+@RestController
+@RequestMapping("/orders")
+public class TradingPipelineApplication {
+    private final RingBuffer&lt;OrderEvent&gt; ringBuffer;
+
+    public TradingPipelineApplication() {
+        int bufferSize = 1024 * 64; // Power of two: 65,536 entries
+        Disruptor&lt;OrderEvent&gt; disruptor = new Disruptor&lt;&gt;(
+            OrderEvent::new,
+            bufferSize,
+            DaemonThreadFactory.INSTANCE
+        );
+        disruptor.handleEventsWith((event, sequence, endOfBatch) -&gt; {
+            try {
+                boolean success = event.getPrice() &gt; 0.0;
+                event.getCompletionSignal().complete(success);
+            } finally {
+                event.clear();
+            }
+        });
+        this.ringBuffer = disruptor.start();
+    }
+
+    @PostMapping("/execute")
+    public Mono&lt;ResponseEntity&lt;String&gt;&gt; submitOrder(@RequestParam String id,
+                                                    @RequestParam double price) {
+        return Mono.defer(() -&gt; {
+            CompletableFuture&lt;Boolean&gt; signal = new CompletableFuture&lt;&gt;();
+            long sequence = ringBuffer.next();
+            try {
+                OrderEvent event = ringBuffer.get(sequence);
+                event.setValues(id, price, signal);
+            } finally {
+                ringBuffer.publish(sequence);
+            }
+            return Mono.fromFuture(signal)
+                .map(success -&gt; success
+                    ? ResponseEntity.ok("Order Executed Successfully")
+                    : ResponseEntity.badRequest().body("Order Rejected: Invalid Parameters"));
+        });
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(TradingPipelineApplication.class, args);
+    }
+}</code></pre>
+        </div>
+
+        <h3 id="fmea-matrix">Production Failure Mode and Effects Analysis (FMEA)</h3>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Failure Mode</th>
+                <th>Root Cause Mechanism</th>
+                <th>Runtime Symptoms</th>
+                <th>Diagnostic Vector</th>
+                <th>Remediation Strategy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Virtual Thread Carrier Starvation</strong></td>
+                <td>Thread Pinning. Blocking calls executed while holding an intrinsic object monitor (<code>synchronized</code>) or native frame on Java 21.</td>
+                <td>Latency spikes; throughput collapses under load while CPU usage remains low.</td>
+                <td>JFR event <code>jdk.VirtualThreadPinned</code> or <code>-Djdk.tracePinnedThreads=full</code> output.</td>
+                <td>Replace synchronized blocks with <code>ReentrantLock</code>; upgrade third-party drivers to non-pinning releases.</td>
+              </tr>
+              <tr>
+                <td><strong>ZGC Allocation Stall</strong></td>
+                <td>Allocation rate exceeds concurrent reclamation capacity. GC worker threads fall behind mutators.</td>
+                <td>Latency spikes (hundreds of milliseconds) not visible in standard STW pause metrics.</td>
+                <td>JFR event <code>jdk.ZAllocationStall</code>; garbage collection logs reporting Allocation Stall events.</td>
+                <td>Increase heap sizing (<code>-Xmx</code>); raise concurrent GC threads (<code>-XX:ConcGCThreads</code>); reduce allocation rate on hot paths.</td>
+              </tr>
+              <tr>
+                <td><strong>Safepoint TTSP Latency Spikes</strong></td>
+                <td>Uncounted loops lacking safepoint polling checks, delaying STW synchronization.</td>
+                <td>Elevated p99.9 latency across all mutators; threads take milliseconds to halt at safepoints.</td>
+                <td>JVM log entries: safepoint, cleanup displaying elevated Time-To-Safepoint durations.</td>
+                <td>Compile with <code>-XX:+UseCountedLoopSafepoints</code>; replace non-inlined integer indexed loops with long counters.</td>
+              </tr>
+              <tr>
+                <td><strong>Hardware False Sharing</strong></td>
+                <td>High-frequency variables updated by different cores share the same 64-byte cache line.</td>
+                <td>Multi-threaded performance scales poorly across cores; CPU counters show cache invalidation traffic.</td>
+                <td>Profiling with Linux <code>perf c2c</code> surfaces high cache-line hit-modification conflicts.</td>
+                <td>Apply 64-byte padding around contended fields or annotate classes with <code>@jdk.internal.vm.annotation.Contended</code>.</td>
+              </tr>
+              <tr>
+                <td><strong>Native Metaspace OOM</strong></td>
+                <td>ClassLoader memory leak. Dynamically generated classes (e.g., CGLIB, ByteBuddy) are not unloaded.</td>
+                <td>Native process memory grows steadily until throwing <code>java.lang.OutOfMemoryError: Metaspace</code>.</td>
+                <td>VisualVM / MAT inspects <code>ClassLoaderDataGraph</code>; displays uncollected, duplicate class definitions.</td>
+                <td>Configure <code>-XX:MaxMetaspaceSize</code>; ensure dynamic framework proxies use shared, cached classloaders.</td>
+              </tr>
+              <tr>
+                <td><strong>ThreadLocal Leak in Pooled Threads</strong></td>
+                <td>Failure to invoke <code>ThreadLocal.remove()</code> in long-lived thread pools.</td>
+                <td>Slow memory leak in the Old Generation; heap dumps show large retained sets rooted in thread arrays.</td>
+                <td>Dominator Tree analysis in Eclipse MAT traces retained heap back to <code>java.lang.Thread.threadLocals</code>.</td>
+                <td>Enforce try-finally cleanup blocks calling <code>ThreadLocal.remove()</code>; transition to Scoped Values (<code>java.lang.ScopedValue</code>).</td>
+              </tr>
+              <tr>
+                <td><strong>Reactive Silent Pipe Lockup</strong></td>
+                <td>Unhandled error signals in a reactive stream; downstream backpressure demand (n) drops to zero.</td>
+                <td>Stream processing halts without throwing exceptions; request flows hang indefinitely.</td>
+                <td>Inspect Reactor StepVerifier; log pipeline events using <code>.doOnError()</code> and <code>.doOnRequest()</code>.</td>
+                <td>Ensure pipelines include error handling operators (<code>.onErrorResume()</code>); verify <code>subscribe()</code> contracts register demand.</td>
+              </tr>
+              <tr>
+                <td><strong>GraalVM Native Missing Reflection</strong></td>
+                <td>Dynamically referenced class omitted from Ahead-of-Time build metadata.</td>
+                <td>Application crashes at runtime with <code>ClassNotFoundException</code> or <code>NoSuchMethodException</code>.</td>
+                <td>GraalVM native execution stack trace pointing to reflection lookup failure.</td>
+                <td>Implement and annotate a <code>RuntimeHintsRegistrar</code> to register missing types with the AOT reachability graph.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 5 -->
+      <section id="architectural-conclusions" class="content-section">
+        <h2>5. Architectural Conclusions</h2>
+        <p>Designing high-throughput systems on Java 21 requires understanding how application code interacts with the underlying JVM and hardware architecture:</p>
+        <ul>
+          <li><strong>Garbage Collection Strategies:</strong> Generational ZGC achieves sub-millisecond pause times by performing marking and relocation concurrently with application execution. However, this shifts the operational risk from Stop-The-World pauses to allocation stalls. Workloads with high allocation rates must be provisioned with sufficient heap headroom to allow concurrent GC threads to keep pace with mutators.</li>
+          <li><strong>Concurrency Models:</strong> Virtual threads lower the cost of thread-per-request architectures for I/O-bound workloads by decoupling logical threads from OS platform threads. Realizing these benefits requires auditing codebases for thread-pinning patterns (such as blocking I/O within synchronized blocks) that prevent virtual threads from yielding their underlying carrier threads. For CPU-bound workloads, traditional platform thread pools remain the correct design choice.</li>
+          <li><strong>Mechanical Sympathy:</strong> Achieving low latency requires aligning data structures with CPU caching behaviors. Lock-free patterns (such as the LMAX Disruptor) avoid lock contention, false sharing, and cache-line invalidation by using pre-allocated circular buffers, explicit cache-line padding, and non-blocking sequence barriers.</li>
+          <li><strong>Microservice Engineering:</strong> Modern microservice architectures leverage compile-time processing (such as MapStruct) to eliminate runtime reflection overhead. When paired with standardized error contracts (RFC 7807 ProblemDetail) and GraalVM AOT compilation, applications achieve fast startup times, small memory footprints, and predictable execution characteristics across cloud-native environments.</li>
+        </ul>
+      </section>
+
+      <!-- Pagination -->
+      <div class="page-nav-footer">
+        <a href="java-masterclass.html" class="nav-card-link prev">
+          <span class="nav-direction">&larr; Previous Manual</span>
+          <span class="nav-title">Java Masterclass Manual</span>
+        </a>
+        <a href="enterprise-scss.html" class="nav-card-link next">
+          <span class="nav-direction">Next Manual &rarr;</span>
+          <span class="nav-title">Enterprise SCSS Architecture</span>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

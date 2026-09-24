@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)">
+  <title>Engineering Low-Latency Backend Systems | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–06</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownBackend">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Backend Systems <span class="card-kanji">[低遅延]</span></div>
+                  <div class="card-sub">PEP 703 Free-Threading &bull; ASGI &bull; Pydantic V2 Rust &bull; SSE</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.11</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
+                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.12</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="toc-title">Table of Contents</div>
+      <ul class="toc-nav">
+        <li><a href="#overview">Overview &amp; Executive Summary</a></li>
+        <li><a href="#cpython-internals">1. CPython 3.12 Runtime Internals &amp; Mechanics</a>
+          <ul class="toc-subnav">
+            <li><a href="#compilation-pipeline">Bytecode Compilation Pipeline &amp; Frame Architecture</a></li>
+            <li><a href="#diagram-split-frame">Diagram: Split-Frame Stack Architecture</a></li>
+            <li><a href="#gil-memory">The Global Interpreter Lock &amp; Memory Lifecycle</a></li>
+            <li><a href="#free-threaded">Free-Threaded CPython: PEP 703 &amp; Concurrency Evolution</a></li>
+            <li><a href="#diagram-biased-rc">Diagram: Biased Reference Counting (BRC)</a></li>
+          </ul>
+        </li>
+        <li><a href="#async-demultiplexing">2. Mastering Asynchronous Python &amp; Demultiplexing</a>
+          <ul class="toc-subnav">
+            <li><a href="#selectors-loop">Operating System Selectors &amp; Event Loop Engine</a></li>
+            <li><a href="#generators-coroutines">Generators, Coroutines, Tasks &amp; Futures</a></li>
+            <li><a href="#concurrency-tradeoffs">Concurrency Trade-Offs: Cooperative vs Preemptive</a></li>
+            <li><a href="#structured-concurrency">Structured Concurrency: TaskGroups &amp; Exceptions</a></li>
+            <li><a href="#code-structured-pipeline">Code: Python 3.12 Structured Concurrency Pipeline</a></li>
+            <li><a href="#code-java-threads">Code: Java 21 StructuredTaskScope Contrast</a></li>
+            <li><a href="#event-loop-traps">Execution Traps: Event Loop Starvation &amp; Offloading</a></li>
+          </ul>
+        </li>
+        <li><a href="#modern-web-frameworks">3. Modern Web Frameworks: ASGI &amp; Core Acceleration</a>
+          <ul class="toc-subnav">
+            <li><a href="#wsgi-vs-asgi">Protocol Gateways: WSGI Bottlenecks vs ASGI Channels</a></li>
+            <li><a href="#pydantic-v2">Pydantic V2: Rust-Based Validation &amp; jiter Mechanics</a></li>
+            <li><a href="#diagram-asgi-sse">Diagram: ASGI Pipeline &amp; SSE Token Streaming</a></li>
+            <li><a href="#realtime-streaming">Real-Time LLM Token Streaming &amp; Disconnect Resilience</a></li>
+            <li><a href="#code-fastapi-sse">Code: Production FastAPI Disconnect-Aware Streamer</a></li>
+          </ul>
+        </li>
+        <li><a href="#persistent-data">4. Persistent Data Architecture &amp; Asynchronous ORM</a>
+          <ul class="toc-subnav">
+            <li><a href="#sqlalchemy-greenlet">SQLAlchemy 2.0 &amp; the Greenlet Execution Bridge</a></li>
+            <li><a href="#uow-identity-map">Unit-of-Work Pattern &amp; Identity Map Mechanics</a></li>
+            <li><a href="#connection-pool-sizing">Connection Pool Sizing Dynamics &amp; Little's Law</a></li>
+            <li><a href="#code-db-engine">Code: Database Engine &amp; Transaction Lifecycle</a></li>
+            <li><a href="#zero-downtime-schema">Zero-Downtime Schema Evolution with Alembic</a></li>
+            <li><a href="#expand-contract">Safe Column Additions: Expand-Contract Pattern</a></li>
+            <li><a href="#column-renaming">Safe Column Renaming via Triggers</a></li>
+            <li><a href="#code-alembic-migration">Code: Zero-Downtime Alembic Migration Script</a></li>
+          </ul>
+        </li>
+        <li><a href="#architectural-synthesis">5. Architectural Synthesis &amp; Engineering Patterns</a></li>
+        <li><a href="#works-cited">6. Works Cited (17 References)</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-header">
+        <span class="doc-badge">Volume 10 &bull; 20 Pages &bull; Backend Architecture</span>
+        <h1 class="doc-title">Engineering Low-Latency Backend Systems</h1>
+        <p class="doc-subtitle">CPython Runtime Mechanics, Asynchronous Event Loops, and Enterprise Distributed Architecture</p>
+        <div class="doc-meta-row">
+          <span>Author: Enterprise Distributed Systems Engineering</span>
+          <span>Coverage: CPython 3.12 Internals, PEP 703 Free-Threading, ASGI, Pydantic V2 Rust, Alembic Zero-Downtime</span>
+          <span>Interactive: Runnable Code Blocks + Animated SVG Diagrams</span>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <section id="overview" class="content-section">
+        <h2>Overview &amp; Executive Summary</h2>
+        <p>Modern backend systems handling tens of thousands of requests per second require an engineering understanding of how CPython allocates execution state, navigates memory safety under the Global Interpreter Lock (GIL), and adapts under upcoming free-threaded paradigms [cite: 76]. High-throughput network applications rely on non-blocking I/O to handle thousands of concurrent connections on minimal hardware, pairing asynchronous event loops with compiled native validation engines and zero-downtime persistent relational storage.</p>
+      </section>
+
+      <!-- Section 1 -->
+      <section id="cpython-internals" class="content-section">
+        <h2>1. CPython 3.12 Runtime Internals and Execution Mechanics</h2>
+        <p>CPython serves as the reference implementation of Python, executing programs via a two-stage process: compiling high-level source text into an intermediate bytecode representation, followed by evaluating that bytecode within a virtual machine stack architecture.</p>
+
+        <h3 id="compilation-pipeline">Bytecode Compilation Pipeline and Frame Architecture</h3>
+        <p>The journey of Python source code to native hardware execution proceeds through discrete compiler stages that transform human-readable syntax into compact, low-level operational structures:</p>
+
+        <ol>
+          <li><strong>Lexical Analysis and Tokenization:</strong> The source string is scanned by <code>Parser/tokenizer.c</code>, generating a stream of discrete lexical tokens. Each token encapsulates a syntactic category and string slice.</li>
+          <li><strong>Parsing via Parsing Expression Grammar (PEG):</strong> Introduced to eliminate the lookahead constraints of the legacy LL(1) parser, the PEG parser (<code>Parser/pegen.c</code>) constructs a Concrete Syntax Tree (CST) and transforms it into an Abstract Syntax Tree (AST).</li>
+          <li><strong>Semantic Analysis and Symbol Table Construction:</strong> The AST is traversed by <code>Python/symtable.c</code> to resolve variable scopes into distinct categories: local, non-local, global, cell, or free. This categorization determines whether values are accessed via array indexing or hash table lookups.</li>
+          <li><strong>Optimization and Flow Graph Generation:</strong> The compiler builds a Control Flow Graph (CFG) within <code>Python/compile.c</code>, applying peephole optimizations, eliminating unreachable basic blocks, and computing jump offsets.</li>
+          <li><strong>Bytecode Emission:</strong> The CFG is serialized into an immutable <code>PyCodeObject</code> structure (<code>Objects/codeobject.c</code>).</li>
+        </ol>
+
+        <p>In Python 3.12, instructions are encoded as uniform 16-bit code units, consisting of an 8-bit opcode and an 8-bit operational argument (oparg). If an operational argument exceeds an 8-bit representation (&gt; 255), the compiler prefixes the instruction with one or more <code>EXTENDED_ARG</code> opcodes. This fixed-width format ensures alignment, optimizes CPU instruction-cache fetching, and eliminates branch-prediction penalties associated with variable-length instruction decoding.</p>
+
+        <p>Python 3.12 extends the adaptive specializing interpreter introduced under PEP 659. When bytecode executes, generic opcodes (such as <code>BINARY_OP</code> or <code>LOAD_ATTR</code>) observe input types during initial runs. After verifying type stability across a sequence of calls, the interpreter rewrites the generic instruction directly within memory into a specialized instruction (such as <code>BINARY_OP_ADD_INT</code> or <code>LOAD_ATTR_MODULE</code>). These specialized instructions bypass polymorphic dispatch, class dictionary lookups, and method-resolution order (MRO) traversal, executing tight C-level memory reads.</p>
+
+        <p>The evaluation of this bytecode occurs within an execution frame. Prior to Python 3.11, every invocation of a Python function necessitated allocating a heap-allocated <code>PyFrameObject</code> via the standard garbage-collected allocator (<code>PyObject_GC_New</code>). This approach incurred high allocation overhead, fragmented memory, and placed substantial pressure on CPU data caches. Python 3.12 employs a split-frame architecture that decouples runtime execution state from introspection capabilities:</p>
+
+        <ul>
+          <li>The internal runtime execution state is encapsulated within an unboxed, lightweight struct called <code>_PyInterpreterFrame</code>.</li>
+          <li>Rather than allocating <code>_PyInterpreterFrame</code> structures individually on the heap, CPython allocates a contiguous block of memory per thread (the thread evaluation stack). When a function call is initiated, the frame pointer advances down this contiguous buffer; when the function returns, the pointer retreats. This achieves O(1) allocation and deallocation without heap churn, maximizing CPU L1 data cache spatial locality.</li>
+          <li>The heap-allocated <code>PyFrameObject</code> is transformed into an on-demand, lazily materialized wrapper. If application code, a debugger, or an exception handler invokes frame introspection (such as <code>sys._getframe()</code> or <code>inspect.currentframe()</code>), CPython allocates the full <code>PyFrameObject</code> on the heap and points it to the active <code>_PyInterpreterFrame</code>. Production execution paths running without attached profilers or debuggers incur zero heap allocation overhead for call frames.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Metric / Structural Property</th>
+                <th>Legacy Frame Architecture (Pre-3.11)</th>
+                <th>Modern Frame Architecture (Python 3.12)</th>
+                <th>Hardware and Performance Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Execution Frame Structure</strong></td>
+                <td><code>PyFrameObject</code></td>
+                <td><code>_PyInterpreterFrame</code></td>
+                <td>Memory footprint per frame reduced from approx 160 bytes to minimal register/pointer storage.</td>
+              </tr>
+              <tr>
+                <td><strong>Memory Allocation Site</strong></td>
+                <td>Dynamic Heap via <code>PyObject_GC_New</code></td>
+                <td>Thread Evaluation Stack (Contiguous Pre-allocated Chunk)</td>
+                <td>Completely eliminates heap allocator lock contention and page fragmentation.</td>
+              </tr>
+              <tr>
+                <td><strong>Frame Allocation Time Complexity</strong></td>
+                <td>O(1) amortized, but bounded by malloc freelist searching</td>
+                <td>O(1) strict pointer increment/decrement</td>
+                <td>Zero heap allocation overhead on hot call paths.</td>
+              </tr>
+              <tr>
+                <td><strong>Introspection Cost</strong></td>
+                <td>Zero incremental cost (frame already existed as <code>PyFrameObject</code>)</td>
+                <td>Lazy on-demand materialization</td>
+                <td>Fast execution for normal execution paths; small penalty only during debugging or exception handling.</td>
+              </tr>
+              <tr>
+                <td><strong>Instruction Cache Footprint</strong></td>
+                <td>Variable 16-bit to 32-bit instructions</td>
+                <td>Strict 16-bit Code Units (8-bit opcode, 8-bit oparg)</td>
+                <td>Predictable cache-line alignment; avoids instruction decoding stalls.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ANIMATED DIAGRAM 1: SPLIT FRAME ARCHITECTURE -->
+        <div id="diagram-split-frame" class="diagram-card">
+          <div class="diagram-header">
+            <div class="diagram-title-group">
+              <span class="diagram-badge">⟦ ARCHITECTURAL SPEC // システム仕様図 04 ⟧</span>
+              <span class="diagram-title">CPython 3.12 Split-Frame Stack Architecture &amp; Lazy Materialization</span>
+            </div>
+            <div class="diagram-controls">
+              <button class="diagram-btn play-pause-btn" type="button">⏸ Pause Animation</button>
+            </div>
+          </div>
+          <div class="diagram-canvas-wrap">
+            <svg class="diagram-svg" viewBox="0 0 880 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Thread Evaluation Stack (Contiguous) -->
+              <rect x="30" y="30" width="380" height="240" rx="8" fill="var(--bg-tertiary)" stroke="var(--accent-primary)" stroke-width="2"/>
+              <text x="50" y="55" fill="var(--accent-primary)" font-weight="800" font-size="12" letter-spacing="1">THREAD EVALUATION STACK (CONTIGUOUS)</text>
+              <rect x="50" y="75" width="340" height="42" rx="4" fill="#0d1b33" stroke="var(--border-strong)"/>
+              <text x="65" y="100" fill="#93c5fd" font-size="11" font-family="monospace">_PyInterpreterFrame [main()]</text>
+              <rect x="50" y="125" width="340" height="42" rx="4" fill="#0d1b33" stroke="var(--border-strong)"/>
+              <text x="65" y="150" fill="#93c5fd" font-size="11" font-family="monospace">_PyInterpreterFrame [process_order()]</text>
+              <rect x="50" y="175" width="340" height="42" rx="4" fill="rgba(0,240,255,0.15)" stroke="var(--accent-primary)" stroke-width="1.5"/>
+              <text x="65" y="200" fill="var(--accent-cyan)" font-size="11" font-weight="700" font-family="monospace">_PyInterpreterFrame [calculate_tax()] &larr; Top</text>
+              
+              <text x="50" y="245" fill="var(--text-muted)" font-size="10">&bull; O(1) Bump pointer advance/retreat &bull; Zero heap churn &bull; L1 cache hot</text>
+
+              <!-- Lazy Materialization Arrow -->
+              <path d="M 390 196 L 470 196" stroke="var(--accent-secondary)" stroke-width="2.5" stroke-dasharray="6 4" class="anim-flow-line"/>
+              <text x="400" y="185" fill="var(--accent-secondary)" font-size="10" font-weight="700">sys._getframe()</text>
+
+              <!-- Heap Materialization -->
+              <rect x="490" y="30" width="360" height="240" rx="8" fill="var(--bg-tertiary)" stroke="var(--border-strong)"/>
+              <text x="510" y="55" fill="var(--accent-secondary)" font-weight="800" font-size="12" letter-spacing="1">MANAGED HEAP (LAZY MATERIALIZATION)</text>
+              <rect x="510" y="85" width="320" height="135" rx="6" fill="var(--bg-secondary)" stroke="var(--accent-secondary)" stroke-width="1.5"/>
+              <text x="525" y="110" fill="var(--accent-secondary)" font-weight="800" font-size="11">PyFrameObject (Materialized On-Demand)</text>
+              <line x1="510" y1="120" x2="830" y2="120" stroke="var(--border-subtle)"/>
+              <text x="525" y="140" fill="var(--text-secondary)" font-size="10" font-family="monospace">ob_refcnt: 1</text>
+              <text x="525" y="158" fill="var(--text-secondary)" font-size="10" font-family="monospace">ob_type: &amp;PyFrame_Type</text>
+              <text x="525" y="176" fill="var(--accent-primary)" font-size="10" font-family="monospace">f_frame &rarr; points to active _PyInterpreterFrame</text>
+              <text x="525" y="196" fill="var(--text-muted)" font-size="10">Created only during debugging/introspection</text>
+
+              <text x="510" y="245" fill="#4ade80" font-size="10" font-weight="700">&check; 99.9% Production Calls Incur Zero Heap Allocations</text>
+            </svg>
+          </div>
+          <div class="diagram-caption">
+            <strong>Figure 10.1:</strong> CPython 3.12 Split-Frame Stack Architecture. Lightweight unboxed <code>_PyInterpreterFrame</code> records live contiguously on a thread evaluation stack with bump-pointer allocation. Heap-allocated <code>PyFrameObject</code> is lazily materialized only when introspection or debuggers explicitly access the call frame.
+          </div>
+        </div>
+
+        <h3 id="gil-memory">The Global Interpreter Lock and Memory Lifecycle</h3>
+        <p>Memory management in CPython combines deterministic reference counting with an auxiliary generational cyclic garbage collector. Every Python object header includes the <code>PyObject</code> structure:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">C (Include/object.h)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>typedef struct _object {
+    _PyObject_HEAD_EXTRA
+    Py_ssize_t ob_refcnt;
+    struct _typeobject *ob_type;
+} PyObject;</code></pre>
+        </div>
+
+        <p>The <code>ob_refcnt</code> field tracks incoming references across local variable registers, container structures, and global namespaces. Whenever a variable is bound, passed as a parameter, or appended to an array, the runtime calls <code>Py_INCREF(op)</code>, incrementing <code>ob_refcnt</code>. When variables exit scope or containers are cleared, <code>Py_DECREF(op)</code> decrements <code>ob_refcnt</code>. When <code>ob_refcnt</code> reaches zero, the memory occupied by the object is deallocated immediately.</p>
+
+        <p>The Global Interpreter Lock (GIL) is a mutual exclusion primitive implemented as an operating system mutex (typically wrapping <code>pthread_mutex_t</code> on POSIX systems). It prevents multiple native OS threads from executing Python bytecode concurrently. The GIL exists because CPython's reference counting model is fundamentally non-atomic. If multiple threads running on distinct CPU cores executed <code>Py_INCREF</code> and <code>Py_DECREF</code> simultaneously on shared objects without synchronization, memory corruption would occur:</p>
+
+        <ul>
+          <li>Two threads reading <code>ob_refcnt = 1</code> concurrently could increment it to 2 using non-atomic CPU load-add-store operations, causing an inaccurate count.</li>
+          <li>Symmetrically, concurrent decrements could drop the count to zero prematurely, triggering deallocation while another thread retains an active pointer. This creates dangling pointers, memory corruption, and use-after-free conditions.</li>
+        </ul>
+
+        <p>The thread executing Python bytecode holds the GIL until one of two conditions is met:</p>
+        <ol>
+          <li><strong>Cooperative Release during I/O:</strong> When invoking blocking system calls (such as reading from a network socket or writing to a disk descriptor), CPython releases the GIL using the <code>Py_BEGIN_ALLOW_THREADS</code> macro and re-acquires it upon return via <code>Py_END_ALLOW_THREADS</code>. This allows other threads to execute Python code while one thread waits on the operating system kernel.</li>
+          <li><strong>Preemptive Timeslice Expiration:</strong> To maintain fairness and prevent a single CPU-bound thread from monopolizing the interpreter, CPython checks an evaluation interval (configured via <code>sys.getswitchinterval()</code>, default 5 milliseconds). When this time interval elapses, the running thread sets the <code>eval_breaker</code> flag, drops the GIL, and allows waiting threads to contend for acquisition via operating system condition variables.</li>
+        </ol>
+
+        <p>Because reference counting cannot resolve circular references, CPython uses an auxiliary cyclic garbage collector (<code>Modules/gcmodule.c</code>). The cyclic GC tracks container objects by embedding an additional header: <code>PyGC_Head</code>. The cyclic collector partitions tracked containers into three generations (Generations 0, 1, and 2), based on the heuristic that newly allocated objects are the most likely to become unreachable quickly. It uses a tri-color marking algorithm to detect and collect unreachable cycles.</p>
+
+        <h3 id="free-threaded">Free-Threaded CPython: PEP 703 and Concurrency Evolution</h3>
+        <p>CPython 3.13 introduces experimental support for free-threaded execution under PEP 703, allowing the interpreter to run without the Global Interpreter Lock (<code>--disable-gil</code>). Running Python across multi-core systems without a centralized lock requires redesigning reference counting, object allocation, and container thread-safety.</p>
+
+        <p>PEP 703 replaces the single non-atomic <code>ob_refcnt</code> field with <strong>Biased Reference Counting (BRC)</strong>:</p>
+        <ul>
+          <li>The object header tracks an owning thread ID (<code>ob_tid</code>).</li>
+          <li>When the owning thread modifies an object's reference count, it executes non-atomic updates on a thread-local field (<code>ob_ref_local</code>), preserving single-threaded execution speeds.</li>
+          <li>When foreign threads access the object, they update a shared reference count field (<code>ob_ref_shared</code>) using atomic read-modify-write CPU instructions.</li>
+          <li>An object lifecycle traverses four states tracked by the least significant bits of <code>ob_ref_shared</code>: Default (<code>0b00</code>), Weakrefs (<code>0b01</code>), Queued (<code>0b10</code>), and Merged (<code>0b11</code>). If an object transitions into a queued state, deallocation is managed through evaluation breaker cycles to avoid multi-threaded race conditions.</li>
+        </ul>
+
+        <!-- ANIMATED DIAGRAM 2: BIASED REFERENCE COUNTING -->
+        <div id="diagram-biased-rc" class="diagram-card">
+          <div class="diagram-header">
+            <div class="diagram-title-group">
+              <span class="diagram-badge">⟦ ARCHITECTURAL SPEC // システム仕様図 05 ⟧</span>
+              <span class="diagram-title">PEP 703 Biased Reference Counting (BRC) &amp; Split Reference Resolution</span>
+            </div>
+            <div class="diagram-controls">
+              <button class="diagram-btn play-pause-btn" type="button">⏸ Pause Animation</button>
+            </div>
+          </div>
+          <div class="diagram-canvas-wrap">
+            <svg class="diagram-svg" viewBox="0 0 880 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Thread A Box -->
+              <rect x="40" y="30" width="340" height="100" rx="8" fill="var(--bg-tertiary)" stroke="#10b981" stroke-width="2"/>
+              <text x="60" y="55" fill="#4ade80" font-weight="800" font-size="12">THREAD A (ALLOCATING CORE)</text>
+              <text x="60" y="78" fill="var(--text-primary)" font-size="11">Owns Object: ob_tid = Thread A</text>
+              <rect x="60" y="90" width="300" height="28" rx="4" fill="var(--bg-secondary)"/>
+              <text x="75" y="108" fill="#38bdf8" font-size="10" font-family="monospace">Fast Non-Atomic Inc/Dec: ob_ref_local</text>
+
+              <!-- Thread B Box -->
+              <rect x="500" y="30" width="340" height="100" rx="8" fill="var(--bg-tertiary)" stroke="#f43f5e" stroke-width="2"/>
+              <text x="520" y="55" fill="#fb7185" font-weight="800" font-size="12">THREAD B (FOREIGN CORE)</text>
+              <text x="520" y="78" fill="var(--text-primary)" font-size="11">Foreign Access: ob_tid != Thread B</text>
+              <rect x="520" y="90" width="300" height="28" rx="4" fill="var(--bg-secondary)"/>
+              <text x="535" y="108" fill="#f43f5e" font-size="10" font-family="monospace">Atomic CAS Instruction: ob_ref_shared</text>
+
+              <!-- Convergence to State Resolution -->
+              <line x1="210" y1="130" x2="440" y2="180" stroke="#10b981" stroke-width="2" class="anim-flow-line"/>
+              <line x1="670" y1="130" x2="440" y2="180" stroke="#f43f5e" stroke-width="2" class="anim-flow-line"/>
+
+              <rect x="240" y="180" width="400" height="60" rx="8" fill="var(--bg-secondary)" stroke="var(--accent-primary)" stroke-width="2"/>
+              <text x="260" y="205" fill="var(--accent-primary)" font-weight="800" font-size="12">REFERENCE STATE RESOLUTION (PEP 703)</text>
+              <text x="260" y="224" fill="var(--text-secondary)" font-size="11" font-family="monospace">States: Default (00) &bull; Weakrefs (01) &bull; Queued (10) &bull; Merged (11)</text>
+            </svg>
+          </div>
+          <div class="diagram-caption">
+            <strong>Figure 10.2:</strong> Biased Reference Counting under PEP 703. The allocating thread retains exclusive, non-atomic mutation access to <code>ob_ref_local</code> without bus locks. Foreign threads perform atomic compare-and-swap operations on <code>ob_ref_shared</code>, eliminating the global lock while preserving single-threaded execution speed.
+          </div>
+        </div>
+
+        <p>To further reduce atomic operations, PEP 703 introduces deferred and immortal reference counting:</p>
+        <ul>
+          <li><strong>Immortal Objects:</strong> Critical runtime constants (such as <code>None</code>, <code>True</code>, <code>False</code>, small integers, and interned strings) have their reference counts set to a sentinel value. The runtime treats reference count adjustments on these objects as no-ops, preventing CPU cache-line invalidation across multi-core processors.</li>
+          <li><strong>Deferred Reference Counting:</strong> Applied to top-level module functions, class methods, and type descriptors. Stack references to these objects are not counted, eliminating reference overhead during function call loops.</li>
+        </ul>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Operational Metric</th>
+                <th>Standard CPython 3.12 (GIL-Bound)</th>
+                <th>Free-Threaded CPython 3.13+ (PEP 703)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Reference Counting Overhead</strong></td>
+                <td>Direct non-atomic single-word updates</td>
+                <td>Biased reference counting: local non-atomic vs. foreign atomic CAS</td>
+              </tr>
+              <tr>
+                <td><strong>Object Header Size (Non-GC)</strong></td>
+                <td>16 bytes (Reference Count + Type Pointer)</td>
+                <td>32 bytes (Expanded headers accommodating <code>ob_tid</code> and split references)</td>
+              </tr>
+              <tr>
+                <td><strong>Memory Allocator</strong></td>
+                <td>pymalloc (Single-threaded arena pools)</td>
+                <td>mimalloc (Thread-safe, multi-heap size-classed allocators)</td>
+              </tr>
+              <tr>
+                <td><strong>CPU-Bound Multi-Threading</strong></td>
+                <td>Serialized across a single core (100% max utilization of one thread)</td>
+                <td>Scales linearly across available physical CPU cores</td>
+              </tr>
+              <tr>
+                <td><strong>Garbage Collection Synchronization</strong></td>
+                <td>Single-threaded cyclic evaluation during timeslice pauses</td>
+                <td>Stop-The-World (STW) pauses requiring thread synchronization</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="async-demultiplexing" class="content-section">
+        <h2>2. Mastering Asynchronous Python and Kernel Demultiplexing</h2>
+
+        <h3 id="selectors-loop">Operating System Selectors and the Event Loop Engine</h3>
+        <p>At the core of asyncio is the event loop, which handles I/O multiplexing via operating system system calls: Linux <code>epoll</code>, macOS/BSD <code>kqueue</code>, or Windows <code>IOCP</code>. Under Linux, when an asynchronous socket is instantiated, it is configured as non-blocking:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">C (fcntl Non-Blocking Flag)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>int flags = fcntl(fd, F_GETFL, 0);
+fcntl(fd, F_SETFL, flags | O_NONBLOCK);</code></pre>
+        </div>
+
+        <p>The asyncio event loop coordinates execution using two primary internal data structures:</p>
+        <ul>
+          <li><strong>A ready queue (<code>collections.deque</code>):</strong> Holds callbacks that are ready to run immediately.</li>
+          <li><strong>A timer queue (<code>heapq</code> binary min-heap):</strong> Stores scheduled executions ordered by expiration timestamp (<code>call_later</code>, <code>call_at</code>).</li>
+        </ul>
+        <p>Each iteration evaluates the nearest deadline in the timer min-heap. If callbacks are waiting in the ready queue, the loop sets the <code>epoll_wait</code> timeout to zero, polling the kernel without blocking. If empty, the timeout is set to the time remaining until the next scheduled timer.</p>
+
+        <h3 id="generators-coroutines">Generators, Coroutines, Tasks, and Futures</h3>
+        <ul>
+          <li><strong>Generators (<code>yield</code>):</strong> Functions containing yield statements suspend execution and preserve their local frame state on the heap. Invoking <code>next()</code> or <code>.send(val)</code> restores the frame and resumes execution from the last instruction offset.</li>
+          <li><strong>Coroutines (<code>async def</code>, <code>await</code>):</strong> Declared with async def and flagged with <code>CO_COROUTINE</code>. Coroutines cannot be invoked as plain functions; calling one returns a coroutine object. The <code>await</code> keyword serves as an inversion of control boundary: it yields an awaitable object downward to the event loop, suspending the coroutine until the awaited operation resolves.</li>
+          <li><strong>Futures (<code>asyncio.Future</code>):</strong> Low-level objects representing eventual asynchronous results, maintaining state flags (<code>PENDING</code>, <code>CANCELLED</code>, <code>FINISHED</code>).</li>
+          <li><strong>Tasks (<code>asyncio.Task</code>):</strong> A subclass of Future designed to run a coroutine concurrently. When passed to <code>asyncio.create_task()</code>, the task registers its execution step method (<code>task._step()</code>) with the event loop's ready queue.</li>
+        </ul>
+
+        <h3 id="concurrency-tradeoffs">Concurrency Trade-Offs: Cooperative Multitasking vs. Kernel Thread Contention</h3>
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Performance Metric</th>
+                <th>Operating System Kernel Threads (pthread)</th>
+                <th>Cooperative Asynchronous Tasks (asyncio.Task)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Stack Memory Overhead</strong></td>
+                <td>8 MB virtual space, 4 KB to 64 KB committed physical pages</td>
+                <td>1 KB to 2 KB dynamic heap-allocated frame</td>
+              </tr>
+              <tr>
+                <td><strong>Context Switch Latency</strong></td>
+                <td>1.0 &mu;s &minus; 5.0 &mu;s (2,000 to 10,000 CPU cycles)</td>
+                <td>20 ns &minus; 80 ns (50 to 200 CPU cycles)</td>
+              </tr>
+              <tr>
+                <td><strong>Scheduling Model</strong></td>
+                <td>Kernel-space preemptive time-slicing</td>
+                <td>User-space cooperative yielding</td>
+              </tr>
+              <tr>
+                <td><strong>Memory Access Synchronization</strong></td>
+                <td>Explicit synchronization primitives (mutexes, semaphores, atomics)</td>
+                <td>Deterministic execution boundaries between await points</td>
+              </tr>
+              <tr>
+                <td><strong>Maximum Concurrent Scale</strong></td>
+                <td>Thousands of threads (bounded by kernel tables and physical RAM)</td>
+                <td>Hundreds of thousands of tasks (bounded solely by available RAM)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="structured-concurrency">Structured Concurrency: TaskGroups, Scoped Lifetimes, and Exception Handling</h3>
+        <p>Python 3.11 addresses task leakage and traceback erasure with Structured Concurrency, implemented via <code>asyncio.TaskGroup</code> and supported by <code>ExceptionGroup</code> (PEP 654). Structured Concurrency guarantees that an execution block cannot exit until all child tasks spawned within its scope have terminated, failed, or been explicitly cancelled.</p>
+
+        <h3 id="code-structured-pipeline">High-Throughput Structured Concurrency Pipeline Demonstrating Python 3.12 Semantics</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python 3.12 (Structured Concurrency Pipeline)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>import asyncio
+from concurrent.futures import ThreadPoolExecutor
+import logging
+import sys
+import time
+from typing import Final
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] (%(threadName)s) %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
+)
+logger: Final[logging.Logger] = logging.getLogger("DistributedExecutor")
+
+def unyielding_cpu_bound_operation(payload: bytes) -> str:
+    """Simulate a synchronous, CPU-intensive workload.
+    This function blocks the executing thread and must not be called
+    directly on the asyncio event loop thread.
+    """
+    time.sleep(0.15)  # Simulate CPU-bound work or blocking C-extension calls
+    return f"processed::{hash(payload)}"
+
+async def concurrent_network_query(endpoint_id: int, target_url: str) -> dict[str, str]:
+    """Execute a cooperative, non-blocking network query."""
+    logger.info("Starting network query %d to %s", endpoint_id, target_url)
+    await asyncio.sleep(0.05)
+    if endpoint_id == 13:
+        raise ConnectionResetError(f"TCP reset received from endpoint {endpoint_id}")
+    return {"endpoint": str(endpoint_id), "status": "200_OK"}
+
+async def enterprise_orchestrator(endpoints: list[str]) -> None:
+    """Demonstrate TaskGroup exception containment, timeouts, and safe
+    thread offloading."""
+    thread_pool = ThreadPoolExecutor(max_workers=4, thread_name_prefix="cpu_worker")
+    try:
+        async with asyncio.timeout(2.0):
+            async with asyncio.TaskGroup() as task_group:
+                # 1. Spawn structured concurrent I/O tasks
+                io_tasks = [
+                    task_group.create_task(
+                        concurrent_network_query(idx, url),
+                        name=f"task-io-{idx}"
+                    )
+                    for idx, url in enumerate(endpoints)
+                ]
+                # 2. Offload CPU-bound or blocking synchronous calls to the thread pool
+                loop = asyncio.get_running_loop()
+                compute_future = loop.run_in_executor(
+                    thread_pool,
+                    unyielding_cpu_bound_operation,
+                    b"transaction_ledger_payload"
+                )
+                successful_responses = [t.result() for t in io_tasks]
+                compute_result = await compute_future
+                logger.info("Pipeline completed successfully. Compute result: %s. Records: %d",
+                            compute_result, len(successful_responses))
+    except* ConnectionResetError as exc_group:
+        for exc in exc_group.exceptions:
+            logger.error("Handling network failure: %s", exc)
+    except TimeoutError:
+        logger.error("Pipeline exceeded configured timeout; all pending tasks cancelled.")
+    finally:
+        thread_pool.shutdown(wait=True)
+
+if __name__ == "__main__":
+    test_endpoints = [f"https://service.mesh.internal/v1/resource/{i}" for i in range(15)]
+    asyncio.run(enterprise_orchestrator(test_endpoints))</code></pre>
+        </div>
+
+        <h3 id="code-java-threads">Java 21 Enterprise Concurrency: Virtual Threads Contrast</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Java 21 (StructuredTaskScope &amp; Virtual Threads)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>package enterprise.concurrency;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.concurrent.StructuredTaskScope;
+import java.util.stream.IntStream;
+
+public final class VirtualThreadOrchestrator {
+    public record QueryResult(int endpointId, String body) {}
+
+    public static void main(String[] args) {
+        var endpoints = IntStream.range(0, 15)
+            .mapToObj(i -> "https://httpbin.org/get?id=" + i)
+            .toList();
+
+        try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+            var client = HttpClient.newHttpClient();
+            List&lt;StructuredTaskScope.Subtask&lt;QueryResult&gt;&gt; subtasks = endpoints.stream()
+                .map(url -> scope.fork(() -> {
+                    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
+                    HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    return new QueryResult(url.hashCode(), response.body());
+                }))
+                .toList();
+
+            scope.join();
+            scope.throwIfFailed();
+
+            List&lt;QueryResult&gt; results = subtasks.stream()
+                .map(StructuredTaskScope.Subtask::get)
+                .toList();
+            System.out.printf("Successfully processed %d requests via Virtual Threads.%n", results.size());
+        } catch (Exception e) {
+            System.err.printf("Pipeline failed: %s%n", e.getMessage());
+        }
+    }
+}</code></pre>
+        </div>
+
+        <h3 id="event-loop-traps">Execution Traps: Event Loop Starvation and Thread-Pool Offloading</h3>
+        <p>Because an asyncio event loop executes on a single operating system thread, any invocation of a synchronous, blocking system call stalls the entire process. While the thread executes a blocking operation (such as <code>time.sleep()</code>, synchronous database queries, or disk writes via <code>open()</code>), the event loop cannot tick. As a result, ready callbacks are starved, heartbeat monitors drop, incoming connections backlog in OS buffers, and client connections begin timing out across the server.</p>
+
+        <p>To integrate synchronous dependencies safely, execution must be offloaded to an OS worker thread via <code>asyncio.to_thread()</code> or <code>loop.run_in_executor()</code>. Calling <code>asyncio.to_thread()</code> transfers execution of the blocking function to a thread pool while preserving the active <code>contextvars</code> context. When the thread finishes the blocking task, it schedules a completion callback on the event loop via the thread-safe <code>loop.call_soon_threadsafe()</code> method, resuming the awaiting coroutine without starving the event loop.</p>
+      </section>
+
+      <!-- Section 3 -->
+      <section id="modern-web-frameworks" class="content-section">
+        <h2>3. Modern Web Frameworks: ASGI Architecture and Native Core Acceleration</h2>
+
+        <h3 id="wsgi-vs-asgi">Protocol Gateways: WSGI Bottlenecks and ASGI Message Channels</h3>
+        <p>The Web Server Gateway Interface (WSGI, PEP 3333) standardized Python web development for years based on a synchronous call-and-return protocol. WSGI couples each incoming HTTP connection to an individual operating system worker thread or child process. Under heavy traffic, long-lived client connections (such as WebSocket sessions or HTTP streaming channels) exhaust the server's thread pool, preventing it from accepting new connections.</p>
+
+        <p>To support asynchronous web applications, the Asynchronous Server Gateway Interface (ASGI) was introduced. ASGI models web protocols using an asynchronous message-passing interface defined by three components:</p>
+        <ul>
+          <li><strong><code>scope</code>:</strong> A connection metadata dictionary containing connection type (<code>http</code>, <code>websocket</code>, <code>lifespan</code>), headers, client IP, path, and query parameters.</li>
+          <li><strong><code>receive</code>:</strong> An asynchronous callable (<code>async def receive() -&gt; dict</code>) that listens for incoming protocol messages.</li>
+          <li><strong><code>send</code>:</strong> An asynchronous callable (<code>async def send(message: dict) -&gt; None</code>) that streams response messages back to the client socket.</li>
+        </ul>
+
+        <h3 id="pydantic-v2">Pydantic V2: Rust-Based Validation and Core Performance Mechanics</h3>
+        <p>Pydantic V2 re-engineers the data validation engine by shifting core validation, parsing, and serialization logic into a native Rust crate: <code>pydantic-core</code>, integrated into CPython via PyO3.</p>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Benchmark Metric / Operational Behavior</th>
+                <th>Pydantic V1 (Pure Python)</th>
+                <th>Pydantic V2 (pydantic-core Rust Engine)</th>
+                <th>Architecture Driver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Model Validation Throughput</strong></td>
+                <td>approx 15,000 &minus; 25,000 ops/sec</td>
+                <td>approx 250,000 &minus; 450,000 ops/sec</td>
+                <td>Native Rust DAG validation avoiding Python interpreter dispatch.</td>
+              </tr>
+              <tr>
+                <td><strong>JSON Deserialization + Parsing</strong></td>
+                <td>High overhead; requires two-pass parsing via <code>json.loads()</code></td>
+                <td>Low overhead; single-pass validation directly from raw bytes via <code>jiter</code></td>
+                <td>Bypasses intermediate Python dictionaries and allocations.</td>
+              </tr>
+              <tr>
+                <td><strong>JSON Serialization (<code>model_dump_json</code>)</strong></td>
+                <td>Slow; traverses Python object graphs to build dictionaries</td>
+                <td>High-throughput Rust serialization directly to memory buffers</td>
+                <td>Avoids intermediate object allocation and reference count adjustments.</td>
+              </tr>
+              <tr>
+                <td><strong>Recursive Parsing Overhead</strong></td>
+                <td>Constrained by Python stack limits and frame overheads</td>
+                <td>Managed via Rust stack execution without CPython frame allocations</td>
+                <td>Minimal heap allocation; prevents recursion crashes on deep payloads.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ANIMATED DIAGRAM 3: ASGI & SSE STREAMING -->
+        <div id="diagram-asgi-sse" class="diagram-card">
+          <div class="diagram-header">
+            <div class="diagram-title-group">
+              <span class="diagram-badge">⟦ ARCHITECTURAL SPEC // システム仕様図 06 ⟧</span>
+              <span class="diagram-title">ASGI Pipeline &amp; Disconnect-Aware Real-Time LLM Token Streaming</span>
+            </div>
+            <div class="diagram-controls">
+              <button class="diagram-btn play-pause-btn" type="button">⏸ Pause Animation</button>
+            </div>
+          </div>
+          <div class="diagram-canvas-wrap">
+            <svg class="diagram-svg" viewBox="0 0 900 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Client Box -->
+              <rect x="30" y="40" width="200" height="200" rx="8" fill="var(--bg-tertiary)" stroke="var(--border-strong)"/>
+              <text x="50" y="70" fill="var(--accent-secondary)" font-weight="800" font-size="12">CLIENT (BROWSER / UI)</text>
+              <rect x="50" y="90" width="160" height="40" rx="4" fill="var(--bg-secondary)"/>
+              <text x="60" y="115" fill="var(--text-primary)" font-size="10" font-family="monospace">EventSource / fetch()</text>
+              <rect x="50" y="150" width="160" height="60" rx="4" fill="var(--bg-secondary)"/>
+              <text x="60" y="175" fill="var(--accent-cyan)" font-size="10" font-weight="700">Token Consumer</text>
+              <text x="60" y="195" fill="var(--text-muted)" font-size="9">Streams rendered in real time</text>
+
+              <!-- ASGI Gateway (FastAPI / Starlette) -->
+              <rect x="300" y="40" width="280" height="200" rx="8" fill="var(--bg-tertiary)" stroke="var(--accent-primary)" stroke-width="2"/>
+              <text x="320" y="70" fill="var(--accent-primary)" font-weight="800" font-size="12">FASTAPI / ASGI GATEWAY</text>
+              <rect x="320" y="90" width="240" height="50" rx="4" fill="var(--bg-secondary)"/>
+              <text x="330" y="112" fill="var(--text-primary)" font-size="10" font-family="monospace">Pydantic V2 / jiter parsing</text>
+              <text x="330" y="128" fill="#4ade80" font-size="9">Validated in Rust (0.02ms)</text>
+              <rect x="320" y="155" width="240" height="65" rx="4" fill="var(--bg-secondary)"/>
+              <text x="330" y="178" fill="var(--accent-secondary)" font-size="10" font-weight="700">Disconnect Sentinel</text>
+              <text x="330" y="195" fill="var(--text-secondary)" font-size="9" font-family="monospace">await request.is_disconnected()</text>
+              <text x="330" y="210" fill="#f43f5e" font-size="9">&rarr; Aborts zombie generation!</text>
+
+              <!-- LLM Inference Engine -->
+              <rect x="650" y="40" width="220" height="200" rx="8" fill="var(--bg-tertiary)" stroke="var(--border-strong)"/>
+              <text x="670" y="70" fill="#a855f7" font-weight="800" font-size="12">LLM INFERENCE ENGINE</text>
+              <rect x="670" y="90" width="180" height="125" rx="4" fill="var(--bg-secondary)"/>
+              <text x="680" y="120" fill="#c084fc" font-size="11" font-weight="700">AsyncGenerator</text>
+              <text x="680" y="145" fill="var(--text-secondary)" font-size="10" font-family="monospace">Token 1: "Distributed"</text>
+              <text x="680" y="165" fill="var(--text-secondary)" font-size="10" font-family="monospace">Token 2: "systems"</text>
+              <text x="680" y="185" fill="var(--text-secondary)" font-size="10" font-family="monospace">Token 3: "rely..."</text>
+
+              <!-- Flow Lines -->
+              <line x1="230" y1="110" x2="300" y2="110" stroke="var(--accent-primary)" stroke-width="2" class="anim-flow-line"/>
+              <line x1="580" y1="115" x2="650" y2="115" stroke="#a855f7" stroke-width="2" class="anim-flow-line"/>
+              <line x1="650" y1="175" x2="580" y2="175" stroke="#10b981" stroke-width="2" class="anim-flow-line"/>
+              <line x1="300" y1="175" x2="230" y2="175" stroke="var(--accent-secondary)" stroke-width="2.5" class="anim-flow-line"/>
+            </svg>
+          </div>
+          <div class="diagram-caption">
+            <strong>Figure 10.3:</strong> ASGI Disconnect-Aware Streaming Pipeline. Raw HTTP request bytes are validated by Rust <code>pydantic-core</code>. As tokens are yielded from the upstream LLM generator, the worker actively polls the ASGI disconnect channel (<code>request.is_disconnected()</code>), immediately terminating upstream generation if the client closes the connection.
+          </div>
+        </div>
+
+        <h3 id="realtime-streaming">Real-Time LLM Token Streaming and Disconnect Resilience</h3>
+        <p>A common production issue in streaming architectures is the "zombie execution" anti-pattern: when a user closes their client connection midway through a stream, the backend asynchronous generator may continue running unmonitored. As a result, the server continues generating tokens from the upstream LLM inference provider, wasting compute and API credits. To prevent this resource waste, an asynchronous streaming endpoint must actively monitor the underlying ASGI disconnect channel and terminate its upstream tasks as soon as the client disconnects.</p>
+
+        <h3 id="code-fastapi-sse">Production FastAPI Router Delivering Resilient, Disconnect-Aware LLM Streaming</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python 3.12 (FastAPI Resilient SSE Router)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>import asyncio
+import json
+from typing import AsyncGenerator
+from fastapi import APIRouter, HTTPException, Request, status
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field, ValidationError
+
+streaming_router = APIRouter(prefix="/v2/ai", tags=["LLM Inference"])
+
+class InferenceRequest(BaseModel):
+    """Input payload validated by pydantic-core."""
+    prompt: str = Field(..., min_length=1, max_length=8192)
+    max_output_tokens: int = Field(default=1024, ge=1, le=4096)
+    temperature: float = Field(default=0.7, ge=0.0, le=2.0)
+
+async def simulate_upstream_inference(prompt: str) -> AsyncGenerator[str, None]:
+    """Simulate an asynchronous token generator connected to an inference engine."""
+    tokens = [
+        "Distributed", "transactions", "require", "rigorous",
+        "coordination ", "and", "fault-tolerant", "consensus."
+    ]
+    for token in tokens:
+        await asyncio.sleep(0.06)
+        yield token
+
+async def resilient_event_stream(
+    request: Request,
+    prompt: str
+) -> AsyncGenerator[str, None]:
+    """Stream Server-Sent Events while actively monitoring client connection state."""
+    token_generator = simulate_upstream_inference(prompt)
+    try:
+        while True:
+            disconnected = await request.is_disconnected()
+            if disconnected:
+                break
+            try:
+                token = await asyncio.wait_for(anext(token_generator), timeout=10.0)
+                payload = json.dumps({"token": token})
+                yield f"event: message\ndata: {payload}\n\n"
+            except StopAsyncIteration:
+                yield "event: control\ndata: [DONE]\n\n"
+                break
+            except TimeoutError:
+                yield ": keep-alive heartbeat\n\n"
+            except asyncio.CancelledError:
+                raise
+    finally:
+        pass
+
+@streaming_router.post("/generate-stream", status_code=status.HTTP_200_OK)
+async def generate_stream_endpoint(
+    request: Request,
+    payload: InferenceRequest
+) -> StreamingResponse:
+    """Stream LLM inference tokens via Server-Sent Events."""
+    return StreamingResponse(
+        resilient_event_stream(request, payload.prompt),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 4 -->
+      <section id="persistent-data" class="content-section">
+        <h2>4. Persistent Data Architecture and Asynchronous Object-Relational Mapping</h2>
+
+        <h3 id="sqlalchemy-greenlet">SQLAlchemy 2.0 and the Greenlet Execution Bridge</h3>
+        <p>SQLAlchemy 2.0 provides declarative mappings with full typing support:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (SQLAlchemy 2.0 Model)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>from sqlalchemy import BigInteger, String
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+class Base(DeclarativeBase):
+    pass
+
+class LedgerEntry(Base):
+    __tablename__ = "ledger_entry"
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
+    account_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)</code></pre>
+        </div>
+
+        <p>Integrating asynchronous execution with an ORM designed around synchronous abstractions introduces an architectural challenge. The Python Database API Specification (DBAPI, PEP 249) is synchronous and blocking. While native asynchronous drivers (such as <code>asyncpg</code> for PostgreSQL) manage socket state using non-blocking calls, the higher-level ORM logic—such as lazy-loading attributes, cascades, and state synchronization—was written using synchronous function signatures.</p>
+
+        <p>SQLAlchemy bridges this divide through its <code>AsyncSession</code> and <code>AsyncEngine</code> abstractions, powered internally by the <code>greenlet</code> library:</p>
+        <ul>
+          <li>When an application awaits an asynchronous database operation (such as <code>await session.execute(stmt)</code>), SQLAlchemy executes the call using <code>greenlet_spawn()</code>.</li>
+          <li>The <code>greenlet_spawn()</code> utility runs the internal synchronous ORM logic inside a lightweight, cooperatively scheduled userspace micro-thread (greenlet).</li>
+          <li>When the ORM generates SQL and dispatches queries to the underlying driver, the greenlet cooperatively pauses its execution and transfers control back to the primary asyncio event loop.</li>
+          <li>The event loop awaits the non-blocking socket read/write operation via asyncpg using kernel selectors (<code>epoll</code>).</li>
+          <li>When the database socket returns data, the event loop resumes the suspended greenlet, passing the raw record buffers back to the ORM to be mapped into model entities.</li>
+        </ul>
+
+        <h3 id="uow-identity-map">The Unit-of-Work Pattern and Identity Map Mechanics</h3>
+        <p>The <code>AsyncSession</code> acts as a transactional boundary wrapping the Unit-of-Work design pattern. Rather than writing database modifications directly to the network on every assignment, the session tracks in-memory entity state across three key structures:</p>
+        <ol>
+          <li><strong>Identity Map:</strong> A bidirectional dictionary mapping composite primary keys to instantiated Python entity objects. The Identity Map ensures that within a single session transaction, querying the same database row multiple times returns the exact same object reference in memory, preventing divergent state updates.</li>
+          <li><strong>State Tracking (Transient, Pending, Persistent, Deleted):</strong> Entities transition through explicit states during their lifecycle. Newly instantiated objects are transient; adding them via <code>session.add()</code> makes them pending. Once flushed to the database, they become persistent. If marked for removal via <code>session.delete()</code>, they become deleted.</li>
+          <li><strong>Topological Flush Sorting:</strong> When <code>await session.flush()</code> or <code>await session.commit()</code> is called, the Unit-of-Work engine compiles all pending state changes into a minimal set of DML operations (INSERT, UPDATE, DELETE). It builds a directed acyclic graph (DAG) of foreign key relationships across the modified entities, performs a topological sort, and executes the operations in the exact mathematical order required to prevent foreign key constraint violations.</li>
+        </ol>
+
+        <h3 id="connection-pool-sizing">Connection Pool Sizing Dynamics and Queuing Calculus</h3>
+        <div class="formula-card">
+          <div class="formula-header">// SYSTEM FORMULA [数理仕様] &bull; Little's Law for Connection Pools</div>
+          <p>Sizing connection pools accurately requires balancing request throughput against database resource exhaustion. Little's Law provides the mathematical foundation:</p>
+          <div class="formula-math">L = &lambda; &times; W</div>
+          <p>Where <strong>L</strong> is the average number of active database connections held concurrently, <strong>&lambda;</strong> is the incoming transactional arrival rate (queries per second), and <strong>W</strong> is the average duration a connection is held by a query (seconds).</p>
+          <p>If an API handles 5,000 incoming requests per second (&lambda; = 5,000), and each request requires 4 ms of connection hold time (W = 0.004 s):</p>
+          <div class="formula-math">L = 5000 &times; 0.004 = 20 concurrent active connections</div>
+        </div>
+
+        <p>To optimize throughput without overwhelming hardware, the maximum number of connections across all application instances should follow the standard sizing heuristic: <code>N_connections = (2 &times; N_CPU_cores) + N_spindles</code>, where <code>N_CPU_cores</code> represents physical CPU core count, and <code>N_spindles</code> accounts for concurrent disk I/O channels.</p>
+
+        <div class="table-wrapper">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Configuration Parameter</th>
+                <th>Recommended Production Value</th>
+                <th>Architectural Failure Prevented</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>pool_size</strong></td>
+                <td>10 to 30 per container</td>
+                <td>Prevents backend process explosion on the database server.</td>
+              </tr>
+              <tr>
+                <td><strong>max_overflow</strong></td>
+                <td>5 to 15</td>
+                <td>Accommodates transient burst traffic without rejecting requests.</td>
+              </tr>
+              <tr>
+                <td><strong>pool_timeout</strong></td>
+                <td>10.0 to 30.0 seconds</td>
+                <td>Prevents requests from queueing indefinitely when connections are exhausted.</td>
+              </tr>
+              <tr>
+                <td><strong>pool_recycle</strong></td>
+                <td>1800 seconds (30m)</td>
+                <td>Recreates idle connections before stateful firewalls or cloud NAT gateways drop them silently.</td>
+              </tr>
+              <tr>
+                <td><strong>pool_pre_ping</strong></td>
+                <td>True</td>
+                <td>Runs a lightweight test query (<code>SELECT 1</code>) on checkout to discard dead connections automatically.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="code-db-engine">Database Engine Configuration and Transaction Lifecycle Management</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (SQLAlchemy 2.0 Async Engine &amp; Sessionmaker)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
+import logging
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
+
+logger = logging.getLogger("DatabasePersistence")
+
+DATABASE_URI = (
+    "postgresql+asyncpg://app_usr:K8s_Secr3t_Pass@db-primary.internal:5432/finance_db"
+)
+
+async_database_engine: AsyncEngine = create_async_engine(
+    DATABASE_URI,
+    pool_size=20,
+    max_overflow=10,
+    pool_timeout=20.0,
+    pool_recycle=1800,
+    pool_pre_ping=True,
+    echo=False,
+    connect_args={
+        "server_settings": {
+            "application_name": "transaction_service",
+            "jit": "off",
+        },
+        "command_timeout": 15.0,
+    },
+)
+
+AsyncSessionFactory: async_sessionmaker[AsyncSession] = async_sessionmaker(
+    bind=async_database_engine,
+    class_=AsyncSession,
+    autoflush=True,
+    expire_on_commit=False,
+)
+
+@asynccontextmanager
+async def get_managed_session() -> AsyncGenerator[AsyncSession, None]:
+    """Provide a transactional boundary with automatic rollback on error."""
+    session: AsyncSession = AsyncSessionFactory()
+    try:
+        yield session
+        await session.commit()
+    except Exception as exc:
+        await session.rollback()
+        logger.error("Transaction rolled back due to error: %s", exc)
+        raise
+    finally:
+        await session.close()</code></pre>
+        </div>
+
+        <h3 id="zero-downtime-schema">Zero-Downtime Schema Evolution with Alembic</h3>
+        <p>In continuous deployment environments, database schemas must evolve without taking the system offline or acquiring long-lived exclusive table locks (<code>ACCESS EXCLUSIVE</code>) that block incoming user queries.</p>
+
+        <h3 id="expand-contract">Safe Column Additions: The Expand-Contract Pattern</h3>
+        <p>Executing a naive <code>ALTER TABLE ledger_entry ADD COLUMN risk_tier VARCHAR(32) NOT NULL;</code> on a large table can cause an outage. The database must write the default value to every existing row on disk while holding an exclusive lock on the table. To perform this change without downtime, teams use the multi-step Expand-Contract migration pattern:</p>
+
+        <ol>
+          <li><strong>Expand Step (Migration N):</strong> Add the column as NULLABLE with no default value. This operation updates table metadata almost instantaneously, without requiring a table rewrite.</li>
+          <li><strong>Dual-Writing Step (Application Release N):</strong> Update application code to write to the new column for all new records, while gracefully handling NULL values when reading existing records.</li>
+          <li><strong>Backfill Step:</strong> Run an asynchronous batch job to backfill existing historical records in small chunks (e.g., 5,000 rows per transaction), preventing long-lived table-level locks.</li>
+          <li><strong>Validation Step (Migration N+1):</strong> Add a CHECK constraint using PostgreSQL's <code>NOT VALID</code> option. This ensures all new rows satisfy the condition immediately without validating historic data, acquiring an exclusive lock for only milliseconds. Next, validate the constraint asynchronously using <code>VALIDATE CONSTRAINT</code>, which checks historic data via a non-blocking sequential scan.</li>
+          <li><strong>Contract Step (Migration N+2):</strong> Transition the column to <code>NOT NULL</code> (a metadata-only change once validated) and remove any temporary application-level fallback logic.</li>
+        </ol>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">SQL (Expand-Contract Zero-Downtime Migration)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>-- Step 1: Add the column as nullable (fast metadata operation)
+ALTER TABLE ledger_entry ADD COLUMN risk_tier VARCHAR(32);
+
+-- Step 2: (Application code is deployed to dual-write new records)
+
+-- Step 3: (Background worker updates existing rows in batches)
+UPDATE ledger_entry SET risk_tier = 'standard' WHERE id BETWEEN 1 AND 5000;
+
+-- Step 4: Add the constraint without validating historic records
+ALTER TABLE ledger_entry
+ADD CONSTRAINT chk_risk_tier_not_null
+CHECK (risk_tier IS NOT NULL) NOT VALID;
+
+-- Validate historic records concurrently without blocking reads or writes
+ALTER TABLE ledger_entry
+VALIDATE CONSTRAINT chk_risk_tier_not_null;
+
+-- Step 5: Convert the verified constraint to a standard NOT NULL declaration
+ALTER TABLE ledger_entry ALTER COLUMN risk_tier SET NOT NULL;
+ALTER TABLE ledger_entry DROP CONSTRAINT chk_risk_tier_not_null;</code></pre>
+        </div>
+
+        <h3 id="column-renaming">Safe Column Renaming via Triggers</h3>
+        <p>Renaming an active database column directly via <code>ALTER TABLE ledger_entry RENAME COLUMN account_id TO source_account_id;</code> causes immediate downtime: old application instances running in production crash the moment they attempt to query the old column name. To rename a column safely without service interruption, teams use a multi-phase migration pipeline:</p>
+        <ol>
+          <li><strong>Schema Expansion:</strong> Add the new column (<code>source_account_id</code>) alongside the existing one as nullable.</li>
+          <li><strong>Database-Level Trigger Synchronization:</strong> Install a bidirectional database trigger that mirrors any insert or update between the old and new column:
+            <ul>
+              <li>Writes to <code>account_id</code> automatically populate <code>source_account_id</code>.</li>
+              <li>Writes to <code>source_account_id</code> automatically populate <code>account_id</code>.</li>
+            </ul>
+          </li>
+          <li><strong>Historical Backfill:</strong> Backfill historical data from the old column into the new column in discrete batches.</li>
+          <li><strong>Application Deployment:</strong> Deploy the new application version configured to read from and write to <code>source_account_id</code>.</li>
+          <li><strong>Schema Contraction:</strong> Drop the bidirectional database trigger and remove the legacy column (<code>account_id</code>) via a final migration.</li>
+        </ol>
+
+        <h3 id="code-alembic-migration">Production Code: Zero-Downtime Alembic Migration</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-lang-label">Python (Alembic Zero-Downtime Migration)</span>
+            <div class="code-actions">
+              <button class="run-btn" type="button" title="Execute Code"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Run // 実行</button>
+              <button class="copy-btn" type="button" title="Copy Code">Copy</button>
+            </div>
+          </div>
+          <pre><code>"""Zero-Downtime Alembic Migration Demonstrating Safe Column
+Additions."""
+from alembic import op
+import sqlalchemy as sa
+
+# Alembic revision metadata
+revision = "20241028_ledger_risk_tier"
+down_revision = "20240915_base_ledger"
+branch_labels = None
+depends_on = None
+
+def upgrade() -> None:
+    # 1. Non-blocking metadata operation: Add column as nullable
+    op.add_column("ledger_entry", sa.Column("risk_tier", sa.String(length=32), nullable=True))
+    # 2. Add an unvalidated CHECK constraint to enforce NOT NULL semantics for new writes
+    op.execute(
+        """
+        ALTER TABLE ledger_entry
+        ADD CONSTRAINT chk_ledger_risk_tier_not_null
+        CHECK (risk_tier IS NOT NULL) NOT VALID;
+        """
+    )
+    # The backfill script runs out-of-band across historical rows.
+    # A follow-up migration finalizes the change:
+    # op.execute("ALTER TABLE ledger_entry VALIDATE CONSTRAINT chk_ledger_risk_tier_not_null;")
+    # op.alter_column("ledger_entry", "risk_tier", nullable=False)
+    # op.drop_constraint("chk_ledger_risk_tier_not_null", "ledger_entry", type_="check")
+
+def downgrade() -> None:
+    op.drop_constraint("chk_ledger_risk_tier_not_null", "ledger_entry", type_="check")
+    op.drop_column("ledger_entry", "risk_tier")</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 5 -->
+      <section id="architectural-synthesis" class="content-section">
+        <h2>5. Architectural Synthesis and Systems Engineering Patterns</h2>
+        <p>Designing low-latency, scalable backend systems in modern Python requires coordinating optimizations across every layer of the architecture:</p>
+
+        <ul>
+          <li><strong>CPython Execution Layer:</strong> Python 3.12 minimizes runtime overhead by managing call state using contiguous <code>_PyInterpreterFrame</code> stacks and optimizing monomorphic bytecode via PEP 659 adaptive instructions. As free-threaded CPython (PEP 703) matures, CPU-bound workloads can parallelize across multiple cores using biased reference counting, immortal constants, and mimalloc thread-local memory heaps, bypassing the need for multi-processing architectures.</li>
+          <li><strong>Asynchronous I/O Layer:</strong> Concurrency scales by offloading blocking socket states to the OS kernel via non-blocking selectors (<code>epoll</code>). Single-threaded cooperative multitasking avoids the memory overheads and context-switching latencies of OS threads. Structured Concurrency via <code>asyncio.TaskGroup</code> ensures child tasks remain bound to scoped lifetimes, preventing orphaned tasks and managing concurrent failures through <code>ExceptionGroup</code> hierarchies.</li>
+          <li><strong>Application Framework Layer:</strong> Modern ASGI gateways (Starlette, FastAPI) process HTTP and streaming connections using asynchronous message channels. Request parsing and validation bottlenecks are mitigated by shifting validation logic into compiled Rust engines (<code>pydantic-core</code>), which validate raw JSON byte buffers directly via <code>jiter</code> without creating intermediate Python objects. Real-time streaming endpoints (such as SSE for generative AI) monitor ASGI disconnect events to cancel abandoned upstream generation tasks immediately.</li>
+          <li><strong>Persistent Storage Layer:</strong> Database interactions decouple synchronous ORM mapping logic from asynchronous socket execution using greenlet context switches. Connection pools configured according to Little's Law prevent database server saturation, while zero-downtime expand-contract migration patterns allow schemas to evolve seamlessly without service interruptions.</li>
+        </ul>
+        <p>Understanding these runtime mechanisms, kernel interactions, and persistent storage patterns allows engineers to build resilient, low-latency distributed backends capable of serving demanding production workloads within the modern Python ecosystem.</p>
+      </section>
+
+      <!-- Section 6: Works Cited -->
+      <section id="works-cited" class="content-section">
+        <h2>6. Works Cited</h2>
+        <ol style="margin-left: 1.5rem; line-height: 1.8; font-size: 0.92rem; color: var(--text-secondary);">
+          <li>PEP 703 &ndash; Making the Global Interpreter Lock Optional in CPython, <code>https://peps.python.org/pep-0703/</code></li>
+          <li>Deterministic Multithreaded Testing in Python with blanket, <code>https://bernat.tech/posts/blanket-deterministic-threading/</code></li>
+          <li>The bytecode interpreter (3.11) &ndash; Python Developer's Guide, <code>https://devguide-pt-br.readthedocs.io/pt-br/latest/internals/interpreter/</code></li>
+          <li>Proposal: rename _PyInterpreterFrame struct as _Py_framedata, <code>https://discuss.python.org/t/proposal-rename-pyinterpreterframe-struct-as-py-framedata/14213</code></li>
+          <li>Continuum/ARCHITECTURE.md at main byte271/Continuum, <code>https://github.com/byte271/Continuum/blob/main/ARCHITECTURE.md</code></li>
+          <li>Python Without Gil | Coding Fun, <code>https://garychang.org/2023/09/30/Python-Without-GIL.html</code></li>
+          <li>Faster Python: Unlocking the Python Global Interpreter Lock, <code>https://blog.jetbrains.com/pycharm/2025/07/faster-python-unlocking-the-python-global-interpreter-lock/</code></li>
+          <li>Python support for free threading &ndash; Python 3.14.7 documentation, <code>https://docs.python.org/3/howto/free-threading-python.html</code></li>
+          <li>Increased memory usage with free-threaded build #135898 &ndash; GitHub, <code>https://github.com/python/cpython/issues/135898</code></li>
+          <li>Blog &ndash; Removing the Python GIL &ndash; Michael Tsai, <code>https://mjtsai.com/blog/2023/07/19/removing-the-python-gil/</code></li>
+          <li>What's New In Python 3.11 &ndash; Python 3.12.0a0 documentation, <code>https://pradyunsg-cpython-lutra-testing.readthedocs.io/en/latest/whatsnew/3.11.html</code></li>
+          <li>Pydantic v1 vs v2 for Compliance Payload Validation &ndash; Crop Planning, <code>https://www.crop-planning.com/agricultural-automation-system-architecture-compliance/field-schema-design/pydantic-v1-vs-v2-for-compliance-payload-validation/</code></li>
+          <li>Introducing Pydantic v2 &ndash; Key Features, <code>https://pydantic.dev/articles/pydantic-v2</code></li>
+          <li>Enabling Rich Comparisons for Model Instances in FastAPI &ndash; Orchestra, <code>https://www.getorchestra.io/guides/pydantic-rich-comparison-methods-enabling-rich-comparisons-for-model-instances-in-fastapi-2</code></li>
+          <li>Pydantic Performance Tips | Talk Python To Me Podcast, <code>https://talkpython.fm/episodes/show/466/pydantic-performance-tips</code></li>
+          <li>marshmallow vs Pydantic &ndash; A Thorough Comparison &ndash; Tomoda Hinata, <code>https://tomodahinata.com/en/blog/marshmallow-vs-pydantic-comparison-guide</code></li>
+          <li>Async SQLAlchemy in pytest fixture: greenlet_spawn has not been called, <code>https://stackoverflow.com/questions/78701058/async-sqlalchemy-in-pytest-fixture-greenlet-spawn-has-not-been-called</code></li>
+        </ol>
+      </section>
+
+      <!-- Pagination -->
+      <div class="page-nav-footer">
+        <a href="python-runtime.html" class="nav-card-link prev">
+          <span class="nav-direction">&larr; Previous Manual</span>
+          <span class="nav-title">CPython Runtime Internals</span>
+        </a>
+        <a href="postgresql.html" class="nav-card-link next">
+          <span class="nav-direction">Next Manual &rarr;</span>
+          <span class="nav-title">PostgreSQL Zero-to-Hero</span>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

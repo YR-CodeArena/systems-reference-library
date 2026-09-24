@@ -12,7 +12,7 @@
   <div id="reading-progress"></div>
 
   <!-- Header -->
-    <header class="site-header">
+      <header class="site-header">
     <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
       <div class="brand-icon">SR</div>
       <div class="brand-text-block">
@@ -20,7 +20,7 @@
           <span class="brand-title">Systems Reference</span>
           <span class="brand-status-tag">● ONLINE // 稼働中</span>
         </div>
-        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
       </div>
     </a>
 
@@ -37,7 +37,7 @@
           <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
             <span>🌐</span>
             <span>Core Architecture</span>
-            <span class="dropdown-badge">VOL.01–05</span>
+            <span class="dropdown-badge">VOL.01–06</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -80,15 +80,22 @@
                   <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
                 </div>
               </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
             </div>
           </div>
         </li>
 
-        <li class="nav-dropdown" id="dropdownRuntimes">
+        <li class="nav-dropdown" id="dropdownBackend">
           <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
             <span>⚡</span>
-            <span>Languages &amp; Runtimes</span>
-            <span class="dropdown-badge">VOL.06–10</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -97,38 +104,82 @@
             </div>
             <div class="dropdown-grid">
               <a href="git-github.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.06</span>
+                <span class="card-vol-tag">VOL.07</span>
                 <div class="card-text">
                   <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
                   <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
                 </div>
               </a>
               <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.07</span>
+                <span class="card-vol-tag">VOL.08</span>
                 <div class="card-text">
                   <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
                   <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
                 </div>
               </a>
               <a href="python-runtime.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.08</span>
+                <span class="card-vol-tag">VOL.09</span>
                 <div class="card-text">
-                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
-                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
                 </div>
               </a>
               <a href="postgresql.html" class="dropdown-card active" role="menuitem">
-                <span class="card-vol-tag">VOL.09</span>
+                <span class="card-vol-tag">VOL.11</span>
                 <div class="card-text">
-                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
-                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
                 </div>
               </a>
               <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.10</span>
+                <span class="card-vol-tag">VOL.12</span>
                 <div class="card-text">
-                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
-                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
                 </div>
               </a>
             </div>
@@ -232,6 +283,60 @@
 
 <section class="content-section">
         <h2>Handbook Overview &amp; Learning Roadmap</h2>
+
+<div class="diagram-card" id="diagram-pg-arch">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 11.1 // DATABASE ARCHITECTURE</span>
+      <h3 class="diagram-title">PostgreSQL Shared Memory &amp; WAL Checkpointer Pipeline</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-pg" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-pg" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-pg" class="diagram-svg" viewBox="0 0 940 300" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(30, 40)">
+        <rect width="180" height="90" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+        <text x="90" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#93c5fd">BACKEND WORKER</text>
+        <text x="90" y="48" text-anchor="middle" font-size="9" fill="#9ca3af">Dedicated Process</text>
+        <text x="90" y="66" text-anchor="middle" font-size="9" fill="#9ca3af">Per-Client Forked Process</text>
+      </g>
+      <g transform="translate(320, 20)">
+        <rect width="300" height="250" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
+        <text x="150" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#67e8f9">SHARED MEMORY (IPC Area)</text>
+        <rect x="20" y="45" width="260" height="80" rx="4" fill="#0f172a" stroke="#06b6d4" stroke-width="1"/>
+        <text x="150" y="68" text-anchor="middle" font-size="10" font-weight="700" fill="#cffafe">Shared Buffers (shared_buffers)</text>
+        <text x="150" y="88" text-anchor="middle" font-size="9" fill="#9ca3af">Clock Sweep Buffer Management</text>
+        <text x="150" y="104" text-anchor="middle" font-size="9" fill="#9ca3af">Dirty Page Marking</text>
+        <rect x="20" y="145" width="260" height="80" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+        <text x="150" y="168" text-anchor="middle" font-size="10" font-weight="700" fill="#fde68a">WAL Buffers (wal_buffers)</text>
+        <text x="150" y="188" text-anchor="middle" font-size="9" fill="#9ca3af">Write-Ahead Redo Log Ring</text>
+        <text x="150" y="204" text-anchor="middle" font-size="9" fill="#9ca3af">Pre-Commit Persistence Gate</text>
+      </g>
+      <g transform="translate(730, 140)">
+        <rect width="180" height="85" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+        <text x="90" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#a7f3d0">DISK STORAGE (pg_wal)</text>
+        <text x="90" y="46" text-anchor="middle" font-size="9" fill="#9ca3af">Sequential 16MB WAL Files</text>
+        <text x="90" y="62" text-anchor="middle" font-size="9" fill="#9ca3af">Crash Recovery Foundation</text>
+      </g>
+      <path d="M 210 85 L 320 85" fill="none" stroke="#3b82f6" stroke-width="2" class="anim-flow-line"/>
+      <path d="M 580 185 L 730 185" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,3" class="anim-flow-line"/>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 11.1 PostgreSQL Memory Topology:</strong> Forked backend workers communicate through shared memory containing Shared Buffers and WAL Buffers. Changes write immediately to WAL for durability before Checkpointer lazily flushes dirty shared pages to tablespace files.
+  </div>
+</div>
+
+
         <p>These comprehensive notes capture every detail, explanation, code block, and practical architectural model from the complete PostgreSQL Masterclass. Designed as a standalone technical handbook, you can seamlessly refer back to this document months or years after learning to review syntax, database design patterns, procedural logic, analytics, and performance optimization techniques.</p>
       </section>
 
@@ -362,10 +467,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>PostgreSQL Server Instance
   └── Database (e.g., bank_db)
@@ -384,10 +495,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Create a new database
 CREATE DATABASE person_db;
@@ -404,10 +521,16 @@ DROP DATABASE person_db;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">CREATE TABLE person (
     id INT,
@@ -421,10 +544,16 @@ DROP DATABASE person_db;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- 1. CREATE (Insert Records)
 -- Single record insertion specifying target columns
@@ -569,10 +698,16 @@ WHERE id = 104;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Inspect current sequence value
 SELECT currval('employee_emp_id_seq');
@@ -585,10 +720,16 @@ SELECT setval('employee_emp_id_seq', (SELECT MAX(emp_id) FROM employee));</code>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Create Bank Database
 CREATE DATABASE bank_db;
@@ -630,10 +771,16 @@ INSERT INTO employee (first_name, last_name, email, department, salary, hire_dat
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Exact Match
 SELECT * FROM employee WHERE emp_id = 5;
@@ -652,10 +799,16 @@ SELECT * FROM employee WHERE department = 'HR' OR department = 'Finance';</code>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Replacing repetitive OR conditions using IN
 SELECT * FROM employee WHERE department IN ('IT', 'Finance', 'HR');
@@ -671,10 +824,16 @@ SELECT * FROM employee WHERE salary BETWEEN 40000.00 AND 60000.00;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Extract distinct unique values from a column
 SELECT DISTINCT department FROM employee;
@@ -698,10 +857,16 @@ SELECT * FROM employee ORDER BY salary DESC LIMIT 3 OFFSET 0;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Names starting with 'A'
 SELECT * FROM employee WHERE first_name LIKE 'A%';
@@ -731,10 +896,16 @@ SELECT * FROM employee WHERE department LIKE '__';</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Total employee headcount
 SELECT COUNT(emp_id) AS total_employees FROM employee;
@@ -758,10 +929,16 @@ SELECT MIN(salary) AS lowest_salary, MAX(salary) AS highest_salary FROM employee
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Count headcount per department
 SELECT department, COUNT(emp_id) AS headcount 
@@ -846,10 +1023,16 @@ GROUP BY department;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">SELECT CONCAT_WS(' : ', emp_id, first_name, last_name, department) AS formatted_profile 
 FROM employee;</code></pre>
@@ -860,10 +1043,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">SELECT CONCAT_WS(' : ', 
     emp_id, 
@@ -878,10 +1067,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">SELECT first_name, 
        CONCAT(LEFT(department, 1), emp_id) AS custom_emp_code 
@@ -897,10 +1092,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Add a new column with default value
 ALTER TABLE person ADD COLUMN age INT DEFAULT 0;
@@ -928,10 +1129,16 @@ ALTER TABLE person ALTER COLUMN city DROP DEFAULT;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Add mobile column
 ALTER TABLE person ADD COLUMN mobile VARCHAR(15);
@@ -957,10 +1164,16 @@ ALTER TABLE person DROP CONSTRAINT mobile_num_min_10_digits;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">SELECT first_name, salary,
     CASE 
@@ -975,10 +1188,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Calculate 10% annual bonus rounded to 2 decimal places
 SELECT first_name, salary,
@@ -995,10 +1214,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">SELECT 
     CASE 
@@ -1033,10 +1258,16 @@ GROUP BY
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Parent Table: Customers
 CREATE TABLE customers (
@@ -1083,10 +1314,16 @@ INSERT INTO orders (order_date, price, customer_id) VALUES
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- INNER JOIN: Fetch orders paired with customer details (Excludes customers without orders)
 SELECT c.customer_name, o.order_id, o.order_date, o.price
@@ -1109,10 +1346,16 @@ GROUP BY c.customer_name;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Primary Table 1: Students
 CREATE TABLE students (
@@ -1155,10 +1398,16 @@ JOIN courses c ON e.course_id = c.course_id;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- 1. Create E-Commerce Tables
 CREATE TABLE store_customers (
@@ -1220,10 +1469,16 @@ JOIN store_products p ON oi.product_id = p.product_id;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Encapsulate complex e-commerce join query into a View
 CREATE VIEW billing_info_view AS
@@ -1249,10 +1504,16 @@ SELECT * FROM billing_info_view WHERE line_item_total > 1000.00;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Find product categories generating total revenue exceeding $1,000
 SELECT product_name, SUM(line_item_total) AS total_revenue
@@ -1265,10 +1526,16 @@ HAVING SUM(line_item_total) > 1000.00;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- ROLLUP auto-generates subtotal and grand total summary rows
 -- COALESCE replaces NULL headers in summary rows with 'GRAND TOTAL'
@@ -1289,10 +1556,16 @@ GROUP BY ROLLUP(product_name);</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Create Procedure to update employee salary safely
 CREATE OR REPLACE PROCEDURE update_emp_salary(
@@ -1317,10 +1590,16 @@ CALL update_emp_salary(3, 71000.00);</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Create Function returning a result table of top earners for a given department
 CREATE OR REPLACE FUNCTION get_dept_max_earner(p_dept_name VARCHAR)
@@ -1352,10 +1631,16 @@ SELECT * FROM get_dept_max_earner('IT');</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Calculate Running Cumulative Salary Total ordered by salary ASC
 SELECT first_name, salary,
@@ -1373,10 +1658,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Ranking Employees Organization-Wide by Salary
 SELECT first_name, salary,
@@ -1395,10 +1686,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Compare employee salary against the salary of the next higher earner (LEAD)
 SELECT first_name, salary,
@@ -1417,10 +1714,16 @@ FROM employee;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- Define CTE calculating departmental average salaries
 WITH dept_avg_cte AS (
@@ -1445,10 +1748,16 @@ WHERE e.salary > d.avg_dept_salary;</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">sql</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-sql">-- 1. Create Trigger Function enforcing non-negative salaries
 CREATE OR REPLACE FUNCTION sanitize_salary_func()
@@ -1602,6 +1911,8 @@ SELECT emp_id, first_name, salary FROM employee WHERE emp_id = 1;</code></pre>
     </svg>
   </button>
 
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

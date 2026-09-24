@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+# Script to build complete updated index.html with all 15 volumes across 3 tracks
+def build_index_html():
+    content = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -555,8 +557,14 @@
     </div>
   </footer>
 
-  <script src="assets/js/skulpt.min.js"></script>
-  <script src="assets/js/skulpt-stdlib.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+"""
+
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(content)
+    print("Created index.html with all 15 volumes successfully!")
+
+if __name__ == '__main__':
+    build_index_html()

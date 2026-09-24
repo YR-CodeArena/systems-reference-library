@@ -12,7 +12,7 @@
   <div id="reading-progress"></div>
 
   <!-- Header -->
-    <header class="site-header">
+      <header class="site-header">
     <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
       <div class="brand-icon">SR</div>
       <div class="brand-text-block">
@@ -20,7 +20,7 @@
           <span class="brand-title">Systems Reference</span>
           <span class="brand-status-tag">● ONLINE // 稼働中</span>
         </div>
-        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
       </div>
     </a>
 
@@ -37,7 +37,7 @@
           <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
             <span>🌐</span>
             <span>Core Architecture</span>
-            <span class="dropdown-badge">VOL.01–05</span>
+            <span class="dropdown-badge">VOL.01–06</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -80,15 +80,22 @@
                   <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
                 </div>
               </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
             </div>
           </div>
         </li>
 
-        <li class="nav-dropdown" id="dropdownRuntimes">
+        <li class="nav-dropdown" id="dropdownBackend">
           <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
             <span>⚡</span>
-            <span>Languages &amp; Runtimes</span>
-            <span class="dropdown-badge">VOL.06–10</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -97,38 +104,82 @@
             </div>
             <div class="dropdown-grid">
               <a href="git-github.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.06</span>
+                <span class="card-vol-tag">VOL.07</span>
                 <div class="card-text">
                   <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
                   <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
                 </div>
               </a>
               <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.07</span>
+                <span class="card-vol-tag">VOL.08</span>
                 <div class="card-text">
                   <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
                   <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
                 </div>
               </a>
               <a href="python-runtime.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.08</span>
+                <span class="card-vol-tag">VOL.09</span>
                 <div class="card-text">
-                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
-                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
                 </div>
               </a>
               <a href="postgresql.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.09</span>
+                <span class="card-vol-tag">VOL.11</span>
                 <div class="card-text">
-                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
-                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
                 </div>
               </a>
               <a href="java-masterclass.html" class="dropdown-card active" role="menuitem">
-                <span class="card-vol-tag">VOL.10</span>
+                <span class="card-vol-tag">VOL.12</span>
                 <div class="card-text">
-                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
-                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
                 </div>
               </a>
             </div>
@@ -215,6 +266,51 @@
 <section class="content-section" id="ch-1">
         <h2>1. Execution Model, JDK/JRE/JVM &amp; First Program</h2>
 
+<div class="diagram-card" id="diagram-jvm-classloader">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 12.1 // JVM RUNTIME</span>
+      <h3 class="diagram-title">JVM Classloader Hierarchy &amp; Delegation Architecture</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-classloader" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-classloader" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-classloader" class="diagram-svg" viewBox="0 0 940 300" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(470, 30)">
+        <rect x="-140" y="0" width="280" height="45" rx="6" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+        <text x="0" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="#fbcfe8">Bootstrap ClassLoader (C++ Native)</text>
+      </g>
+      <g transform="translate(470, 105)">
+        <rect x="-140" y="0" width="280" height="45" rx="6" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.8"/>
+        <text x="0" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="#ede9fe">Platform ClassLoader (Java Modules)</text>
+      </g>
+      <g transform="translate(470, 180)">
+        <rect x="-140" y="0" width="280" height="45" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+        <text x="0" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="#93c5fd">Application ClassLoader (App Classpath)</text>
+      </g>
+      <!-- Delegation arrows -->
+      <line x1="470" y1="180" x2="470" y2="150" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,2" class="anim-flow-line"/>
+      <line x1="470" y1="105" x2="470" y2="75" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4,2" class="anim-flow-line"/>
+      <text x="590" y="165" font-size="10" fill="#60a5fa">1. Delegates Parent First &uarr;</text>
+      <text x="590" y="90" font-size="10" fill="#c4b5fd">2. Delegates Root First &uarr;</text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 12.1 Classloader Delegation:</strong> The Java Virtual Machine enforces strict parent-delegation: when a class is requested, loaders delegate upwards to the Bootstrap loader before attempting to load classes locally, guaranteeing core JDK class security.
+  </div>
+</div>
+
+
+
         <h3 id="ch-1-1">1.1 Conceptual Deep Dive &amp; Execution Pipeline</h3>
         <p>Java is a high-level, class-based, object-oriented programming language designed around the core philosophy of <strong>"Write Once, Run Anywhere" (WORA)</strong>. Unlike traditional purely compiled languages (like C or C++) which compile directly into platform-specific machine code (binary instructions unique to an x86 or ARM CPU), Java uses a two-stage translation pipeline involving both compilation and interpretation.</p>
         <p>When a developer writes code in a file named <code>Main.java</code>, this file contains human-readable Java syntax. The Java Compiler (<code>javac</code>) compiles this source code into an intermediate format called <strong>Bytecode</strong>, stored in a <code>Main.class</code> file. Bytecode is not machine code for any real computer hardware; instead, it is an optimized set of instructions for an abstract machine called the <strong>Java Virtual Machine (JVM)</strong>.</p>
@@ -223,10 +319,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>+--------------------+      javac Compiler      +--------------------+
 |  Source Code File  | -----------------------> |   Bytecode File    |
@@ -259,10 +361,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>JDK (Java Development Kit)
 [Compiler (javac) | Archiver (jar) | Debugger (jdb) | Documentation (javadoc)]
@@ -282,10 +390,16 @@ JVM (Java Virtual Machine)
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; Main.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class Main {
     /**
@@ -366,10 +480,16 @@ JVM (Java Virtual Machine)
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>STACK MEMORY                                  HEAP MEMORY
 (Thread-Private, Fast, LIFO)                  (Shared, Dynamic Allocation)
@@ -471,10 +591,16 @@ JVM (Java Virtual Machine)
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; DataTypesDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class DataTypesDemo {
     public static void main(String[] args) {
@@ -506,10 +632,16 @@ JVM (Java Virtual Machine)
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">Scanner scanner = new Scanner(System.in);</code></pre>
         </div>
@@ -520,10 +652,16 @@ JVM (Java Virtual Machine)
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>User types "25" and presses [ENTER] on the Keyboard:
 
@@ -550,10 +688,16 @@ INPUT BUFFER STATE:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; ScannerBufferFix.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">import java.util.Scanner;
 
@@ -595,10 +739,16 @@ public class ScannerBufferFix {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; DivisionDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">int a = 10;
 int b = 4;
@@ -697,10 +847,16 @@ double result2 = (double) a / b; // Evaluates to 2.5</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">variable = (condition) ? value_if_true : value_if_false;</code></pre>
         </div>
@@ -716,10 +872,16 @@ double result2 = (double) a / b; // Evaluates to 2.5</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; EnhancedSwitchDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class EnhancedSwitchDemo {
     public static void main(String[] args) {
@@ -766,10 +928,16 @@ double result2 = (double) a / b; // Evaluates to 2.5</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; RandomDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">import java.util.Random;
 
@@ -873,10 +1041,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; StringSlicingDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class StringSlicingDemo {
     public static void main(String[] args) {
@@ -914,10 +1088,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; LoopsDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class LoopsDemo {
     public static void main(String[] args) {
@@ -951,10 +1131,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; OverloadingDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class OverloadingDemo {
     public static void main(String[] args) {
@@ -991,10 +1177,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; ArrayOperations.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class ArrayOperations {
     public static void main(String[] args) {
@@ -1023,10 +1215,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">int[][] matrix = new int[rows][cols];</code></pre>
         </div>
@@ -1047,10 +1245,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; Student.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">public class Student {
     String name;
@@ -1082,10 +1286,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>                   +---------------------------------------+
                    |            OOP PILLARS                |
@@ -1129,10 +1339,16 @@ public class RandomDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; CollectionsDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">import java.util.ArrayList;
 import java.util.HashMap;
@@ -1163,10 +1379,16 @@ public class CollectionsDemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">enum Day { MONDAY, TUESDAY, WEDNESDAY }
 
@@ -1186,10 +1408,16 @@ class Box<T> {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>                   +----------------------------------+
                    |            Throwable             |
@@ -1213,10 +1441,16 @@ class Box<T> {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; FileIODemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">import java.io.*;
 
@@ -1249,10 +1483,16 @@ public class FileIODemo {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -1270,10 +1510,16 @@ System.out.println(now.format(fmt));</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">import java.util.Timer;
 import java.util.TimerTask;
@@ -1302,10 +1548,16 @@ timer.scheduleAtFixedRate(task, 0, 1000);</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">text</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>[ New Thread ] ---> .start() ---> [ Runnable ] <---> [ Running ]
                                        |                 |
@@ -1317,10 +1569,16 @@ timer.scheduleAtFixedRate(task, 0, 1000);</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">java &bull; MultiThreadingDemo.java</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code class="language-java">class Worker implements Runnable {
     @Override
@@ -1368,6 +1626,8 @@ public class MultiThreadingDemo {
     </svg>
   </button>
 
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

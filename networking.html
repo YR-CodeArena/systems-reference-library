@@ -12,7 +12,7 @@
   <div id="reading-progress"></div>
 
   <!-- Header -->
-    <header class="site-header">
+      <header class="site-header">
     <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
       <div class="brand-icon">SR</div>
       <div class="brand-text-block">
@@ -20,7 +20,7 @@
           <span class="brand-title">Systems Reference</span>
           <span class="brand-status-tag">● ONLINE // 稼働中</span>
         </div>
-        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 10 Volumes</span>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
       </div>
     </a>
 
@@ -37,7 +37,7 @@
           <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
             <span>🌐</span>
             <span>Core Architecture</span>
-            <span class="dropdown-badge">VOL.01–05</span>
+            <span class="dropdown-badge">VOL.01–06</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -80,15 +80,22 @@
                   <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
                 </div>
               </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
             </div>
           </div>
         </li>
 
-        <li class="nav-dropdown" id="dropdownRuntimes">
+        <li class="nav-dropdown" id="dropdownBackend">
           <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
             <span>⚡</span>
-            <span>Languages &amp; Runtimes</span>
-            <span class="dropdown-badge">VOL.06–10</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
             <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-pane" role="menu">
@@ -97,38 +104,82 @@
             </div>
             <div class="dropdown-grid">
               <a href="git-github.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.06</span>
+                <span class="card-vol-tag">VOL.07</span>
                 <div class="card-text">
                   <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
                   <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
                 </div>
               </a>
               <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.07</span>
+                <span class="card-vol-tag">VOL.08</span>
                 <div class="card-text">
                   <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
                   <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
                 </div>
               </a>
               <a href="python-runtime.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.08</span>
+                <span class="card-vol-tag">VOL.09</span>
                 <div class="card-text">
-                  <div class="card-title">CPython Runtime Internals <span class="card-kanji">[CPython]</span></div>
-                  <div class="card-sub">PyObject &bull; GIL &bull; PyEval_EvalFrameDefault &bull; PyMalloc</div>
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
                 </div>
               </a>
               <a href="postgresql.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.09</span>
+                <span class="card-vol-tag">VOL.11</span>
                 <div class="card-text">
-                  <div class="card-title">PostgreSQL Zero-to-Hero <span class="card-kanji">[PostgreSQL]</span></div>
-                  <div class="card-sub">Postmaster &bull; Shared Buffers &bull; WAL &bull; Index Internals &bull; VACUUM</div>
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
                 </div>
               </a>
               <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
-                <span class="card-vol-tag">VOL.10</span>
+                <span class="card-vol-tag">VOL.12</span>
                 <div class="card-text">
-                  <div class="card-title">Java Masterclass Manual <span class="card-kanji">[Java]</span></div>
-                  <div class="card-sub">JVM Spec &bull; Memory Model (JMM) &bull; G1/ZGC &bull; Virtual Threads</div>
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
                 </div>
               </a>
             </div>
@@ -192,6 +243,63 @@
       <!-- Page 1 -->
       <section id="network-layering" class="content-section">
         <h2>Network Layering Architecture and Packet Transformation Mechanics</h2>
+
+<div class="diagram-card" id="diagram-tcp-window">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 1.1 // WIRE PROTOCOLS</span>
+      <h3 class="diagram-title">TCP 3-Way Handshake &amp; Sliding Window Wire Pipeline</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-tcp" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-tcp" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-tcp" class="diagram-svg" viewBox="0 0 940 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="netArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#06b6d4"/>
+        </marker>
+        <marker id="netArrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+        </marker>
+        <marker id="netArrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+        </marker>
+      </defs>
+      <line x1="160" y1="40" x2="160" y2="280" stroke="#374151" stroke-width="2"/>
+      <line x1="780" y1="40" x2="780" y2="280" stroke="#374151" stroke-width="2"/>
+      <rect x="80" y="20" width="160" height="35" rx="6" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5"/>
+      <text x="160" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#67e8f9">CLIENT (Initiator)</text>
+      <rect x="700" y="20" width="160" height="35" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+      <text x="780" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#6ee7b7">SERVER (Listener)</text>
+      <!-- Step 1: SYN -->
+      <path d="M 160 80 L 780 110" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#netArrow)"/>
+      <text x="470" y="90" text-anchor="middle" font-size="11" fill="#67e8f9" font-family="monospace">1. SYN (seq=1000, MSS=1460, WScale=7)</text>
+      <!-- Step 2: SYN-ACK -->
+      <path d="M 780 130 L 160 160" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#netArrowGreen)"/>
+      <text x="470" y="140" text-anchor="middle" font-size="11" fill="#6ee7b7" font-family="monospace">2. SYN-ACK (seq=5000, ack=1001, win=65535)</text>
+      <!-- Step 3: ACK -->
+      <path d="M 160 180 L 780 210" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#netArrow)"/>
+      <text x="470" y="190" text-anchor="middle" font-size="11" fill="#67e8f9" font-family="monospace">3. ACK (seq=1001, ack=5001) [ESTABLISHED]</text>
+      <!-- Sliding window pipeline -->
+      <path d="M 160 230 L 780 260" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,2" class="anim-flow-line" marker-end="url(#netArrowAmber)"/>
+      <text x="470" y="240" text-anchor="middle" font-size="11" fill="#fde68a" font-family="monospace">4. Data Segment PSH-ACK [Sliding Window in Flight: 64KB CWND]</text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 1.1 TCP Wire Mechanics:</strong> Complete state transition sequence for connection establishment and steady-state sliding window data transmission. Handshake negotiates MSS and window scale options before BBR/CUBIC congestion control drives maximum pipe capacity.
+  </div>
+</div>
+
+
 
         <h3 id="osi-vs-tcpip">Conceptual Foundations: The 7-Layer OSI Model vs. The Practical 4-Layer TCP/IP Stack</h3>
         <p>Modern network engineering relies on layered abstractions to isolate physical transmission constraints from application logic. An intuitive analogy is an international diplomatic postal exchange. When an ambassador drafts a message, the text is authored in a specific language to convey meaning, representing the application tier.</p>
@@ -561,10 +669,16 @@
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python (TCP Echo Server)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># tcp_server.py
 import socket
@@ -588,10 +702,16 @@ def run_tcp_server(host: str = "127.0.0.1", port: int = 9000) -> None:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python (UDP Messaging Server)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># udp_server.py
 def run_udp_server(host: str = "127.0.0.1", port: int = 9001) -> None:
@@ -611,10 +731,16 @@ def run_udp_server(host: str = "127.0.0.1", port: int = 9001) -> None:
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java (NioTcpEchoServer.java)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// NioTcpEchoServer.java
 package com.network.transport;
@@ -646,10 +772,16 @@ public class NioTcpEchoServer {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java (NioUdpEchoServer.java)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// NioUdpEchoServer.java
 package com.network.transport;
@@ -685,10 +817,16 @@ public class NioUdpEchoServer {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">TypeScript (transport_servers.ts)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// transport_servers.ts
 import * as net from "net";
@@ -729,10 +867,16 @@ udpServer.bind(9001, "127.0.0.1", () => {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">HTTP/1.1 Request Payload</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>GET /api/v1/orders/100 HTTP/1.1
 Host: api.service.internal
@@ -1006,10 +1150,16 @@ Connection: keep-alive</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">RPC Local Signature</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>OrderResponse response = orderService.processOrder(orderRequest);</code></pre>
         </div>
@@ -1045,10 +1195,16 @@ Connection: keep-alive</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Protobuf Binary Record Layout</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// Conceptual layout of a Protobuf binary record
 [ Tag: Varint ((Field_Number &lt;&lt; 3) | Wire_Type) ]
@@ -1127,10 +1283,16 @@ Connection: keep-alive</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">ZigZag Mapping Logic</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>0 &rarr; 0
 -1 &rarr; 1
@@ -1246,10 +1408,16 @@ ZigZag64(n) = (n &lt;&lt; 1) ^ (n &gt;&gt; 63)</code></pre>
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Protobuf (order_service.proto)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>syntax = "proto3";
 
@@ -1287,10 +1455,16 @@ service OrderService {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Python (order_server.py)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code># order_server.py
 import time
@@ -1335,10 +1509,16 @@ if __name__ == "__main__":
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java (OrderServiceImpl.java)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// OrderServiceImpl.java
 package com.ecommerce.grpc;
@@ -1387,10 +1567,16 @@ public class OrderServiceImpl extends OrderServiceGrpc.OrderServiceImplBase {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">Java (OrderServer.java)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// OrderServer.java
 package com.ecommerce.grpc;
@@ -1419,10 +1605,16 @@ public class OrderServer {
         <div class="code-block-wrapper">
           <div class="code-header">
             <span class="code-lang-label">TypeScript (order_server.ts)</span>
-            <button class="copy-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
+            <div class="code-actions">
+            <button type="button" class="run-btn" title="Run code and inspect terminal output">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Run // 実行</span>
             </button>
+            <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">Copy // コピー</span>
+            </button>
+          </div>
           </div>
           <pre><code>// order_server.ts
 import * as grpc from "@grpc/grpc-js";
@@ -1557,6 +1749,8 @@ server.bindAsync("0.0.0.0:50051", grpc.ServerCredentials.createInsecure(), (erro
     </svg>
   </button>
 
+  <script src="assets/js/skulpt.min.js"></script>
+  <script src="assets/js/skulpt-stdlib.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

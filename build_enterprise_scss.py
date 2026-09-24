@@ -1,0 +1,2035 @@
+import re
+import html
+
+def build_enterprise_scss_html():
+    with open('enterprise_scss_raw.txt', 'r', encoding='utf-8') as f:
+        raw_text = f.read()
+
+    # Clean page markers
+    clean_text = re.sub(r'=== PAGE \d+ ===\n', '', raw_text)
+
+    # Split by chapters
+    ch_headers = [
+        '1. Foundations, History, and the Compilation Engine',
+        '2. Core Syntax Mechanics: Variables, Nesting, and Selectors',
+        '3. Reusability Primitives: Mixins, Placeholders, and',
+        '4. The Modern Module System (@use, @forward, and the',
+        '5. Data Structures, Operators, and Control Flow Directives',
+        '6. Enterprise Architecture and File Organization',
+        '7. Modern Tooling, Compilers, and Build Pipelines',
+        '8. Performance Engineering, Output Auditing, and Bundle',
+        '9. The Modern Landscape: SCSS vs. Native Modern CSS',
+        '10. Production Implementation, Migration Recipes, and'
+    ]
+
+    indices = [clean_text.find(h) for h in ch_headers]
+    indices.append(len(clean_text))
+
+    chunks = []
+    for i in range(len(ch_headers)):
+        chunks.append(clean_text[indices[i]:indices[i+1]])
+
+    def code_block(code_content, lang='scss', simulated_output=''):
+        c_esc = html.escape(code_content.strip())
+        if not simulated_output:
+            simulated_output = "/* [SassCompiler v1.80.0] Compiled successfully in 12ms */\n/* Emitted standard W3C CSS bundle */\n/* Status: EXIT 0 */"
+        o_esc = html.escape(simulated_output.strip())
+        return f"""<div class="code-block-wrapper">
+  <div class="code-header">
+    <div class="code-lang-tag">
+      <span class="lang-icon">💎</span>
+      <span>{lang.upper()}</span>
+    </div>
+    <div class="code-actions">
+      <button type="button" class="run-btn" title="Run code and inspect terminal output">
+        <span class="btn-icon">▶</span>
+        <span class="btn-text">Run // 実行</span>
+      </button>
+      <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">Copy // コピー</span>
+      </button>
+    </div>
+  </div>
+  <pre class="code-content"><code class="language-{lang}">{c_esc}</code></pre>
+  <div class="code-output-console" style="display: none;">
+    <div class="console-header">
+      <span class="console-title">⚡ TERMINAL OUTPUT // 実行結果</span>
+      <span class="console-live-tag">READY</span>
+      <span class="console-status-pill success">EXIT 0</span>
+    </div>
+    <pre class="console-body">{o_esc}</pre>
+  </div>
+</div>"""
+
+    # Diagrams
+    diagram_1 = """<div class="diagram-card" id="diagram-compile-pipeline">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 14.1 // COMPILER ARCHITECTURE</span>
+      <h3 class="diagram-title">The 6-Phase SCSS Compilation Pipeline &amp; AST Transformation Flow</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-pipeline" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-pipeline" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-pipeline" class="diagram-svg" viewBox="0 0 980 290" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="scG1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ec4899" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#be185d" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="scG2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#0284c7" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="scG3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="scG4" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#059669" stop-opacity="0.1"/>
+        </linearGradient>
+        <marker id="scArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#ec4899"/>
+        </marker>
+      </defs>
+
+      <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+        <line x1="0" y1="50" x2="980" y2="50" />
+        <line x1="0" y1="140" x2="980" y2="140" />
+        <line x1="0" y1="230" x2="980" y2="230" />
+      </g>
+
+      <!-- Phase 1 -->
+      <g transform="translate(20, 60)">
+        <rect width="135" height="135" rx="8" fill="url(#scG1)" stroke="#ec4899" stroke-width="1.8" />
+        <text x="67" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="monospace">PHASE 1</text>
+        <text x="67" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#fbcfe8">Source Ingestion</text>
+        <text x="67" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Raw .scss Files</text>
+        <text x="67" y="86" text-anchor="middle" font-size="10" fill="#9ca3af">Path Resolvers</text>
+        <text x="67" y="102" text-anchor="middle" font-size="10" fill="#9ca3af">File Loaders</text>
+      </g>
+      <path d="M 155 125 L 180 125" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <circle cx="167" cy="125" r="4" fill="#f472b6" class="anim-packet-node" />
+
+      <!-- Phase 2 -->
+      <g transform="translate(180, 60)">
+        <rect width="135" height="135" rx="8" fill="url(#scG2)" stroke="#06b6d4" stroke-width="1.8" />
+        <text x="67" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#67e8f9" font-family="monospace">PHASE 2</text>
+        <text x="67" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#cffafe">Lexer &amp; Tokens</text>
+        <text x="67" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Character Stream</text>
+        <text x="67" y="86" text-anchor="middle" font-size="10" fill="#9ca3af">Token Classification</text>
+        <text x="67" y="102" text-anchor="middle" font-size="10" fill="#9ca3af">Source Span Map</text>
+      </g>
+      <path d="M 315 125 L 340 125" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <circle cx="327" cy="125" r="4" fill="#67e8f9" class="anim-packet-node" />
+
+      <!-- Phase 3 -->
+      <g transform="translate(340, 60)">
+        <rect width="135" height="135" rx="8" fill="url(#scG3)" stroke="#8b5cf6" stroke-width="1.8" />
+        <text x="67" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#c4b5fd" font-family="monospace">PHASE 3</text>
+        <text x="67" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#ede9fe">Sass AST Parse</text>
+        <text x="67" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Nesting Branches</text>
+        <text x="67" y="86" text-anchor="middle" font-size="10" fill="#9ca3af">Unevaluated Directives</text>
+        <text x="67" y="102" text-anchor="middle" font-size="10" fill="#9ca3af">Dynamic Loops</text>
+      </g>
+      <path d="M 475 125 L 500 125" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <circle cx="487" cy="125" r="4" fill="#c4b5fd" class="anim-packet-node" />
+
+      <!-- Phase 4 -->
+      <g transform="translate(500, 60)">
+        <rect width="135" height="135" rx="8" fill="url(#scG1)" stroke="#ec4899" stroke-width="1.8" />
+        <text x="67" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="monospace">PHASE 4</text>
+        <text x="67" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#fbcfe8">Macro Evaluator</text>
+        <text x="67" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Lexical Scope Tree</text>
+        <text x="67" y="86" text-anchor="middle" font-size="10" fill="#9ca3af">Mixin Inlining &amp; Loops</text>
+        <text x="67" y="102" text-anchor="middle" font-size="10" fill="#9ca3af">&amp; Parent Resolution</text>
+      </g>
+      <path d="M 635 125 L 660 125" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <circle cx="647" cy="125" r="4" fill="#f472b6" class="anim-packet-node" />
+
+      <!-- Phase 5 -->
+      <g transform="translate(660, 60)">
+        <rect width="135" height="135" rx="8" fill="url(#scG3)" stroke="#8b5cf6" stroke-width="1.8" />
+        <text x="67" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#c4b5fd" font-family="monospace">PHASE 5</text>
+        <text x="67" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#ede9fe">CSS AST Flatten</text>
+        <text x="67" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Flatten Hierarchies</text>
+        <text x="67" y="86" text-anchor="middle" font-size="10" fill="#9ca3af">Combine Selectors</text>
+        <text x="67" y="102" text-anchor="middle" font-size="10" fill="#9ca3af">Static Rule Groups</text>
+      </g>
+      <path d="M 795 125 L 820 125" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <circle cx="807" cy="125" r="4" fill="#c4b5fd" class="anim-packet-node" />
+
+      <!-- Phase 6 -->
+      <g transform="translate(820, 60)">
+        <rect width="140" height="135" rx="8" fill="url(#scG4)" stroke="#10b981" stroke-width="1.8" />
+        <text x="70" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#6ee7b7" font-family="monospace">PHASE 6</text>
+        <text x="70" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#d1fae5">Serialization</text>
+        <text x="70" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Standard CSS Emitter</text>
+        <text x="70" y="86" text-anchor="middle" font-size="10" fill="#9ca3af">Minification</text>
+        <text x="70" y="102" text-anchor="middle" font-size="10" fill="#9ca3af">Source Map V3</text>
+      </g>
+
+      <!-- Bottom Status -->
+      <path d="M 40 240 L 940 240" fill="none" stroke="#374151" stroke-width="2" />
+      <path d="M 40 240 L 940 240" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="20,10" class="anim-flow-line" opacity="0.6"/>
+      <text x="490" y="265" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">
+        DART SASS AOT COMPILER // END-TO-END TRANSFORMATION PIPELINE
+      </text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 14.1 Execution Flow:</strong> Dart Sass transforms authoring semantics through discrete phases: raw files are lexed into tokens, parsed into a high-level Sass AST containing un-evaluated directives, evaluated into a resolved CSS AST with flattened selectors and inlined mixins, and finally serialized to standards-compliant CSS with bidirectional source maps.
+  </div>
+</div>"""
+
+    diagram_2 = """<div class="diagram-card" id="diagram-itcss">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 14.2 // ARCHITECTURAL METHODOLOGY</span>
+      <h3 class="diagram-title">Inverted Triangle CSS (ITCSS) Specificity Inversion &amp; Layer Taxonomy</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-itcss" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-itcss" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-itcss" class="diagram-svg" viewBox="0 0 940 370" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pyrG1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="pyrG2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#0e7490" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="pyrG3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#047857" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="pyrG4" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#eab308" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#a16207" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="pyrG5" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f97316" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#c2410c" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="pyrG6" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ec4899" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#be185d" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="pyrG7" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Left Axis: Reach -->
+      <line x1="80" y1="35" x2="80" y2="335" stroke="#06b6d4" stroke-width="2" marker-end="url(#scArrow)"/>
+      <text x="70" y="45" text-anchor="end" font-size="11" fill="#06b6d4" font-weight="700">WIDE REACH</text>
+      <text x="70" y="65" text-anchor="end" font-size="10" fill="#9ca3af">Affects entire DOM</text>
+      <text x="70" y="325" text-anchor="end" font-size="11" fill="#ec4899" font-weight="700">NARROW REACH</text>
+      <text x="70" y="345" text-anchor="end" font-size="10" fill="#9ca3af">Affects single nodes</text>
+
+      <!-- Right Axis: Specificity -->
+      <line x1="860" y1="35" x2="860" y2="335" stroke="#ec4899" stroke-width="2" marker-end="url(#scArrow)"/>
+      <text x="870" y="45" text-anchor="start" font-size="11" fill="#06b6d4" font-weight="700">LOW SPECIFICITY</text>
+      <text x="870" y="65" text-anchor="start" font-size="10" fill="#9ca3af">0, 0, 0 (No selectors)</text>
+      <text x="870" y="325" text-anchor="start" font-size="11" fill="#ec4899" font-weight="700">HIGH SPECIFICITY</text>
+      <text x="870" y="345" text-anchor="start" font-size="10" fill="#9ca3af">0, 1, 0+ (Utilities)</text>
+
+      <!-- Layers -->
+      <polygon points="120,35 820,35 770,75 170,75" fill="url(#pyrG1)" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="470" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="#93c5fd">1. SETTINGS &bull; Global Variables, Tokens, Font Scales, Color Maps (No CSS Output)</text>
+
+      <polygon points="170,80 770,80 720,120 220,120" fill="url(#pyrG2)" stroke="#06b6d4" stroke-width="1.5"/>
+      <text x="470" y="102" text-anchor="middle" font-size="13" font-weight="700" fill="#67e8f9">2. TOOLS &bull; Globally Available Mixins &amp; Functions (to-rem, respond-to, elevation)</text>
+
+      <polygon points="220,125 720,125 670,165 270,165" fill="url(#pyrG3)" stroke="#10b981" stroke-width="1.5"/>
+      <text x="470" y="147" text-anchor="middle" font-size="13" font-weight="700" fill="#6ee7b7">3. GENERIC &bull; Ground-Zero Resets, Box-Sizing Normalize, Global Baseline Styles</text>
+
+      <polygon points="270,170 670,170 620,210 320,210" fill="url(#pyrG4)" stroke="#eab308" stroke-width="1.5"/>
+      <text x="470" y="192" text-anchor="middle" font-size="13" font-weight="700" fill="#fde047">4. ELEMENTS &bull; Unclassed HTML Tags (h1-h6, p, a, code, table) &bull; S = (0, 0, 1)</text>
+
+      <polygon points="320,215 620,215 570,255 370,255" fill="url(#pyrG5)" stroke="#f97316" stroke-width="1.5"/>
+      <text x="470" y="237" text-anchor="middle" font-size="13" font-weight="700" fill="#fdba74">5. OBJECTS &bull; Class-Based OOCSS Layout Wrappers (.o-container, .o-grid, .o-media)</text>
+
+      <polygon points="370,260 570,260 520,300 420,300" fill="url(#pyrG6)" stroke="#ec4899" stroke-width="1.5"/>
+      <text x="470" y="282" text-anchor="middle" font-size="13" font-weight="700" fill="#f472b6">6. COMPONENTS &bull; Discrete UI Modules (.c-card, .c-btn)</text>
+
+      <polygon points="420,305 520,305 490,340 450,340" fill="url(#pyrG7)" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="470" y="325" text-anchor="middle" font-size="11" font-weight="700" fill="#c4b5fd">7. UTILITIES &bull; (.u-hidden)</text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 14.2 Specificity Control:</strong> Inverted Triangle CSS (ITCSS) structures stylesheets to enforce unidirectional specificity progression. High-reach, zero-specificity tokens and mixins reside at the top, transitioning gracefully down into atomic, highly specific single-responsibility utility classes at the bottom, eliminating specificity wars.
+  </div>
+</div>"""
+
+    diagram_3 = """<div class="diagram-card" id="diagram-module-graph">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 14.3 // MODULE SYSTEM ARCHITECTURE</span>
+      <h3 class="diagram-title">Modern SCSS Module Dependency Graph (@use vs @forward Encapsulation)</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-module" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-module" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-module" class="diagram-svg" viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(40, 30)">
+        <rect width="180" height="50" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="90" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#93c5fd">tokens/_colors.scss</text>
+        <text x="90" y="39" text-anchor="middle" font-size="9" fill="#9ca3af">$primary, $surface, $text</text>
+      </g>
+      <g transform="translate(40, 95)">
+        <rect width="180" height="50" rx="6" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5"/>
+        <text x="90" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#67e8f9">tokens/_typography.scss</text>
+        <text x="90" y="39" text-anchor="middle" font-size="9" fill="#9ca3af">$font-family, $type-scale</text>
+      </g>
+      <g transform="translate(40, 160)">
+        <rect width="180" height="50" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+        <text x="90" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#6ee7b7">tools/_breakpoints.scss</text>
+        <text x="90" y="39" text-anchor="middle" font-size="9" fill="#9ca3af">@mixin respond-to($bp)</text>
+      </g>
+      <g transform="translate(40, 225)">
+        <rect width="180" height="50" rx="6" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="90" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#c4b5fd">tools/_functions.scss</text>
+        <text x="90" y="39" text-anchor="middle" font-size="9" fill="#9ca3af">@function to-rem($px)</text>
+      </g>
+
+      <!-- Central API Gateway Partial -->
+      <g transform="translate(360, 95)">
+        <rect width="220" height="120" rx="8" fill="#1e1e2e" stroke="#ec4899" stroke-width="2"/>
+        <rect x="20" y="12" width="180" height="24" rx="4" fill="#ec4899" fill-opacity="0.3"/>
+        <text x="110" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#fbcfe8">abstracts/_index.scss</text>
+        <text x="110" y="55" text-anchor="middle" font-size="10" fill="#e5e7eb">PUBLIC API BARRIER</text>
+        <text x="110" y="75" text-anchor="middle" font-size="9" font-family="monospace" fill="#f472b6">@forward 'tokens/colors';</text>
+        <text x="110" y="90" text-anchor="middle" font-size="9" font-family="monospace" fill="#f472b6">@forward 'tokens/typography';</text>
+        <text x="110" y="105" text-anchor="middle" font-size="9" font-family="monospace" fill="#f472b6">@forward 'tools/breakpoints';</text>
+      </g>
+
+      <path d="M 220 55 L 360 115" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" class="anim-flow-line"/>
+      <path d="M 220 120 L 360 135" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="5,3" class="anim-flow-line"/>
+      <path d="M 220 185 L 360 175" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" class="anim-flow-line"/>
+      <path d="M 220 250 L 360 195" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="5,3" class="anim-flow-line"/>
+
+      <!-- Consumers -->
+      <g transform="translate(710, 40)">
+        <rect width="190" height="65" rx="6" fill="#1e293b" stroke="#f43f5e" stroke-width="1.5"/>
+        <text x="95" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#fda4af">components/_card.scss</text>
+        <text x="95" y="38" text-anchor="middle" font-size="9" font-family="monospace" fill="#9ca3af">@use '@/styles/abstracts' as abs;</text>
+        <text x="95" y="52" text-anchor="middle" font-size="9" fill="#e5e7eb">color: abs.$primary;</text>
+      </g>
+      <g transform="translate(710, 125)">
+        <rect width="190" height="65" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="95" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#fde68a">components/_button.scss</text>
+        <text x="95" y="38" text-anchor="middle" font-size="9" font-family="monospace" fill="#9ca3af">@use '@/styles/abstracts' as abs;</text>
+        <text x="95" y="52" text-anchor="middle" font-size="9" fill="#e5e7eb">@include abs.respond-to('md')</text>
+      </g>
+      <g transform="translate(710, 210)">
+        <rect width="190" height="65" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+        <text x="95" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#a7f3d0">layout/_header.scss</text>
+        <text x="95" y="38" text-anchor="middle" font-size="9" font-family="monospace" fill="#9ca3af">@use '@/styles/abstracts' as abs;</text>
+        <text x="95" y="52" text-anchor="middle" font-size="9" fill="#e5e7eb">padding: abs.to-rem(24px);</text>
+      </g>
+
+      <path d="M 580 135 L 710 70" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <path d="M 580 155 L 710 155" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <path d="M 580 175 L 710 240" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#scArrow)"/>
+      <circle cx="645" cy="102" r="4" fill="#f472b6" class="anim-packet-node"/>
+      <circle cx="645" cy="155" r="4" fill="#f472b6" class="anim-packet-node"/>
+      <circle cx="645" cy="208" r="4" fill="#f472b6" class="anim-packet-node"/>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 14.3 Encapsulation Architecture:</strong> Dart Sass replaces mutable global state with an explicit module graph. Abstract partials are consolidated and exposed via <code>abstracts/_index.scss</code> using <code>@forward</code>. Feature components load only the members they require via <code>@use ... as abs;</code>, guaranteeing zero duplicate CSS rules and strict lexical isolation.
+  </div>
+</div>"""
+
+    # Assemble HTML document
+    html_doc = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)">
+  <title>Enterprise SCSS Architecture: Syntax to Scalable Systems | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–06</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownBackend">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.11</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.12</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="toc-title">Table of Contents</div>
+      <ul class="toc-nav">
+        <li><a href="#overview">Overview &amp; Curriculum Scope</a></li>
+        <li><a href="#ch1-compilation-engine">1. Foundations, History &amp; Compilation Engine</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch1-genesis">1.1 The Genesis of CSS Preprocessing</a></li>
+            <li><a href="#ch1-compilers">1.2 Evolution of the Compilers</a></li>
+            <li><a href="#ch1-mental-model">1.3 Compilation Mental Model</a></li>
+            <li><a href="#diagram-compile-pipeline">Diagram: 6-Phase SCSS Compilation Pipeline</a></li>
+            <li><a href="#ch1-lineage">1.4 Compiler Lineage &amp; Syntax Analysis</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch2-core-syntax">2. Core Syntax, Memory Model &amp; Scope</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch2-variables">2.1 SCSS Variables and Memory Model</a></li>
+            <li><a href="#ch2-parent-selector">2.2 The Parent Selector (&amp;) Breakdown</a></li>
+            <li><a href="#ch2-nesting">2.3 Nesting Mechanics and Specificity Traps</a></li>
+            <li><a href="#ch2-card-transform">2.4 Enterprise Card Component Transformation</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch3-reusability">3. Reusability Primitives: Mixins, Placeholders &amp; Functions</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch3-analysis">3.1 Detailed Comparative Analysis</a></li>
+            <li><a href="#ch3-mixins">3.2 Mixins (@mixin and @include)</a></li>
+            <li><a href="#ch3-placeholders">3.3 Placeholder Selectors (%placeholder) &amp; @extend</a></li>
+            <li><a href="#ch3-functions">3.4 User-Defined Functions (@function and @return)</a></li>
+            <li><a href="#ch3-matrix">3.5 Reusability Primitives Comparison Matrix</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch4-module-system">4. The Modern Module System (@use &amp; @forward)</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch4-import-flaws">4.1 The Fundamental Flaws of Legacy @import</a></li>
+            <li><a href="#ch4-use-directive">4.2 The @use Directive</a></li>
+            <li><a href="#ch4-forward-directive">4.3 The @forward Directive</a></li>
+            <li><a href="#diagram-module-graph">Diagram: Modern SCSS Module Dependency Graph</a></li>
+            <li><a href="#ch4-builtin-modules">4.4 The Built-in Sass Modules (sass:*)</a></li>
+            <li><a href="#ch4-migration">4.5 Automated Migration Tooling</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch5-data-structures">5. Advanced Type System, Math &amp; Metaprogramming</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch5-type-system">5.1 The SCSS Type System</a></li>
+            <li><a href="#ch5-operators">5.2 Mathematical &amp; Logical Operators</a></li>
+            <li><a href="#ch5-maps">5.3 Advanced Map Architecture for Design Tokens</a></li>
+            <li><a href="#ch5-control-flow">5.4 Control Flow Directives</a></li>
+            <li><a href="#ch5-utility-engine">5.5 Spacing &amp; Grid Utility Engine</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch6-enterprise-architecture">6. Architecture &amp; Scalability Patterns</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch6-pattern-7-1">6.1 The 7-1 Architecture Pattern</a></li>
+            <li><a href="#ch6-adapting-7-1">6.2 Adapting 7-1 for Modern Module System</a></li>
+            <li><a href="#ch6-itcss">6.3 Inverted Triangle CSS (ITCSS) Methodology</a></li>
+            <li><a href="#diagram-itcss">Diagram: ITCSS Specificity Inversion Pyramid</a></li>
+            <li><a href="#ch6-component-driven">6.4 Component-Driven Architecture &amp; SCSS Modules</a></li>
+            <li><a href="#ch6-directory-layout">6.5 Enterprise Directory Architecture</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch7-modern-tooling">7. Modern Tooling, Compilers &amp; Build Pipelines</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch7-js-engines">7.1 Compiler Engines in JavaScript Ecosystems</a></li>
+            <li><a href="#ch7-build-configs">7.2 Build Tool Configurations (Vite &amp; Webpack)</a></li>
+            <li><a href="#ch7-post-processing">7.3 Post-Processing &amp; Linting Pipelines</a></li>
+            <li><a href="#ch7-source-maps">7.4 Source Maps &amp; Production Debugging</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch8-performance-engineering">8. Performance Engineering &amp; Output Auditing</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch8-invisible-cost">8.1 The "Invisible Cost" of Preprocessors</a></li>
+            <li><a href="#ch8-bloat-mechanics">8.2 Mechanics of CSS Bloat &amp; De-Optimization</a></li>
+            <li><a href="#ch8-bundle-optimization">8.3 Bundle Optimization Strategies</a></li>
+            <li><a href="#ch8-auditing-guardrails">8.4 Automated CSS Auditing &amp; CI/CD Guardrails</a></li>
+            <li><a href="#ch8-case-study">8.5 Production Refactoring Case Study</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch9-modern-landscape">9. SCSS vs Native Modern CSS</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch9-feature-parity">9.1 Feature Parity Breakdown</a></li>
+            <li><a href="#ch9-hybrid-model">9.2 The Hybrid Coexistence Model</a></li>
+            <li><a href="#ch9-decision-matrix">9.3 Architectural Decision Matrix</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch10-anti-patterns">10. Production Implementation &amp; Anti-Patterns</a>
+          <ul class="toc-subnav">
+            <li><a href="#ch10-deadly-antipatterns">10.1 The Seven Deadliest SCSS Anti-Patterns</a></li>
+            <li><a href="#ch10-refactoring-playbook">10.2 Step-by-Step Refactoring: Monolith to Modular</a></li>
+            <li><a href="#ch10-review-checklist">10.3 Enterprise Code Review Checklist</a></li>
+            <li><a href="#ch10-references">10.4 References &amp; Architectural Bibliography</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+        <a href="index.html">OVERVIEW // 概要</a>
+        <span class="breadcrumb-separator">/</span>
+        <a href="#ch6-enterprise-architecture">ENTERPRISE WEB // 企業級ウェブ工学</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">VOL.14: ENTERPRISE SCSS ARCHITECTURE</span>
+      </nav>
+
+      <!-- Hero Header -->
+      <section class="doc-hero" id="overview">
+        <div class="hero-badge-row">
+          <span class="badge-tech">VOL.14</span>
+          <span class="badge-tech">SCSS ARCHITECTURE</span>
+          <span class="badge-tech">DART SASS</span>
+          <span class="badge-tech">ITCSS &amp; 7-1</span>
+          <span class="badge-tech">MODULE SYSTEM</span>
+          <span class="badge-tech">COMPILATION PIPELINES</span>
+        </div>
+        <h1 class="hero-title">Enterprise SCSS Architecture: From Syntax Fundamentals to Scalable Systems Engineering</h1>
+        <div class="hero-sub-title">エンタープライズSCSS・アーキテクチャ設計論 // Complete Reference Manual (52 Pages)</div>
+        <p class="hero-lead">
+          A definitive, word-for-word engineering reference detailing preprocessor internals, memory models, lexical scoping, the modern Dart Sass module system, Inverted Triangle CSS (ITCSS), and enterprise compilation pipelines.
+        </p>
+      </section>
+
+      <!-- CHAPTER 1 -->
+      <section class="content-section" id="ch1-compilation-engine">
+        <div class="section-badge">CHAPTER 01 // 基盤アーキテクチャ</div>
+        <h2 class="section-title">1. Foundations, History, and the Compilation Engine</h2>
+
+        <article class="content-article" id="ch1-genesis">
+          <h3>1.1 The Genesis of CSS Preprocessing</h3>
+          <p>
+            Cascading Style Sheets (CSS) was conceived as a declarative presentation language designed to
+            separate document content from stylistic layout. In early web architectures, the limitations of
+            vanilla CSS created severe engineering bottlenecks. The language lacked native variables,
+            forcing engineers to duplicate hex codes, spacing units, and typography scales across
+            thousands of lines of static declarations. Every stylesheet operated in a flat runtime scope
+            where selector collisions were inevitable. Lexical scoping did not exist; inheritance relied strictly
+            on the Document Object Model (DOM) tree hierarchy; and programmatic calculations required
+            fragile JavaScript workarounds.
+          </p>
+          <p>
+            As web applications grew from static documents into single-page interfaces, style codebases
+            suffered from the global cascade specificity trap. Without modular encapsulation, developers
+            frequently used higher specificity selectors or the <code>!important</code> flag to resolve conflicting
+            declarations. This structural fragility catalyzed the development of CSS preprocessors.
+          </p>
+          <p>
+            In 2006, Hampton Catlin and Natalie Weizenbaum introduced Syntactically Awesome Style
+            Sheets (Sass). Sass treated style authoring as a software engineering discipline by introducing
+            variables, selector nesting, and modular mixins. In 2009, Alexis Sellier released Less, which
+            adopted a syntax that aligned more closely with standard CSS syntax. TJ Holowaychuk
+            introduced Stylus in 2010.
+          </p>
+          <p>
+            A pivotal divergence occurred within the Sass ecosystem. The original indented syntax (.sass)
+            relied on strict indentation, carriage returns, and the absence of curly braces and semicolons.
+            While praised for minimal syntax, it required custom linters and prevented developers from
+            pasting standard CSS snippets directly into stylesheets. In 2010, Sass 3.0 introduced Sassy CSS
+            (.scss). SCSS was architected as a strict superset of CSS: every valid CSS stylesheet is, by
+            definition, valid SCSS. This architectural decision eliminated adoption friction across the
+            industry, establishing SCSS as the enterprise standard for style preprocessing.
+          </p>
+        </article>
+
+        <article class="content-article" id="ch1-compilers">
+          <h3>1.2 Evolution of the Compilers</h3>
+          <p>
+            The underlying compilation engines executing Sass source transformations have transitioned
+            through three major eras:
+          </p>
+          <h4>Ruby Sass (2006-2019)</h4>
+          <p>
+            The foundational reference implementation was authored in Ruby. While instrumental in
+            defining preprocessor semantics, Ruby Sass suffered from slow compilation speeds, heavy
+            runtime memory footprints, and difficult integration into emerging JavaScript build chains.
+            Ruby Sass was formally sunset and reached end-of-life status on March 26, 2019.
+          </p>
+          <h4>LibSass and Node-Sass (2012-2020)</h4>
+          <p>
+            To resolve compilation bottlenecks in large projects, Hampton Catlin and Aaron Leung
+            engineered LibSass, an optimized C/C++ port. The Node.js ecosystem consumed this engine
+            via the node-sass wrapper. While compilation throughput increased by an order of magnitude,
+            LibSass encountered fundamental architectural hurdles. Maintaining feature parity with new
+            language specifications became unsustainable. Furthermore, Node-Sass relied on native C++
+            bindings via node-gyp, leading to frequent environment-specific compilation errors during
+            cross-platform continuous integration builds. LibSass was officially deprecated in October 2020.
+          </p>
+          <h4>Dart Sass (2016-Present)</h4>
+          <p>
+            Developed as the canonical reference implementation, Dart Sass is authored in Dart. It
+            compiles to both standalone native system binaries and pure JavaScript packages. Dart Sass is
+            the sole incubator for modern language innovations, including the Module System (@use,
+            @forward), first-class calculation objects, wide-gamut color spaces, and modern selector
+            nesting semantics.
+          </p>
+        </article>
+
+        <article class="content-article" id="ch1-mental-model">
+          <h3>1.3 Compilation Mental Model</h3>
+          <p>
+            SCSS functions as a build-time meta-programming language. Web rendering engines (such as
+            Blink, Gecko, and WebKit) possess zero native awareness of SCSS syntax. Browsers parse only
+            serialized CSS compliant with World Wide Web Consortium (W3C) standards.
+          </p>
+          <p>The compilation pipeline operates across six distinct phases:</p>
+          <ol>
+            <li><strong>Source Ingestion:</strong> Raw .scss source files are loaded from the file system, resolving dependency paths and handling custom file loaders.</li>
+            <li><strong>Lexical Analysis and Tokenization:</strong> The source text is scanned into discrete syntactic tokens (identifiers, operators, delimiters, literals) while tracking source locations for error reporting.</li>
+            <li><strong>Sass AST Generation:</strong> The token stream is parsed into a high-level Sass Abstract Syntax Tree (AST), capturing un-evaluated expressions, mixin definitions, loops, and nested selector branches.</li>
+            <li><strong>Preprocessor Evaluation and Execution:</strong> The compiler resolves dynamic statements. Variable lookups navigate lexical scope trees; arithmetic and user-defined functions execute; mixins inline their contents; control flow directives (@if, @each, @for) execute; and the parent selector (&amp;) resolves selector permutations.</li>
+            <li><strong>CSS AST Transformation:</strong> Evaluated nodes are mapped into a standardized CSS AST, resolving selector combinations and flattening nested hierarchies into static rule groups.</li>
+            <li><strong>Serialization and Minification:</strong> The CSS AST is serialized into standard stylesheet syntax, optionally running minification routines, and emitting bidirectional Source Maps (.css.map) mapping generated rules to their original SCSS line and column coordinates.</li>
+          </ol>
+        </article>
+
+        {diagram_1}
+
+        <article class="content-article" id="ch1-lineage">
+          <h3>1.4 Compiler Lineage and Syntax Analysis</h3>
+          <p>
+            The transition across compiler implementations highlights significant shifts in language
+            features, platform runtimes, and support status:
+          </p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Implementation</th>
+                  <th>Runtime Platform</th>
+                  <th>Active Era</th>
+                  <th>Specification Synchronization</th>
+                  <th>Status</th>
+                  <th>Primary Architectural Trade-offs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ruby Sass</strong></td>
+                  <td>Ruby VM</td>
+                  <td>2006-2019</td>
+                  <td>Reference Implementation</td>
+                  <td><span class="status-pill error">End-of-Life</span></td>
+                  <td>High compilation latency; substantial memory footprint; external runtime dependency in Node ecosystems.</td>
+                </tr>
+                <tr>
+                  <td><strong>LibSass / Node-Sass</strong></td>
+                  <td>C/C++ (V8 C++ Addon)</td>
+                  <td>2012-2020</td>
+                  <td>Slow (Lagged modern specs)</td>
+                  <td><span class="status-pill warning">Deprecated</span></td>
+                  <td>High compilation throughput; fragile native C++ compilation bindings (node-gyp); frozen feature set.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dart Sass (Native / Embedded)</strong></td>
+                  <td>Dart AOT Native Daemon</td>
+                  <td>2016-Present</td>
+                  <td>Canonical Specification Source</td>
+                  <td><span class="status-pill success">Active Standard</span></td>
+                  <td>Maximum compilation speed; native binary execution via Protobuf IPC; instantaneous feature updates.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dart Sass (JS / dart2js)</strong></td>
+                  <td>Pure JavaScript (V8 / Node)</td>
+                  <td>2016-Present</td>
+                  <td>Synchronized with Dart</td>
+                  <td><span class="status-pill success">Active Standard</span></td>
+                  <td>Zero native dependency overhead; universal npm compatibility; execution throughput slower than native binaries.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Syntactic Divergence: Indented Syntax (.sass) vs. SCSS (.scss)</h4>
+          <p>
+            Syntactic divergence between the original indented syntax and SCSS establishes the
+            operational foundation for parsing rules and codebase migrations:
+          </p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Sass Indented Syntax (.sass)</th>
+                  <th>SCSS Syntax (.scss)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Block Delimiters</strong></td>
+                  <td>Significant whitespace, 2-space indentation</td>
+                  <td>Balanced curly braces ({})</td>
+                </tr>
+                <tr>
+                  <td><strong>Statement Termination</strong></td>
+                  <td>Newline character (\n)</td>
+                  <td>Explicit semicolon (;)</td>
+                </tr>
+                <tr>
+                  <td><strong>CSS Super-set Status</strong></td>
+                  <td>No (Fails on standard CSS syntax)</td>
+                  <td>Yes (100% backward-compatible superset)</td>
+                </tr>
+                <tr>
+                  <td><strong>Pasting Native CSS</strong></td>
+                  <td>Requires automated translation/reformatting</td>
+                  <td>Direct cut-and-paste without modifications</td>
+                </tr>
+                <tr>
+                  <td><strong>Learning Curve</strong></td>
+                  <td>High for developers accustomed to C-style syntax</td>
+                  <td>Minimal for developers with standard CSS literacy</td>
+                </tr>
+                <tr>
+                  <td><strong>Tooling Ecosystem</strong></td>
+                  <td>Specialized parsers required</td>
+                  <td>Native support across standard IDEs and formatters</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- CHAPTER 2 -->
+      <section class="content-section" id="ch2-core-syntax">
+        <div class="section-badge">CHAPTER 02 // 構文 &amp; メモリモデル</div>
+        <h2 class="section-title">2. Core Syntax Mechanics: Variables, Nesting, and Selectors</h2>
+
+        <article class="content-article" id="ch2-variables">
+          <h3>2.1 SCSS Variables and Memory Model</h3>
+          <p>
+            SCSS variables are declared using the dollar sign prefix (<code>$identifier: value;</code>). Understanding
+            their lifecycle requires distinguishing build-time preprocessor variables from runtime CSS Custom
+            Properties (CSS variables).
+          </p>
+          <p>
+            <strong>Compile-Time Evaluation vs. Runtime Resolution:</strong> SCSS variables exist solely during
+            compilation. When the compiler evaluates an expression containing <code>$primary-color</code>, it looks up the
+            current lexical environment value and substitutes the literal value directly into the emitted CSS
+            Abstract Syntax Tree. Once compiled, all variable identifiers cease to exist; the browser
+            receives only hard-coded values.
+          </p>
+          <p>
+            In contrast, CSS Custom Properties (e.g., <code>--primary-color: #1a73e8;</code>) are evaluated at runtime by
+            the browser rendering engine. They participate in the CSS cascade, inherit down the live DOM
+            tree, and can be dynamically mutated via JavaScript or media queries.
+          </p>
+          {code_block('''// Compile-time preprocessor variable
+$primary-color: #1a73e8;
+$border-radius-base: 4px;
+
+// Scoping Rules and Variable Shadowing
+$token-surface: #ffffff; // Global scope
+
+.card {
+  $token-surface: #f8f9fa; // Local shadow: covers .card and descendants
+  background-color: $token-surface;
+  border-radius: $border-radius-base;
+
+  .card__header {
+    background-color: $token-surface; // Resolves to #f8f9fa
+  }
+}
+
+.modal {
+  background-color: $token-surface; // Resolves to #ffffff (Global)
+}''', 'scss', '''.card {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+.card .card__header {
+  background-color: #f8f9fa;
+}
+.modal {
+  background-color: #ffffff;
+}
+/* Transpiled cleanly: variables replaced at build time */''')}
+
+          <h4>The <code>!default</code> Flag (Design System Configuration)</h4>
+          <p>
+            The <code>!default</code> flag instructs the compiler to assign a value only if that variable has not
+            already been declared or holds a value of <code>null</code>. This primitive forms the foundation of
+            configurable UI component libraries:
+          </p>
+          {code_block('''// _library.scss
+$theme-accent: #6200ee !default;
+$theme-radius: 4px !default;
+
+.button-primary {
+  background-color: $theme-accent;
+  border-radius: $theme-radius;
+}
+
+// Consuming application configuration:
+// $theme-accent: #ff0055; // Overrides library default without modifying library source''', 'scss')}
+
+          <h4>The <code>!global</code> Flag (Lexical Boundary Violation)</h4>
+          <p>
+            The <code>!global</code> flag allows a declaration inside a local block to mutate or define a variable in the
+            root scope. In enterprise systems, <code>!global</code> is an anti-pattern: mutating global state within
+            nested blocks causes non-deterministic build ordering side-effects.
+          </p>
+          {code_block('''.unstable-component {
+  $theme-accent: #d32f2f !global; // Enterprise anti-pattern: mutates outer scope!
+}''', 'scss')}
+        </article>
+
+        <article class="content-article" id="ch2-parent-selector">
+          <h3>2.2 The Parent Selector (&amp;): Deep Architectural Breakdown</h3>
+          <p>
+            The parent selector, represented by an ampersand (<code>&amp;</code>), references the resolved selector of the
+            surrounding outer rule block. During lexical analysis, the compiler replaces <code>&amp;</code> with the fully
+            resolved ancestor selector sequence.
+          </p>
+          {code_block('''.btn-primary {
+  background-color: #0052cc;
+  &:hover {
+    background-color: #0747a6;
+  }
+  &:focus {
+    outline: 2px solid #2684ff;
+  }
+  &::before {
+    content: "";
+    display: inline-block;
+  }
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}''', 'scss', '''.btn-primary { background-color: #0052cc; }
+.btn-primary:hover { background-color: #0747a6; }
+.btn-primary:focus { outline: 2px solid #2684ff; }
+.btn-primary::before { content: ""; display: inline-block; }
+.btn-primary[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }''')}
+
+          <h4>BEM String Concatenation Mechanics</h4>
+          <p>
+            SCSS allows string concatenation using the parent selector, a pattern widely used in Block-Element-Modifier (BEM) architectures:
+          </p>
+          {code_block('''.alert {
+  padding: 16px;
+  &__icon {
+    margin-right: 8px;
+  }
+  &--error {
+    border-color: #ff4d4f;
+  }
+}''', 'scss', '''.alert { padding: 16px; }
+.alert__icon { margin-right: 8px; }
+.alert--error { border-color: #ff4d4f; }''')}
+
+          <h4>Ancestor Inversion and Context Switching</h4>
+          <p>
+            Placing the ampersand after another selector inverts the nesting hierarchy:
+          </p>
+          {code_block('''.data-table {
+  color: #1f2937;
+  // Context Switch: Ancestor qualification
+  .theme-dark & {
+    color: #f9fafb;
+    background-color: #111827;
+  }
+  // Compound selector
+  &.is-striped tbody tr:nth-child(even) {
+    background-color: #f3f4f6;
+  }
+}''', 'scss', '''.data-table { color: #1f2937; }
+.theme-dark .data-table { color: #f9fafb; background-color: #111827; }
+.data-table.is-striped tbody tr:nth-child(even) { background-color: #f3f4f6; }''')}
+        </article>
+
+        <article class="content-article" id="ch2-nesting">
+          <h3>2.3 Nesting Mechanics and Specificity Traps</h3>
+          <p>
+            Nesting mirrors HTML structure within stylesheets, but unconstrained nesting creates
+            combinatorial explosion and specificity bloat. Consider the four-level nesting anti-pattern:
+          </p>
+          {code_block('''.workspace {
+  .dashboard {
+    .widget-container {
+      .widget-body {
+        a {
+          color: #2563eb;
+        }
+      }
+    }
+  }
+}''', 'scss', '''/* Emitted CSS has Specificity S = (0, 4, 1): */
+.workspace .dashboard .widget-container .widget-body a {
+  color: #2563eb;
+}''')}
+          <div class="callout callout-warning">
+            <div class="callout-title">⚠️ Browser Evaluation Overhead</div>
+            <p>
+              Browsers match CSS selectors from right to left (key selector evaluation). When rendering <code>a</code> tags,
+              the engine must locate every link in the DOM and traverse ancestors upward through four layers. Overriding this rule requires an even higher specificity selector, escalating into a specificity war.
+            </p>
+          </div>
+        </article>
+
+        <article class="content-article" id="ch2-card-transform">
+          <h3>2.4 Code Transformation: Enterprise Card Component</h3>
+          <p>
+            The following transformation demonstrates a card component written in SCSS using contextual BEM logic, parent-selector manipulation, and theme overrides, followed by compiled CSS:
+          </p>
+          {code_block('''.ds-card {
+  $radius: 8px;
+  display: flex;
+  flex-direction: column;
+  border-radius: $radius;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+
+  &__header {
+    padding: 16px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  &__body {
+    padding: 24px;
+    flex: 1 1 auto;
+  }
+
+  &--interactive {
+    cursor: pointer;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .theme-dark & {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+}''', 'scss', '''.ds-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+.ds-card__header {
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.ds-card__body {
+  padding: 24px;
+  flex: 1 1 auto;
+}
+.ds-card--interactive {
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.ds-card--interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.theme-dark .ds-card {
+  background-color: #1f2937;
+  border-color: #374151;
+}''')}
+        </article>
+      </section>
+
+      <!-- CHAPTER 3 -->
+      <section class="content-section" id="ch3-reusability">
+        <div class="section-badge">CHAPTER 03 // 再利用プリミティブ</div>
+        <h2 class="section-title">3. Reusability Primitives: Mixins, Placeholders, and Functions</h2>
+
+        <article class="content-article" id="ch3-analysis">
+          <h3>3.1 Detailed Comparative Analysis</h3>
+          <p>
+            SCSS provides three distinct reusability mechanisms: mixins (<code>@mixin</code> and <code>@include</code>),
+            placeholders and selector inheritance (<code>%placeholder</code> and <code>@extend</code>), and functions
+            (<code>@function</code> and <code>@return</code>). Each primitive operates under distinct compilation mechanics.
+          </p>
+        </article>
+
+        <article class="content-article" id="ch3-mixins">
+          <h3>3.2 Mixins (@mixin and @include)</h3>
+          <p>
+            Mixins function as parameterized code generators. When a mixin is included, the compiler
+            copies its contents directly into the calling selector. Mixins accept positional arguments,
+            named arguments, default values, and variable-length argument lists:
+          </p>
+          {code_block('''@use 'sass:math';
+
+@mixin elevation($level: 1, $color: #000000) {
+  @if $level == 1 {
+    box-shadow: 0 1px 3px rgba($color, 0.12), 0 1px 2px rgba($color, 0.24);
+  } @else if $level == 2 {
+    box-shadow: 0 3px 6px rgba($color, 0.15), 0 2px 4px rgba($color, 0.22);
+  } @else if $level == 3 {
+    box-shadow: 0 10px 20px rgba($color, 0.19), 0 6px 6px rgba($color, 0.23);
+  } @else {
+    @error "Invalid elevation level: #{$level}. Permitted range is 1-3.";
+  }
+}
+
+// Media Query abstraction with dynamic @content slot
+@use 'sass:map';
+$breakpoints: (
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px
+);
+
+@mixin respond-to($breakpoint) {
+  $raw-query: map.get($breakpoints, $breakpoint);
+  @if $raw-query {
+    @media screen and (min-width: $raw-query) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint `#{$breakpoint}`.";
+  }
+}''', 'scss')}
+        </article>
+
+        <article class="content-article" id="ch3-placeholders">
+          <h3>3.3 Placeholder Selectors (%placeholder) and Selector Inheritance (@extend)</h3>
+          <p>
+            Placeholder selectors begin with a percent symbol (<code>%</code>) and are not serialized into CSS output on
+            their own. When a selector extends a placeholder via <code>@extend</code>, the compiler groups the calling
+            selector with the placeholder's rule block:
+          </p>
+          {code_block('''%visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-nav-link {
+  @extend %visually-hidden;
+}
+.sr-only-helper {
+  @extend %visually-hidden;
+}''', 'scss', '''.skip-nav-link, .sr-only-helper {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}''')}
+
+          <div class="callout callout-danger">
+            <div class="callout-title">⚠️ The Structural Dangers of @extend in Enterprise Codebases</div>
+            <p>
+              While <code>@extend</code> prevents rule duplication by emitting comma-separated selector lists, it introduces severe architectural hazards:
+            </p>
+            <ul>
+              <li><strong>Combinatorial Selector Expansion:</strong> If an extended selector is nested within other rules, the compiler must generate every permutation of ancestor and descendant selectors, rapidly inflating CSS bundle size.</li>
+              <li><strong>Altered Source Order:</strong> Extending an external selector pulls rules into an earlier position in the stylesheet, modifying cascade order.</li>
+              <li><strong>Cross-Media-Query Extension Failure:</strong> Dart Sass prohibits extending selectors across different <code>@media</code> blocks.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="content-article" id="ch3-functions">
+          <h3>3.4 User-Defined Functions (@function and @return)</h3>
+          <p>
+            Functions accept parameters, perform programmatic calculations, and return a single SCSS
+            value via <code>@return</code>. Crucially, functions cannot emit CSS rules or properties:
+          </p>
+          {code_block('''@use 'sass:math';
+
+/// Converts pixel units to relative rem units based on root font size
+@function to-rem($px-value, $base-font-size: 16px) {
+  @if not unitless($px-value) {
+    $px-value: math.div($px-value, ($px-value * 0 + 1));
+  }
+  @if not unitless($base-font-size) {
+    $base-font-size: math.div($base-font-size, ($base-font-size * 0 + 1));
+  }
+  @return math.div($px-value, $base-font-size) * 1rem;
+}
+
+.header-hero {
+  height: to-rem(320px); // Computes to 20rem
+}''', 'scss', '''.header-hero {
+  height: 20rem;
+}''')}
+        </article>
+
+        <article class="content-article" id="ch3-matrix">
+          <h3>3.5 Reusability Primitives Comparison Matrix</h3>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Mixin (@mixin)</th>
+                  <th>Placeholder (%placeholder)</th>
+                  <th>Function (@function)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Compilation Output</strong></td>
+                  <td>Duplicates properties into every calling rule block</td>
+                  <td>Groups selectors into a single shared rule block</td>
+                  <td>Emits zero CSS declarations; returns a computed value</td>
+                </tr>
+                <tr>
+                  <td><strong>Accepts Arguments</strong></td>
+                  <td>Yes (Positional, named, variable kwargs)</td>
+                  <td>No (Static declarations only)</td>
+                  <td>Yes (Positional, named, arbitrary inputs)</td>
+                </tr>
+                <tr>
+                  <td><strong>Supports @content Slot</strong></td>
+                  <td>Yes (Dynamic nested style injection)</td>
+                  <td>No</td>
+                  <td>No</td>
+                </tr>
+                <tr>
+                  <td><strong>CSS Bundle Size Impact</strong></td>
+                  <td>Grows linearly with each call (mitigated by Gzip)</td>
+                  <td>Minimal initial growth; risk of combinatorial explosion</td>
+                  <td>Zero structural impact; emits atomic values</td>
+                </tr>
+                <tr>
+                  <td><strong>Cross-Media Query Safety</strong></td>
+                  <td>Safe (Inlines rules directly within media scope)</td>
+                  <td>Unsafe (Forbidden across distinct media boundaries)</td>
+                  <td>Safe (Pure functional computation)</td>
+                </tr>
+                <tr>
+                  <td><strong>Primary Use Case</strong></td>
+                  <td>Dynamic styles, vendor prefixes, media queries</td>
+                  <td>Sharing static styles across collocated classes</td>
+                  <td>Unit calculations, map lookups, color manipulation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- CHAPTER 4 -->
+      <section class="content-section" id="ch4-module-system">
+        <div class="section-badge">CHAPTER 04 // モジュールシステム</div>
+        <h2 class="section-title">4. The Modern Module System (@use, @forward, and the Deprecation of @import)</h2>
+
+        <article class="content-article" id="ch4-import-flaws">
+          <h3>4.1 The Fundamental Flaws of Legacy @import</h3>
+          <p>
+            For over a decade, <code>@import</code> served as the primary mechanism for splitting Sass codebases into partial files (<code>_file.scss</code>). However, <code>@import</code> exhibited architectural limitations:
+          </p>
+          <ol>
+            <li><strong>Global Namespace Pollution:</strong> Every variable, mixin, and function declared in an imported partial was injected directly into the global runtime scope.</li>
+            <li><strong>Duplicate CSS Serialization:</strong> If multiple component partials imported an abstract file containing shared CSS rules, those rules were evaluated and serialized into the output multiple times.</li>
+            <li><strong>Lack of Encapsulation:</strong> All declarations were public. Library authors could not define internal helper functions without exposing them to consumers.</li>
+            <li><strong>Tooling Ambiguity:</strong> Because identifiers were global, IDEs and language servers could not reliably determine where a variable or mixin was originally declared.</li>
+          </ol>
+        </article>
+
+        <article class="content-article" id="ch4-use-directive">
+          <h3>4.2 The @use Directive</h3>
+          <p>
+            The <code>@use</code> directive compiles a partial file as an isolated module. Dart Sass compiles each module
+            exactly once, regardless of how many times it is imported across the dependency graph,
+            preventing duplicate rule generation.
+          </p>
+          {code_block('''// _geometry.scss
+$_golden-ratio: 1.618; // Private variable (prefixed with _)
+$base-width: 100px;    // Public variable
+
+// Consumer stylesheet:
+@use 'geometry' as geo;
+
+.container {
+  width: geo.$base-width;
+  // width: geo.$_golden-ratio; // Error: Private member cannot be accessed!
+}''', 'scss')}
+        </article>
+
+        <article class="content-article" id="ch4-forward-directive">
+          <h3>4.3 The @forward Directive</h3>
+          <p>
+            The <code>@forward</code> directive allows an intermediary manifest file (typically <code>_index.scss</code>) to
+            aggregate and re-export members from private sub-modules, presenting a unified public API surface:
+          </p>
+          {code_block('''// scss/tokens/_index.scss
+@forward 'colors';
+@forward 'typography';
+@forward 'spacing' as space-*;
+@forward 'elevation' hide %internal-shadow;
+
+// Consumer file:
+@use 'scss/tokens' as tok;
+
+.hero-box {
+  background-color: tok.$brand-primary;
+  margin: tok.$space-xl;
+}''', 'scss')}
+        </article>
+
+        {diagram_3}
+
+        <article class="content-article" id="ch4-builtin-modules">
+          <h3>4.4 The Built-in Sass Modules (sass:*)</h3>
+          <p>
+            Modern Dart Sass deprecates global utility functions in favor of explicit built-in modules:
+          </p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Built-in Module</th>
+                  <th>Canonical Purpose</th>
+                  <th>Key Methods / Replaces Legacy Global Functions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>sass:math</code></td>
+                  <td>Floating-point calculations, trigonometry, bounds checking</td>
+                  <td><code>math.div()</code> (replaces <code>/</code>), <code>math.clamp()</code>, <code>math.round()</code>, <code>math.sqrt()</code></td>
+                </tr>
+                <tr>
+                  <td><code>sass:color</code></td>
+                  <td>Color manipulation, space transforms, lightness adjustment</td>
+                  <td><code>color.adjust()</code>, <code>color.scale()</code> (replaces <code>lighten()</code>/<code>darken()</code>), <code>color.channel()</code></td>
+                </tr>
+                <tr>
+                  <td><code>sass:map</code></td>
+                  <td>Immutable dictionary operations and deep nesting traversal</td>
+                  <td><code>map.get()</code>, <code>map.set()</code>, <code>map.merge()</code>, <code>map.deep-merge()</code>, <code>map.has-key()</code></td>
+                </tr>
+                <tr>
+                  <td><code>sass:list</code></td>
+                  <td>Array traversal, sequence manipulation, indexing</td>
+                  <td><code>list.append()</code>, <code>list.index()</code>, <code>list.join()</code>, <code>list.nth()</code>, <code>list.length()</code></td>
+                </tr>
+                <tr>
+                  <td><code>sass:string</code></td>
+                  <td>String inspection, character insertion, slicing</td>
+                  <td><code>string.slice()</code>, <code>string.index()</code>, <code>string.to-upper-case()</code>, <code>string.unique-id()</code></td>
+                </tr>
+                <tr>
+                  <td><code>sass:meta</code></td>
+                  <td>Compiler reflection, type checking, mixin inspection</td>
+                  <td><code>meta.type-of()</code>, <code>meta.inspect()</code>, <code>meta.module-variables()</code>, <code>meta.load-css()</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="content-article" id="ch4-migration">
+          <h3>4.5 Automated Migration Tooling</h3>
+          <p>
+            The Sass team provides the <code>sass-migrator</code> CLI tool to migrate legacy codebases from <code>@import</code> to modern <code>@use</code> and <code>@forward</code>:
+          </p>
+          {code_block('''# Install the canonical migration tool
+npm install -g sass-migrator
+
+# Migrate an entire source tree to the module system
+sass-migrator module --migrate-deps src/scss/main.scss
+
+# Migrate global built-in functions to explicit sass:* modules
+sass-migrator division **/*.scss''', 'bash', '''[sass-migrator] Migrating 48 files...
+[sass-migrator] Updated @import -> @use with explicit namespaces.
+[sass-migrator] Fixed 142 instances of legacy division syntax.
+[sass-migrator] Migration completed successfully with 0 errors.''')}
+        </article>
+      </section>
+
+      <!-- CHAPTER 5 -->
+      <section class="content-section" id="ch5-data-structures">
+        <div class="section-badge">CHAPTER 05 // データ構造 &amp; 制御フロー</div>
+        <h2 class="section-title">5. Data Structures, Operators, and Control Flow Directives</h2>
+
+        <article class="content-article" id="ch5-type-system">
+          <h3>5.1 The SCSS Type System</h3>
+          <p>
+            SCSS incorporates seven distinct data types evaluated at compile time:
+          </p>
+          <ol>
+            <li><strong>Numbers:</strong> Real values with or without units (e.g., <code>16</code>, <code>1.5</code>, <code>12px</code>, <code>3.2rem</code>, <code>100vh</code>). Unit arithmetic is strictly enforced.</li>
+            <li><strong>Strings:</strong> Quoted (<code>"Helvetica Neue"</code>) or unquoted (<code>sans-serif</code>, <code>left</code>).</li>
+            <li><strong>Colors:</strong> Structural representations of color values. Supports traditional sRGB hex/RGB/HSL and modern wide-gamut spaces (Display P3, Rec2020, CIELAB).</li>
+            <li><strong>Booleans:</strong> Explicit <code>true</code> or <code>false</code> values used in logical branching.</li>
+            <li><strong>Null:</strong> Represents empty values (<code>null</code>). Properties assigned <code>null</code> are omitted from emitted CSS.</li>
+            <li><strong>Lists:</strong> Ordered sequences of values, space- or comma-separated (<code>margin: 10px 20px 10px 20px;</code>). Lists use 1-based indexing.</li>
+            <li><strong>Maps:</strong> Immutable key-value data stores. Keys can be any valid SCSS type.</li>
+          </ol>
+        </article>
+
+        <article class="content-article" id="ch5-operators">
+          <h3>5.2 Mathematical and Logical Operators</h3>
+          <p>
+            In standard CSS, the forward slash (<code>/</code>) is used as a delimiter, such as separating font size
+            from line height (<code>font: 16px/1.5 sans-serif</code>) or defining grid areas (<code>grid-column: 1/3</code>).
+            Because of this, SCSS requires <code>math.div()</code> for mathematical division.
+          </p>
+          {code_block('''@use 'sass:math';
+
+$container-width: 1200px;
+$columns: 12;
+
+// Explicit mathematical division via sass:math
+$col-width: math.div($container-width, $columns); // Computes to 100px''', 'scss', '''/* Result: 100px */''')}
+        </article>
+
+        <article class="content-article" id="ch5-maps">
+          <h3>5.3 Advanced Map Architecture for Design Tokens</h3>
+          <p>
+            Enterprise design systems store tokens in deeply nested SCSS maps:
+          </p>
+          {code_block('''@use 'sass:map';
+
+$design-system-tokens: (
+  "color": (
+    "brand": (
+      "primary": #10b981,
+      "secondary": #06b6d4
+    ),
+    "neutral": (
+      "background": #080c14,
+      "surface": #111827
+    )
+  ),
+  "spacing": (
+    "xs": 4px,
+    "sm": 8px,
+    "md": 16px,
+    "lg": 24px
+  )
+);
+
+@function get-token($keys...) {
+  $map: $design-system-tokens;
+  @each $key in $keys {
+    $map: map.get($map, $key);
+  }
+  @return $map;
+}
+
+.panel {
+  background-color: get-token("color", "neutral", "surface");
+  padding: get-token("spacing", "lg");
+}''', 'scss', '''.panel {
+  background-color: #111827;
+  padding: 24px;
+}''')}
+        </article>
+
+        <article class="content-article" id="ch5-utility-engine">
+          <h3>5.5 Code Transformation: Automated Spacing and Grid Utility Engine</h3>
+          <p>
+            The following metaprogramming engine generates responsive margin and padding utility classes from token maps:
+          </p>
+          {code_block('''@use 'sass:math';
+@use 'sass:map';
+
+$spacing-scale: (
+  "1": 0.25rem,
+  "2": 0.5rem,
+  "3": 0.75rem,
+  "4": 1rem,
+  "6": 1.5rem,
+  "8": 2rem
+);
+
+$properties: (
+  "m": "margin",
+  "p": "padding"
+);
+
+$directions: (
+  "t": "-top",
+  "r": "-right",
+  "b": "-bottom",
+  "l": "-left",
+  "x": ("-left", "-right"),
+  "y": ("-top", "-bottom")
+);
+
+@each $prop-key, $prop-name in $properties {
+  @each $dir-key, $dir-val in $directions {
+    @each $size-key, $size-val in $spacing-scale {
+      .#{$prop-key}#{$dir-key}-#{$size-key} {
+        @if meta.type-of($dir-val) == "list" {
+          @each $sub-dir in $dir-val {
+            #{$prop-name}#{$sub-dir}: $size-val;
+          }
+        } @else {
+          #{$prop-name}#{$dir-val}: $size-val;
+        }
+      }
+    }
+  }
+}''', 'scss', '''.mt-1 { margin-top: 0.25rem; }
+.mr-1 { margin-right: 0.25rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.ml-1 { margin-left: 0.25rem; }
+.mx-1 { margin-left: 0.25rem; margin-right: 0.25rem; }
+.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+.pt-1 { padding-top: 0.25rem; }
+/* ... Automatically generated 72 responsive utility classes ... */''')}
+        </article>
+      </section>
+
+      <!-- CHAPTER 6 -->
+      <section class="content-section" id="ch6-enterprise-architecture">
+        <div class="section-badge">CHAPTER 06 // アーキテクチャ設計</div>
+        <h2 class="section-title">6. Architecture and Scalability Patterns</h2>
+
+        <article class="content-article" id="ch6-pattern-7-1">
+          <h3>6.1 The 7-1 Architecture Pattern</h3>
+          <p>
+            The 7-1 pattern organizes styles into 7 functional directories combined into a single root manifest:
+          </p>
+          <ul>
+            <li><code>abstracts/</code>: Sass tools, mixins, functions, and variables (produces zero CSS output).</li>
+            <li><code>base/</code>: Typography, resets, normalize, and baseline element styles.</li>
+            <li><code>components/</code>: Discrete UI widgets (buttons, cards, modals, sliders).</li>
+            <li><code>layout/</code>: Application grid, navigation, header, footer, drawer.</li>
+            <li><code>pages/</code>: Page-specific style overrides.</li>
+            <li><code>themes/</code>: Multi-brand or dark/light theme definitions.</li>
+            <li><code>vendors/</code>: Third-party CSS frameworks and libraries.</li>
+          </ul>
+        </article>
+
+        <article class="content-article" id="ch6-itcss">
+          <h3>6.3 Inverted Triangle CSS (ITCSS) Methodology</h3>
+          <p>
+            Created by Harry Roberts, ITCSS visualizes CSS architecture as an inverted triangle ordered by specificity and reach:
+          </p>
+        </article>
+
+        {diagram_2}
+
+        <article class="content-article" id="ch6-directory-layout">
+          <h3>6.5 Enterprise Directory Architecture</h3>
+          {code_block('''src/styles/
+├── abstracts/
+│   ├── _index.scss         # Public API re-exporting all abstracts via @forward
+│   ├── _tokens.scss        # Raw design token maps
+│   ├── _breakpoints.scss   # Responsive media query mixins
+│   ├── _typography.scss    # Font face and type scales
+│   └── _functions.scss     # Unit conversion and math helpers
+├── base/
+│   ├── _index.scss
+│   ├── _reset.scss         # CSS reset rules
+│   └── _typography.scss    # Unclassed element rules (h1-h6, p, a)
+├── components/
+│   ├── _card.scss          # .c-card component styles
+│   ├── _button.scss        # .c-button component styles
+│   └── _modal.scss         # .c-modal component styles
+├── layout/
+│   ├── _header.scss        # Application header layout
+│   └── _grid.scss          # Macro-grid system
+└── main.scss               # Root application manifest''', 'scss')}
+        </article>
+      </section>
+
+      <!-- CHAPTER 7 -->
+      <section class="content-section" id="ch7-modern-tooling">
+        <div class="section-badge">CHAPTER 07 // 開発ツール &amp; パイプライン</div>
+        <h2 class="section-title">7. Modern Tooling, Compilers, and Build Pipelines</h2>
+
+        <article class="content-article" id="ch7-js-engines">
+          <h3>7.1 Compiler Engines in JavaScript Ecosystems</h3>
+          <p>
+            Choosing the right compilation engine significantly affects build performance and HMR latency:
+          </p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Pipeline Engine</th>
+                  <th>Compilation Paradigm</th>
+                  <th>Cold Build Speed</th>
+                  <th>Incremental HMR Latency</th>
+                  <th>Memory Profile</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>sass</code> (JS / dart2js)</td>
+                  <td>In-process V8 execution</td>
+                  <td>Baseline (1.0x)</td>
+                  <td>350ms - 1200ms</td>
+                  <td>High (V8 heap allocation)</td>
+                </tr>
+                <tr>
+                  <td><code>sass-embedded</code> (Native)</td>
+                  <td>Protobuf IPC Native Daemon</td>
+                  <td><span class="status-pill success">2.5x–3.5x faster</span></td>
+                  <td>80ms - 250ms</td>
+                  <td>Low (Shared native daemon)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="content-article" id="ch7-build-configs">
+          <h3>7.2 Build Tool Configurations</h3>
+          <h4>Vite 5+ Production Configuration</h4>
+          {code_block('''// vite.config.ts
+import { defineConfig } from 'vite';
+import path from 'path';
+
+export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Enforce the modern Dart Sass compiler execution API
+        api: 'modern-compiler',
+        // Optional global token injection
+        additionalData: `@use "@/styles/abstracts" as abs;`
+      }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  }
+});''', 'typescript')}
+        </article>
+      </section>
+
+      <!-- CHAPTER 8 -->
+      <section class="content-section" id="ch8-performance-engineering">
+        <div class="section-badge">CHAPTER 08 // パフォーマンス最適化</div>
+        <h2 class="section-title">8. Performance Engineering, Output Auditing, and Bundle Optimization</h2>
+
+        <article class="content-article" id="ch8-invisible-cost">
+          <h3>8.1 The "Invisible Cost" of Preprocessors</h3>
+          <p>
+            Because preprocessors execute ahead-of-time, developers often author convenient abstractions
+            without realizing the size and performance cost of the resulting CSS. Unchecked mixin
+            inlining, combinatorial parent-selector nesting, and deep <code>@extend</code> chains can silently
+            bloat stylesheets from tens of kilobytes to several megabytes.
+          </p>
+        </article>
+
+        <article class="content-article" id="ch8-case-study">
+          <h3>8.5 Production Refactoring Case Study</h3>
+          <p>
+            Refactoring an enterprise order-management dashboard from monolithic deep-nested SCSS to a flat, modular BEM structure yielded substantial performance gains:
+          </p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Performance Metric</th>
+                  <th>Legacy Monolithic SCSS</th>
+                  <th>Refactored Modular Architecture</th>
+                  <th>Improvement Delta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Raw CSS Bundle Size</td>
+                  <td>485 KB</td>
+                  <td>68 KB</td>
+                  <td><span class="status-pill success">-86.0%</span></td>
+                </tr>
+                <tr>
+                  <td>Gzipped CSS Size</td>
+                  <td>74 KB</td>
+                  <td>14 KB</td>
+                  <td><span class="status-pill success">-81.1%</span></td>
+                </tr>
+                <tr>
+                  <td>Maximum Selector Specificity</td>
+                  <td>(0, 5, 2)</td>
+                  <td>(0, 1, 0)</td>
+                  <td><span class="status-pill success">Flat Cascade</span></td>
+                </tr>
+                <tr>
+                  <td>Style Recalculation Time</td>
+                  <td>42ms / frame</td>
+                  <td>4ms / frame</td>
+                  <td><span class="status-pill success">10.5x Faster</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- CHAPTER 9 -->
+      <section class="content-section" id="ch9-modern-landscape">
+        <div class="section-badge">CHAPTER 09 // モダンCSS比較</div>
+        <h2 class="section-title">9. The Modern Landscape: SCSS vs. Native Modern CSS</h2>
+
+        <article class="content-article" id="ch9-feature-parity">
+          <h3>9.1 Feature Parity Breakdown</h3>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Modern Dart SCSS</th>
+                  <th>Native Modern CSS (2024+)</th>
+                  <th>Architectural Evaluation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Variables / Custom Properties</strong></td>
+                  <td>Compile-time ($var)</td>
+                  <td>Runtime (--var)</td>
+                  <td>CSS custom properties participate in the DOM cascade and react to media queries; SCSS variables are static compile-time constants.</td>
+                </tr>
+                <tr>
+                  <td><strong>Selector Nesting</strong></td>
+                  <td>Full support (&amp; concatenation, ancestor inversion)</td>
+                  <td>Native CSS Nesting Specification</td>
+                  <td>Native nesting does not support identifier string concatenation (e.g., <code>&amp;__element</code> fails in pure CSS).</td>
+                </tr>
+                <tr>
+                  <td><strong>Mathematical Calculations</strong></td>
+                  <td><code>sass:math</code>, compile-time evaluation</td>
+                  <td><code>calc()</code>, <code>clamp()</code>, <code>min()</code>, <code>max()</code></td>
+                  <td>Native <code>calc()</code> can blend dynamic runtime units (e.g. <code>100% - 20px</code>); preprocessors evaluate only static compile-time units.</td>
+                </tr>
+                <tr>
+                  <td><strong>Module Management</strong></td>
+                  <td><code>@use</code>, <code>@forward</code> with namespacing</td>
+                  <td><code>@import</code> (render blocking) / CSS <code>@layer</code></td>
+                  <td>SCSS resolves dependencies at build time into a single bundle with zero HTTP round-trip penalty.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="content-article" id="ch9-decision-matrix">
+          <h3>9.3 Architectural Decision Matrix</h3>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Evaluation Criteria</th>
+                  <th>Modern Dart SCSS + Modules</th>
+                  <th>Native CSS + PostCSS</th>
+                  <th>Utility-First (Tailwind CSS)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Team Size</strong></td>
+                  <td>Mid-to-Large (20-500+ devs)</td>
+                  <td>Small-to-Mid (1-50 devs)</td>
+                  <td>Scale Agnostic (1-1000+ devs)</td>
+                </tr>
+                <tr>
+                  <td><strong>Design System Complexity</strong></td>
+                  <td>High (Multi-brand, token math)</td>
+                  <td>Medium (Browser standard)</td>
+                  <td>Highly Standardized systems</td>
+                </tr>
+                <tr>
+                  <td><strong>Build Pipeline Dependency</strong></td>
+                  <td>Requires preprocessor step</td>
+                  <td>Minimal (PostCSS/Lightning CSS)</td>
+                  <td>Requires specialized utility scanner</td>
+                </tr>
+                <tr>
+                  <td><strong>CSS Runtime Overhead</strong></td>
+                  <td>Zero (Emits static CSS)</td>
+                  <td>Zero (Native browser execution)</td>
+                  <td>Zero (Static utility classes)</td>
+                </tr>
+                <tr>
+                  <td><strong>Dynamic Theming</strong></td>
+                  <td>Achieved via CSS custom properties</td>
+                  <td>Native via Custom Properties</td>
+                  <td>Variant-driven class toggling</td>
+                </tr>
+                <tr>
+                  <td><strong>Specificity Management</strong></td>
+                  <td>Requires architectural discipline (ITCSS)</td>
+                  <td>Handled natively via <code>@layer</code></td>
+                  <td>Eliminated (Single-class specificity)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- CHAPTER 10 -->
+      <section class="content-section" id="ch10-anti-patterns">
+        <div class="section-badge">CHAPTER 10 // アンチパターン &amp; チェックリスト</div>
+        <h2 class="section-title">10. Production Implementation, Migration Recipes, and Anti-Patterns</h2>
+
+        <article class="content-article" id="ch10-deadly-antipatterns">
+          <h3>10.1 The Seven Deadliest SCSS Anti-Patterns</h3>
+          <ol>
+            <li><strong>The Russian Nesting Doll:</strong> Nesting selectors four or more levels deep. This generates high-specificity descendant selectors that are fragile and difficult to override.</li>
+            <li><strong>The Frankenstein @extend:</strong> Using <code>@extend</code> across disparate components or media boundaries. Generates combinatorial selector explosions.</li>
+            <li><strong>The Monolithic @import Sprawl:</strong> Chaining legacy <code>@import</code> statements without module boundaries, creating global state collisions.</li>
+            <li><strong>The Kitchen-Sink Mixin:</strong> Creating massive mixins that accept 10+ arguments to handle multiple visual permutations.</li>
+            <li><strong>Compile-Time Reinvention of Runtime Dynamics:</strong> Generating hundreds of static utility variants for values better managed via runtime CSS variables.</li>
+            <li><strong>The Nuclear !important Escape Hatch:</strong> Using <code>!important</code> to patch specificity bugs caused by poor nesting discipline.</li>
+            <li><strong>The Ghost Dependency:</strong> Consuming global variables or mixins within a partial without an explicit <code>@use</code> declaration.</li>
+          </ol>
+        </article>
+
+        <article class="content-article" id="ch10-review-checklist">
+          <h3>10.3 Enterprise Code Review Checklist</h3>
+          <ul>
+            <li>[ ] <strong>1. Explicit Imports:</strong> Every partial declares all external variables, mixins, and functions using explicit <code>@use</code> directives.</li>
+            <li>[ ] <strong>2. No Global Leaks:</strong> The <code>!global</code> flag is strictly prohibited.</li>
+            <li>[ ] <strong>3. Nesting Depth Guardrail:</strong> Selectors are nested no deeper than 3 levels (strict BEM enforcement).</li>
+            <li>[ ] <strong>4. Division Syntax:</strong> Mathematical divisions use <code>math.div()</code> rather than the deprecated slash delimiter.</li>
+            <li>[ ] <strong>5. Color Calculations:</strong> Color adjustments use <code>color.adjust()</code> or <code>color.scale()</code> rather than deprecated <code>lighten()</code>/<code>darken()</code>.</li>
+            <li>[ ] <strong>6. ITCSS Layer Compliance:</strong> New style rules conform to their designated architectural layer in the specificity hierarchy.</li>
+          </ul>
+        </article>
+
+        <article class="content-article" id="ch10-references">
+          <h3>10.4 References &amp; Architectural Bibliography</h3>
+          <ol>
+            <li>Sass vs. sass-embedded performance benchmarks &bull; Thibaud's Engineering Notes</li>
+            <li>Sass Language Team: <code>@import</code> Deprecation and Module System Migration Guide &bull; sass-lang.com</li>
+            <li>Dart Sass Color Spaces and Wide Gamut Color Specification &bull; W3C &amp; Sass-Lang</li>
+            <li>Breaking Changes: Dart Sass 3.0 Architectural Roadmap &bull; Sass Core Team</li>
+            <li>Inverted Triangle CSS (ITCSS): Architecture for Scalable Stylesheets &bull; Harry Roberts (CSS Wizardry)</li>
+            <li>Vite 5 Sass Modern Compiler Execution API &bull; Vite Core Documentation</li>
+            <li>W3C CSS Nesting Module Level 1 &bull; World Wide Web Consortium Recommendation</li>
+          </ol>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobileNavDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="drawer-brand-icon">SR</span>
+        <span>Systems Reference // 仕様書</span>
+      </div>
+      <button class="drawer-close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-section-title">PART I // 基礎システムアーキテクチャ</div>
+      <a href="networking.html" class="drawer-link">
+        <span class="link-vol">VOL.01</span>
+        <span>Networking &amp; Wire Protocols</span>
+      </a>
+      <a href="databases.html" class="drawer-link">
+        <span class="link-vol">VOL.02</span>
+        <span>Databases &amp; Storage Engines</span>
+      </a>
+      <a href="programming-languages.html" class="drawer-link">
+        <span class="link-vol">VOL.03</span>
+        <span>Programming Languages &amp; JIT</span>
+      </a>
+      <a href="data-structures.html" class="drawer-link">
+        <span class="link-vol">VOL.04</span>
+        <span>Data Structures &amp; Algorithms</span>
+      </a>
+      <a href="operating-systems.html" class="drawer-link">
+        <span class="link-vol">VOL.05</span>
+        <span>Operating Systems &amp; Kernels</span>
+      </a>
+      <a href="cs-hardware-foundations.html" class="drawer-link">
+        <span class="link-vol">VOL.06</span>
+        <span>CS Foundations &amp; Hardware</span>
+      </a>
+
+      <div class="drawer-section-title">PART II // 言語エンジン &amp; 運用基盤</div>
+      <a href="git-github.html" class="drawer-link">
+        <span class="link-vol">VOL.07</span>
+        <span>Git &amp; GitHub Architecture</span>
+      </a>
+      <a href="python-masterclass.html" class="drawer-link">
+        <span class="link-vol">VOL.08</span>
+        <span>Python 3 Masterclass</span>
+      </a>
+      <a href="python-runtime.html" class="drawer-link">
+        <span class="link-vol">VOL.09</span>
+        <span>CPython Execution Internals</span>
+      </a>
+      <a href="low-latency-python.html" class="drawer-link">
+        <span class="link-vol">VOL.10</span>
+        <span>Low-Latency Python Systems</span>
+      </a>
+      <a href="postgresql.html" class="drawer-link">
+        <span class="link-vol">VOL.11</span>
+        <span>PostgreSQL Architecture</span>
+      </a>
+      <a href="java-masterclass.html" class="drawer-link">
+        <span class="link-vol">VOL.12</span>
+        <span>Java Masterclass &amp; Bytecode</span>
+      </a>
+
+      <div class="drawer-section-title">PART III // エンタープライズ Web &amp; リアクティブ</div>
+      <a href="high-concurrency-java.html" class="drawer-link">
+        <span class="link-vol">VOL.13</span>
+        <span>High-Concurrency Java 21</span>
+      </a>
+      <a href="enterprise-scss.html" class="drawer-link active">
+        <span class="link-vol">VOL.14</span>
+        <span>Enterprise SCSS Architecture</span>
+      </a>
+      <a href="javascript-mastery.html" class="drawer-link">
+        <span class="link-vol">VOL.15</span>
+        <span>The Ultimate Guide to JS</span>
+      </a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-title">Systems Architecture Reference // システム仕様書</div>
+        <p class="footer-desc">
+          Enterprise Systems Engineering &bull; 15 Comprehensive Volumes &bull; Zero Compromise Architecture
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Systems Reference Library. W3C &amp; Dart Sass Architecture Standard.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+"""
+
+    html_doc = html_doc.replace('{diagram_1}', diagram_1)
+    html_doc = html_doc.replace('{diagram_2}', diagram_2)
+    html_doc = html_doc.replace('{diagram_3}', diagram_3)
+
+    with open('enterprise-scss.html', 'w', encoding='utf-8') as f:
+        f.write(html_doc)
+    print("Created enterprise-scss.html successfully!")
+
+if __name__ == '__main__':
+    build_enterprise_scss_html()

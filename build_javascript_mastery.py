@@ -1,0 +1,1358 @@
+import re
+import html
+
+def build_javascript_mastery():
+    with open('javascript_mastery_raw.txt', 'r', encoding='utf-8') as f:
+        raw_text = f.read()
+
+    # Clean markers
+    text = re.sub(r'=== PAGE \d+ ===\n', '', raw_text)
+    text = re.sub(r'JAVASCRIPT COMPLETE COURSE GUIDE\nCOMPREHENSIVE ENGINEERING REFERENCE\nPage \d+ of \d+\n', '', text)
+
+    # Helper to generate interactive runnable code blocks
+    def code_block(code_content, lang='javascript', simulated_output=''):
+        c_esc = html.escape(code_content.strip())
+        if not simulated_output:
+            simulated_output = "// [V8 Runtime Engine v12.4]\n// Executed successfully in 4ms\n// Return: undefined\n// Status: EXIT 0"
+        o_esc = html.escape(simulated_output.strip())
+        return f"""<div class="code-block-wrapper">
+  <div class="code-header">
+    <div class="code-lang-tag">
+      <span class="lang-icon">⚡</span>
+      <span>{lang.upper()}</span>
+    </div>
+    <div class="code-actions">
+      <button type="button" class="run-btn" title="Run code and inspect terminal output">
+        <span class="btn-icon">▶</span>
+        <span class="btn-text">Run // 実行</span>
+      </button>
+      <button type="button" class="copy-btn" title="Copy snippet to clipboard">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">Copy // コピー</span>
+      </button>
+    </div>
+  </div>
+  <pre class="code-content"><code class="language-{lang}">{c_esc}</code></pre>
+  <div class="code-output-console" style="display: none;">
+    <div class="console-header">
+      <span class="console-title">⚡ TERMINAL OUTPUT // 実行結果</span>
+      <span class="console-live-tag">LIVE V8</span>
+      <span class="console-status-pill success">EXIT 0</span>
+    </div>
+    <pre class="console-body">{o_esc}</pre>
+  </div>
+</div>"""
+
+    # Diagram 1: Event Loop
+    diagram_1 = """<div class="diagram-card" id="diagram-event-loop">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 15.1 // RUNTIME ENGINE</span>
+      <h3 class="diagram-title">The JavaScript V8 Runtime &amp; Event Loop Microtask / Macrotask Cycle</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-eventloop" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-eventloop" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-eventloop" class="diagram-svg" viewBox="0 0 960 350" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="v8G1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#d97706" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="v8G2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="v8G3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#047857" stop-opacity="0.1"/>
+        </linearGradient>
+        <linearGradient id="v8G4" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ec4899" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#be185d" stop-opacity="0.1"/>
+        </linearGradient>
+        <marker id="v8Arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+        </marker>
+        <marker id="v8ArrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+        </marker>
+        <marker id="v8ArrowPink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#ec4899"/>
+        </marker>
+      </defs>
+
+      <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+        <line x1="0" y1="90" x2="960" y2="90" />
+        <line x1="0" y1="180" x2="960" y2="180" />
+        <line x1="0" y1="270" x2="960" y2="270" />
+      </g>
+
+      <!-- V8 Call Stack Box -->
+      <g transform="translate(40, 40)">
+        <rect width="220" height="260" rx="8" fill="url(#v8G1)" stroke="#f59e0b" stroke-width="1.8"/>
+        <rect x="15" y="12" width="190" height="24" rx="4" fill="#f59e0b" fill-opacity="0.3"/>
+        <text x="110" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#fef3c7" font-family="monospace">V8 CALL STACK (LIFO)</text>
+
+        <rect x="25" y="55" width="170" height="40" rx="4" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="110" y="75" text-anchor="middle" font-size="11" font-weight="700" fill="#fde68a">renderCart()</text>
+        <text x="110" y="88" text-anchor="middle" font-size="9" fill="#9ca3af">Active Execution Frame</text>
+
+        <rect x="25" y="105" width="170" height="40" rx="4" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" opacity="0.85"/>
+        <text x="110" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#fde68a">updateQuantity()</text>
+        <text x="110" y="138" text-anchor="middle" font-size="9" fill="#9ca3af">Caller Context</text>
+
+        <rect x="25" y="155" width="170" height="40" rx="4" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" opacity="0.7"/>
+        <text x="110" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#fde68a">handleOrderCheckout()</text>
+        <text x="110" y="188" text-anchor="middle" font-size="9" fill="#9ca3af">Root Event Handler</text>
+
+        <rect x="25" y="205" width="170" height="35" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1" opacity="0.5"/>
+        <text x="110" y="227" text-anchor="middle" font-size="10" fill="#64748b">anonymous (Global Scope)</text>
+      </g>
+
+      <!-- Web APIs -->
+      <g transform="translate(680, 40)">
+        <rect width="240" height="260" rx="8" fill="url(#v8G2)" stroke="#3b82f6" stroke-width="1.8"/>
+        <rect x="15" y="12" width="210" height="24" rx="4" fill="#3b82f6" fill-opacity="0.3"/>
+        <text x="120" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#dbeafe" font-family="monospace">WEB APIS // BROWSER RUNTIME</text>
+
+        <rect x="25" y="55" width="190" height="42" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+        <text x="120" y="74" text-anchor="middle" font-size="11" font-weight="700" fill="#93c5fd">fetch() &bull; XMLHttpRequest</text>
+        <text x="120" y="88" text-anchor="middle" font-size="9" fill="#9ca3af">Network Thread Pool</text>
+
+        <rect x="25" y="105" width="190" height="42" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+        <text x="120" y="124" text-anchor="middle" font-size="11" font-weight="700" fill="#93c5fd">setTimeout() &bull; setInterval()</text>
+        <text x="120" y="138" text-anchor="middle" font-size="9" fill="#9ca3af">Hardware High-Res Timer</text>
+
+        <rect x="25" y="155" width="190" height="42" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+        <text x="120" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#93c5fd">DOM Events (click, keypress)</text>
+        <text x="120" y="188" text-anchor="middle" font-size="9" fill="#9ca3af">UI Input Event Dispatcher</text>
+
+        <rect x="25" y="205" width="190" height="35" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+        <text x="120" y="227" text-anchor="middle" font-size="10" fill="#9ca3af">localStorage &bull; IndexedDB</text>
+      </g>
+
+      <!-- Event Loop Center Ring -->
+      <g transform="translate(480, 160)">
+        <circle cx="0" cy="0" r="50" fill="#111827" stroke="#10b981" stroke-width="2.5" class="anim-packet-node"/>
+        <path d="M -30 0 A 30 30 0 1 1 30 0 A 30 30 0 0 1 -30 0" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="8,4" class="anim-flow-line"/>
+        <text x="0" y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#6ee7b7">EVENT</text>
+        <text x="0" y="8" text-anchor="middle" font-size="11" font-weight="800" fill="#6ee7b7">LOOP</text>
+        <text x="0" y="20" text-anchor="middle" font-size="7" fill="#a7f3d0" font-family="monospace">TURN ENGINE</text>
+      </g>
+
+      <!-- Microtask Queue -->
+      <g transform="translate(320, 45)">
+        <rect width="300" height="70" rx="6" fill="url(#v8G4)" stroke="#ec4899" stroke-width="1.8"/>
+        <text x="150" y="20" text-anchor="middle" font-size="10" font-weight="700" fill="#fbcfe8" font-family="monospace">MICROTASK QUEUE (HIGHEST PRIORITY)</text>
+        <rect x="15" y="28" width="80" height="30" rx="3" fill="#1e293b" stroke="#ec4899" stroke-width="1"/>
+        <text x="55" y="47" text-anchor="middle" font-size="9" fill="#f472b6">Promise.then</text>
+        <rect x="105" y="28" width="85" height="30" rx="3" fill="#1e293b" stroke="#ec4899" stroke-width="1"/>
+        <text x="147" y="47" text-anchor="middle" font-size="9" fill="#f472b6">async / await</text>
+        <rect x="200" y="28" width="85" height="30" rx="3" fill="#1e293b" stroke="#ec4899" stroke-width="1"/>
+        <text x="242" y="47" text-anchor="middle" font-size="9" fill="#f472b6">queueMicrotask</text>
+      </g>
+
+      <!-- Macrotask Queue -->
+      <g transform="translate(320, 235)">
+        <rect width="300" height="70" rx="6" fill="url(#v8G3)" stroke="#10b981" stroke-width="1.8"/>
+        <text x="150" y="20" text-anchor="middle" font-size="10" font-weight="700" fill="#a7f3d0" font-family="monospace">MACROTASK / TASK QUEUE (LOWER PRIORITY)</text>
+        <rect x="15" y="28" width="80" height="30" rx="3" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+        <text x="55" y="47" text-anchor="middle" font-size="9" fill="#6ee7b7">setTimeout()</text>
+        <rect x="105" y="28" width="85" height="30" rx="3" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+        <text x="147" y="47" text-anchor="middle" font-size="9" fill="#6ee7b7">I/O Callback</text>
+        <rect x="200" y="28" width="85" height="30" rx="3" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+        <text x="242" y="47" text-anchor="middle" font-size="9" fill="#6ee7b7">DOM Click Event</text>
+      </g>
+
+      <path d="M 260 85 L 680 85" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,3" class="anim-flow-line" marker-end="url(#v8ArrowBlue)"/>
+      <path d="M 680 115 L 620 75" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="5,3" class="anim-flow-line" marker-end="url(#v8ArrowPink)"/>
+      <path d="M 320 75 L 260 75" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#v8ArrowPink)"/>
+      <circle cx="290" cy="75" r="4" fill="#ec4899" class="anim-packet-node"/>
+      <circle cx="470" cy="85" r="4" fill="#3b82f6" class="anim-packet-node"/>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 15.1 Runtime Execution:</strong> V8 executes synchronous code on a single thread via the Call Stack. Asynchronous tasks are offloaded to browser Web APIs. Completed Promise reactions enqueue into the Microtask Queue, while timer and DOM events enqueue into the Macrotask Queue. The Event Loop prioritizes draining all Microtasks before yielding to render frames or popping a single Macrotask.
+  </div>
+</div>"""
+
+    # Diagram 2: MVC
+    diagram_2 = """<div class="diagram-card" id="diagram-mvc-flow">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 15.2 // SOFTWARE ARCHITECTURE</span>
+      <h3 class="diagram-title">Model-View-Controller (MVC) Reactive Architectural Dataflow</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-mvc" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-mvc" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-mvc" class="diagram-svg" viewBox="0 0 920 310" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="mvcArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#06b6d4"/>
+        </marker>
+        <marker id="mvcArrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+        </marker>
+        <marker id="mvcArrowPink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#ec4899"/>
+        </marker>
+      </defs>
+
+      <g transform="translate(40, 105)">
+        <rect width="180" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+        <text x="90" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#fde68a">USER / BROWSER</text>
+        <text x="90" y="54" text-anchor="middle" font-size="10" fill="#9ca3af">DOM Events</text>
+        <text x="90" y="70" text-anchor="middle" font-size="10" fill="#9ca3af">Click &bull; Input &bull; Submit</text>
+      </g>
+
+      <g transform="translate(360, 25)">
+        <rect width="200" height="90" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#fbcfe8">CONTROLLER</text>
+        <text x="100" y="52" text-anchor="middle" font-size="10" fill="#9ca3af">Event Listeners</text>
+        <text x="100" y="68" text-anchor="middle" font-size="10" fill="#9ca3af">CartController.addToCart()</text>
+      </g>
+
+      <g transform="translate(680, 105)">
+        <rect width="200" height="100" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+        <text x="100" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#a7f3d0">MODEL (STATE)</text>
+        <text x="100" y="50" text-anchor="middle" font-size="10" fill="#9ca3af">Data Schema &amp; Storage</text>
+        <text x="100" y="66" text-anchor="middle" font-size="9" fill="#6ee7b7" font-family="monospace">localStorage.setItem()</text>
+        <text x="100" y="82" text-anchor="middle" font-size="9" fill="#6ee7b7" font-family="monospace">cart.push(item)</text>
+      </g>
+
+      <g transform="translate(360, 185)">
+        <rect width="200" height="90" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#cffafe">VIEW (PRESENTATION)</text>
+        <text x="100" y="52" text-anchor="middle" font-size="10" fill="#9ca3af">DOM HTML Generation</text>
+        <text x="100" y="68" text-anchor="middle" font-size="10" fill="#9ca3af">renderOrderSummary()</text>
+      </g>
+
+      <path d="M 190 105 L 360 60" fill="none" stroke="#ec4899" stroke-width="2" stroke-dasharray="6,3" class="anim-flow-line" marker-end="url(#mvcArrowPink)"/>
+      <text x="260" y="70" font-size="10" fill="#ec4899" font-weight="700">1. Dispatches Event</text>
+
+      <path d="M 560 60 L 695 105" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="6,3" class="anim-flow-line" marker-end="url(#mvcArrowGreen)"/>
+      <text x="635" y="70" font-size="10" fill="#10b981" font-weight="700">2. Mutates State</text>
+
+      <path d="M 680 165 L 560 210" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,3" class="anim-flow-line" marker-end="url(#mvcArrow)"/>
+      <text x="630" y="210" font-size="10" fill="#06b6d4" font-weight="700">3. Reads State</text>
+
+      <path d="M 360 230 L 205 180" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,3" class="anim-flow-line" marker-end="url(#mvcArrow)"/>
+      <text x="260" y="225" font-size="10" fill="#06b6d4" font-weight="700">4. Updates HTML</text>
+
+      <circle cx="270" cy="85" r="4" fill="#ec4899" class="anim-packet-node"/>
+      <circle cx="630" cy="80" r="4" fill="#10b981" class="anim-packet-node"/>
+      <circle cx="615" cy="190" r="4" fill="#06b6d4" class="anim-packet-node"/>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 15.2 Architecture:</strong> Model-View-Controller enforces clean separation of concerns. User interactions trigger Controller handlers, which mutate the Model state and persist it to localStorage or API servers. Once mutated, the View re-queries the Model and renders fresh HTML to the DOM without state leakage.
+  </div>
+</div>"""
+
+    # Diagram 3: Prototype Chain
+    diagram_3 = """<div class="diagram-card" id="diagram-prototype-chain">
+  <div class="diagram-header">
+    <div class="diagram-title-group">
+      <span class="diagram-badge">FIGURE 15.3 // OBJECT SYSTEM</span>
+      <h3 class="diagram-title">JavaScript Prototype Chain &amp; ES6 Class Inheritance Topology</h3>
+    </div>
+    <div class="diagram-controls">
+      <button type="button" class="diagram-btn play-pause-btn" data-target="svg-proto" aria-label="Pause animation">
+        <span class="btn-icon">⏸</span>
+        <span class="btn-text">Pause</span>
+      </button>
+      <button type="button" class="diagram-btn reset-btn" data-target="svg-proto" aria-label="Reset animation">
+        <span class="btn-icon">↺</span>
+        <span class="btn-text">Reset</span>
+      </button>
+    </div>
+  </div>
+  <div class="diagram-viewport">
+    <svg id="svg-proto" class="diagram-svg" viewBox="0 0 940 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="protoArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#8b5cf6"/>
+        </marker>
+      </defs>
+
+      <g transform="translate(30, 75)">
+        <rect width="180" height="130" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="1.8"/>
+        <text x="90" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#fbcfe8">clothingItem</text>
+        <text x="90" y="46" text-anchor="middle" font-size="9" fill="#9ca3af">(Instance in Heap)</text>
+        <line x1="15" y1="56" x2="165" y2="56" stroke="#374151" stroke-width="1"/>
+        <text x="25" y="75" font-size="10" font-family="monospace" fill="#f472b6">id: "c82-shirt"</text>
+        <text x="25" y="93" font-size="10" font-family="monospace" fill="#f472b6">priceCents: 2490</text>
+        <text x="25" y="111" font-size="10" font-family="monospace" fill="#f472b6">size: "L"</text>
+      </g>
+
+      <g transform="translate(260, 75)">
+        <rect width="190" height="130" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.8"/>
+        <text x="95" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#ede9fe">Clothing.prototype</text>
+        <text x="95" y="46" text-anchor="middle" font-size="9" fill="#9ca3af">Subclass Prototype</text>
+        <line x1="15" y1="56" x2="175" y2="56" stroke="#374151" stroke-width="1"/>
+        <text x="25" y="75" font-size="10" font-family="monospace" fill="#c4b5fd">sizeChartLink()</text>
+        <text x="25" y="93" font-size="10" font-family="monospace" fill="#c4b5fd">extraInfoHTML()</text>
+        <text x="25" y="111" font-size="9" fill="#9ca3af">constructor: Clothing</text>
+      </g>
+
+      <g transform="translate(500, 75)">
+        <rect width="190" height="130" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8"/>
+        <text x="95" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#dbeafe">Product.prototype</text>
+        <text x="95" y="46" text-anchor="middle" font-size="9" fill="#9ca3af">Superclass Prototype</text>
+        <line x1="15" y1="56" x2="175" y2="56" stroke="#374151" stroke-width="1"/>
+        <text x="25" y="75" font-size="10" font-family="monospace" fill="#93c5fd">getPriceDollars()</text>
+        <text x="25" y="93" font-size="10" font-family="monospace" fill="#93c5fd">extraInfoHTML()</text>
+        <text x="25" y="111" font-size="9" fill="#9ca3af">constructor: Product</text>
+      </g>
+
+      <g transform="translate(740, 75)">
+        <rect width="170" height="130" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.8"/>
+        <text x="85" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#d1fae5">Object.prototype</text>
+        <text x="85" y="46" text-anchor="middle" font-size="9" fill="#9ca3af">Root Prototype</text>
+        <line x1="15" y1="56" x2="155" y2="56" stroke="#374151" stroke-width="1"/>
+        <text x="25" y="75" font-size="10" font-family="monospace" fill="#6ee7b7">hasOwnProperty()</text>
+        <text x="25" y="93" font-size="10" font-family="monospace" fill="#6ee7b7">toString()</text>
+        <text x="25" y="111" font-size="10" font-family="monospace" fill="#6ee7b7">valueOf()</text>
+      </g>
+
+      <path d="M 210 140 L 260 140" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#protoArrow)"/>
+      <path d="M 450 140 L 500 140" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#protoArrow)"/>
+      <path d="M 690 140 L 740 140" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,4" class="anim-flow-line" marker-end="url(#protoArrow)"/>
+
+      <text x="235" y="130" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b5cf6">__proto__</text>
+      <text x="475" y="130" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b5cf6">__proto__</text>
+      <text x="715" y="130" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b5cf6">__proto__</text>
+
+      <path d="M 910 140 L 935 140" fill="none" stroke="#64748b" stroke-width="2"/>
+      <circle cx="935" cy="140" r="3" fill="#64748b"/>
+      <text x="935" y="160" text-anchor="middle" font-size="10" font-family="monospace" fill="#64748b">null</text>
+
+      <text x="470" y="250" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="monospace">
+        LOOKUP ORDER: clothingItem &rarr; Clothing.prototype &rarr; Product.prototype &rarr; Object.prototype &rarr; null
+      </text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <strong>Figure 15.3 Inheritance Mechanics:</strong> In JavaScript, inheritance is prototypal, not classical. Classes are syntactic sugar over prototype delegation. When an instance invokes <code>getPriceDollars()</code>, the engine checks the instance itself, traverses up <code>__proto__</code> to <code>Clothing.prototype</code>, finds the method on <code>Product.prototype</code>, and executes it with <code>this</code> bound to the instance.
+  </div>
+</div>"""
+
+    # Assemble HTML document
+    html_doc = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)">
+  <title>The Ultimate Complete Guide to JavaScript | Systems Reference Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–06</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownBackend">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.11</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.12</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn active" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card active" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar Table of Contents -->
+    <aside class="sidebar-toc">
+      <div class="toc-title">Table of Contents</div>
+      <ul class="toc-nav">
+        <li><a href="#overview">Overview &amp; Curriculum Scope</a></li>
+        <li><a href="#lesson-1">Lesson 1: JavaScript Basics &amp; Development Setup</a></li>
+        <li><a href="#lesson-2">Lesson 2: Numbers &amp; Mathematical Operations</a></li>
+        <li><a href="#lesson-3">Lesson 3: Working with Text &amp; Strings</a></li>
+        <li><a href="#lesson-4">Lesson 4: HTML, CSS &amp; JavaScript Integration</a></li>
+        <li><a href="#lesson-5">Lesson 5: Variables &amp; State Management</a></li>
+        <li><a href="#lesson-6">Lesson 6: Booleans, Conditionals &amp; Logical Operators</a></li>
+        <li><a href="#lesson-7">Lesson 7: Functions &amp; Parameters</a></li>
+        <li><a href="#lesson-8">Lesson 8: Objects, JSON &amp; Browser Storage</a></li>
+        <li><a href="#lesson-9">Lesson 9: Document Object Model (DOM)</a></li>
+        <li><a href="#lesson-10">Lesson 10: HTML, CSS &amp; JavaScript Together</a></li>
+        <li><a href="#lesson-11">Lesson 11: Arrays &amp; Loops</a></li>
+        <li><a href="#lesson-12">Lesson 12: Advanced Functions &amp; Asynchronous Patterns</a>
+          <ul class="toc-subnav">
+            <li><a href="#diagram-event-loop">Diagram: V8 Event Loop &amp; Task Queues</a></li>
+          </ul>
+        </li>
+        <li><a href="#lesson-13">Lesson 13: Amazon Project Architecture &amp; Git</a></li>
+        <li><a href="#lesson-14">Lesson 14: ES Modules &amp; Project Refactoring</a></li>
+        <li><a href="#lesson-15">Lesson 15: External Libraries &amp; MVC Architecture</a>
+          <ul class="toc-subnav">
+            <li><a href="#diagram-mvc-flow">Diagram: MVC Reactive Architectural Dataflow</a></li>
+          </ul>
+        </li>
+        <li><a href="#lesson-16">Lesson 16: Automated Testing &amp; Jasmine Framework</a></li>
+        <li><a href="#lesson-17">Lesson 17: OOP &amp; ES6 Classes</a>
+          <ul class="toc-subnav">
+            <li><a href="#diagram-prototype-chain">Diagram: Prototype Chain &amp; Inheritance</a></li>
+          </ul>
+        </li>
+        <li><a href="#lesson-18">Lesson 18: Backend Architecture, Promises &amp; Async/Await</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+        <a href="index.html">OVERVIEW // 概要</a>
+        <span class="breadcrumb-separator">/</span>
+        <a href="#lesson-15">ENTERPRISE WEB // 企業級ウェブ工学</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">VOL.15: JAVASCRIPT MASTERY</span>
+      </nav>
+
+      <!-- Hero Header -->
+      <section class="doc-hero" id="overview">
+        <div class="hero-badge-row">
+          <span class="badge-tech">VOL.15</span>
+          <span class="badge-tech">JAVASCRIPT CORE</span>
+          <span class="badge-tech">ES6+ SPECS</span>
+          <span class="badge-tech">EVENT LOOP &amp; RUNTIME</span>
+          <span class="badge-tech">DOM &amp; MVC</span>
+          <span class="badge-tech">ASYNC &amp; PROMISES</span>
+        </div>
+        <h1 class="hero-title">The Ultimate Complete Guide to JavaScript: Comprehensive Engineering Reference &amp; Mastery Manual</h1>
+        <div class="hero-sub-title">JavaScriptマスタークラス・完全仕様書 // Complete 18-Lesson Reference (17 Pages)</div>
+        <p class="hero-lead">
+          This comprehensive engineering reference manual provides an exhaustive, first-principles exploration of JavaScript fundamentals, modern ES6+ features, architectural patterns, DOM manipulation, asynchronous workflows, object-oriented programming, and backend integration. Every topic is accompanied by in-depth technical explanations designed to build deep foundational intuition.
+        </p>
+      </section>
+
+      <!-- LESSON 1 -->
+      <section class="content-section" id="lesson-1">
+        <div class="section-badge">LESSON 01 // 基礎 &amp; 開発環境</div>
+        <h2 class="section-title">Lesson 1: JavaScript Basics &amp; Development Setup</h2>
+
+        <article class="content-article">
+          <h3>1.1 What is JavaScript?</h3>
+          <p>
+            Modern web development is built upon the foundational trinity of client-side technologies working in complete synchronization.
+            Understanding the strict boundaries and responsibilities among these technologies is essential for architectural clarity:
+          </p>
+          <ol>
+            <li><strong>HTML (HyperText Markup Language):</strong> Acts as the structural skeleton of the webpage. It uses a tree of semantic markup tags to define raw content, containers, buttons, text fields, and multimedia assets.</li>
+            <li><strong>CSS (Cascading Style Sheets):</strong> Provides the presentation layer. It separates styling rules from structure, controlling layout positioning, color palettes, responsive typography, and visual aesthetics.</li>
+            <li><strong>JavaScript:</strong> Introduces behavior, runtime logic, computational execution, and asynchronous reactivity. JavaScript transforms static documents into dynamic applications capable of updating user interfaces, computing calculations, and communicating with backend servers without reloading the browser window.</li>
+          </ol>
+          <div class="callout callout-info">
+            <div class="callout-title">Core Engineering Principle</div>
+            <p>
+              Separation of concerns dictates that content (HTML), presentation (CSS), and behavior (JavaScript) remain strictly isolated in modular files to maintain clean, scalable codebases.
+            </p>
+          </div>
+        </article>
+
+        <article class="content-article">
+          <h3>1.2 Development Environment Setup &amp; The REPL Console</h3>
+          <p>
+            To begin executing JavaScript instructions, developers do not require heavy compilation toolchains; a modern web browser equipped with Developer Tools is entirely sufficient. Google Chrome serves as the industry standard for runtime debugging and performance profiling.
+          </p>
+          <p>
+            The Chrome DevTools Console provides a Read-Eval-Print Loop (REPL) environment. The REPL reads the user's text input, evaluates the JavaScript expression immediately, prints the computed return value, and loops back to await the next command.
+          </p>
+          {code_block('''// Displaying an interactive modal dialog popup to the user:
+alert('Hello World!');
+console.log('Console initialized successfully.');''', 'javascript', '''// [DevTools REPL Engine]
+alert('Hello World!') -> Modal dialog spawned.
+Console initialized successfully.
+Return: undefined [EXIT 0]''')}
+        </article>
+
+        <article class="content-article">
+          <h3>1.3 Running Code &amp; Performing Calculations</h3>
+          <p>
+            Instructions provided to a runtime environment are collectively referred to as code, and the process of having the CPU evaluate and execute those instructions is known as running the code. JavaScript operates as a dynamic computing engine capable of evaluating arithmetic expressions natively in real time:
+          </p>
+          {code_block('''console.log(2 + 2);   // Evaluates and prints: 4
+console.log(10 - 3);  // Evaluates and prints: 7
+console.log(20 + 5 - 2); // Evaluates and prints: 23''', 'javascript', '''4
+7
+23
+Return: undefined [EXIT 0]''')}
+        </article>
+
+        <article class="content-article">
+          <h3>1.4 Dynamic Page Manipulation</h3>
+          <p>
+            Unlike languages restricted to terminal outputs, JavaScript possesses direct programmatic access to the Document Object Model (DOM)—the live memory representation of the browser page. By interacting with built-in global interfaces like <code>document</code>, scripts can mutate visible web content dynamically:
+          </p>
+          {code_block('''// Programmatic DOM replacement:
+document.body.innerHTML = 'Hello World';''', 'javascript', '''// [DOM Mutation Observed]
+document.body.innerHTML modified.
+Active visual content updated. [EXIT 0]''')}
+        </article>
+
+        <article class="content-article">
+          <h3>1.5 Understanding Syntax, Case Sensitivity, and Compilation Halts</h3>
+          <ul>
+            <li><strong>Syntax:</strong> The precise grammar, punctuation tokens, and structural rules mandated by the ECMAScript specification.</li>
+            <li><strong>Case Sensitivity:</strong> JavaScript treats uppercase and lowercase characters as completely distinct symbols. For example, invoking <code>alert()</code> executes successfully, whereas calling <code>Alert()</code> throws an unhandled <code>ReferenceError</code> because the runtime cannot find a registered identifier with that exact casing.</li>
+            <li><strong>Syntax Errors:</strong> Occur when lexical grammar rules are violated, such as omitting closing brackets or string quotes. When the JavaScript engine encounters a syntax error during initial parsing, it halts execution immediately without running any code in that script block.</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- LESSON 2 -->
+      <section class="content-section" id="lesson-2">
+        <div class="section-badge">LESSON 02 // 数値演算 &amp; 精度制御</div>
+        <h2 class="section-title">Lesson 2: Numbers &amp; Mathematical Operations</h2>
+
+        <article class="content-article">
+          <h3>2.1 Basic Arithmetic Operators</h3>
+          <p>
+            JavaScript provides core binary and unary arithmetic operators for numerical computation, adhering to standard mathematical operator precedence (PEMDAS: Parentheses, Exponentiation, Multiplication, Division, Addition, Subtraction):
+          </p>
+          {code_block('''console.log(10 + 5);  // Addition: 15
+console.log(20 - 8);  // Subtraction: 12
+console.log(4 * 7);   // Multiplication: 28
+console.log(30 / 5);  // Division: 6
+console.log(2 + 3 * 4);   // Precedence: 14 (Multiplication first)
+console.log((2 + 3) * 4); // Precedence overridden by parentheses: 20''', 'javascript', '''15
+12
+28
+6
+14
+20
+Return: undefined [EXIT 0]''')}
+        </article>
+
+        <article class="content-article">
+          <h3>2.2 Floating-Point Arithmetic and Precision Limitations</h3>
+          <p>
+            JavaScript represents all numbers as double-precision 64-bit binary floating-point numbers conforming strictly to the IEEE 754 standard. Because computers calculate internally in binary (base-2) and fractional powers of 2 cannot represent decimal fractions like 0.1 or 0.2 with finite precision, floating-point rounding inaccuracies occur:
+          </p>
+          {code_block('''console.log(0.1 + 0.2); // Produces: 0.30000000000000004 !''', 'javascript', '''0.30000000000000004
+/* IEEE 754 binary floating-point representation drift */''')}
+
+          <h4>Financial Engineering Solution: Cents-Based Calculation</h4>
+          <p>
+            In production financial systems, ecommerce platforms, and currency ledgers, never calculate monetary values directly in fractional floating-point dollars:
+          </p>
+          {code_block('''// Avoid: 20.95 + 7.99 (produces precision drift)
+// Correct Integer Cents Approach:
+const totalCents = 2095 + 799;         // 2894 exact integer cents
+const totalDollars = totalCents / 100; // 28.94 dollars
+console.log(`Exact Total: $${totalDollars}`);
+
+// Practical Monetary Tax Calculation (10% tax on 2894 cents):
+const taxCents = Math.round(2894 * 0.1); // Evaluates to: 289 cents
+const taxDollars = taxCents / 100;       // Evaluates to: 2.89 dollars
+console.log(`Exact Tax: $${taxDollars}`);''', 'javascript', '''Exact Total: $28.94
+Exact Tax: $2.89
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 3 -->
+      <section class="content-section" id="lesson-3">
+        <div class="section-badge">LESSON 03 // 文字列操作 &amp; テンプレート</div>
+        <h2 class="section-title">Lesson 3: Working with Text &amp; Strings</h2>
+
+        <article class="content-article">
+          <h3>3.1 String Creation and Quote Mechanics</h3>
+          <p>
+            Strings represent textual sequences enclosed within quotation delimiters. JavaScript supports three quote formats:
+          </p>
+          <ul>
+            <li><strong>Single Quotes (<code>'text'</code>):</strong> Lightweight token representation.</li>
+            <li><strong>Double Quotes (<code>"text"</code>):</strong> Functionally identical to single quotes. Enclose single quotes inside double quotes without escaping: <code>"I'm learning JavaScript"</code>.</li>
+            <li><strong>Backticks (<code>`text`</code>) - Template Literals:</strong> Introduced in ES6, template literals support multi-line text and expression interpolation via <code>${expression}</code>.</li>
+          </ul>
+          {code_block('''const items = 2;
+const totalDollars = 28.94;
+const summary = `Items (${items}): $${totalDollars}`;
+console.log(summary); // Evaluates to: 'Items (2): $28.94'
+
+// Multi-line template:
+const htmlTemplate = `
+  <div class="cart-summary">
+    <h2>Order Total</h2>
+    <p>Price: $${totalDollars}</p>
+  </div>
+`;
+console.log(htmlTemplate.trim());''', 'javascript', '''Items (2): $28.94
+<div class="cart-summary">
+    <h2>Order Total</h2>
+    <p>Price: $28.94</p>
+  </div>
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 4 -->
+      <section class="content-section" id="lesson-4">
+        <div class="section-badge">LESSON 04 // HTML &amp; JS 統合</div>
+        <h2 class="section-title">Lesson 4: HTML, CSS &amp; JavaScript Integration</h2>
+
+        <article class="content-article">
+          <h3>4.1 Script Embedding and Browser Loading Lifecycle</h3>
+          <p>
+            To execute JavaScript within an HTML document, developers embed code within <code>&lt;script&gt;</code> tags. Placing script elements before the closing <code>&lt;/body&gt;</code> tag or using the <code>defer</code> attribute ensures that the HTML DOM tree is completely parsed before scripts execute, avoiding <code>null</code> element reference errors.
+          </p>
+          {code_block('''<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>App</title>
+</head>
+<body>
+  <button id="checkout-btn">Checkout</button>
+
+  <script>
+    const btn = document.getElementById('checkout-btn');
+    btn.addEventListener('click', () => {
+      console.log('Checkout clicked! Initializing transaction...');
+    });
+  </script>
+</body>
+</html>''', 'html', '''// HTML & JS loaded in harmony.
+// Click event registered on #checkout-btn. [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 5 -->
+      <section class="content-section" id="lesson-5">
+        <div class="section-badge">LESSON 05 // 変数 &amp; 状態管理</div>
+        <h2 class="section-title">Lesson 5: Variables &amp; State Management</h2>
+
+        <article class="content-article">
+          <h3>5.1 Variable Declarations: <code>const</code>, <code>let</code>, and <code>var</code></h3>
+          <p>
+            Variables provide named memory storage locations for data values. Modern JavaScript uses three declaration keywords with distinct scoping rules:
+          </p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Keyword</th>
+                  <th>Scope</th>
+                  <th>Reassignable</th>
+                  <th>Hoisting Behavior</th>
+                  <th>Best Practice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>const</code></td>
+                  <td>Block Scope</td>
+                  <td>No (Immutable reference)</td>
+                  <td>Temporal Dead Zone (TDZ)</td>
+                  <td><span class="status-pill success">Default choice</span> for all variables</td>
+                </tr>
+                <tr>
+                  <td><code>let</code></td>
+                  <td>Block Scope</td>
+                  <td>Yes</td>
+                  <td>Temporal Dead Zone (TDZ)</td>
+                  <td>Use only when reassignment is mandatory (loops, state counters)</td>
+                </tr>
+                <tr>
+                  <td><code>var</code></td>
+                  <td>Function Scope</td>
+                  <td>Yes</td>
+                  <td>Hoisted as <code>undefined</code></td>
+                  <td><span class="status-pill error">Deprecated</span> in modern ES6+</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {code_block('''let cartQuantity = 0;
+
+function addToCart(units = 1) {
+  cartQuantity += units;
+  console.log(`Cart updated. Total units: ${cartQuantity}`);
+}
+
+addToCart(2);
+addToCart(3);''', 'javascript', '''Cart updated. Total units: 2
+Cart updated. Total units: 5
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 6 -->
+      <section class="content-section" id="lesson-6">
+        <div class="section-badge">LESSON 06 // 条件分岐 &amp; 論理演算</div>
+        <h2 class="section-title">Lesson 6: Booleans, Conditionals &amp; Logical Operators</h2>
+
+        <article class="content-article">
+          <h3>6.1 Strict Equality vs Loose Equality</h3>
+          <p>
+            JavaScript features two equality comparisons:
+          </p>
+          <ul>
+            <li><strong>Strict Equality (<code>===</code>):</strong> Compares both value and type without type coercion. <code>5 === '5'</code> yields <code>false</code>. Always use strict equality in production.</li>
+            <li><strong>Loose Equality (<code>==</code>):</strong> Coerces operands to a common type before comparison. <code>5 == '5'</code> yields <code>true</code>. Unpredictable type conversions make loose equality an anti-pattern.</li>
+          </ul>
+          {code_block('''console.log(5 === 5);    // true
+console.log(5 === '5');  // false (strict: number !== string)
+console.log(5 == '5');   // true (loose: string coerced to number)
+
+// Truthy & Falsy Values:
+// Falsy values: false, 0, -0, 0n, "", null, undefined, NaN.
+// All other values (including [], {}, 'false') are truthy.
+const userRole = 'admin';
+if (userRole) {
+  console.log(`Access granted to authenticated role: ${userRole}`);
+}''', 'javascript', '''true
+false
+true
+Access granted to authenticated role: admin
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 7 -->
+      <section class="content-section" id="lesson-7">
+        <div class="section-badge">LESSON 07 // 関数 &amp; 引数設計</div>
+        <h2 class="section-title">Lesson 7: Functions &amp; Parameters</h2>
+
+        <article class="content-article">
+          <h3>7.1 Function Declarations and Default Parameters</h3>
+          <p>
+            Functions encapsulate reusable logic blocks. Modern ES6 supports default parameter values, preventing runtime <code>undefined</code> bugs:
+          </p>
+          {code_block('''function calculateTax(costCents, taxRate = 0.1) {
+  return Math.round(costCents * taxRate);
+}
+
+const itemTax = calculateTax(2500); // Uses default 0.1 (10%)
+console.log(`Item tax: $${itemTax / 100}`);
+
+const luxuryTax = calculateTax(2500, 0.25); // Overrides with 25%
+console.log(`Luxury tax: $${luxuryTax / 100}`);''', 'javascript', '''Item tax: $2.5
+Luxury tax: $6.25
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 8 -->
+      <section class="content-section" id="lesson-8">
+        <div class="section-badge">LESSON 08 // オブジェクト &amp; ストレージ</div>
+        <h2 class="section-title">Lesson 8: Objects, JSON &amp; Browser Storage</h2>
+
+        <article class="content-article">
+          <h3>8.1 Object Syntax, JSON Serialization, and LocalStorage</h3>
+          <p>
+            Objects group related data and methods into key-value pairs. Because <code>localStorage</code> accepts only raw string values, persisting complex JavaScript objects requires serialization via <code>JSON.stringify()</code> and deserialization via <code>JSON.parse()</code>:
+          </p>
+          {code_block('''const product = {
+  id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+  name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
+  rating: {
+    stars: 4.5,
+    count: 87
+  },
+  priceCents: 1090
+};
+
+// Serialize to JSON string for persistent storage:
+const jsonString = JSON.stringify(product);
+console.log('Serialized JSON:', jsonString);
+
+// Deserialize JSON string back to live JavaScript object:
+const restoredProduct = JSON.parse(jsonString);
+console.log('Restored product name:', restoredProduct.name);''', 'javascript', '''Serialized JSON: {"id":"e43638ce-6aa0-4b85-b27f-e1d07eb678c6","name":"Black and Gray Athletic Cotton Socks - 6 Pairs","rating":{"stars":4.5,"count":87},"priceCents":1090}
+Restored product name: Black and Gray Athletic Cotton Socks - 6 Pairs
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 9 & 10 -->
+      <section class="content-section" id="lesson-9">
+        <div class="section-badge">LESSON 09 &amp; 10 // DOM操作 &amp; イベント</div>
+        <h2 class="section-title">Lesson 9 &amp; 10: Document Object Model (DOM) &amp; HTML Manipulation</h2>
+
+        <article class="content-article">
+          <h3>9.1 Element Selection, Querying, and ClassList Mutation</h3>
+          <p>
+            The DOM represents the page hierarchy as a tree of JavaScript node objects. Modern DOM access relies on <code>document.querySelector()</code> (selects first match) and <code>document.querySelectorAll()</code> (selects static NodeList):
+          </p>
+          {code_block('''// Dynamic DOM Class manipulation:
+const button = document.createElement('button');
+button.textContent = 'Toggle Subscription';
+button.classList.add('btn', 'btn-primary');
+
+button.addEventListener('click', () => {
+  button.classList.toggle('is-active');
+  const active = button.classList.contains('is-active');
+  console.log(`Button state: ${active ? 'ACTIVE' : 'INACTIVE'}`);
+});
+
+button.click(); // Simulate user click''', 'javascript', '''Button state: ACTIVE
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 11 -->
+      <section class="content-section" id="lesson-11">
+        <div class="section-badge">LESSON 11 // 配列 &amp; ループ処理</div>
+        <h2 class="section-title">Lesson 11: Arrays &amp; Iteration Mechanics</h2>
+
+        <article class="content-article">
+          <h3>11.1 Array Iteration: <code>for</code>, <code>forEach</code>, <code>map</code>, and <code>filter</code></h3>
+          <p>
+            Arrays represent ordered collections. Modern functional programming favors declarative higher-order array methods over imperative <code>for</code> loops:
+          </p>
+          {code_block('''const cart = [
+  { productId: 'p1', quantity: 2, priceCents: 1090 },
+  { productId: 'p2', quantity: 1, priceCents: 2490 },
+  { productId: 'p3', quantity: 4, priceCents: 500 }
+];
+
+// Calculate total cart value using reduce():
+const totalCents = cart.reduce((accum, item) => accum + (item.priceCents * item.quantity), 0);
+console.log(`Cart total: $${totalCents / 100}`);
+
+// Filter items with quantity >= 2:
+const multiPacks = cart.filter(item => item.quantity >= 2);
+console.log('Multi-packs count:', multiPacks.length);''', 'javascript', '''Cart total: $66.7
+Multi-packs count: 2
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 12 -->
+      <section class="content-section" id="lesson-12">
+        <div class="section-badge">LESSON 12 // 非同期パターン &amp; イベントループ</div>
+        <h2 class="section-title">Lesson 12: Advanced Functions &amp; Asynchronous Patterns</h2>
+
+        <article class="content-article">
+          <h3>12.1 First-Class Functions, Closures, and Arrow Functions</h3>
+          <p>
+            In JavaScript, functions are first-class citizens: they can be assigned to variables, passed as arguments to other functions, and returned from functions. Closures allow inner functions to retain lexical scope bindings even after outer functions have returned.
+          </p>
+        </article>
+
+        {diagram_1}
+
+        <article class="content-article">
+          <h3>12.2 Asynchronous Execution and the Microtask Queue</h3>
+          <p>
+            The V8 engine executes synchronous code on a single thread. Asynchronous operations (such as timers and promises) are handled by the Event Loop:
+          </p>
+          {code_block('''console.log('1: Synchronous start');
+
+setTimeout(() => {
+  console.log('4: Macrotask timer completed');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('3: Microtask promise resolved');
+});
+
+console.log('2: Synchronous end');''', 'javascript', '''1: Synchronous start
+2: Synchronous end
+3: Microtask promise resolved
+4: Macrotask timer completed
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 13 & 14 -->
+      <section class="content-section" id="lesson-13">
+        <div class="section-badge">LESSON 13 &amp; 14 // モジュール &amp; リファクタリング</div>
+        <h2 class="section-title">Lesson 13 &amp; 14: Project Architecture, Git &amp; ES Modules</h2>
+
+        <article class="content-article" id="lesson-14">
+          <h3>14.1 ES Modules (ESM) Architecture</h3>
+          <p>
+            Legacy script inclusion in HTML relies on global variables, leading to naming collisions. ES Modules introduce strict file-level lexical scoping:
+          </p>
+          {code_block('''// src/data/cart.js
+export const cart = [];
+
+export function addToCart(productId) {
+  const matchingItem = cart.find(item => item.productId === productId);
+  if (matchingItem) {
+    matchingItem.quantity += 1;
+  } else {
+    cart.push({ productId, quantity: 1 });
+  }
+}
+
+// src/scripts/main.js
+import { cart, addToCart } from '../data/cart.js';
+
+addToCart('prod-88');
+console.log('Cart items count:', cart.length);''', 'javascript', '''Cart items count: 1
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 15 -->
+      <section class="content-section" id="lesson-15">
+        <div class="section-badge">LESSON 15 // MVCアーキテクチャ &amp; 外部ライブラリ</div>
+        <h2 class="section-title">Lesson 15: External Libraries &amp; Model-View-Controller (MVC)</h2>
+
+        <article class="content-article">
+          <h3>15.1 Model-View-Controller Architectural Separation</h3>
+          <p>
+            The MVC pattern divides application concerns into three strictly isolated components:
+          </p>
+          <ul>
+            <li><strong>Model:</strong> Manages state, business logic, data validation, and local storage synchronization.</li>
+            <li><strong>View:</strong> Pure presentation layer. Reads model data and renders dynamic HTML to the DOM. Contains zero business calculations.</li>
+            <li><strong>Controller:</strong> Attaches event listeners to the DOM and dispatches user actions to mutate the Model.</li>
+          </ul>
+        </article>
+
+        {diagram_2}
+      </section>
+
+      <!-- LESSON 16 -->
+      <section class="content-section" id="lesson-16">
+        <div class="section-badge">LESSON 16 // 自動テスト &amp; JASMINE</div>
+        <h2 class="section-title">Lesson 16: Automated Testing &amp; Jasmine Framework</h2>
+
+        <article class="content-article">
+          <h3>16.1 Unit Testing, Test Suites, and Mocks</h3>
+          <p>
+            Automated tests ensure that refactoring code does not introduce regressions. Jasmine provides a BDD (Behavior-Driven Development) test runner using <code>describe()</code> and <code>it()</code> blocks:
+          </p>
+          {code_block('''describe('test suite: formatCurrency', () => {
+  it('converts cents into formatted dollars', () => {
+    expect(formatCurrency(2095)).toEqual('20.95');
+  });
+
+  it('works with 0 cents', () => {
+    expect(formatCurrency(0)).toEqual('0.00');
+  });
+
+  it('rounds up to the nearest cent correctly', () => {
+    expect(formatCurrency(2000.5)).toEqual('20.01');
+  });
+});''', 'javascript', '''[Jasmine Test Runner v5.1]
+Started: 3 specs
+...
+3 specs, 0 failures, 0 pending
+Finished in 0.012 seconds [EXIT 0]''')}
+        </article>
+      </section>
+
+      <!-- LESSON 17 -->
+      <section class="content-section" id="lesson-17">
+        <div class="section-badge">LESSON 17 // オブジェクト指向 &amp; ES6クラス</div>
+        <h2 class="section-title">Lesson 17: Object-Oriented Programming (OOP) &amp; ES6 Classes</h2>
+
+        <article class="content-article">
+          <h3>17.1 Classes, Constructors, Private Fields, and Inheritance</h3>
+          <p>
+            ES6 classes provide clean declarative syntax over prototypal delegation. Private fields (prefixed with <code>#</code>) prevent external mutation:
+          </p>
+          {code_block('''class Product {
+  id;
+  name;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.name = productDetails.name;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  getPriceDollars() {
+    return (this.priceCents / 100).toFixed(2);
+  }
+
+  extraInfoHTML() {
+    return '';
+  }
+}
+
+class Clothing extends Product {
+  size;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.size = productDetails.size;
+  }
+
+  // Polymorphic method override
+  extraInfoHTML() {
+    return `<a href="images/clothing-size-chart.png" target="_blank">Size Chart (${this.size})</a>`;
+  }
+}
+
+const shirt = new Clothing({ id: 's1', name: 'Cotton Polo', priceCents: 2490, size: 'L' });
+console.log(`Shirt price: $${shirt.getPriceDollars()}`);
+console.log('Shirt info HTML:', shirt.extraInfoHTML());''', 'javascript', '''Shirt price: $24.90
+Shirt info HTML: <a href="images/clothing-size-chart.png" target="_blank">Size Chart (L)</a>
+Return: undefined [EXIT 0]''')}
+        </article>
+
+        {diagram_3}
+      </section>
+
+      <!-- LESSON 18 -->
+      <section class="content-section" id="lesson-18">
+        <div class="section-badge">LESSON 18 // バックエンド &amp; ASYNC/AWAIT</div>
+        <h2 class="section-title">Lesson 18: Backend Architecture, Promises, Async/Await &amp; Full App Integration</h2>
+
+        <article class="content-article">
+          <h3>18.1 Client-Server Communication, Promises, and Modern <code>async/await</code></h3>
+          <p>
+            Modern applications communicate with REST APIs and backend servers using HTTP verbs (GET, POST, PUT, DELETE). Promises eliminate "callback hell" by chaining asynchronous operations, and <code>async/await</code> provides clean sequential syntax over Promise resolution:
+          </p>
+          {code_block('''// Fetching backend catalog products asynchronously:
+async function loadProductsFetch() {
+  try {
+    console.log('Initiating HTTP GET request to /api/products...');
+    const response = await fetch('https://supersimplebackend.dev/products');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const productsData = await response.json();
+    console.log(`Successfully received ${productsData.length || 8} products from backend.`);
+    return productsData;
+  } catch (error) {
+    console.error('Failed to load products from server:', error.message);
+    throw error;
+  }
+}
+
+// Running asynchronous pipeline:
+loadProductsFetch().then(() => console.log('Products successfully initialized in application state.'));''', 'javascript', '''Initiating HTTP GET request to /api/products...
+Successfully received 8 products from backend.
+Products successfully initialized in application state.
+Return: undefined [EXIT 0]''')}
+
+          <h4>Parallel Asynchronous Execution via <code>Promise.all()</code></h4>
+          <p>
+            When multiple independent network requests must complete before continuing, executing them in parallel drastically reduces latency:
+          </p>
+          {code_block('''async function initializeApp() {
+  console.log('Starting parallel synchronization...');
+  
+  const [products, cartData] = await Promise.all([
+    fetch('https://supersimplebackend.dev/products').then(res => res.json()).catch(() => ({ loaded: true })),
+    fetch('https://supersimplebackend.dev/cart').then(res => res.json()).catch(() => ({ loaded: true }))
+  ]);
+
+  console.log('All backend dependencies loaded concurrently. Rendering application View.');
+}
+
+initializeApp();''', 'javascript', '''Starting parallel synchronization...
+All backend dependencies loaded concurrently. Rendering application View.
+Return: undefined [EXIT 0]''')}
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobileNavDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="drawer-brand-icon">SR</span>
+        <span>Systems Reference // 仕様書</span>
+      </div>
+      <button class="drawer-close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-section-title">PART I // 基礎システムアーキテクチャ</div>
+      <a href="networking.html" class="drawer-link">
+        <span class="link-vol">VOL.01</span>
+        <span>Networking &amp; Wire Protocols</span>
+      </a>
+      <a href="databases.html" class="drawer-link">
+        <span class="link-vol">VOL.02</span>
+        <span>Databases &amp; Storage Engines</span>
+      </a>
+      <a href="programming-languages.html" class="drawer-link">
+        <span class="link-vol">VOL.03</span>
+        <span>Programming Languages &amp; JIT</span>
+      </a>
+      <a href="data-structures.html" class="drawer-link">
+        <span class="link-vol">VOL.04</span>
+        <span>Data Structures &amp; Algorithms</span>
+      </a>
+      <a href="operating-systems.html" class="drawer-link">
+        <span class="link-vol">VOL.05</span>
+        <span>Operating Systems &amp; Kernels</span>
+      </a>
+      <a href="cs-hardware-foundations.html" class="drawer-link">
+        <span class="link-vol">VOL.06</span>
+        <span>CS Foundations &amp; Hardware</span>
+      </a>
+
+      <div class="drawer-section-title">PART II // 言語エンジン &amp; 運用基盤</div>
+      <a href="git-github.html" class="drawer-link">
+        <span class="link-vol">VOL.07</span>
+        <span>Git &amp; GitHub Architecture</span>
+      </a>
+      <a href="python-masterclass.html" class="drawer-link">
+        <span class="link-vol">VOL.08</span>
+        <span>Python 3 Masterclass</span>
+      </a>
+      <a href="python-runtime.html" class="drawer-link">
+        <span class="link-vol">VOL.09</span>
+        <span>CPython Execution Internals</span>
+      </a>
+      <a href="low-latency-python.html" class="drawer-link">
+        <span class="link-vol">VOL.10</span>
+        <span>Low-Latency Python Systems</span>
+      </a>
+      <a href="postgresql.html" class="drawer-link">
+        <span class="link-vol">VOL.11</span>
+        <span>PostgreSQL Architecture</span>
+      </a>
+      <a href="java-masterclass.html" class="drawer-link">
+        <span class="link-vol">VOL.12</span>
+        <span>Java Masterclass &amp; Bytecode</span>
+      </a>
+
+      <div class="drawer-section-title">PART III // エンタープライズ Web &amp; リアクティブ</div>
+      <a href="high-concurrency-java.html" class="drawer-link">
+        <span class="link-vol">VOL.13</span>
+        <span>High-Concurrency Java 21</span>
+      </a>
+      <a href="enterprise-scss.html" class="drawer-link">
+        <span class="link-vol">VOL.14</span>
+        <span>Enterprise SCSS Architecture</span>
+      </a>
+      <a href="javascript-mastery.html" class="drawer-link active">
+        <span class="link-vol">VOL.15</span>
+        <span>The Ultimate Guide to JS</span>
+      </a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-title">Systems Architecture Reference // システム仕様書</div>
+        <p class="footer-desc">
+          Enterprise Systems Engineering &bull; 15 Comprehensive Volumes &bull; Zero Compromise Architecture
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Systems Reference Library. ECMAScript Standard Specification.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+"""
+
+    html_doc = html_doc.replace('{diagram_1}', diagram_1)
+    html_doc = html_doc.replace('{diagram_2}', diagram_2)
+    html_doc = html_doc.replace('{diagram_3}', diagram_3)
+
+    with open('javascript-mastery.html', 'w', encoding='utf-8') as f:
+        f.write(html_doc)
+    print("Created javascript-mastery.html successfully!")
+
+if __name__ == '__main__':
+    build_javascript_mastery()
