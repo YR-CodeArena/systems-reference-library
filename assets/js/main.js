@@ -32,7 +32,7 @@
     if (theme === "dark") {
       root.setAttribute("data-theme", "dark");
     } else {
-      root.removeAttribute("data-theme");
+      root.setAttribute("data-theme", "light");
     }
     updateThemeIcon(theme);
   }
@@ -71,6 +71,38 @@
   applyTheme(currentTheme);
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Dynamic volume page background detection
+    const pathname = window.location.pathname.toLowerCase();
+    const volumeSlugMap = {
+      "networking": "page-vol-1",
+      "databases": "page-vol-2",
+      "programming-languages": "page-vol-3",
+      "data-structures": "page-vol-4",
+      "operating-systems": "page-vol-5",
+      "cs-hardware-foundations": "page-vol-6",
+      "git-github": "page-vol-7",
+      "python-masterclass": "page-vol-8",
+      "python-runtime": "page-vol-9",
+      "low-latency-python": "page-vol-10",
+      "postgresql": "page-vol-11",
+      "java-masterclass": "page-vol-12",
+      "high-concurrency-java": "page-vol-13",
+      "enterprise-scss": "page-vol-14",
+      "javascript-mastery": "page-vol-15",
+    };
+
+    let matched = false;
+    for (const [slug, cls] of Object.entries(volumeSlugMap)) {
+      if (pathname.includes(slug)) {
+        document.body.classList.add(cls, `page-${slug}`, "inner-page");
+        matched = true;
+        break;
+      }
+    }
+    if (!matched && (pathname.endsWith("index.html") || pathname.endsWith("/") || pathname === "")) {
+      document.body.classList.add("home-page", "page-home");
+    }
+
     // Theme toggle button clicks
     document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -2228,5 +2260,287 @@ builtins.input = _sys_input
         }
       }, 100);
     }, { passive: true });
+
+    // --- Tactile Spatial 3D Perspective & Viewport Trackball Physics Engine ---
+    (function setupSpatial3DInteractions() {
+      const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+      // 1. Interactive 3D Cursor Tilt (Blender Viewport Trackball Effect for showcase cards)
+      // Exclude code blocks and diagrams to ensure copy/run/diagram buttons remain 100% stable under cursor
+      const tiltTargets = document.querySelectorAll(
+        ".analogy-card, .formula-card, .portal-card"
+      );
+
+      // Mobile touch toggle for 3D flip-cards
+      document.querySelectorAll(".volume-card").forEach((card) => {
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".card-footer-cta") || e.target.closest(".volume-back")) return;
+          if (window.matchMedia("(hover: none)").matches) {
+            card.classList.toggle("is-flipped");
+          }
+        });
+      });
+
+      tiltTargets.forEach((el) => {
+        el.classList.add("spatial-card");
+
+        if (!canHover || prefersReducedMotion) return;
+
+        let rafId = null;
+        let isHovered = false;
+
+        el.addEventListener("mouseenter", () => {
+          isHovered = true;
+          el.classList.add("is-tilting");
+        }, { passive: true });
+
+        el.addEventListener("mousemove", (e) => {
+          if (!isHovered) return;
+          if (rafId) cancelAnimationFrame(rafId);
+
+          rafId = requestAnimationFrame(() => {
+            const rect = el.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+
+            // Normalized delta from center [-0.5, 0.5]
+            const dx = Math.max(-0.5, Math.min(0.5, (e.clientX - rect.left) / rect.width - 0.5));
+            const dy = Math.max(-0.5, Math.min(0.5, (e.clientY - rect.top) / rect.height - 0.5));
+
+            // Specular sheen highlight coordinates in percentages
+            const px = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+            const py = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+
+            el.style.setProperty("--sheen-x", `${px.toFixed(1)}%`);
+            el.style.setProperty("--sheen-y", `${py.toFixed(1)}%`);
+
+            // Subtle spatial rotation: -12deg to +12deg pitch/yaw with 8px Z-elevation
+            const rotX = (-dy * 12).toFixed(2);
+            const rotY = (dx * 12).toFixed(2);
+            el.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(8px)`;
+          });
+        }, { passive: true });
+
+        el.addEventListener("mouseleave", () => {
+          isHovered = false;
+          if (rafId) cancelAnimationFrame(rafId);
+          el.classList.remove("is-tilting");
+          el.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+        }, { passive: true });
+      });
+
+      // 2. Cinematic 3D Scroll Entrances (Spatial Reveal - Safe Visibility)
+      if (!prefersReducedMotion && "IntersectionObserver" in window) {
+        // Stagger sibling cards in portal grids
+        document.querySelectorAll(".portal-grid").forEach((grid) => {
+          grid.querySelectorAll(".portal-card").forEach((card, idx) => {
+            card.style.setProperty("--stagger-idx", (idx % 6).toString());
+          });
+        });
+
+        // Only apply spatial reveal to discrete cards, never hide section containers or text
+        const revealTargets = document.querySelectorAll(
+          ".portal-card, .diagram-card, .analogy-card, .formula-card"
+        );
+
+        revealTargets.forEach((target, i) => {
+          if (!target.style.getPropertyValue("--stagger-idx")) {
+            target.style.setProperty("--stagger-idx", ((i % 4) * 0.5).toString());
+          }
+          target.classList.add("spatial-reveal");
+        });
+
+        const spatialObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.05,
+          rootMargin: "50px 0px 50px 0px"
+        });
+
+        revealTargets.forEach((target) => spatialObserver.observe(target));
+      }
+
+      // Dynamic background hover synchronization on Home / Overview page
+      const volumeCards = document.querySelectorAll(".volume-card");
+      if (volumeCards.length > 0) {
+        volumeCards.forEach((card) => {
+          const backEl = card.querySelector(".volume-back");
+          if (!backEl) return;
+          const bgVal = backEl.style.backgroundImage;
+          if (bgVal && bgVal !== "none") {
+            card.addEventListener("mouseenter", () => {
+              document.body.style.setProperty("--dynamic-bg", bgVal);
+              document.body.style.setProperty("--dynamic-bg-opacity", "1");
+            });
+            card.addEventListener("mouseleave", () => {
+              document.body.style.removeProperty("--dynamic-bg");
+              document.body.style.removeProperty("--dynamic-bg-opacity");
+            });
+          }
+        });
+      }
+
+      // Background Video Audio Toggle Engine (Overview Portal)
+      const bgVideo = document.getElementById("bgVideo");
+      const audioToggleBtn = document.getElementById("bgAudioToggleBtn");
+      const floatingAudioBtn = document.getElementById("floatingAudioBtn");
+
+      if (bgVideo) {
+        function updateAudioUI(isMuted) {
+          if (audioToggleBtn) {
+            const mutedIcon = audioToggleBtn.querySelector(".audio-icon-muted");
+            const playingIcon = audioToggleBtn.querySelector(".audio-icon-playing");
+            if (isMuted) {
+              audioToggleBtn.classList.remove("is-active");
+              audioToggleBtn.setAttribute("title", "Enable Background Audio (Unmute)");
+              audioToggleBtn.setAttribute("aria-label", "Enable Background Audio");
+              if (mutedIcon) mutedIcon.style.display = "block";
+              if (playingIcon) playingIcon.style.display = "none";
+            } else {
+              audioToggleBtn.classList.add("is-active");
+              audioToggleBtn.setAttribute("title", "Mute Background Audio");
+              audioToggleBtn.setAttribute("aria-label", "Mute Background Audio");
+              if (mutedIcon) mutedIcon.style.display = "none";
+              if (playingIcon) playingIcon.style.display = "block";
+            }
+          }
+
+          if (floatingAudioBtn) {
+            const icon = floatingAudioBtn.querySelector(".audio-hud-icon");
+            const label = floatingAudioBtn.querySelector(".audio-hud-label");
+            if (isMuted) {
+              floatingAudioBtn.classList.remove("is-active");
+              if (icon) icon.textContent = "🔇";
+              if (label) label.textContent = "AUDIO: MUTED";
+            } else {
+              floatingAudioBtn.classList.add("is-active");
+              if (icon) icon.textContent = "🔊";
+              if (label) label.textContent = "AUDIO: PLAYING";
+            }
+          }
+        }
+
+        function toggleAudio(e) {
+          if (e) e.preventDefault();
+          bgVideo.muted = !bgVideo.muted;
+          if (!bgVideo.muted) {
+            bgVideo.play().catch(() => {});
+          }
+          updateAudioUI(bgVideo.muted);
+        }
+
+        if (audioToggleBtn) {
+          audioToggleBtn.addEventListener("click", toggleAudio);
+        }
+        if (floatingAudioBtn) {
+          floatingAudioBtn.addEventListener("click", toggleAudio);
+        }
+
+        // Initialize muted autoplay as required by browser policy
+        bgVideo.muted = true;
+        bgVideo.play().catch(() => {});
+        updateAudioUI(true);
+      }
+
+      // 3. Spatial Scroll Telemetry & Parallax Engine
+      let hudEl = document.getElementById("spatialDepthHud");
+      if (!hudEl) {
+        hudEl = document.createElement("div");
+        hudEl.id = "spatialDepthHud";
+        hudEl.className = "spatial-depth-hud";
+        hudEl.setAttribute("aria-hidden", "true");
+        hudEl.innerHTML = `
+          <span class="hud-axis">Z-AXIS</span>
+          <span class="hud-value" id="spatialDepthVal">000%</span>
+          <span class="hud-label">// DEPTH</span>
+        `;
+        document.body.appendChild(hudEl);
+      }
+
+      const depthValEl = document.getElementById("spatialDepthVal");
+      let scrollRafId = null;
+
+      function updateSpatialDepth() {
+        if (scrollRafId) return;
+        scrollRafId = requestAnimationFrame(() => {
+          scrollRafId = null;
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          if (maxScroll <= 0) return;
+          const ratio = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+
+          document.documentElement.style.setProperty("--scroll-depth", ratio.toFixed(4));
+          if (depthValEl) {
+            const pct = Math.round(ratio * 100).toString().padStart(3, "0") + "%";
+            depthValEl.textContent = pct;
+          }
+        });
+      }
+
+      window.addEventListener("scroll", updateSpatialDepth, { passive: true });
+      updateSpatialDepth();
+    })();
+
+    // --- Overview Portal Heading Typewriter Engine (Typing & Backspacing Effect) ---
+    (function setupTitleTypewriter() {
+      const textEl = document.getElementById("typewriterText");
+      const cursorEl = document.querySelector(".typewriter-cursor");
+      if (!textEl) return;
+
+      const phrase = "Computer Systems & Software Engineering Manuals";
+
+      // Respect prefers-reduced-motion: if user prefers reduced motion, leave static
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) {
+        textEl.textContent = phrase;
+        if (cursorEl) cursorEl.style.display = "none";
+        return;
+      }
+
+      let isDeleting = false;
+      let currentIdx = phrase.length; // Start with full title displayed
+      const typingSpeed = 70;      // ms per char forward
+      const backspacingSpeed = 38; // ms per char backward
+      const pauseAfterType = 2400; // ms to pause when fully typed
+      const pauseAfterDelete = 550;// ms to pause when cleared
+
+      let timeoutId = null;
+
+      function tick() {
+        if (isDeleting) {
+          currentIdx--;
+          textEl.textContent = phrase.slice(0, currentIdx);
+
+          if (currentIdx <= 0) {
+            isDeleting = false;
+            timeoutId = setTimeout(tick, pauseAfterDelete);
+            return;
+          }
+          timeoutId = setTimeout(tick, backspacingSpeed);
+        } else {
+          currentIdx++;
+          textEl.textContent = phrase.slice(0, currentIdx);
+
+          if (currentIdx >= phrase.length) {
+            isDeleting = true;
+            timeoutId = setTimeout(tick, pauseAfterType);
+            return;
+          }
+          // Slight natural typing cadence variation
+          const jitter = Math.floor(Math.random() * 24) - 12;
+          timeoutId = setTimeout(tick, Math.max(30, typingSpeed + jitter));
+        }
+      }
+
+      // Initial pause so the user can read the complete title on initial page load
+      timeoutId = setTimeout(() => {
+        isDeleting = true;
+        tick();
+      }, pauseAfterType);
+    })();
   });
 })();

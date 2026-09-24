@@ -9,7 +9,15 @@
   <link rel="stylesheet" href="assets/css/style.css">
 <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
 </head>
-<body>
+<body class="home-page page-home">
+  <!-- Overview Page Cinematic Background Video Container -->
+  <div class="video-bg-container" id="videoBgContainer" aria-hidden="true">
+    <video id="bgVideo" class="bg-video-element" autoplay loop muted playsinline preload="auto">
+      <source src="assets/videos/overview_bg.mp4" type="video/mp4">
+      <source src="assets/videos/vidssave.com Chinatsu &amp; Taiki &#x1F499; _ Blue Box AMV _ Mahiye Jinna Sohna [Hindi Amv_Edit] 4k&#x2728; 1080P.mp4" type="video/mp4">
+    </video>
+  </div>
+
   <div id="reading-progress"></div>
 
   <!-- Header -->
@@ -190,6 +198,17 @@
     </nav>
 
     <div class="header-actions">
+      <button id="bgAudioToggleBtn" class="bg-audio-toggle-btn" type="button" aria-label="Enable Background Audio" title="Enable Background Audio (Unmute)">
+        <svg class="audio-icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <svg class="audio-icon-playing" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
       <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -203,19 +222,21 @@
   <main>
     <section class="portal-hero">
       <span class="portal-tagline">⟦ SYSTEM SPECIFICATION // 統合仕様書 // PRODUCTION GRADE ⟧</span>
-      <h1>Computer Systems &amp; Software Engineering Manuals</h1>
+      <h1 class="portal-title">
+        <span id="typewriterText">Computer Systems &amp; Software Engineering Manuals</span><span class="typewriter-cursor" aria-hidden="true">|</span>
+      </h1>
       <p>A rigorous, word-for-word digital reference curriculum compiled directly from foundational systems engineering specifications and authoritative masterclasses. Featuring full architectural mechanics, mathematical derivations, low-level data structures, protocol specifications, runtime internals, and production implementations with one-click copyable and runnable code snippets across 15 authoritative volumes.</p>
       
-      <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-        <span class="badge-tech" style="font-size: 0.85rem; padding: 0.35rem 0.8rem;">15 COMPREHENSIVE VOLUMES</span>
-        <span class="badge-tech" style="font-size: 0.85rem; padding: 0.35rem 0.8rem;">3 SPECIALIZED TRACKS</span>
-        <span class="badge-tech" style="font-size: 0.85rem; padding: 0.35rem 0.8rem;">100% WORD-FOR-WORD ACCURACY</span>
-        <span class="badge-tech" style="font-size: 0.85rem; padding: 0.35rem 0.8rem;">RUNNABLE CODE &amp; ANIMATED SVGs</span>
+      <div class="portal-hero-badges">
+        <span class="badge-tech">15 COMPREHENSIVE VOLUMES</span>
+        <span class="badge-tech">3 SPECIALIZED TRACKS</span>
+        <span class="badge-tech">100% WORD-FOR-WORD ACCURACY</span>
+        <span class="badge-tech">RUNNABLE CODE &amp; ANIMATED SVGs</span>
       </div>
     </section>
 
     <!-- Track 1: Core Systems Architecture -->
-    <div style="max-width: 1400px; margin: 2.5rem auto 1rem auto; padding: 0 2rem;">
+    <div id="track-part1" class="track-header-container" style="max-width: 1400px; margin: 2.5rem auto 1rem auto; padding: 0 2rem;">
       <h2 style="font-size: 1.6rem; color: var(--text-primary); border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
         <span>⟦ PART I ⟧ Core Systems Architecture, Protocols &amp; Foundations</span>
         <span style="font-size: 0.85rem; color: var(--accent-secondary); font-weight: 700;">[ 基礎システムアーキテクチャ &bull; VOL.01–06 ]</span>
@@ -228,8 +249,11 @@
     <!-- Portal Cards Grid Track 1 -->
     <div class="portal-grid" style="margin-top: 0;">
       <!-- Card 1 -->
-      <a href="networking.html" class="portal-card">
-        <span class="card-num-badge">VOL.01 [ 通信プロトコル ] &bull; 19 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.01 [ 通信プロトコル ] &bull; 19 PAGES</span>
         <h2>Computer Networking &amp; Distributed Wire Protocols</h2>
         <p>Layering mechanics from physical transceivers to user-space runtimes. In-depth analysis of the 7-Layer OSI vs 4-Layer TCP/IP stack, packet encapsulation, TCP state machines, 3-way and 4-way handshakes, sliding window flow control, Reno vs CUBIC vs BBR congestion control, UDP datagrams, HTTP/1.1 vs HTTP/2 vs HTTP/3 (QUIC), IPC primitives, and complete gRPC Protobuf wire formats with Python, Java, and TypeScript implementations.</p>
         <ul class="card-topics-list">
@@ -240,15 +264,26 @@
           <li class="card-topic-tag">Unix Domain Sockets</li>
           <li class="card-topic-tag">gRPC &amp; Protobuf</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="networking.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="networking.html" class="volume-back" style="background-image: url('assets/images/vol_1.png');" aria-label="Open Volume 1">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.01 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 2 -->
-      <a href="databases.html" class="portal-card">
-        <span class="card-num-badge">VOL.02 [ データベース構造 ] &bull; 16 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.02 [ データベース構造 ] &bull; 16 PAGES</span>
         <h2>Database Management Systems and Storage Engines</h2>
         <p>Relational storage engine internals, slotted pages, system catalogs, and formal ACID primitives. Deep-dive into ARIES recovery, steal/no-steal &amp; force/no-force buffer policies, transaction isolation levels, read phenomena (G1, A2, A3, Write Skew), 2PL vs MVCC (Postgres xmin/xmax and InnoDB undo chains), hardware storage hierarchies, B+ Tree mathematical fan-out and shallow height proofs, Redis in-memory internals, MongoDB WiredTiger, Cassandra LSM-Trees, and Neo4j Index-Free Adjacency.</p>
         <ul class="card-topics-list">
@@ -259,15 +294,26 @@
           <li class="card-topic-tag">Redis Data Structures</li>
           <li class="card-topic-tag">Cassandra LSM &amp; SSTables</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="databases.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="databases.html" class="volume-back" style="background-image: url('assets/images/vol_2.png');" aria-label="Open Volume 2">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.02 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 3 -->
-      <a href="programming-languages.html" class="portal-card">
-        <span class="card-num-badge">VOL.03 [ プログラミング言語 ] &bull; 18 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.03 [ プログラミング言語 ] &bull; 18 PAGES</span>
         <h2>Programming Languages, Execution Engines &amp; Memory</h2>
         <p>The compiler translation pipeline from source code to silicon: lexical analysis, AST construction, type proof checking, SSA/TAC optimization, and register allocation. Comprehensive comparison of Pure AOT (C/Rust/Go), Pure Interpreted, JVM HotSpot (C1/C2 JIT), CPython PEP 659 &amp; 744, and V8 Ignition/Sparkplug/Maglev/TurboFan. Memory mechanics of the Call Stack vs Managed Heap, pointer tracing, pass-by-value proof across languages, vtables and inline caches, C3 MRO linearization, and functional pipelines.</p>
         <ul class="card-topics-list">
@@ -278,15 +324,26 @@
           <li class="card-topic-tag">vtables &amp; Inline Caches</li>
           <li class="card-topic-tag">C3 Linearization</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="programming-languages.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="programming-languages.html" class="volume-back" style="background-image: url('assets/images/vol_3.png');" aria-label="Open Volume 3">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.03 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 4 -->
-      <a href="data-structures.html" class="portal-card">
-        <span class="card-num-badge">VOL.04 [ データ構造・アルゴリズム ] &bull; 18 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.04 [ データ構造・アルゴリズム ] &bull; 18 PAGES</span>
         <h2>Data Structures, Algorithms &amp; Computational Complexity</h2>
         <p>Hardware-level realities of data structures: CPU cache line alignment (64-byte blocks), false sharing, L1/L2/L3 cache misses, and contiguous vs pointer-chasing topologies. Asymptotic Big-O proofs via Master Theorem, hash collision resolution (Open Addressing vs Robin Hood hashing), self-balancing trees (AVL vs Red-Black rotation mechanics), B-Trees in database pages, Graph traversals (BFS, DFS, Dijkstra, A*, Tarjan SCC), Dynamic Programming paradigms, and probabilistic filters (Bloom Filters &amp; HyperLogLog).</p>
         <ul class="card-topics-list">
@@ -297,15 +354,26 @@
           <li class="card-topic-tag">Dynamic Programming</li>
           <li class="card-topic-tag">Bloom Filters &amp; Murmur3</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="data-structures.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="data-structures.html" class="volume-back" style="background-image: url('assets/images/vol_4.png');" aria-label="Open Volume 4">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.04 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 5 -->
-      <a href="operating-systems.html" class="portal-card">
-        <span class="card-num-badge">VOL.05 [ オペレーティングシステム ] &bull; 16 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.05 [ オペレーティングシステム ] &bull; 16 PAGES</span>
         <h2>Operating Systems, Kernels &amp; Low-Level Hardware</h2>
         <p>x86-64 CPU architecture: registers, instruction cycle, pipelining, and cache hierarchy. Kernel privilege rings (Ring 0 vs Ring 3), interrupt vectors, trap tables, and SYSCALL/SYSRET overhead. Complete breakdown of Processes, Kernel Threads, and User-Space Green Threads/Fibers. Microarchitectural cost of context switching (TLB invalidation, cache pollutions). Linux CFS scheduler, Virtual Memory 4-level paging hierarchy (PML4 to PT), and non-blocking asynchronous I/O evolution (select -> poll -> epoll -> io_uring).</p>
         <ul class="card-topics-list">
@@ -316,15 +384,26 @@
           <li class="card-topic-tag">epoll vs io_uring</li>
           <li class="card-topic-tag">Edge-Triggered IO Loop</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="operating-systems.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="operating-systems.html" class="volume-back" style="background-image: url('assets/images/vol_5.png');" aria-label="Open Volume 5">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.05 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 6 -->
-      <a href="cs-hardware-foundations.html" class="portal-card">
-        <span class="card-num-badge">VOL.06 [ ハードウェア実態 ] &bull; 21 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.06 [ ハードウェア実態 ] &bull; 21 PAGES</span>
         <h2>Computer Science Foundations &amp; Hardware-Level Realities</h2>
         <p>A rigorous, comprehensive manual unifying kernel transitions, microarchitectural realities, virtual memory management, high-performance distributed wire protocols, and cache-conscious algorithmic design. Features 3 animated SVG diagrams, Linux edge-triggered epoll servers, Java 21 Virtual Threads, Python SSE streaming engines, and LMAX Disruptor cache-padded ring buffers.</p>
         <ul class="card-topics-list">
@@ -335,15 +414,23 @@
           <li class="card-topic-tag">LMAX Disruptor Ring Buffer</li>
           <li class="card-topic-tag">SPSC Cache Padding</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="cs-hardware-foundations.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="cs-hardware-foundations.html" class="volume-back" style="background-image: url('assets/images/vol_6.png');" aria-label="Open Volume 6">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.06 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
     </div>
 
     <!-- Track 2: Backend Languages, Execution Engines & Storage Systems -->
-    <div style="max-width: 1400px; margin: 3.5rem auto 1rem auto; padding: 0 2rem;">
+    <div id="track-part2" class="track-header-container" style="max-width: 1400px; margin: 3.5rem auto 1rem auto; padding: 0 2rem;">
       <h2 style="font-size: 1.6rem; color: var(--text-primary); border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
         <span>⟦ PART II ⟧ Backend Languages, Execution Engines &amp; Storage Systems</span>
         <span style="font-size: 0.85rem; color: var(--accent-secondary); font-weight: 700;">[ 言語エンジン &amp; 運用基盤 &bull; VOL.07–12 ]</span>
@@ -356,8 +443,11 @@
     <!-- Portal Cards Grid Track 2 -->
     <div class="portal-grid" style="margin-top: 0;">
       <!-- Card 7 -->
-      <a href="git-github.html" class="portal-card">
-        <span class="card-num-badge">VOL.07 [ バージョン管理 ] &bull; 13 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.07 [ バージョン管理 ] &bull; 13 PAGES</span>
         <h2>Git Internals &amp; GitHub Architecture</h2>
         <p>Git's immutable content-addressable object database: Blobs, Trees, Commits, and Annotated Tags keyed by SHA-1 hashes. Packfiles, zlib compression, and delta representation. Three trees model (Working Directory, Staging Index, HEAD), branch pointers, fast-forward vs three-way recursive merges, rebase mechanics, commit rewriting, interactive rebasing, merge conflict resolution, reflogs, detached HEAD states, and automated GitHub CI/CD workflows.</p>
         <ul class="card-topics-list">
@@ -368,15 +458,26 @@
           <li class="card-topic-tag">Git Hooks &amp; Automation</li>
           <li class="card-topic-tag">Production Monorepos</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="git-github.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="git-github.html" class="volume-back" style="background-image: url('assets/images/vol_7.png');" aria-label="Open Volume 7">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.07 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 8 -->
-      <a href="python-masterclass.html" class="portal-card">
-        <span class="card-num-badge">VOL.08 [ PYTHON応用 ] &bull; 23 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.08 [ PYTHON応用 ] &bull; 23 PAGES</span>
         <h2>Python 3 Masterclass: OOP to Async Architecture</h2>
         <p>Comprehensive Python 3 programming guide from fundamental primitives to production async backend patterns. Object-Oriented Architecture: dunder methods, properties, abstract base classes, descriptors, and custom metaclasses. Python 3.10+ Structural Pattern Matching. Memory model and mutability realities. Robust exception hierarchies and context managers. High-performance asynchronous concurrency via asyncio, task groups, and FastAPI REST architectures.</p>
         <ul class="card-topics-list">
@@ -387,15 +488,26 @@
           <li class="card-topic-tag">Context Managers</li>
           <li class="card-topic-tag">FastAPI Production Patterns</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="python-masterclass.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="python-masterclass.html" class="volume-back" style="background-image: url('assets/images/vol_8.png');" aria-label="Open Volume 8">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.08 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 9 -->
-      <a href="python-runtime.html" class="portal-card">
-        <span class="card-num-badge">VOL.09 [ CPYTHON内部構造 ] &bull; 26 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.09 [ CPYTHON内部構造 ] &bull; 26 PAGES</span>
         <h2>CPython Runtime Internals, Compilation &amp; Garbage Collection</h2>
         <p>Exhaustive technical exploration of the CPython C codebase. PyObject header structure, reference counting mechanics, and cyclic garbage collection. Compilation pipeline: AST generation, bytecode compilation, and opcode dispatch inside _PyEval_EvalFrameDefault. Global Interpreter Lock (GIL) internals and free-threaded Python 3.13 (PEP 703). Memory management via PyMalloc and PyArena. Extension module development via the Python/C API and Cython JIT.</p>
         <ul class="card-topics-list">
@@ -406,15 +518,26 @@
           <li class="card-topic-tag">PyMalloc Small Object Allocator</li>
           <li class="card-topic-tag">Cython C Extension Engine</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="python-runtime.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="python-runtime.html" class="volume-back" style="background-image: url('assets/images/vol_9.png');" aria-label="Open Volume 9">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.09 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 10 -->
-      <a href="low-latency-python.html" class="portal-card">
-        <span class="card-num-badge">VOL.10 [ 超低遅延PYTHON ] &bull; 20 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.10 [ 超低遅延PYTHON ] &bull; 20 PAGES</span>
         <h2>Engineering Low-Latency Backend Systems in Modern Python</h2>
         <p>Advanced engineering guide for high-throughput, sub-millisecond Python runtimes. CPython 3.12+ frame stack optimizations, PEP 703 Biased Reference Counting, Cython zero-copy native memory sharing, lock-free ring buffers, socket buffer kernel tuning, real-time LLM token streaming via ASGI, and high-performance Postgres pipelines using asyncpg and Alembic migrations.</p>
         <ul class="card-topics-list">
@@ -425,15 +548,26 @@
           <li class="card-topic-tag">asyncpg Direct Binary Protocol</li>
           <li class="card-topic-tag">Alembic Async Migrations</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="low-latency-python.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="low-latency-python.html" class="volume-back" style="background-image: url('assets/images/vol_10.png');" aria-label="Open Volume 10">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.10 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 11 -->
-      <a href="postgresql.html" class="portal-card">
-        <span class="card-num-badge">VOL.11 [ POSTGRESQL設計 ] &bull; 17 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.11 [ POSTGRESQL設計 ] &bull; 17 PAGES</span>
         <h2>PostgreSQL Zero-to-Hero: Architecture, Indexing &amp; Optimization</h2>
         <p>Definitive PostgreSQL engineering manual. Process and memory architecture: Postmaster, backend worker processes, shared memory, and Shared Buffers. Storage mechanics: page layout, tuples, HOT (Heap-Only Tuples), and WAL (Write-Ahead Logging). Indexing internals: B-Tree, GiST, GIN, BRIN, and covering indexes. Query optimization: Cost-Based Optimizer, statistics, EXPLAIN ANALYZE interpretation, join algorithms, transactions, MVCC, and vacuuming.</p>
         <ul class="card-topics-list">
@@ -444,15 +578,26 @@
           <li class="card-topic-tag">VACUUM &amp; Freeze Maps</li>
           <li class="card-topic-tag">Streaming Replication &amp; HA</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="postgresql.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="postgresql.html" class="volume-back" style="background-image: url('assets/images/vol_11.png');" aria-label="Open Volume 11">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.11 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 12 -->
-      <a href="java-masterclass.html" class="portal-card">
-        <span class="card-num-badge">VOL.12 [ JAVAマスタークラス ] &bull; 19 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.12 [ JAVAマスタークラス ] &bull; 19 PAGES</span>
         <h2>Java Masterclass: Core Language to Virtual Threads</h2>
         <p>Comprehensive Java engineering reference from JVM bytecode specification to modern Java 21 features. Complete classloader delegation model, JVM memory regions (Heap, Stack, Metaspace), and bytecode inspection with javap. Garbage collection algorithms: Serial, Parallel, G1, and ZGC concurrent marking. Project Loom: Virtual Threads vs OS Threads, Carrier Threads, and continuations. Modern language features: Records, Sealed Classes, Pattern Matching, and Structured Concurrency.</p>
         <ul class="card-topics-list">
@@ -463,15 +608,23 @@
           <li class="card-topic-tag">Pattern Matching &amp; Records</li>
           <li class="card-topic-tag">Structured Concurrency</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="java-masterclass.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="java-masterclass.html" class="volume-back" style="background-image: url('assets/images/vol_12.png');" aria-label="Open Volume 12">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.12 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
     </div>
 
     <!-- Track 3: Enterprise Web Architecture & Reactive Systems -->
-    <div style="max-width: 1400px; margin: 3.5rem auto 1rem auto; padding: 0 2rem;">
+    <div id="track-part3" class="track-header-container" style="max-width: 1400px; margin: 3.5rem auto 1rem auto; padding: 0 2rem;">
       <h2 style="font-size: 1.6rem; color: var(--text-primary); border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
         <span>⟦ PART III ⟧ Enterprise Web Architecture &amp; Reactive Systems</span>
         <span style="font-size: 0.85rem; color: var(--accent-secondary); font-weight: 700;">[ エンタープライズ Web &amp; リアクティブ &bull; VOL.13–15 ]</span>
@@ -484,8 +637,11 @@
     <!-- Portal Cards Grid Track 3 -->
     <div class="portal-grid" style="margin-top: 0;">
       <!-- Card 13 -->
-      <a href="high-concurrency-java.html" class="portal-card">
-        <span class="card-num-badge">VOL.13 [ 並行処理・JVM ] &bull; 23 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.13 [ 並行処理・JVM ] &bull; 23 PAGES</span>
         <h2>High-Concurrency Java 21 &amp; Enterprise Reactive Systems</h2>
         <p>Architectural guide to ultra-high concurrency in Java 21. Explores Project Loom internals, virtual thread carrier scheduling, continuation yields, JVM memory topology, off-heap DirectByteBuffers, ZGC colored pointers, load barriers, lock-free concurrency via the LMAX Disruptor, JMH micro-benchmarking, and non-blocking reactive pipelines using Spring WebFlux and Project Reactor.</p>
         <ul class="card-topics-list">
@@ -496,15 +652,26 @@
           <li class="card-topic-tag">JMH Microbenchmarks</li>
           <li class="card-topic-tag">Spring WebFlux &amp; Reactor</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="high-concurrency-java.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="high-concurrency-java.html" class="volume-back" style="background-image: url('assets/images/vol_13.png');" aria-label="Open Volume 13">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.13 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 14 -->
-      <a href="enterprise-scss.html" class="portal-card">
-        <span class="card-num-badge">VOL.14 [ SCSSアーキテクチャ ] &bull; 52 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.14 [ SCSSアーキテクチャ ] &bull; 52 PAGES</span>
         <h2>Enterprise SCSS Architecture: Syntax to Scalable Systems</h2>
         <p>Comprehensive 52-page engineering manual for large-scale CSS architecture. Explores Dart Sass compiler internals, the 6-phase AST compilation pipeline, lexical variable shadowing, parent selector manipulation, modern module systems (@use and @forward), Inverted Triangle CSS (ITCSS), 7-1 pattern, design token map engines, Vite/Webpack build pipelines, and production bundle auditing.</p>
         <ul class="card-topics-list">
@@ -515,15 +682,26 @@
           <li class="card-topic-tag">sass-embedded Native Daemon</li>
           <li class="card-topic-tag">Production Refactoring Playbook</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="enterprise-scss.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="enterprise-scss.html" class="volume-back" style="background-image: url('assets/images/vol_14.png');" aria-label="Open Volume 14">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.14 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Card 15 -->
-      <a href="javascript-mastery.html" class="portal-card">
-        <span class="card-num-badge">VOL.15 [ JAVASCRIPT完全仕様 ] &bull; 17 PAGES</span>
+      <div class="volume-card">
+        <div class="volume-flipper">
+          <!-- Front: Existing technical text, titles, tags -->
+          <div class="volume-front glass-panel portal-card">
+            <span class="card-num-badge">VOL.15 [ JAVASCRIPT完全仕様 ] &bull; 17 PAGES</span>
         <h2>The Ultimate Complete Guide to JavaScript</h2>
         <p>Exhaustive 18-lesson JavaScript engineering reference. Covers first principles of client-side execution, V8 runtime mechanics, Call Stack vs Web APIs, Microtask vs Macrotask Event Loop priority, DOM mutation, Model-View-Controller (MVC) architectural separation, ES Modules, Jasmine automated testing suites, ES6 class inheritance, and backend async/await pipelines with Promise.all().</p>
         <ul class="card-topics-list">
@@ -534,11 +712,19 @@
           <li class="card-topic-tag">Jasmine BDD Test Runner</li>
           <li class="card-topic-tag">ES6 Classes &amp; Prototypal Chain</li>
         </ul>
-        <div class="card-footer-cta">
+        <a href="javascript-mastery.html" class="card-footer-cta">
           <span>Read Reference Manual</span>
           <span>&rarr;</span>
+        </a>
+          </div>
+          <!-- Back: Anime Image -->
+          <a href="javascript-mastery.html" class="volume-back" style="background-image: url('assets/images/vol_15.png');" aria-label="Open Volume 15">
+            <div class="volume-back-overlay">
+              <span class="vol-back-tag">VOL.15 // READ MANUAL &rarr;</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
     </div>
   </main>
 
@@ -555,6 +741,14 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating Audio HUD Quick-Toggle (Bottom-Left) -->
+  <div class="floating-audio-hud" id="floatingAudioHud">
+    <button id="floatingAudioBtn" class="floating-audio-btn" type="button" aria-label="Toggle Background Audio">
+      <span class="audio-hud-icon">🔇</span>
+      <span class="audio-hud-label">AUDIO: MUTED</span>
+    </button>
+  </div>
 
   <script src="assets/js/skulpt.min.js"></script>
   <script src="assets/js/skulpt-stdlib.js"></script>
