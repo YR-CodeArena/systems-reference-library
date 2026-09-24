@@ -242,7 +242,6 @@
         <li class="depth-2"><a href="#ch28">Ch 28: Advanced AsyncIO Patterns</a></li>
         <li class="depth-2"><a href="#ch29">Ch 29: Memory Profiling & Debugging</a></li>
         <li class="depth-2"><a href="#ch30">Ch 30: System Integration & Matrix</a></li>
-        <li><a href="#works-cited">Works Cited</a></li>
       </ul>
     </aside>
 
@@ -2933,37 +2932,7 @@ libc.puts(message)</code></pre>
           <li><strong>Understand Objects &amp; References:</strong> Variables are dynamic references pointing to heap objects; distinguish clearly between value equality ( <code>==</code> ) and object identity ( <code>is</code> ).</li>
           <li><strong>Optimize Memory Layouts:</strong> Use <code>__slots__</code> for fixed instance attributes, <code>memoryview</code> for zero-copy binary buffer slicing, and generators for streaming data lazily.</li>
           <li><strong>Choose the Right Concurrency Tool:</strong> Use <code>asyncio</code> for non-blocking network I/O, <code>threading</code> for blocking disk/socket operations, <code>multiprocessing</code> for CPU-heavy tasks, and free-threaded builds (PEP 703) or sub-interpreters (PEP 684) for multi-core parallelism.</li>
-        </ol>
-
-        <h3 id="works-cited">Works cited</h3>
-        <ol style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;">
-          <li>How Python's GIL Works - Codefinity, https://codefinity.com/blog/How-Python's-GIL-Works</li>
-          <li>Common Object Structures — Python 3.14.7 documentation, https://docs.python.org/3/c-api/structures.html</li>
-          <li>PEP 703 - Making the Global Interpreter Lock Optional in CPython - Python Enhancement Proposals, https://peps.python.org/pep-0703/</li>
-          <li>What's New In Python 3.9 - Python 3.14.7 documentation, https://docs.python.org/3/whatsnew/3.9.html</li>
-          <li>How free are threads in Python now? - Jamie's Blog, https://blog.changs.co.uk/how-free-are-threads-in-python-now.html</li>
-          <li>What's New In Python 3.13 - Python 3.14.7 documentation, https://docs.python.org/3/whatsnew/3.13.html</li>
-          <li>Free-threaded Python: past, present, and future - LWN.net, https://lwn.net/Articles/1078367/</li>
-          <li>Python support for free threading - Python 3.14.7 documentation, https://docs.python.org/3/howto/free-threading-python.html</li>
-          <li>The Dawn of Concurrency and Parallelism: Python 3.12 Starts to Support a Per-Interpreter GIL - Reddit, https://www.reddit.com/r/Python/comments/18e0q7p/the_dawn_of_concurrency_and_parallelism_python/</li>
-          <li>PEP 684 - A Per-Interpreter GIL - Python Enhancement Proposals, https://peps.python.org/pep-0684/</li>
-          <li>extrainterpreters - PyPI, https://pypi.org/project/extrainterpreters/</li>
-          <li>Python 3.14 - Astral, https://astral.sh/blog/python-3.14</li>
-          <li>C3 linearization algorithm in Python - GeeksforGeeks, https://www.geeksforgeeks.org/python/c3-linearization-algorithm-in-python/</li>
-          <li>Python 3.13: Free Threading and a JIT Compiler - Real Python, https://realpython.com/python313-free-threading-jit/</li>
-        </ol>
-
-        <div class="page-nav-footer">
-          <a href="python-masterclass.html" class="nav-card-link">
-            <span class="nav-card-direction">&larr; Previous Manual</span>
-            <span class="nav-card-title">Python 3 Masterclass Handbook</span>
-          </a>
-          <a href="postgresql.html" class="nav-card-link" style="text-align: right;">
-            <span class="nav-card-direction">Next Manual &rarr;</span>
-            <span class="nav-card-title">PostgreSQL Master Notes</span>
-          </a>
-        </div>
-      </section>
+        </ol></section>
     </main>
   </div>
 

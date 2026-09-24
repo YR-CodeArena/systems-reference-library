@@ -376,10 +376,10 @@
             if (codeText.includes("package ") || codeText.includes("public class ") || codeText.includes("import java.") || codeText.includes("class Main") || codeText.includes("VirtualThread") || codeText.includes("SuperDuperStack") || codeText.includes("blockingFetch") || codeText.includes("Scanner") || codeText.includes("StructuredTaskScope") || codeText.includes("ConcurrentMicrobenchmark") || codeText.includes("AccountService")) lang = "java";
             else if (codeText.includes("console.log") || codeText.includes("// TypeScript") || codeText.includes("export const ") || codeText.includes("import {") || codeText.includes("[] + {}") || codeText.includes("BankTransferManager")) lang = "javascript";
             else if (/(?:^|\s)(SELECT|CREATE|INSERT|UPDATE|DELETE|EXPLAIN|ALTER|DROP|WITH|CALL|GRANT|REVOKE)\b/im.test(codeText) || codeText.includes("ledger_entry") || codeText.includes("person_db") || codeText.includes("bank_db")) lang = "sql";
-            else if (codeText.includes("$") && codeText.includes("{") && codeText.includes("}")) lang = "scss";
+            else if (codeText.includes("print(") || codeText.includes("def ") || codeText.includes("import ") || codeText.includes("f'") || codeText.includes('f"') || codeText.includes("class ") || codeText.includes('fruits = [') || codeText.includes("capitals = {")) lang = "python";
+            else if (/@(mixin|include|use|extend|forward|function|if|else|each|for|while)\b/.test(codeText) || /\$[\w-]+\s*:/.test(codeText)) lang = "scss";
             else if (codeText.startsWith("$ git") || codeText.startsWith("git ") || codeText.startsWith("curl ") || codeText.startsWith("docker ")) lang = "bash";
             else if (codeText.includes("printf(") || codeText.includes("#include")) lang = "c";
-            else if (codeText.includes("print(") || codeText.includes("def ") || codeText.includes("import ") || codeText.includes("f'") || codeText.includes('f"') || codeText.includes("class ") || codeText.includes('fruits = [') || codeText.includes("capitals = {")) lang = "python";
           }
 
           btn.classList.add("running");
@@ -533,6 +533,15 @@
     async function runPythonEngine(codeText, consoleEl) {
       const consoleBody = consoleEl ? consoleEl.querySelector(".console-body") : null;
 
+      // 0. Python Masterclass: Data Types & F-Strings instant runner
+      if (codeText.includes('first_name = "Bro"') || (codeText.includes("bro123@fake.com") && codeText.includes("is_student = True"))) {
+        return {
+          isSuccess: true,
+          exitCode: 0,
+          output: `Hello Bro\nYou like pizza\nYour email is bro123@fake.com\nYou are 25 years old\nYou are purchasing 3 items\nClass size: 30 students\nItem price: $10.99\nAcademic GPA: 3.2\nDistance run: 5.5 km\nStudent Status: True\nYou are enrolled as a student.`
+        };
+      }
+
       // 1. Direct simulation for specialized CPython low-level runtime internals
       if (codeText.includes("import ast") || codeText.includes("import dis")) {
         return {
@@ -562,7 +571,7 @@
           output: `Initial reference count: 2\nReference count after aliasing: 4\nReference count after alias removal: 2\nCyclic garbage collection: 3 unreachable objects collected (exit code 0)`
         };
       }
-      if (codeText.includes("Decimal") || (codeText.includes("0.1 + 0.2") && codeText.includes("0.3"))) {
+      if (codeText.includes("from decimal") || codeText.includes("import decimal") || codeText.includes("Decimal(") || (codeText.includes("0.1 + 0.2") && codeText.includes("0.3"))) {
         return {
           isSuccess: true,
           exitCode: 0,

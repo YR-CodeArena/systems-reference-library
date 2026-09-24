@@ -260,7 +260,7 @@
       <!-- Overview -->
       <section id="overview" class="content-section">
         <h2>Overview &amp; Executive Summary</h2>
-        <p>High-throughput distributed systems demand an exact understanding of runtime mechanics. The Java Virtual Machine (HotSpot JVM) abstracts physical hardware while exposing critical configuration vectors that govern thread execution, object allocation, and garbage collection [cite: 76]. Modern enterprise architectures balance the resource efficiency of asynchronous runtimes against maintainable operational models, unifying non-blocking reactive pipelines with hardware-aligned primitives.</p>
+        <p>High-throughput distributed systems demand an exact understanding of runtime mechanics. The Java Virtual Machine (HotSpot JVM) abstracts physical hardware while exposing critical configuration vectors that govern thread execution, object allocation, and garbage collection. Modern enterprise architectures balance the resource efficiency of asynchronous runtimes against maintainable operational models, unifying non-blocking reactive pipelines with hardware-aligned primitives.</p>
       </section>
 
       <!-- Section 1 -->
@@ -268,23 +268,23 @@
         <h2>1. Java 21 JVM Architecture and Memory Management Mechanics</h2>
 
         <h3 id="memory-topologies">Physical and Logical Memory Topologies</h3>
-        <p>The HotSpot JVM logically partitions memory into distinct regions to balance allocation throughput and reclamation overhead. These logical regions reside entirely within the operating system process virtual address space, mapped across physical dynamic random-access memory (DRAM) [cite: 76].</p>
+        <p>The HotSpot JVM logically partitions memory into distinct regions to balance allocation throughput and reclamation overhead. These logical regions reside entirely within the operating system process virtual address space, mapped across physical dynamic random-access memory (DRAM).</p>
 
-        <p>The memory topology divides into the Java Heap Space, which is subject to garbage collection, and Off-Heap native process allocations. The Java Heap contains the Young Generation—comprising an Eden space and two Survivor spaces (S0 and S1)—and the Tenured Old Generation. The Off-Heap space accommodates the Metaspace, native memory utilized by C++ runtimes and Direct ByteBuffers, and JVM platform thread call stacks [cite: 76].</p>
+        <p>The memory topology divides into the Java Heap Space, which is subject to garbage collection, and Off-Heap native process allocations. The Java Heap contains the Young Generation—comprising an Eden space and two Survivor spaces (S0 and S1)—and the Tenured Old Generation. The Off-Heap space accommodates the Metaspace, native memory utilized by C++ runtimes and Direct ByteBuffers, and JVM platform thread call stacks.</p>
 
-        <p>The Eden space serves as the initial point of allocation for virtually all dynamic object instances and arrays. High allocation rates are sustained through Thread-Local Allocation Buffers (TLABs). A TLAB is a dedicated chunk of Eden memory assigned directly to an execution thread. Allocation within a TLAB requires only a bump-pointer operation: <code>Top = Top + Size</code> [cite: 76]. This pointer adjustment eliminates synchronization against a global heap pointer. If an allocation exceeds the remaining TLAB capacity, the runtime either retires the current TLAB and allocates a fresh one or allocates directly into the global Eden via an atomic instruction [cite: 76].</p>
+        <p>The Eden space serves as the initial point of allocation for virtually all dynamic object instances and arrays. High allocation rates are sustained through Thread-Local Allocation Buffers (TLABs). A TLAB is a dedicated chunk of Eden memory assigned directly to an execution thread. Allocation within a TLAB requires only a bump-pointer operation: <code>Top = Top + Size</code>. This pointer adjustment eliminates synchronization against a global heap pointer. If an allocation exceeds the remaining TLAB capacity, the runtime either retires the current TLAB and allocates a fresh one or allocates directly into the global Eden via an atomic instruction.</p>
 
-        <p>Surrounding the Eden space are two Survivor spaces (S0 and S1), configured with identical dimensions. At any point in time, one survivor space acts as the active evacuation target while the other remains empty. Live objects surviving an Eden collection are copied to the active survivor space. The roles of the survivor spaces alternate on each minor garbage collection invocation [cite: 76].</p>
+        <p>Surrounding the Eden space are two Survivor spaces (S0 and S1), configured with identical dimensions. At any point in time, one survivor space acts as the active evacuation target while the other remains empty. Live objects surviving an Eden collection are copied to the active survivor space. The roles of the survivor spaces alternate on each minor garbage collection invocation.</p>
 
-        <p>The Tenured or Old Generation occupies the remaining heap capacity, housing long-lived objects. Objects transition into Tenured space after surviving a specified number of collection cycles, governed by an aging threshold stored within the object header. Allocations that exceed half the size of a TLAB or surpass configured humongous thresholds can bypass the Young generation entirely, avoiding memory evacuation copy penalties [cite: 76].</p>
+        <p>The Tenured or Old Generation occupies the remaining heap capacity, housing long-lived objects. Objects transition into Tenured space after surviving a specified number of collection cycles, governed by an aging threshold stored within the object header. Allocations that exceed half the size of a TLAB or surpass configured humongous thresholds can bypass the Young generation entirely, avoiding memory evacuation copy penalties.</p>
 
-        <p>Metaspace, introduced to replace Permanent Generation (PermGen), resides in native process memory. Metaspace stores runtime class definitions, method bytecode, method annotations, the constant pool, method dispatch tables (vtable and itable), and internal HotSpot C++ metadata representations (InstanceKlass) [cite: 76]. When Compressed Class Pointers are active (<code>-XX:+UseCompressedClassPointers</code>), Metaspace is logically divided into two distinct allocations [cite: 76]:</p>
+        <p>Metaspace, introduced to replace Permanent Generation (PermGen), resides in native process memory. Metaspace stores runtime class definitions, method bytecode, method annotations, the constant pool, method dispatch tables (vtable and itable), and internal HotSpot C++ metadata representations (InstanceKlass). When Compressed Class Pointers are active (<code>-XX:+UseCompressedClassPointers</code>), Metaspace is logically divided into two distinct allocations:</p>
         <ul>
-          <li><strong>Class Space:</strong> A contiguous native memory block (defaulting to 1 GB, configured via <code>-XX:CompressedClassSpaceSize</code>) storing instances of Klass structures. This permits HotSpot to reference class metadata via 32-bit compressed pointers within the object header [cite: 76].</li>
-          <li><strong>Non-Class Space:</strong> Dynamically allocated native chunks (Metachunks) requested from the OS via <code>mmap</code> or <code>malloc</code>, holding executable bytecode, annotations, constant pools, and JIT-compiled symbols [cite: 76].</li>
+          <li><strong>Class Space:</strong> A contiguous native memory block (defaulting to 1 GB, configured via <code>-XX:CompressedClassSpaceSize</code>) storing instances of Klass structures. This permits HotSpot to reference class metadata via 32-bit compressed pointers within the object header.</li>
+          <li><strong>Non-Class Space:</strong> Dynamically allocated native chunks (Metachunks) requested from the OS via <code>mmap</code> or <code>malloc</code>, holding executable bytecode, annotations, constant pools, and JIT-compiled symbols.</li>
         </ul>
 
-        <p>Each platform thread created by the JVM receives an isolated, linear native call stack allocated directly via underlying operating system thread primitives, such as <code>pthread_create</code>. Stack sizing is governed by the <code>-Xss</code> flag, which defaults to 1024 KB on modern 64-bit architectures. Every method invocation pushes a discrete stack frame containing three components [cite: 76]:</p>
+        <p>Each platform thread created by the JVM receives an isolated, linear native call stack allocated directly via underlying operating system thread primitives, such as <code>pthread_create</code>. Stack sizing is governed by the <code>-Xss</code> flag, which defaults to 1024 KB on modern 64-bit architectures. Every method invocation pushes a discrete stack frame containing three components:</p>
         <ol>
           <li><strong>The Local Variable Array (LVA):</strong> A zero-indexed structure holding primitive values, references to heap objects, and the invocation instance reference (<code>this</code> at index 0 for instance methods). Long and double values consume two consecutive slots.</li>
           <li><strong>The Operand Stack:</strong> A Last-In-First-Out (LIFO) register space utilized by the JVM bytecode execution engine to push operands, compute intermediate expressions, and pop results to invoke method dispatches.</li>
@@ -409,9 +409,9 @@
         </div>
 
         <h3 id="gc-engineering">Garbage Collection Engineering: G1GC vs. Generational ZGC</h3>
-        <p>Automatic memory reclamation balances throughput against pause latency. The operational model rests upon the <strong>Weak Generational Hypothesis</strong>: the probability that an object survives decreases exponentially with time elapsed since allocation: <code>P(survival) &approx; C &bull; e^(-&lambda;t)</code> [cite: 76].</p>
+        <p>Automatic memory reclamation balances throughput against pause latency. The operational model rests upon the <strong>Weak Generational Hypothesis</strong>: the probability that an object survives decreases exponentially with time elapsed since allocation: <code>P(survival) &approx; C &bull; e^(-&lambda;t)</code>.</p>
 
-        <p><strong>Generational ZGC (JEP 439)</strong>, finalized in Java 21, delivers sub-millisecond maximum pause times (&lt; 1 ms) across terabyte-scale heaps by executing marking, thread-stack scanning, and object relocation concurrently with mutator threads [cite: 76]. To coordinate relocation without Stop-The-World compaction, ZGC uses <strong>Colored Pointers</strong>:</p>
+        <p><strong>Generational ZGC (JEP 439)</strong>, finalized in Java 21, delivers sub-millisecond maximum pause times (&lt; 1 ms) across terabyte-scale heaps by executing marking, thread-stack scanning, and object relocation concurrently with mutator threads. To coordinate relocation without Stop-The-World compaction, ZGC uses <strong>Colored Pointers</strong>:</p>
         <ul>
           <li><strong>Bits 0–43:</strong> Object Virtual Address Space (up to 16 TB addressable memory).</li>
           <li><strong>Bit 44:</strong> Finalizable metadata, tracking reachability through finalizers.</li>
@@ -628,7 +628,7 @@ public class ConcurrencyPrimitiveBenchmark {
         </div>
 
         <h3 id="thread-pinning">Thread Pinning Hazard and ReentrantLock Remediation</h3>
-        <p>When a virtual thread becomes pinned, it cannot unmount from its carrier thread upon encountering a blocking operation. As a result, the carrier thread remains blocked, which can exhaust the carrier pool and stall system throughput [cite: 76]. Thread pinning occurs in two scenarios: executing within an intrinsic <code>synchronized</code> block/method, or executing native frames via JNI/FFM [cite: 76].</p>
+        <p>When a virtual thread becomes pinned, it cannot unmount from its carrier thread upon encountering a blocking operation. As a result, the carrier thread remains blocked, which can exhaust the carrier pool and stall system throughput. Thread pinning occurs in two scenarios: executing within an intrinsic <code>synchronized</code> block/method, or executing native frames via JNI/FFM.</p>
 
         <div class="code-block-wrapper">
           <div class="code-header">
@@ -665,7 +665,7 @@ public class ConcurrencyPrimitiveBenchmark {
         </div>
 
         <h3 id="jmm-lock-free">Non-Blocking Algorithms and the Java Memory Model</h3>
-        <p>Developing lock-free data structures requires aligning application code with the Java Memory Model and hardware memory hierarchies [cite: 76]. To enforce execution order, the JVM emits architecture-specific memory barriers (<code>LoadLoad</code>, <code>StoreStore</code>, <code>LoadStore</code>, and <code>StoreLoad / mfence</code>) [cite: 76].</p>
+        <p>Developing lock-free data structures requires aligning application code with the Java Memory Model and hardware memory hierarchies. To enforce execution order, the JVM emits architecture-specific memory barriers (<code>LoadLoad</code>, <code>StoreStore</code>, <code>LoadStore</code>, and <code>StoreLoad / mfence</code>).</p>
 
         <h3 id="code-lock-free-stack">Lock-Free Stack with VarHandle</h3>
 
@@ -730,7 +730,7 @@ public class LockFreeNodeStack&lt;T&gt; {
         </div>
 
         <h3 id="lmax-disruptor"><div id="disruptor-internals"></div>>The LMAX Disruptor: Mechanical Sympathy and Zero-Contention Architectures</h3>
-        <p>The LMAX Disruptor is an ultra-low-latency inter-thread messaging library designed around mechanical sympathy. It replaces lock contention, cache line bouncing, and GC churn using a pre-allocated circular <code>RingBuffer</code> with power-of-two bitwise indexing: <code>Index = Sequence &amp; (N - 1)</code> [cite: 76].</p>
+        <p>The LMAX Disruptor is an ultra-low-latency inter-thread messaging library designed around mechanical sympathy. It replaces lock contention, cache line bouncing, and GC churn using a pre-allocated circular <code>RingBuffer</code> with power-of-two bitwise indexing: <code>Index = Sequence &amp; (N - 1)</code>.</p>
 
         <h3 id="code-padded-sequence">Padded Atomic Sequence Implementation</h3>
 
@@ -813,7 +813,7 @@ public class PaddedAtomicSequence extends RhsPadding {
         <h2>3. Enterprise Microservice Stack: Spring Boot 3, Reactive Architecture, and Cloud Native Patterns</h2>
 
         <h3 id="spring-boot-aot">Spring Boot 3, Jakarta EE Migration, and GraalVM AOT Compilation</h3>
-        <p>Spring Boot 3 requires Java 17 as a baseline with native support for Java 21 LTS. GraalVM Native Image uses Ahead-Of-Time (AOT) compilation relying on the <strong>Closed-World Assumption</strong>: all classes and methods reachable at runtime must be discoverable during the build phase [cite: 76].</p>
+        <p>Spring Boot 3 requires Java 17 as a baseline with native support for Java 21 LTS. GraalVM Native Image uses Ahead-Of-Time (AOT) compilation relying on the <strong>Closed-World Assumption</strong>: all classes and methods reachable at runtime must be discoverable during the build phase.</p>
 
         <div class="code-block-wrapper">
           <div class="code-header">
@@ -843,7 +843,7 @@ public class NativeAotRuntimeHints implements RuntimeHintsRegistrar {
 }</code></pre>
         </div>
 
-        <p>Spring Boot 3.2+ enables virtual threads across the web layer via a single configuration flag: <code>spring.threads.virtual.enabled=true</code>, replacing Tomcat's standard 200-thread platform pool with <code>Executors.newVirtualThreadPerTaskExecutor()</code> [cite: 76].</p>
+        <p>Spring Boot 3.2+ enables virtual threads across the web layer via a single configuration flag: <code>spring.threads.virtual.enabled=true</code>, replacing Tomcat's standard 200-thread platform pool with <code>Executors.newVirtualThreadPerTaskExecutor()</code>.</p>
 
         <h3 id="reactive-streams">Reactive Programming and the Reactive Streams Specification</h3>
         <div class="table-wrapper">
@@ -928,7 +928,7 @@ public interface UserMapper {
         </div>
 
         <h3 id="distributed-ecosystem">Distributed Microservice Ecosystem</h3>
-        <p>Enterprise systems distribute load across self-healing topologies using reactive gateways (Spring Cloud Gateway), service registries (Netflix Eureka AP vs HashiCorp Consul CP Raft), centralized configuration (Spring Cloud Config Server &amp; Bus), and client-side load balancing (Spring Cloud Load Balancer WebClient) [cite: 76].</p>
+        <p>Enterprise systems distribute load across self-healing topologies using reactive gateways (Spring Cloud Gateway), service registries (Netflix Eureka AP vs HashiCorp Consul CP Raft), centralized configuration (Spring Cloud Config Server &amp; Bus), and client-side load balancing (Spring Cloud Load Balancer WebClient).</p>
       </section>
 
       <!-- Section 4 -->
@@ -936,7 +936,7 @@ public interface UserMapper {
         <h2>4. Architectural Synthesis and System Blueprints</h2>
 
         <h3 id="code-trading-pipeline">High-Throughput Processing Blueprint: Trading Pipeline</h3>
-        <p>The following production blueprint combines non-blocking network I/O with an LMAX Disruptor ring buffer to process orders without lock contention [cite: 76]:</p>
+        <p>The following production blueprint combines non-blocking network I/O with an LMAX Disruptor ring buffer to process orders without lock contention:</p>
 
         <div class="code-block-wrapper">
           <div class="code-header">

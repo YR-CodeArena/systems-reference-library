@@ -247,7 +247,6 @@
           </ul>
         </li>
         <li><a href="#architectural-synthesis">5. Architectural Synthesis &amp; Engineering Patterns</a></li>
-        <li><a href="#works-cited">6. Works Cited (17 References)</a></li>
       </ul>
     </aside>
 
@@ -267,7 +266,7 @@
       <!-- Overview -->
       <section id="overview" class="content-section">
         <h2>Overview &amp; Executive Summary</h2>
-        <p>Modern backend systems handling tens of thousands of requests per second require an engineering understanding of how CPython allocates execution state, navigates memory safety under the Global Interpreter Lock (GIL), and adapts under upcoming free-threaded paradigms [cite: 76]. High-throughput network applications rely on non-blocking I/O to handle thousands of concurrent connections on minimal hardware, pairing asynchronous event loops with compiled native validation engines and zero-downtime persistent relational storage.</p>
+        <p>Modern backend systems handling tens of thousands of requests per second require an engineering understanding of how CPython allocates execution state, navigates memory safety under the Global Interpreter Lock (GIL), and adapts under upcoming free-threaded paradigms. High-throughput network applications rely on non-blocking I/O to handle thousands of concurrent connections on minimal hardware, pairing asynchronous event loops with compiled native validation engines and zero-downtime persistent relational storage.</p>
       </section>
 
       <!-- Section 1 -->
@@ -1209,28 +1208,6 @@ def downgrade() -> None:
       </section>
 
       <!-- Section 6: Works Cited -->
-      <section id="works-cited" class="content-section">
-        <h2>6. Works Cited</h2>
-        <ol style="margin-left: 1.5rem; line-height: 1.8; font-size: 0.92rem; color: var(--text-secondary);">
-          <li>PEP 703 &ndash; Making the Global Interpreter Lock Optional in CPython, <code>https://peps.python.org/pep-0703/</code></li>
-          <li>Deterministic Multithreaded Testing in Python with blanket, <code>https://bernat.tech/posts/blanket-deterministic-threading/</code></li>
-          <li>The bytecode interpreter (3.11) &ndash; Python Developer's Guide, <code>https://devguide-pt-br.readthedocs.io/pt-br/latest/internals/interpreter/</code></li>
-          <li>Proposal: rename _PyInterpreterFrame struct as _Py_framedata, <code>https://discuss.python.org/t/proposal-rename-pyinterpreterframe-struct-as-py-framedata/14213</code></li>
-          <li>Continuum/ARCHITECTURE.md at main byte271/Continuum, <code>https://github.com/byte271/Continuum/blob/main/ARCHITECTURE.md</code></li>
-          <li>Python Without Gil | Coding Fun, <code>https://garychang.org/2023/09/30/Python-Without-GIL.html</code></li>
-          <li>Faster Python: Unlocking the Python Global Interpreter Lock, <code>https://blog.jetbrains.com/pycharm/2025/07/faster-python-unlocking-the-python-global-interpreter-lock/</code></li>
-          <li>Python support for free threading &ndash; Python 3.14.7 documentation, <code>https://docs.python.org/3/howto/free-threading-python.html</code></li>
-          <li>Increased memory usage with free-threaded build #135898 &ndash; GitHub, <code>https://github.com/python/cpython/issues/135898</code></li>
-          <li>Blog &ndash; Removing the Python GIL &ndash; Michael Tsai, <code>https://mjtsai.com/blog/2023/07/19/removing-the-python-gil/</code></li>
-          <li>What's New In Python 3.11 &ndash; Python 3.12.0a0 documentation, <code>https://pradyunsg-cpython-lutra-testing.readthedocs.io/en/latest/whatsnew/3.11.html</code></li>
-          <li>Pydantic v1 vs v2 for Compliance Payload Validation &ndash; Crop Planning, <code>https://www.crop-planning.com/agricultural-automation-system-architecture-compliance/field-schema-design/pydantic-v1-vs-v2-for-compliance-payload-validation/</code></li>
-          <li>Introducing Pydantic v2 &ndash; Key Features, <code>https://pydantic.dev/articles/pydantic-v2</code></li>
-          <li>Enabling Rich Comparisons for Model Instances in FastAPI &ndash; Orchestra, <code>https://www.getorchestra.io/guides/pydantic-rich-comparison-methods-enabling-rich-comparisons-for-model-instances-in-fastapi-2</code></li>
-          <li>Pydantic Performance Tips | Talk Python To Me Podcast, <code>https://talkpython.fm/episodes/show/466/pydantic-performance-tips</code></li>
-          <li>marshmallow vs Pydantic &ndash; A Thorough Comparison &ndash; Tomoda Hinata, <code>https://tomodahinata.com/en/blog/marshmallow-vs-pydantic-comparison-guide</code></li>
-          <li>Async SQLAlchemy in pytest fixture: greenlet_spawn has not been called, <code>https://stackoverflow.com/questions/78701058/async-sqlalchemy-in-pytest-fixture-greenlet-spawn-has-not-been-called</code></li>
-        </ol>
-      </section>
 
       <!-- Pagination -->
       <div class="page-nav-footer">
