@@ -1906,7 +1906,8 @@ builtins.input = _sys_input
       }
 
       let navDrawer = document.getElementById("mobileNavDrawer");
-      if (!navDrawer) {
+      if (!navDrawer || !navDrawer.classList.contains("mobile-nav-drawer")) {
+        if (navDrawer) navDrawer.remove();
         navDrawer = document.createElement("aside");
         navDrawer.id = "mobileNavDrawer";
         navDrawer.className = "mobile-nav-drawer";
