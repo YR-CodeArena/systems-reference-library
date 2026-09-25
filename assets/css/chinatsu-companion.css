@@ -336,6 +336,18 @@
   color: #ff2a85;
 }
 
+#chinatsuLangBtn {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #00f0ff;
+}
+
+#chinatsuLangBtn:hover {
+  background: rgba(0, 240, 255, 0.25);
+  border-color: #00f0ff;
+  color: #ffffff;
+}
+
 /* Quick Navigation Dropdown in Chat (Custom Contained Dropdown) */
 .chinatsu-quick-nav-bar {
   padding: 0.45rem 0.85rem;

@@ -239,6 +239,7 @@ Your Personality & Tone:
       this.isSubmitting = false;
       this.lastUserInteractionTime = Date.now();
       this.currentUser = null;
+      this.activeLang = safeGetStorage("chinatsu_preferred_lang", "auto"); // "auto" | "en" | "hi" | "gu"
     }
 
     init() {
@@ -332,6 +333,9 @@ Your Personality & Tone:
               </div>
             </div>
             <div class="chinatsu-header-actions">
+              <button class="chinatsu-header-btn" id="chinatsuLangBtn" type="button" title="Switch Language (English / हिन्दी / ગુજરાતી)" aria-label="Switch Language">
+                🌐
+              </button>
               <button class="chinatsu-header-btn ${this.voiceEnabled ? "is-active" : ""}" id="chinatsuVoiceToggleBtn" type="button" title="Toggle Anime Voice Speech" aria-label="Toggle Anime Voice Speech">
                 ${this.voiceEnabled ? "🔊" : "🔇"}
               </button>
@@ -486,6 +490,44 @@ Your Personality & Tone:
           }
           if (this.synth) this.synth.cancel();
           this.setVideoState("idle");
+        });
+      }
+
+      // Language Selector
+      const langBtn = document.getElementById("chinatsuLangBtn");
+      if (langBtn) {
+        const updateLangLabel = () => {
+          if (this.activeLang === "hi") {
+            langBtn.textContent = "हि";
+            langBtn.title = "Language: हिन्दी (Hindi). Click to switch.";
+          } else if (this.activeLang === "gu") {
+            langBtn.textContent = "ગુ";
+            langBtn.title = "Language: ગુજરાતી (Gujarati). Click to switch.";
+          } else {
+            langBtn.textContent = "EN";
+            langBtn.title = "Language: English. Click to switch.";
+          }
+        };
+        updateLangLabel();
+
+        langBtn.addEventListener("click", () => {
+          if (this.activeLang === "auto" || this.activeLang === "en") {
+            this.activeLang = "hi";
+          } else if (this.activeLang === "hi") {
+            this.activeLang = "gu";
+          } else {
+            this.activeLang = "en";
+          }
+          safeSetStorage("chinatsu_preferred_lang", this.activeLang);
+          updateLangLabel();
+
+          const toast = document.getElementById("chinatsuNavToast");
+          if (toast) {
+            const langName = this.activeLang === "hi" ? "हिन्दी (Hindi)" : this.activeLang === "gu" ? "ગુજરાતી (Gujarati)" : "English (Anime Japanese)";
+            toast.textContent = `🌐 Language set to ${langName}`;
+            toast.classList.add("is-active");
+            setTimeout(() => toast.classList.remove("is-active"), 2200);
+          }
         });
       }
 
@@ -768,7 +810,8 @@ Your Personality & Tone:
           this.isListening = true;
           if (micBtn) micBtn.classList.add("is-recording");
           if (input) {
-            input.placeholder = "Listening... Speak to Chinatsu-senpai 🎙️";
+            const langLabel = this.activeLang === "hi" ? "हिन्दी में बोलिए 🎙️" : this.activeLang === "gu" ? "ગુજરાતીમાં બોલો 🎙️" : "Speak to Chinatsu-senpai 🎙️";
+            input.placeholder = `Listening... ${langLabel}`;
           }
         };
 
@@ -822,6 +865,13 @@ Your Personality & Tone:
           this.currentAudio = null;
         }
         try {
+          if (this.activeLang === "hi") {
+            this.recognition.lang = "hi-IN";
+          } else if (this.activeLang === "gu") {
+            this.recognition.lang = "gu-IN";
+          } else {
+            this.recognition.lang = "en-US";
+          }
           this.recognition.start();
         } catch (e) {
           console.warn("[Chinatsu] Mic start notice:", e);
@@ -829,22 +879,55 @@ Your Personality & Tone:
       }
     }
 
-    // --- Anime Voice Engine (Studio AI Audio + Tuned Natural Speech) ---
-    cleanSpeech(text) {
+    // --- Multilingual Language Detection & Voice Engine ---
+    detectLanguage(text) {
+      if (!text) return "en";
+      // Gujarati Unicode Block: U+0A80 to U+0AFF
+      if (/[\u0A80-\u0AFF]/.test(text)) return "gu";
+      // Devanagari Unicode Block (Hindi): U+0900 to U+097F
+      if (/[\u0900-\u097F]/.test(text)) return "hi";
+      // Japanese Unicode Blocks: Hiragana & Katakana
+      if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return "ja";
+      // Romanized Gujarati / Gujlish common phrases
+      if (/\b(kem\s*cho|su\s*karo|mane|tame|aavjo|saru|nathi|majama|tamne)\b/i.test(text)) return "gu";
+      // Romanized Hindi / Hinglish common phrases
+      if (/\b(namaste|kaise\s*ho|kya\s*haal|mujhe|tum|aap|batao|theek\s*hai|shukriya|dhanyawad)\b/i.test(text)) return "hi";
+      return "en";
+    }
+
+    cleanSpeech(text, isJapaneseVoice = false) {
       if (!text) return "";
-      return text
+      let clean = text
         .replace(/\[NAVIGATE:[^\]]+\]/gi, "")
         .replace(/```[\s\S]*?```/g, "")
         .replace(/`([^`]+)`/g, "$1")
-        .replace(/\$[^$]+\$/g, "") // strip LaTeX formulas so TTS doesn't stumble
-        // Remove all Unicode emojis and pictographs so they are never spoken aloud
+        .replace(/\$[^$]+\$/g, "")
         .replace(/[\u{1F000}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{27BF}\u{2B50}\u{2B55}\u{200D}\u{FE0F}\u{FE0E}]/gu, "")
-        // Remove explicit symbols and brackets that cause audio buffer pops
         .replace(/[🏀✨🏸⚡💭📁🌸🎀⭐💡🎯🔥•✕✖]/gu, "")
-        .replace(/[*_#~]/g, "")
+        .replace(/[*_#~]/g, "");
+
+      // 1. Remove hyphens from names and honorifics so TTS pronounces words smoothly
+      // "Yash-kun" -> "Yash kun", "Kouhai-kun" -> "Kouhai kun"
+      clean = clean.replace(/\b([A-Za-z]+)-kun\b/gi, "$1 kun");
+      clean = clean.replace(/\b([A-Za-z]+)-san\b/gi, "$1 san");
+      clean = clean.replace(/\b([A-Za-z]+)-senpai\b/gi, "$1 senpai");
+
+      // 2. Prevent letter-by-letter acronym spelling for all-caps "YASH"
+      clean = clean.replace(/\bYASH\b/g, "Yash");
+
+      // 3. Phonetic pronunciation fix for Japanese voice:
+      // In Japanese phonology, final "sh" without a vowel causes TTS engines to spell letter-by-letter (Y-A-S-H).
+      // Replacing with "Yashu" allows Japanese TTS to pronounce "Yash" as a fluent, natural single word!
+      if (isJapaneseVoice) {
+        clean = clean.replace(/\bYash\b/gi, "Yashu");
+      }
+
+      clean = clean
         .replace(/[\(\)\[\]\{\}]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
+
+      return clean;
     }
 
     initVoiceEngine() {
@@ -914,7 +997,73 @@ Your Personality & Tone:
     speak(text) {
       if (!this.voiceEnabled || !this.synth) return;
 
-      const cleanText = this.cleanSpeech(text);
+      const detectedLang = this.detectLanguage(text);
+      const voices = this.synth.getVoices() || [];
+      let targetVoice = null;
+      let langCode = "en-US";
+      let pitch = 1.16;
+      let rate = 1.02;
+
+      if (detectedLang === "gu") {
+        // Native Gujarati Voice (Google ગુજરાતી, Microsoft Dhwani, Niranjan)
+        targetVoice = voices.find(v => (v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name)) && !/male/i.test(v.name));
+        if (!targetVoice) {
+          targetVoice = voices.find(v => v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name));
+        }
+        // Fallback to Hindi voice if browser doesn't have Gujarati installed
+        if (!targetVoice) {
+          targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name)) && !/male/i.test(v.name));
+        }
+        if (!targetVoice) {
+          targetVoice = voices.find(v => v.lang.includes("IN") || /india|heera|neerja/i.test(v.name));
+        }
+        langCode = "gu-IN";
+        pitch = 1.18;
+        rate = 1.0;
+      } else if (detectedLang === "hi") {
+        // Native Hindi Voice (Google हिन्दी, Microsoft Swara, Kalpana)
+        targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name));
+        if (!targetVoice) {
+          targetVoice = voices.find(v => v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
+        }
+        if (!targetVoice) {
+          targetVoice = voices.find(v => v.lang.includes("IN") || /india|heera|neerja/i.test(v.name));
+        }
+        langCode = "hi-IN";
+        pitch = 1.18;
+        rate = 1.0;
+      } else {
+        // English / Japanese Anime English
+        targetVoice = this.preferredVoice;
+        langCode = targetVoice?.lang || "en-US";
+      }
+
+      if (!targetVoice) {
+        targetVoice = this.preferredVoice || voices[0];
+      }
+
+      const vName = (targetVoice?.name || "").toLowerCase();
+      const isJapaneseVoice = /ja|jp|japanese|nihongo|日本語/i.test(vName);
+      const isLegacyDesktop = /desktop|sapi|zira|david|george|mark/i.test(vName);
+      const isNaturalOrAndroid = /natural|online|google|sfg|tpd|rjs|network/i.test(vName);
+
+      if (detectedLang === "en") {
+        if (isJapaneseVoice) {
+          pitch = 1.12;
+          rate = 1.02;
+        } else if (isLegacyDesktop) {
+          pitch = 1.0;
+          rate = 1.0;
+        } else if (isNaturalOrAndroid) {
+          pitch = 1.20;
+          rate = 1.05;
+        } else {
+          pitch = 1.18;
+          rate = 1.04;
+        }
+      }
+
+      const cleanText = this.cleanSpeech(text, isJapaneseVoice);
       if (!cleanText) return;
 
       try {
@@ -925,35 +1074,10 @@ Your Personality & Tone:
         this.synth.cancel();
 
         const utterance = new SpeechSynthesisUtterance(cleanText);
-
-        if (this.preferredVoice) {
-          utterance.voice = this.preferredVoice;
-        }
-
-        const vName = (this.preferredVoice?.name || "").toLowerCase();
-        const vLang = (this.preferredVoice?.lang || "").toLowerCase();
-        const isJapanese = vLang.startsWith("ja") || vLang.startsWith("jp") || /japanese|nihongo|日本語/i.test(vName);
-        const isLegacyDesktop = /desktop|sapi|zira|david|george|mark/i.test(vName);
-        const isNaturalOrAndroid = /natural|online|google|sfg|tpd|rjs|network/i.test(vName);
-
-        // Acoustic Tuning calibrated to eliminate cracking and deliver cute anime girl tone:
-        if (isJapanese) {
-          // Japanese voice reading English: authentic, sweet anime accent without phonetic buffer cracking
-          utterance.pitch = 1.12;
-          utterance.rate = 1.02;
-        } else if (isLegacyDesktop) {
-          // Legacy Desktop voices (e.g. Microsoft Zira on Windows): baseline pitch 1.0 to prevent metallic robotic crackle
-          utterance.pitch = 1.0;
-          utterance.rate = 1.0;
-        } else if (isNaturalOrAndroid) {
-          // Modern Natural / Android Google TTS voices: cute, youthful anime girl pitch without distortion
-          utterance.pitch = 1.20;
-          utterance.rate = 1.05;
-        } else {
-          // General female voice fallback: sweet anime girl pitch
-          utterance.pitch = 1.18;
-          utterance.rate = 1.04;
-        }
+        utterance.voice = targetVoice;
+        utterance.lang = langCode;
+        utterance.pitch = pitch;
+        utterance.rate = rate;
 
         utterance.onstart = () => {
           this.setVideoState("speaking");
@@ -1407,6 +1531,17 @@ Your Personality & Tone:
 
       const userText = input.value.trim();
       if (!userText) return;
+
+      // Auto-detect language if in auto mode
+      const inputLang = this.detectLanguage(userText);
+      if (inputLang === "hi" || inputLang === "gu") {
+        this.activeLang = inputLang;
+        safeSetStorage("chinatsu_preferred_lang", this.activeLang);
+        const langBtn = document.getElementById("chinatsuLangBtn");
+        if (langBtn) {
+          langBtn.textContent = inputLang === "hi" ? "हि" : "ગુ";
+        }
+      }
 
       this.isSubmitting = true;
       this.lastUserInteractionTime = Date.now();
