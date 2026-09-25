@@ -85,20 +85,46 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Format chat history (last 6 turns for fast context)
-    const contents = [];
+    // Format and sanitize chat history (alternating user/model, starting with user)
+    const rawTurns = [];
     if (Array.isArray(body.history)) {
-      for (const turn of body.history.slice(-6)) {
+      for (const turn of body.history.slice(-8)) {
         const text = turn?.parts?.[0]?.text;
-        if (text && typeof text === 'string') {
-          contents.push({
+        if (text && typeof text === 'string' && text.trim().length > 0) {
+          rawTurns.push({
             role: turn.role === 'assistant' || turn.role === 'model' ? 'model' : 'user',
-            parts: [{ text }]
+            parts: [{ text: text.trim() }]
           });
         }
       }
     }
-    contents.push({ role: 'user', parts: [{ text: userMessage }] });
+
+    // Ensure userMessage is not duplicated if it's already the last element in rawTurns
+    if (rawTurns.length === 0 || rawTurns[rawTurns.length - 1].parts[0].text !== userMessage) {
+      rawTurns.push({ role: 'user', parts: [{ text: userMessage }] });
+    }
+
+    // Sanitize to guarantee valid alternating turns starting with 'user'
+    const contents = [];
+    for (const turn of rawTurns) {
+      if (contents.length === 0) {
+        if (turn.role === 'user') {
+          contents.push(turn);
+        }
+      } else {
+        const prevRole = contents[contents.length - 1].role;
+        if (turn.role !== prevRole) {
+          contents.push(turn);
+        } else if (turn.role === 'user') {
+          contents[contents.length - 1] = turn;
+        }
+      }
+    }
+
+    // Edge case safeguard: ensure at least userMessage exists
+    if (contents.length === 0) {
+      contents.push({ role: 'user', parts: [{ text: userMessage }] });
+    }
 
     const requestPayload = {
       contents,

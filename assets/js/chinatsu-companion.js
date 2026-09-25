@@ -134,6 +134,7 @@ Your Personality & Tone:
       this.audioCtx = null;
       this.proactiveTimer = null;
       this.lastProactiveIndex = -1;
+      this.isSubmitting = false;
     }
 
     init() {
@@ -576,6 +577,16 @@ Your Personality & Tone:
     }
 
     triggerProactiveMessage() {
+      // Safeguard 1: Do not message if tab is in background / inactive
+      if (typeof document !== "undefined" && document.hidden) {
+        return;
+      }
+
+      // Safeguard 2: Cap unread proactive messages to 3 (stops pinging if user hasn't checked)
+      if (this.unreadCount >= 3) {
+        return;
+      }
+
       // Select non-repeating message from slice-of-life pool
       let nextIndex = Math.floor(Math.random() * PROACTIVE_SLICE_OF_LIFE.length);
       if (nextIndex === this.lastProactiveIndex && PROACTIVE_SLICE_OF_LIFE.length > 1) {
@@ -587,9 +598,8 @@ Your Personality & Tone:
       // 1. Play cute notification chime
       this.playNotificationChime();
 
-      // 2. Add message to chat log
+      // 2. Add message to chat log (100% Client-side — ZERO Gemini API calls or tokens used!)
       this.addMessage("assistant", message);
-      this.chatHistory.push({ role: "model", parts: [{ text: message }] });
 
       // 3. If chat is NOT open, increment mascot badge & show thought bubble preview
       if (!this.isOpen) {
@@ -1004,12 +1014,15 @@ Your Personality & Tone:
 
     // --- Dialogue Processing & Gemini API ---
     async handleUserSubmit() {
+      if (this.isSubmitting) return;
+
       const input = document.getElementById("chinatsuChatInput");
       if (!input) return;
 
       const userText = input.value.trim();
       if (!userText) return;
 
+      this.isSubmitting = true;
       input.value = "";
       this.addMessage("user", userText);
 
@@ -1033,6 +1046,8 @@ Your Personality & Tone:
         if (navMatch && navMatch[1] && this.isExplicitNavigationRequest(userText)) {
           this.navigateWithToast(navMatch[1].trim());
         }
+      } finally {
+        this.isSubmitting = false;
       }
     }
 
