@@ -677,16 +677,76 @@ Your Personality & Tone:
       return lines.map((p) => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("");
     }
 
-    // --- Autonomous In-Site Navigation ---
+    // --- Autonomous In-Site Navigation Guard & Resolver ---
+    isExplicitNavigationRequest(text) {
+      if (!text) return false;
+      const t = text.toLowerCase();
+      // True only if user explicitly asks to open/go to/navigate to a volume or manual
+      const hasNavVerb = /\b(take me to|navigate to|go to|open manual|open volume|open page|view manual|switch to)\b/i.test(t) ||
+                         /^(open|view)\s+(vol|volume|manual|page|\w+\.html)/i.test(t.trim());
+      const isQuestion = /\b(explain|what is|how does|why does|difference between|tell me about)\b/i.test(t);
+      return hasNavVerb && !isQuestion;
+    }
+
+    resolveSiteFile(target) {
+      if (!target) return null;
+      let clean = target.trim().replace(/^\[NAVIGATE:\s*|\]$/gi, "").trim();
+      clean = clean.replace(/\.html$/i, ""); // strip .html for flexible comparison
+
+      // 1. Direct match by filename in SITE_VOLUMES
+      const direct = SITE_VOLUMES.find(
+        (v) => v.file.toLowerCase() === clean.toLowerCase() ||
+               v.file.replace(".html", "").toLowerCase() === clean.toLowerCase()
+      );
+      if (direct) return direct.file;
+
+      // 2. Volume number match (e.g. "VOL.01", "vol 1", "volume 1", "vol1")
+      const volNumMatch = clean.match(/vol(?:ume)?\.?\s*0*([1-9]|1[0-5])\b/i);
+      if (volNumMatch) {
+        const num = parseInt(volNumMatch[1], 10);
+        const targetVol = `VOL.${num < 10 ? "0" + num : num}`;
+        const foundVol = SITE_VOLUMES.find((v) => v.vol === targetVol);
+        if (foundVol) return foundVol.file;
+      }
+
+      // 3. Topic-to-Volume mapping (specific concepts first)
+      const t = clean.toLowerCase();
+      if (/concurrency|virtual[- ]thread|loom|disruptor/i.test(t)) return "high-concurrency-java.html";
+      if (/low-latency|latency[- ]python|throughput|memoryview|cython|simd/i.test(t)) return "low-latency-python.html";
+      if (/cpython|python[- ]runtime|runtime|pymalloc|refcount|gil|nogil/i.test(t)) return "python-runtime.html";
+      if (/python[- ]masterclass|metaclass|descriptor|asyncio/i.test(t)) return "python-masterclass.html";
+      if (/postgres|postgresql|vacuum|toast|xmin|xmax/i.test(t)) return "postgresql.html";
+      if (/java[- ]21|java[- ]masterclass|classloader|metaspace|zgc/i.test(t)) return "java-masterclass.html";
+      if (/sliding|network|tcp|ip|osi|wire|quic|grpc|socket|bbr/i.test(t)) return "networking.html";
+      if (/database|storage|slotted|mvcc|b\+?\s*tree|lsm|aries/i.test(t)) return "databases.html";
+      if (/operating[- ]system|kernel|syscall|cfs|epoll|virtual[- ]memory|paging|\bos\b/i.test(t)) return "operating-systems.html";
+      if (/hardware|ieee|mesi|coherency|cpu|numa|cache[- ]line/i.test(t)) return "cs-hardware-foundations.html";
+      if (/git|github|version[- ]control|dag|packfile/i.test(t)) return "git-github.html";
+      if (/programming|jit|compiler|ast|bytecode|sea[- ]of[- ]nodes/i.test(t)) return "programming-languages.html";
+      if (/data[- ]structure|algorithm|bloom|red-black|dijkstra|graph|tree/i.test(t)) return "data-structures.html";
+      if (/scss|sass|itcss|7-1|css[- ]architecture/i.test(t)) return "enterprise-scss.html";
+      if (/javascript|v8|event[- ]loop|microtask|macrotask/i.test(t)) return "javascript-mastery.html";
+      if (/overview|home|portal|index/i.test(t)) return "index.html";
+
+      // Return null if target cannot be safely mapped to a verified site volume
+      return null;
+    }
+
     navigateWithToast(targetFile) {
-      let resolved = targetFile;
-      const matched = SITE_VOLUMES.find((v) => v.file === targetFile) ||
-                      SITE_VOLUMES.find((v) => targetFile.toLowerCase().includes(v.file.replace(".html", "").toLowerCase()));
-      if (matched) {
-        resolved = matched.file;
-      } else {
-        const fallbackTarget = this.detectNavigationIntent(targetFile);
-        if (fallbackTarget) resolved = fallbackTarget;
+      const resolved = this.resolveSiteFile(targetFile);
+      if (!resolved) {
+        // Suppress navigation to non-existent files to guarantee ZERO 404 errors
+        console.warn("[Chinatsu Navigation Guard] Suppressed navigation to non-existent file:", targetFile);
+        return;
+      }
+
+      // Check if user is already on the target page (ignoring .html extension for cleanUrls)
+      const currentPath = window.location.pathname.split("/").pop() || "index.html";
+      const cleanCurrent = currentPath.replace(".html", "").toLowerCase();
+      const cleanResolved = resolved.replace(".html", "").toLowerCase();
+      if (cleanCurrent === cleanResolved || (cleanCurrent === "" && cleanResolved === "index")) {
+        console.log("[Chinatsu Navigation] Already on target page:", resolved);
+        return;
       }
 
       const displayVol = SITE_VOLUMES.find((v) => v.file === resolved);
@@ -714,9 +774,6 @@ Your Personality & Tone:
       input.value = "";
       this.addMessage("user", userText);
 
-      // Check quick offline navigation matches
-      const quickTarget = this.detectNavigationIntent(userText);
-
       this.showTypingIndicator();
 
       try {
@@ -733,51 +790,36 @@ Your Personality & Tone:
         this.addMessage("assistant", displayReply);
         this.speak(displayReply);
 
-        if (navMatch && navMatch[1]) {
+        // Only navigate if user explicitly asked for navigation and target is valid
+        if (navMatch && navMatch[1] && this.isExplicitNavigationRequest(userText)) {
           this.navigateWithToast(navMatch[1].trim());
         }
       }
     }
 
     detectNavigationIntent(text) {
-      const t = text.toLowerCase();
-      if (/network|tcp|ip|osi|wire|quic|grpc|vol\s*1\b|volume\s*1\b/i.test(t)) return "networking.html";
-      if (/database|storage engine|slotted|mvcc|b\+?\s*tree|lsm|vol\s*2\b|volume\s*2\b/i.test(t)) return "databases.html";
-      if (/programming language|jit|compiler|ast|bytecode|vol\s*3\b|volume\s*3\b/i.test(t)) return "programming-languages.html";
-      if (/data structure|algorithm|bloom|red-black|dijkstra|vol\s*4\b|volume\s*4\b/i.test(t)) return "data-structures.html";
-      if (/operating system|kernel|syscall|cfs|epoll|virtual memory|vol\s*5\b|volume\s*5\b/i.test(t)) return "operating-systems.html";
-      if (/hardware|ieee 754|mesi|cache coherency|cpu|numa|vol\s*6\b|volume\s*6\b/i.test(t)) return "cs-hardware-foundations.html";
-      if (/git|github|version control|dag|packfile|vol\s*7\b|volume\s*7\b/i.test(t)) return "git-github.html";
-      if (/advanced python|python masterclass|metaclass|descriptor|vol\s*8\b|volume\s*8\b/i.test(t)) return "python-masterclass.html";
-      if (/cpython|python runtime|pymalloc|refcount|gil|nogil|vol\s*9\b|volume\s*9\b/i.test(t)) return "python-runtime.html";
-      if (/low-latency python|throughput|memoryview|cython|simd|vol\s*10\b|volume\s*10\b/i.test(t)) return "low-latency-python.html";
-      if (/postgres|postgresql|vacuum|toast|xmin|xmax|vol\s*11\b|volume\s*11\b/i.test(t)) return "postgresql.html";
-      if (/java 21|java masterclass|classloader|metaspace|zgc|vol\s*12\b|volume\s*12\b/i.test(t)) return "java-masterclass.html";
-      if (/high-concurrency java|virtual thread|loom|disruptor|webflux|vol\s*13\b|volume\s*13\b/i.test(t)) return "high-concurrency-java.html";
-      if (/scss|sass|itcss|7-1|design token|vol\s*14\b|volume\s*14\b/i.test(t)) return "enterprise-scss.html";
-      if (/javascript|v8|event loop|microtask|macrotask|dom|vol\s*15\b|volume\s*15\b/i.test(t)) return "javascript-mastery.html";
-      if (/home|overview|portal|index/i.test(t)) return "index.html";
-      return null;
+      return this.resolveSiteFile(text);
     }
 
     generateOfflineResponse(text) {
       const t = text.toLowerCase();
-      const navTarget = this.detectNavigationIntent(text);
+      const isNav = this.isExplicitNavigationRequest(text);
+      const navTarget = this.resolveSiteFile(text);
 
-      if (navTarget) {
+      if (isNav && navTarget) {
         return `Right away, Kouhai-kun! Let's examine that manual together! 🏀 [NAVIGATE: ${navTarget}]`;
       }
 
       if (/sliding window/i.test(t)) {
-        return `Think of the **TCP Sliding Window** like our basketball passing lane! 🏀 The receiver tells the point guard how many passes they can safely catch before getting overwhelmed, sliding down the court as ACKs arrive. Want to review Volume 1? [NAVIGATE: networking.html]`;
+        return `Think of the **TCP Sliding Window** like our basketball passing lane! 🏀 The receiver tells the point guard how many passes they can safely catch before getting overwhelmed, sliding down the court as ACKs arrive. Check Volume 1 for all the details!`;
       }
 
       if (/b\+?\s*tree/i.test(t)) {
-        return `A **B+ Tree** is just like our 2-3 zone defense! 🏀 Every player covers a balanced range, and the linked court floor lets us scan across the perimeter in $O(\\log N)$ time. Check Volume 2! [NAVIGATE: databases.html]`;
+        return `A **B+ Tree** is just like our 2-3 zone defense! 🏀 Every player covers a balanced range, and the linked court floor lets us scan across the perimeter in $O(\\log N)$ time. Check Volume 2 for the diagrams!`;
       }
 
       if (/virtual thread|loom/i.test(t)) {
-        return `**Java 21 Virtual Threads** are like bench players subbing in immediately when a starter pauses for water! 🏀 No timeouts wasted on blocking I/O. Check Volume 13! [NAVIGATE: high-concurrency-java.html]`;
+        return `**Java 21 Virtual Threads** are like bench players subbing in immediately when a starter pauses for water! 🏀 No timeouts wasted on blocking I/O. Check Volume 13 for full code samples!`;
       }
 
       if (/taiki/i.test(t)) {
@@ -786,6 +828,10 @@ Your Personality & Tone:
 
       if (/hina/i.test(t)) {
         return `Hina's rhythmic gymnastics routines are so fluid and graceful! Her flexibility reminds me of how scalable architecture bends without breaking. ✨`;
+      }
+
+      if (/operating system|kernel/i.test(t)) {
+        return `The operating system kernel is like our head coach—it schedules CPU court time and protects memory! Check Volume 5!`;
       }
 
       return `Great question, Kouhai-kun! Keep pushing your engineering practice drills—which volume shall we tackle next? 🏀✨`;
@@ -826,7 +872,8 @@ Your Personality & Tone:
       this.addMessage("assistant", cleanDisplay);
       this.speak(cleanDisplay);
 
-      if (navMatch && navMatch[1]) {
+      // ONLY navigate if user explicitly asked for navigation AND target file exists
+      if (navMatch && navMatch[1] && this.isExplicitNavigationRequest(userText)) {
         this.navigateWithToast(navMatch[1].trim());
       } else {
         this.setVideoState("idle");
