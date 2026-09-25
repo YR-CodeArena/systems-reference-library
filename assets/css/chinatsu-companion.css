@@ -660,19 +660,42 @@
   40% { transform: scale(1.1); opacity: 1; }
 }
 
-/* Quick Suggestion Chips */
+/* Quick Suggestion Chips — Horizontal Scroll Bar */
 .chinatsu-suggestion-chips {
-  padding: 0.5rem 0.85rem;
+  padding: 0.5rem 0.85rem 0.55rem;
   display: flex;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.45rem;
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
-  background: rgba(0, 0, 0, 0.15);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 15, 30, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 42, 133, 0.7) rgba(255, 255, 255, 0.08);
 }
 
+/* Custom Scrollbar for Suggestions ("little bar") */
 .chinatsu-suggestion-chips::-webkit-scrollbar {
-  height: 3px;
+  height: 5px;
+}
+
+.chinatsu-suggestion-chips::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 9999px;
+  margin: 0 0.5rem;
+}
+
+.chinatsu-suggestion-chips::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #ff2a85, #00f0ff);
+  border-radius: 9999px;
+  box-shadow: 0 0 6px rgba(255, 42, 133, 0.5);
+}
+
+.chinatsu-suggestion-chips::-webkit-scrollbar-thumb:hover {
+  background: #ff2a85;
 }
 
 .chinatsu-chip-refresh-btn {

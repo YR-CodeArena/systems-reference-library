@@ -895,6 +895,21 @@ Your Personality & Tone:
       return "en";
     }
 
+    gujaratiToDevanagari(text) {
+      if (!text) return "";
+      let res = "";
+      for (let i = 0; i < text.length; i++) {
+        const code = text.charCodeAt(i);
+        // Gujarati Unicode block 0x0A81 to 0x0AF1 maps to Devanagari with offset -0x0180 (384)
+        if (code >= 0x0A81 && code <= 0x0AF1) {
+          res += String.fromCharCode(code - 0x0180);
+        } else {
+          res += text[i];
+        }
+      }
+      return res;
+    }
+
     cleanSpeech(text, isJapaneseVoice = false) {
       if (!text) return "";
       let clean = text
@@ -906,18 +921,22 @@ Your Personality & Tone:
         .replace(/[🏀✨🏸⚡💭📁🌸🎀⭐💡🎯🔥•✕✖]/gu, "")
         .replace(/[*_#~]/g, "");
 
-      // 1. Remove hyphens from names and honorifics so TTS pronounces words smoothly
-      // "Yash-kun" -> "Yash kun", "Kouhai-kun" -> "Kouhai kun"
+      // 1. Strip Japanese honorifics & anime phrases in Gujarati & Hindi so speech sounds authentic Indian
+      clean = clean.replace(/યશ-કુન|યશ\s*કુન/gu, "યશ");
+      clean = clean.replace(/यश-कुन|यश\s*कुन/gu, "यश");
+      clean = clean.replace(/-?કુન|-?કું/gu, "");
+      clean = clean.replace(/સેનપાઈ|કોહાઈ/gu, "");
+      clean = clean.replace(/([A-Za-z\u0900-\u0AF1])-([A-Za-z\u0900-\u0AF1])/gu, "$1 $2");
+
+      // 2. English honorifics cleanup
       clean = clean.replace(/\b([A-Za-z]+)-kun\b/gi, "$1 kun");
       clean = clean.replace(/\b([A-Za-z]+)-san\b/gi, "$1 san");
       clean = clean.replace(/\b([A-Za-z]+)-senpai\b/gi, "$1 senpai");
 
-      // 2. Prevent letter-by-letter acronym spelling for all-caps "YASH"
+      // 3. Prevent letter-by-letter acronym spelling for all-caps "YASH"
       clean = clean.replace(/\bYASH\b/g, "Yash");
 
-      // 3. Phonetic pronunciation fix for Japanese voice:
-      // In Japanese phonology, final "sh" without a vowel causes TTS engines to spell letter-by-letter (Y-A-S-H).
-      // Replacing with "Yashu" allows Japanese TTS to pronounce "Yash" as a fluent, natural single word!
+      // 4. Phonetic pronunciation fix ONLY for authentic Japanese voice speaking English
       if (isJapaneseVoice) {
         clean = clean.replace(/\bYash\b/gi, "Yashu");
       }
@@ -939,8 +958,20 @@ Your Personality & Tone:
             const voices = this.synth.getVoices();
             if (!voices || voices.length === 0) return;
 
-            // Priority 1: Authentic Japanese Anime Voices (Speaking English with cute anime Japanese accent)
-            // Windows Edge: Nanami, Keiko. iOS/Mac: Kyoko, Otoya. Android/Chrome: Google 日本語 / ja-JP.
+            // --- Cache Hindi Voice ---
+            this.hindiVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name));
+            if (!this.hindiVoice) {
+              this.hindiVoice = voices.find(v => v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
+            }
+
+            // --- Cache Gujarati Voice ---
+            this.gujaratiVoice = voices.find(v => (v.lang.startsWith("gu") || /gujarati|ગુજરાતી|dhwani/i.test(v.name)) && !/male/i.test(v.name));
+            if (!this.gujaratiVoice) {
+              this.gujaratiVoice = voices.find(v => v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name));
+            }
+
+            // --- Cache English/Japanese Preferred Voice (for English mode) ---
+            // Priority 1: Authentic Japanese Anime Voices
             let chosen = voices.find(
               (v) =>
                 (v.lang.startsWith("ja") || v.lang.startsWith("jp") || /japanese|nihongo|日本語/i.test(v.name)) &&
@@ -957,14 +988,14 @@ Your Personality & Tone:
               chosen = voices.find((v) => v.lang.startsWith("ja") || v.lang.startsWith("jp") || /japanese|nihongo|日本語/i.test(v.name));
             }
 
-            // Priority 3: Android Google TTS Youthful Female Voices (Realme, Samsung, Pixel: en-us-x-sfg, en-gb-x-rjs, tpd)
+            // Priority 3: Android Google TTS Youthful Female Voices
             if (!chosen) {
               chosen = voices.find(
                 (v) => /sfg|tpd|rjs|female|woman|natural|neural/i.test(v.name) && !/male|david|mark/i.test(v.name)
               );
             }
 
-            // Priority 4: Modern High-Fidelity Natural Female voices (Google UK English Female, Microsoft Ana/Jenny/Aria, Samantha)
+            // Priority 4: Modern High-Fidelity Natural Female voices
             if (!chosen) {
               chosen = voices.find(
                 (v) =>
@@ -982,6 +1013,8 @@ Your Personality & Tone:
 
             // Final fallback: Default system voice
             this.preferredVoice = chosen || voices[0];
+
+            console.log("[Chinatsu] Voice cache — EN:", this.preferredVoice?.name, "| HI:", this.hindiVoice?.name || "browser-default", "| GU:", this.gujaratiVoice?.name || "browser-default");
           } catch (e) {}
         };
 
@@ -997,62 +1030,74 @@ Your Personality & Tone:
     speak(text) {
       if (!this.voiceEnabled || !this.synth) return;
 
-      const detectedLang = this.detectLanguage(text);
-      const voices = this.synth.getVoices() || [];
-      let targetVoice = null;
-      let useNativeVoice = false; // true = we found a dedicated Hindi/Gujarati voice
-      let langCode = "en-US";
-      let pitch = 1.16;
-      let rate = 1.02;
-
-      if (detectedLang === "gu") {
-        // Search for a dedicated Gujarati voice
-        targetVoice = voices.find(v => (v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name)) && !/male/i.test(v.name));
-        if (!targetVoice) {
-          targetVoice = voices.find(v => v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name));
-        }
-        // Fallback to Hindi voice (close phonetic match)
-        if (!targetVoice) {
-          targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name));
-        }
-        if (!targetVoice) {
-          targetVoice = voices.find(v => v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
-        }
-        // Fallback to any Indian English voice (NOT Japanese!)
-        if (!targetVoice) {
-          targetVoice = voices.find(v => (v.lang.includes("IN") || /india|heera|neerja/i.test(v.name)) && !/ja|jp|japanese/i.test(v.lang));
-        }
-        useNativeVoice = !!targetVoice;
-        langCode = "gu-IN";
-        pitch = 1.1;
-        rate = 1.0;
-      } else if (detectedLang === "hi") {
-        // Search for a dedicated Hindi voice
-        targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name));
-        if (!targetVoice) {
-          targetVoice = voices.find(v => v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
-        }
-        // Fallback to any Indian English voice (NOT Japanese!)
-        if (!targetVoice) {
-          targetVoice = voices.find(v => (v.lang.includes("IN") || /india|heera|neerja/i.test(v.name)) && !/ja|jp|japanese/i.test(v.lang));
-        }
-        useNativeVoice = !!targetVoice;
-        langCode = "hi-IN";
-        pitch = 1.1;
-        rate = 1.0;
-      } else {
-        // English: use the Japanese anime voice (preferredVoice)
-        targetVoice = this.preferredVoice;
-        useNativeVoice = true;
-        langCode = targetVoice?.lang || "en-US";
+      const rawDetected = this.detectLanguage(text);
+      // Respect activeLang if user explicitly toggled to Gujarati or Hindi
+      let detectedLang = rawDetected;
+      if (this.activeLang === "gu" && rawDetected !== "hi") {
+        detectedLang = "gu";
+      } else if (this.activeLang === "hi" && rawDetected !== "gu") {
+        detectedLang = "hi";
       }
 
-      // Determine if the final voice is Japanese (for cleanSpeech phonetic adjustments)
-      const isJapaneseVoice = targetVoice ? /ja|jp|japanese|nihongo|日本語/i.test((targetVoice.name || "") + (targetVoice.lang || "")) : false;
+      const voices = this.synth.getVoices() || [];
+      let targetVoice = null;
+      let langCode = "en-US";
+      let pitch = 1.0;
+      let rate = 1.0;
+      let cleanText = text;
 
-      // Acoustic tuning for English voices
-      if (detectedLang === "en") {
+      if (detectedLang === "gu") {
+        // Priority 1: Native Gujarati Voice on device (Google ગુજરાતી, Microsoft Dhwani, etc.)
+        targetVoice = this.gujaratiVoice
+          || voices.find(v => (v.lang.toLowerCase().startsWith("gu") || /gujarati|ગુજરાતી|dhwani/i.test(v.name)) && !/male/i.test(v.name))
+          || voices.find(v => v.lang.toLowerCase().startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name));
+
+        if (targetVoice && !/ja|jp|japanese/i.test(targetVoice.lang || "")) {
+          langCode = targetVoice.lang || "gu-IN";
+          pitch = 1.0;
+          rate = 0.98;
+          cleanText = this.cleanSpeech(cleanText, false);
+        } else {
+          // Priority 2: Fall back to native Hindi voice with Devanagari transliteration!
+          // Hindi TTS engines pronounce Devanagari representation of Gujarati with 100% fluent, natural Indian phonetics.
+          const hindiCandidate = this.hindiVoice
+            || voices.find(v => (v.lang.toLowerCase().startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name))
+            || voices.find(v => v.lang.toLowerCase().startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
+
+          if (hindiCandidate && !/ja|jp|japanese/i.test(hindiCandidate.lang || "")) {
+            targetVoice = hindiCandidate;
+            langCode = targetVoice.lang || "hi-IN";
+            pitch = 1.0;
+            rate = 0.98;
+            cleanText = this.cleanSpeech(cleanText, false);
+            cleanText = this.gujaratiToDevanagari(cleanText);
+          } else {
+            // Priority 3: Indian English voice or browser default (NEVER Japanese voice)
+            targetVoice = voices.find(v => (v.lang.includes("IN") || /india|heera|neerja/i.test(v.name)) && !/ja|jp/i.test(v.lang));
+            langCode = "gu-IN";
+            pitch = 1.0;
+            rate = 1.0;
+            cleanText = this.cleanSpeech(cleanText, false);
+          }
+        }
+      } else if (detectedLang === "hi") {
+        targetVoice = this.hindiVoice
+          || voices.find(v => (v.lang.toLowerCase().startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name))
+          || voices.find(v => v.lang.toLowerCase().startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
+        if (targetVoice && /ja|jp|japanese/i.test(targetVoice.lang || "")) {
+          targetVoice = null;
+        }
+        langCode = targetVoice?.lang || "hi-IN";
+        pitch = 1.0;
+        rate = 0.98;
+        cleanText = this.cleanSpeech(cleanText, false);
+      } else {
+        // English: cute Japanese anime voice (preferredVoice)
+        targetVoice = this.preferredVoice;
+        langCode = targetVoice?.lang || "en-US";
         const vName = (targetVoice?.name || "").toLowerCase();
+        const isJapaneseVoice = /ja|jp|japanese|nihongo|日本語/i.test(vName + (targetVoice?.lang || ""));
+
         if (isJapaneseVoice) {
           pitch = 1.12;
           rate = 1.02;
@@ -1066,9 +1111,9 @@ Your Personality & Tone:
           pitch = 1.18;
           rate = 1.04;
         }
+        cleanText = this.cleanSpeech(cleanText, isJapaneseVoice);
       }
 
-      const cleanText = this.cleanSpeech(text, isJapaneseVoice);
       if (!cleanText) return;
 
       try {
@@ -1080,11 +1125,7 @@ Your Personality & Tone:
 
         const utterance = new SpeechSynthesisUtterance(cleanText);
 
-        // CRITICAL: For Hindi/Gujarati, only set utterance.voice if we found a real
-        // native Indic voice. Otherwise, leave it unset and let the browser's language
-        // engine pick the correct voice based on utterance.lang alone.
-        // This prevents the Japanese voice from reading Devanagari/Gujarati text.
-        if (useNativeVoice && targetVoice) {
+        if (targetVoice) {
           utterance.voice = targetVoice;
         }
 
@@ -1220,13 +1261,13 @@ Your Personality & Tone:
       try { seen = JSON.parse(seenChips); } catch (e) { seen = []; }
 
       let available = DYNAMIC_SUGGESTION_POOL.filter((_, idx) => !seen.includes(idx));
-      if (available.length < 5) {
+      if (available.length < 8) {
         seen = [];
         available = DYNAMIC_SUGGESTION_POOL;
       }
 
       const shuffled = [...available].sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 5);
+      const selected = shuffled.slice(0, 8);
 
       selected.forEach(item => {
         const idx = DYNAMIC_SUGGESTION_POOL.indexOf(item);
