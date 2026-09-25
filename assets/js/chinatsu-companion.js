@@ -1640,7 +1640,8 @@ Your Personality & Tone:
         body: JSON.stringify({
           message: userText,
           history: this.chatHistory,
-          userProfile: this.currentUser
+          userProfile: this.currentUser,
+          preferredLang: this.activeLang || "en"
         })
       });
 

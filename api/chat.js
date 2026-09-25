@@ -139,6 +139,14 @@ module.exports = async (req, res) => {
       }
     }
 
+    // Inject Mandatory Language Override when user has selected Hindi or Gujarati
+    const preferredLang = (body.preferredLang || '').trim().toLowerCase();
+    if (preferredLang === 'hi') {
+      dynamicSystemPrompt += `\n\nMANDATORY LANGUAGE OVERRIDE:\n- The user has selected Hindi as their preferred language. You MUST respond ENTIRELY in fluent, natural Hindi using Devanagari script (हिन्दी). Do NOT respond in English or Japanese. Keep your warm, sweet senpai personality but write everything in Hindi. Example: "यश-कुन! आज की प्रैक्टिस बहुत मज़ेदार थी! तुम कैसे हो? 🏀"`;
+    } else if (preferredLang === 'gu') {
+      dynamicSystemPrompt += `\n\nMANDATORY LANGUAGE OVERRIDE:\n- The user has selected Gujarati as their preferred language. You MUST respond ENTIRELY in fluent, natural Gujarati using Gujarati script (ગુજરાતી). Do NOT respond in English or Japanese. Keep your warm, sweet senpai personality but write everything in Gujarati. Example: "યશ-કુન! આજની પ્રેક્ટિસ ખૂબ મજાની હતી! તમે કેમ છો? 🏀"`;
+    }
+
     const requestPayload = {
       contents,
       systemInstruction: {
