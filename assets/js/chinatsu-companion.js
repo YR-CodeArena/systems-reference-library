@@ -135,6 +135,7 @@ Your Personality & Tone:
       this.proactiveTimer = null;
       this.lastProactiveIndex = -1;
       this.isSubmitting = false;
+      this.lastUserInteractionTime = Date.now();
     }
 
     init() {
@@ -418,6 +419,7 @@ Your Personality & Tone:
       if (!chatWindow) return;
 
       this.isOpen = typeof forceState === "boolean" ? forceState : !this.isOpen;
+      this.lastUserInteractionTime = Date.now();
       chatWindow.classList.toggle("is-open", this.isOpen);
 
       if (this.isOpen) {
@@ -577,12 +579,22 @@ Your Personality & Tone:
     }
 
     triggerProactiveMessage() {
-      // Safeguard 1: Do not message if tab is in background / inactive
+      // Rule 1: NEVER trigger initiating messages when chat is already open or being used!
+      if (this.isOpen) {
+        return;
+      }
+
+      // Rule 2: Do not message if tab is in background / inactive
       if (typeof document !== "undefined" && document.hidden) {
         return;
       }
 
-      // Safeguard 2: Cap unread proactive messages to 3 (stops pinging if user hasn't checked)
+      // Rule 3: If user interacted or chatted within the last 60 seconds, do not interrupt
+      if (Date.now() - this.lastUserInteractionTime < 60000) {
+        return;
+      }
+
+      // Rule 4: Cap unread proactive messages to 3 (stops pinging if user hasn't checked)
       if (this.unreadCount >= 3) {
         return;
       }
@@ -598,27 +610,22 @@ Your Personality & Tone:
       // 1. Play cute notification chime
       this.playNotificationChime();
 
-      // 2. Add message to chat log (100% Client-side — ZERO Gemini API calls or tokens used!)
+      // 2. Add message to chat log (waiting for user when they open)
       this.addMessage("assistant", message);
 
-      // 3. If chat is NOT open, increment mascot badge & show thought bubble preview
-      if (!this.isOpen) {
-        this.unreadCount++;
-        this.updateBadge();
+      // 3. Increment mascot badge & show thought bubble preview
+      this.unreadCount++;
+      this.updateBadge();
 
-        const bubble = document.getElementById("chinatsuThoughtBubble");
-        const text = document.getElementById("chinatsuThoughtText");
-        if (bubble && text) {
-          text.textContent = message;
-          bubble.classList.add("is-visible");
-          clearTimeout(this.thoughtTimer);
-          this.thoughtTimer = setTimeout(() => {
-            this.hideThoughtBubble();
-          }, 9000);
-        }
-      } else {
-        // If chat is already open, speak gently
-        this.speak(message);
+      const bubble = document.getElementById("chinatsuThoughtBubble");
+      const text = document.getElementById("chinatsuThoughtText");
+      if (bubble && text) {
+        text.textContent = message;
+        bubble.classList.add("is-visible");
+        clearTimeout(this.thoughtTimer);
+        this.thoughtTimer = setTimeout(() => {
+          this.hideThoughtBubble();
+        }, 9000);
       }
     }
 
@@ -1023,6 +1030,7 @@ Your Personality & Tone:
       if (!userText) return;
 
       this.isSubmitting = true;
+      this.lastUserInteractionTime = Date.now();
       input.value = "";
       this.addMessage("user", userText);
 
