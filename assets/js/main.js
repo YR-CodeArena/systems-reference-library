@@ -2466,26 +2466,35 @@ builtins.input = _sys_input
       }
 
       if (ytTarget) {
+        const isFileProtocol = window.location.protocol === "file:";
+
+        function activateVisualFallback() {
+          const container = document.getElementById("videoBgContainer");
+          if (container) {
+            container.classList.add("yt-fallback");
+          }
+          if (audioToggleBtn) {
+            audioToggleBtn.style.opacity = "0.5";
+            audioToggleBtn.setAttribute("title", "Audio unavailable (Serving over local file:// or stream blocked)");
+          }
+          if (floatingAudioBtn) {
+            const label = floatingAudioBtn.querySelector(".audio-hud-label");
+            if (label) label.textContent = "AUDIO: OFFLINE";
+          }
+        }
+
+        if (isFileProtocol) {
+          console.warn(
+            "Notice: Opening directly via file:/// protocol prevents browsers from sending HTTP Referer headers, causing YouTube Error 153. Activating cinematic visual fallback.\nTo stream the YouTube background video locally, serve via a local web server (e.g. 'python -m http.server 8000' or VS Code Live Server)."
+          );
+          activateVisualFallback();
+        }
+
         function setupYTPlayer() {
-          if (!window.YT || !window.YT.Player || ytPlayer) return;
+          if (!window.YT || !window.YT.Player || ytPlayer || isFileProtocol) return;
           try {
             ytPlayer = new YT.Player("bgYoutubePlayer", {
-              videoId: "IUXpEsqIIfI",
-              playerVars: {
-                autoplay: 1,
-                mute: 1,
-                controls: 0,
-                showinfo: 0,
-                rel: 0,
-                loop: 1,
-                playlist: "IUXpEsqIIfI",
-                playsinline: 1,
-                enablejsapi: 1,
-                disablekb: 1,
-                modestbranding: 1,
-                fs: 0,
-                iv_load_policy: 3
-              },
+              host: "https://www.youtube-nocookie.com",
               events: {
                 onReady: function(event) {
                   if (isAudioMuted) {
@@ -2502,11 +2511,16 @@ builtins.input = _sys_input
                   if (event.data === 0) {
                     event.target.playVideo();
                   }
+                },
+                onError: function(event) {
+                  console.warn("YouTube background player error event (" + event.data + "). Activating visual fallback.");
+                  activateVisualFallback();
                 }
               }
             });
           } catch (err) {
             console.warn("YouTube Player initialization error:", err);
+            activateVisualFallback();
           }
         }
 

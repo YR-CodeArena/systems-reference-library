@@ -2530,6 +2530,22 @@ body::before {
   border: 0 !important;
 }
 
+/* Graceful Fallback if YouTube stream encounters Error 153, adblock, or runs on local file:// */
+.video-bg-container.yt-fallback {
+  background-image: url('../images/vol_universal.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  animation: slowPan 40s ease-in-out infinite alternate !important;
+}
+
+.video-bg-container.yt-fallback iframe,
+.video-bg-container.yt-fallback .bg-youtube-iframe {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Background Audio Toggle Button in Header */
 .bg-audio-toggle-btn {
   width: 40px;
