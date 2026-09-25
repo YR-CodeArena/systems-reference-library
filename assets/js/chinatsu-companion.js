@@ -497,11 +497,13 @@ Your Personality & Tone:
         .replace(/\[NAVIGATE:[^\]]+\]/gi, "")
         .replace(/```[\s\S]*?```/g, "")
         .replace(/`([^`]+)`/g, "$1")
+        .replace(/\$[^$]+\$/g, "") // strip LaTeX formulas so TTS doesn't stumble
         // Remove all Unicode emojis and pictographs so they are never spoken aloud
         .replace(/[\u{1F000}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{27BF}\u{2B50}\u{2B55}\u{200D}\u{FE0F}\u{FE0E}]/gu, "")
-        // Remove explicit symbols
+        // Remove explicit symbols and brackets that cause audio buffer pops
         .replace(/[🏀✨🏸⚡💭📁🌸🎀⭐💡🎯🔥•✕✖]/gu, "")
         .replace(/[*_#~]/g, "")
+        .replace(/[\(\)\[\]\{\}]/g, " ")
         .replace(/\s+/g, " ")
         .trim();
     }
@@ -515,8 +517,8 @@ Your Personality & Tone:
             const voices = this.synth.getVoices();
             if (!voices || voices.length === 0) return;
 
-            // Priority 1: Authentic Japanese Voices (Speaking English with cute anime Japanese accent)
-            // Windows/Mac/iOS: Nanami, Keiko, Aoi, Mayu, Shiori, Kyoko, Ayumi, Sayaka, Haruka, etc.
+            // Priority 1: Authentic Japanese Anime Voices (Speaking English with cute anime Japanese accent)
+            // Windows Edge: Nanami, Keiko. iOS/Mac: Kyoko, Otoya. Android/Chrome: Google 日本語.
             let chosen = voices.find(
               (v) =>
                 (v.lang.startsWith("ja") || v.lang.startsWith("jp")) &&
@@ -533,18 +535,23 @@ Your Personality & Tone:
               chosen = voices.find((v) => v.lang.startsWith("ja") || v.lang.startsWith("jp"));
             }
 
-            // Priority 3: Youthful cute female voice (Google UK English Female, Samantha, Victoria, Ana, Jenny, Aria)
+            // Priority 3: Modern High-Fidelity Natural Female voices (Google UK English Female, Microsoft Ana/Jenny/Aria, Samantha)
             if (!chosen) {
               chosen = voices.find(
-                (v) => /google uk english female|samantha|victoria|ana online|jenny|aria|karen|moira/i.test(v.name)
+                (v) =>
+                  /google uk english female|samantha|victoria|ana online|jenny online|aria online|karen/i.test(v.name) &&
+                  !/desktop|sapi|david|mark/i.test(v.name)
               );
             }
 
-            // Final fallback: Any female voice
+            // Priority 4: Any non-desktop female voice
             if (!chosen) {
-              chosen = voices.find((v) => /female/i.test(v.name) && !/male|david|george|mark/i.test(v.name));
+              chosen = voices.find(
+                (v) => /female/i.test(v.name) && !/desktop|sapi|male|david|george|mark/i.test(v.name)
+              );
             }
 
+            // Final fallback: Default system voice
             this.preferredVoice = chosen || voices[0];
           } catch (e) {}
         };
@@ -577,9 +584,29 @@ Your Personality & Tone:
           utterance.voice = this.preferredVoice;
         }
 
-        // Cute anime Japanese English voice characteristics: high pitch, energetic cadence
-        utterance.pitch = 1.32;
-        utterance.rate = 1.06;
+        const vName = (this.preferredVoice?.name || "").toLowerCase();
+        const isJapanese = this.preferredVoice?.lang?.startsWith("ja") || this.preferredVoice?.lang?.startsWith("jp");
+        const isLegacyDesktop = /desktop|sapi|zira|david|george|mark/i.test(vName);
+        const isNatural = /natural|online|google/.test(vName);
+
+        // Acoustic Tuning calibrated to eliminate cracking, digital clipping, and buzzing:
+        if (isJapanese) {
+          // Japanese voice reading English: pitch 1.08 gives a cute, pleasant anime accent without phonetic buffer cracking
+          utterance.pitch = 1.08;
+          utterance.rate = 1.0;
+        } else if (isLegacyDesktop) {
+          // Legacy Desktop voices (e.g. Microsoft Zira on Windows): baseline pitch 1.0 to prevent metallic robotic crackle
+          utterance.pitch = 1.0;
+          utterance.rate = 1.0;
+        } else if (isNatural) {
+          // Modern Natural / Online voices (Edge/Safari/Android): sweet anime lift without distortion
+          utterance.pitch = 1.10;
+          utterance.rate = 1.02;
+        } else {
+          // Standard female voice baseline
+          utterance.pitch = 1.06;
+          utterance.rate = 1.0;
+        }
 
         utterance.onstart = () => {
           this.setVideoState("speaking");
