@@ -299,101 +299,166 @@
   color: #ff2a85;
 }
 
-/* Quick Navigation Dropdown in Chat */
+/* Quick Navigation Dropdown in Chat (Custom Contained Dropdown) */
 .chinatsu-quick-nav-bar {
-  padding: 0.5rem 0.85rem;
-  background: rgba(0, 0, 0, 0.25);
+  padding: 0.45rem 0.85rem;
+  background: rgba(0, 0, 0, 0.28);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden;
+  z-index: 50;
 }
 
-.chinatsu-nav-select-wrapper {
+.chinatsu-custom-dropdown {
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chinatsu-dropdown-trigger {
+  width: 100%;
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, rgba(255, 42, 133, 0.08), rgba(0, 240, 255, 0.08));
   border: 1px solid rgba(0, 240, 255, 0.28);
   border-radius: 12px;
-  padding: 0.25rem 0.55rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  outline: none;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-align: left;
 }
 
-.chinatsu-nav-select-wrapper:hover,
-.chinatsu-nav-select-wrapper:focus-within {
+.chinatsu-dropdown-trigger:hover,
+.chinatsu-custom-dropdown.is-open .chinatsu-dropdown-trigger {
   border-color: #00f0ff;
   background: linear-gradient(135deg, rgba(255, 42, 133, 0.14), rgba(0, 240, 255, 0.15));
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-.chinatsu-nav-select-badge {
-  font-size: 0.7rem;
+.chinatsu-dropdown-badge {
+  font-size: 0.68rem;
   font-weight: 750;
   color: #ff2a85;
   background: rgba(255, 42, 133, 0.16);
   border: 1px solid rgba(255, 42, 133, 0.35);
   border-radius: 8px;
-  padding: 0.2rem 0.45rem;
+  padding: 0.18rem 0.45rem;
   margin-right: 0.45rem;
   flex-shrink: 0;
   white-space: nowrap;
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
-  gap: 0.2rem;
 }
 
-.chinatsu-nav-select {
+.chinatsu-dropdown-selected {
   flex: 1 1 0%;
   min-width: 0;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  background: transparent;
-  border: none;
-  outline: none;
   color: #f1f5f9;
   font-size: 0.74rem;
   font-weight: 600;
-  cursor: pointer;
-  padding: 0.25rem 1.4rem 0.25rem 0.1rem;
-  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  text-overflow: ellipsis;
+  padding-right: 0.5rem;
 }
 
-.chinatsu-nav-select option {
-  background: #0d1322;
-  color: #f1f5f9;
-  padding: 0.5rem;
-  font-size: 0.78rem;
-}
-
-.chinatsu-nav-select-arrow {
-  position: absolute;
-  right: 0.65rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+.chinatsu-dropdown-arrow {
   color: #00f0ff;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.chinatsu-nav-select-wrapper:focus-within .chinatsu-nav-select-arrow {
-  transform: translateY(-50%) rotate(180deg);
+.chinatsu-custom-dropdown.is-open .chinatsu-dropdown-arrow {
+  transform: rotate(180deg);
   color: #ff2a85;
+}
+
+/* Custom Dropdown Menu: 100% inside the chatbox! Zero right-overflow! */
+.chinatsu-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 230px;
+  background: rgba(13, 19, 34, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.32);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 240, 255, 0.18);
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  padding: 0.35rem 0;
+  box-sizing: border-box;
+}
+
+.chinatsu-custom-dropdown.is-open .chinatsu-dropdown-menu {
+  display: block;
+  animation: chinatsuDropdownFade 0.2s ease-out;
+}
+
+@keyframes chinatsuDropdownFade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chinatsu-dropdown-menu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chinatsu-dropdown-menu::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.35);
+  border-radius: 9999px;
+}
+
+.chinatsu-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.76rem;
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.chinatsu-dropdown-item:hover {
+  background: linear-gradient(90deg, rgba(255, 42, 133, 0.22), rgba(0, 240, 255, 0.18));
+  color: #00f0ff;
+  padding-left: 1.05rem;
+}
+
+.chinatsu-dropdown-item .item-vol {
+  font-weight: 750;
+  color: #ff2a85;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.chinatsu-dropdown-item .item-sep {
+  opacity: 0.35;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.chinatsu-dropdown-item .item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Chat Messages Container */
@@ -679,26 +744,29 @@
   border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="light"] .chinatsu-nav-select-wrapper {
+[data-theme="light"] .chinatsu-dropdown-trigger {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(2, 132, 199, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="light"] .chinatsu-nav-select-wrapper:hover,
-[data-theme="light"] .chinatsu-nav-select-wrapper:focus-within {
-  border-color: #0284c7;
-  background: #ffffff;
-  box-shadow: 0 0 12px rgba(2, 132, 199, 0.25);
-}
-
-[data-theme="light"] .chinatsu-nav-select {
+[data-theme="light"] .chinatsu-dropdown-selected {
   color: #0f172a;
 }
 
-[data-theme="light"] .chinatsu-nav-select option {
-  background: #ffffff;
+[data-theme="light"] .chinatsu-dropdown-menu {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(2, 132, 199, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(2, 132, 199, 0.12);
+}
+
+[data-theme="light"] .chinatsu-dropdown-item {
   color: #0f172a;
+}
+
+[data-theme="light"] .chinatsu-dropdown-item:hover {
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.15), rgba(2, 132, 199, 0.12));
+  color: #0284c7;
 }
 
 /* Mobile Screens */

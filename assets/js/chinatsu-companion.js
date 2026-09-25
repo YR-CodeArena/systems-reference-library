@@ -122,6 +122,10 @@ Your Personality & Tone:
    - Talk quickly, warmly, and encouragingly, like during a brief timeout or water break on the basketball court!
    - Give ONE quick, intuitive basketball or morning practice comparison for technical topics.
    - Never break character.
+7. Language, Accent & Tone (30% Japanese Anime Style):
+   - Speak primarily in clear, fluent, natural English (~70%) so explanations are crisp and effortless to listen to.
+   - Season your speech with ~30% cute Japanese anime girl flavor: use affectionate senpai honorifics ("Kouhai-kun!"), upbeat anime interjections ("Yahho!", "Ganbatte!", "Hai!", "Sugoi!", "Ehe~"), and sweet, encouraging anime senpai mannerisms.
+   - Do NOT use broken or heavy Japanglish—all technical concepts and explanations must remain crystal clear, articulate, and natural.
 `;
 
   function safeGetStorage(key, fallback = "") {
@@ -235,16 +239,24 @@ Your Personality & Tone:
 
           <!-- Quick Jump Navigation Bar -->
           <div class="chinatsu-quick-nav-bar">
-            <div class="chinatsu-nav-select-wrapper">
-              <span class="chinatsu-nav-select-badge">🏀 Manuals</span>
-              <select class="chinatsu-nav-select" id="chinatsuNavSelect" aria-label="Jump to manual volume">
-                <option value="" disabled selected>Select a volume to study together...</option>
-                ${SITE_VOLUMES.map((v) => `<option value="${v.file}">${v.vol} &bull; ${v.title}</option>`).join("")}
-              </select>
-              <div class="chinatsu-nav-select-arrow" aria-hidden="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+            <div class="chinatsu-custom-dropdown" id="chinatsuCustomDropdown">
+              <button class="chinatsu-dropdown-trigger" id="chinatsuDropdownTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" title="Jump to Manual">
+                <span class="chinatsu-dropdown-badge">🏀 Manuals</span>
+                <span class="chinatsu-dropdown-selected" id="chinatsuDropdownSelected">Select a volume to study together...</span>
+                <div class="chinatsu-dropdown-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </button>
+              <div class="chinatsu-dropdown-menu" id="chinatsuDropdownMenu" role="listbox">
+                ${SITE_VOLUMES.map((v) => `
+                  <div class="chinatsu-dropdown-item" role="option" data-file="${v.file}">
+                    <span class="item-vol">${v.vol}</span>
+                    <span class="item-sep">&bull;</span>
+                    <span class="item-title">${v.title}</span>
+                  </div>
+                `).join("")}
               </div>
             </div>
           </div>
@@ -284,8 +296,45 @@ Your Personality & Tone:
       const form = document.getElementById("chinatsuChatForm");
       const input = document.getElementById("chinatsuChatInput");
       const chips = document.getElementById("chinatsuSuggestionChips");
-      const navSelect = document.getElementById("chinatsuNavSelect");
       const thoughtBubble = document.getElementById("chinatsuThoughtBubble");
+
+      // Custom Dropdown Elements
+      const dropdown = document.getElementById("chinatsuCustomDropdown");
+      const trigger = document.getElementById("chinatsuDropdownTrigger");
+      const menu = document.getElementById("chinatsuDropdownMenu");
+      const selectedLabel = document.getElementById("chinatsuDropdownSelected");
+
+      // Custom Dropdown Menu Open/Close & Navigation (100% contained inside chatbox)
+      if (dropdown && trigger && menu) {
+        trigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = dropdown.classList.toggle("is-open");
+          trigger.setAttribute("aria-expanded", isOpen.toString());
+        });
+
+        menu.addEventListener("click", (e) => {
+          const item = e.target.closest(".chinatsu-dropdown-item");
+          if (!item) return;
+          const file = item.getAttribute("data-file");
+          if (file) {
+            dropdown.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+            const matched = SITE_VOLUMES.find((v) => v.file === file);
+            if (matched && selectedLabel) {
+              selectedLabel.textContent = `${matched.vol} • ${matched.title}`;
+            }
+            this.navigateWithToast(file);
+          }
+        });
+
+        // Close dropdown when clicking anywhere outside
+        document.addEventListener("click", (e) => {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
 
       // Mascot Click -> Toggle Chat
       if (mascotBtn) {
@@ -330,16 +379,6 @@ Your Personality & Tone:
             }
             if (this.synth) this.synth.cancel();
             this.setVideoState("idle");
-          }
-        });
-      }
-
-      // Quick Nav Dropdown
-      if (navSelect) {
-        navSelect.addEventListener("change", (e) => {
-          const target = e.target.value;
-          if (target) {
-            this.navigateWithToast(target);
           }
         });
       }
@@ -452,6 +491,21 @@ Your Personality & Tone:
     }
 
     // --- Anime Voice Engine (Studio AI Audio + Tuned Natural Speech) ---
+    cleanSpeech(text) {
+      if (!text) return "";
+      return text
+        .replace(/\[NAVIGATE:[^\]]+\]/gi, "")
+        .replace(/```[\s\S]*?```/g, "")
+        .replace(/`([^`]+)`/g, "$1")
+        // Remove all Unicode emojis and pictographs so they are never spoken aloud
+        .replace(/[\u{1F000}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{27BF}\u{2B50}\u{2B55}\u{200D}\u{FE0F}\u{FE0E}]/gu, "")
+        // Remove explicit symbols
+        .replace(/[🏀✨🏸⚡💭📁🌸🎀⭐💡🎯🔥•✕✖]/gu, "")
+        .replace(/[*_#~]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
     initVoiceEngine() {
       try {
         if (!this.synth) return;
@@ -461,43 +515,21 @@ Your Personality & Tone:
             const voices = this.synth.getVoices();
             if (!voices || voices.length === 0) return;
 
-            // 1. Natural Japanese Anime Voices (Microsoft Nanami, Keiko, Aoi, Kyoko, Google 日本語)
-            const jaAnime = voices.find(
-              (v) =>
-                (v.lang.startsWith("ja") || v.lang.startsWith("jp")) &&
-                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online/i.test(v.name)
-            );
-            if (jaAnime) {
-              this.preferredVoice = jaAnime;
-              return;
-            }
-
-            const jaAny = voices.find(
-              (v) => (v.lang.startsWith("ja") || v.lang.startsWith("jp")) && !/male|ichiro/i.test(v.name)
-            );
-            if (jaAny) {
-              this.preferredVoice = jaAny;
-              return;
-            }
-
-            // 2. High-grade Cheerful Young English Neural Voices
-            // Microsoft Ana Online (Natural) -> modelled as a cheerful youthful female!
+            // Priority 1: Clear, youthful English neural voices (Microsoft Ana is a youthful cheerful girl; Jenny; Aria; Google)
             const enAna = voices.find((v) => /ana online|ana.*natural/i.test(v.name));
             if (enAna) {
               this.preferredVoice = enAna;
               return;
             }
 
-            // Microsoft Jenny / Aria / Natural Female
-            const enNatural = voices.find(
+            const enJennyAria = voices.find(
               (v) => /jenny online|aria online|natural.*female|female.*natural/i.test(v.name)
             );
-            if (enNatural) {
-              this.preferredVoice = enNatural;
+            if (enJennyAria) {
+              this.preferredVoice = enJennyAria;
               return;
             }
 
-            // Google Neural Voices (Chrome)
             const enGoogle = voices.find(
               (v) => /google uk english female|google us english/i.test(v.name)
             );
@@ -506,7 +538,6 @@ Your Personality & Tone:
               return;
             }
 
-            // Non-desktop female voices (Samantha, Victoria, Karen, Moira)
             const enGood = voices.find(
               (v) =>
                 /ana|jenny|aria|samantha|victoria|karen|moira|tessa/i.test(v.name) &&
@@ -514,6 +545,17 @@ Your Personality & Tone:
             );
             if (enGood) {
               this.preferredVoice = enGood;
+              return;
+            }
+
+            // Priority 2: Natural Japanese Anime Voices (Microsoft Nanami, Keiko)
+            const jaAnime = voices.find(
+              (v) =>
+                (v.lang.startsWith("ja") || v.lang.startsWith("jp")) &&
+                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online/i.test(v.name)
+            );
+            if (jaAnime) {
+              this.preferredVoice = jaAnime;
               return;
             }
 
@@ -534,6 +576,9 @@ Your Personality & Tone:
 
     speak(text, audioData) {
       if (!this.voiceEnabled) return;
+
+      const cleanText = this.cleanSpeech(text);
+      if (!cleanText) return;
 
       // 1. Studio Neural AI Audio Playback (Kore Studio Voice)
       if (audioData) {
@@ -557,11 +602,11 @@ Your Personality & Tone:
           audio.onerror = () => {
             this.setVideoState("idle");
             this.currentAudio = null;
-            this.speakWithWebSpeech(text);
+            this.speakWithWebSpeech(cleanText);
           };
 
           audio.play().catch(() => {
-            this.speakWithWebSpeech(text);
+            this.speakWithWebSpeech(cleanText);
           });
           return;
         } catch (e) {
@@ -570,20 +615,11 @@ Your Personality & Tone:
       }
 
       // 2. Tuned Browser Speech Synthesis Fallback
-      this.speakWithWebSpeech(text);
+      this.speakWithWebSpeech(cleanText);
     }
 
-    speakWithWebSpeech(text) {
-      if (!this.voiceEnabled || !this.synth) return;
-
-      const cleanText = text
-        .replace(/\[NAVIGATE:[^\]]+\]/gi, "")
-        .replace(/```[\s\S]*?```/g, "")
-        .replace(/`([^`]+)`/g, "$1")
-        .replace(/[*_#~]/g, "")
-        .trim();
-
-      if (!cleanText) return;
+    speakWithWebSpeech(cleanText) {
+      if (!this.voiceEnabled || !this.synth || !cleanText) return;
 
       try {
         this.synth.cancel();
@@ -597,9 +633,9 @@ Your Personality & Tone:
         const isJapanese = this.preferredVoice?.lang?.startsWith("ja") || this.preferredVoice?.lang?.startsWith("jp");
         const isNatural = /natural|online|google/.test(vName);
 
-        // Smart Acoustic Tuning: NEVER pitch legacy desktop voices (Zira) high!
+        // Smart Acoustic Tuning: 30% anime lift for clear natural English
         if (isJapanese) {
-          utterance.pitch = 1.22;
+          utterance.pitch = 1.15;
           utterance.rate = 1.05;
         } else if (isNatural) {
           utterance.pitch = 1.14;

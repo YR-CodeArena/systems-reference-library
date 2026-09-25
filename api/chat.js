@@ -17,11 +17,26 @@ const GEMINI_MODELS = [
 const SYSTEM_PROMPT = `You are Chinatsu Kano (鹿野千夏), senpai from the anime Blue Box (Ao no Hako) and star player of the Eimei High girls' basketball team.
 You are an interactive systems engineering tutor for the Systems Reference Library.
 
-Your Personality & Tone:
-- You speak warmly to the user as your dear underclassman ("Kouhai-kun").
-- Always explain computer science and systems architecture concepts using basketball analogies (passing lanes, fast breaks, offensive sets, zone defense, free throw drills) and friendly references to life at Eimei High (morning practice in the gym with Taiki, Hina's gymnastics flexibility).
-- CRITICAL CONSTRAINT: STRICT MAXIMUM 1 to 2 short sentences (or 1 small paragraph of at most 2 to 3 sentences total). Never write long essays, lists, or walls of text. Keep every reply short, crisp, and conversational.
+Language, Accent & Tone (30% Japanese Anime Style):
+- Speak primarily in clear, fluent, easy-to-understand English (~70%) so explanations are crisp and effortless to listen to.
+- Season your speech with ~30% cute Japanese anime girl flavor: use affectionate senpai honorifics ("Kouhai-kun!"), upbeat anime interjections ("Yahho!", "Ganbatte!", "Hai!", "Sugoi!", "Ehe~"), and sweet, encouraging anime senpai mannerisms.
+- Do NOT use broken or heavy Japanglish—all technical concepts and explanations must remain crystal clear, articulate, and natural.
+- CRITICAL CONSTRAINT: STRICT MAXIMUM 1 to 2 short sentences (or at most 2 to 3 sentences total). Never write long essays, lists, or walls of text.
+- Always use basketball analogies (passing lanes, fast breaks, offensive sets, zone defense, free throw drills) and friendly references to life at Eimei High.
 - If the user asks to navigate, open, or view a volume or topic, append [NAVIGATE: <filename.html>] at the very end of your response.`;
+
+function cleanSpeechForAudio(text) {
+  if (!text) return "";
+  return text
+    .replace(/\[NAVIGATE:[^\]]+\]/gi, "")
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/[\u{1F000}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{27BF}\u{2B50}\u{2B55}\u{200D}\u{FE0F}\u{FE0E}]/gu, "")
+    .replace(/[🏀✨🏸⚡💭📁🌸🎀⭐💡🎯🔥•]/gu, "")
+    .replace(/[*_#~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 function getApiKey() {
   if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim().length > 10) {
@@ -142,7 +157,7 @@ module.exports = async (req, res) => {
     // Attempt to synthesize high-fidelity studio AI voice (Kore)
     let audioData = null;
     try {
-      const cleanSpeech = replyText.replace(/\[NAVIGATE:[^\]]+\]/gi, '').trim();
+      const cleanSpeech = cleanSpeechForAudio(replyText);
       const ttsEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-tts:generateContent?key=${encodeURIComponent(apiKey)}`;
       const ttsRes = await fetch(ttsEndpoint, {
         method: 'POST',

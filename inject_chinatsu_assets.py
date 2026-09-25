@@ -20,7 +20,7 @@ html_files = [
     "javascript-mastery.html"
 ]
 
-VERSION = "20260925_ai_live5"
+VERSION = "20260925_ai_live6"
 
 css_replacement = (
     f'<link rel="stylesheet" href="assets/css/style.css?v={VERSION}">\n'
