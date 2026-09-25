@@ -1,0 +1,645 @@
+/* ===================================================================
+   CHINATSU-SENPAI AI COMPANION STYLESHEET
+   Anime Mascot, Glassmorphic Chat Drawer & Interactive Companion
+   Inspired by Blue Box (Ao no Hako) & Makoto Shinkai Aesthetic
+   =================================================================== */
+
+/* --- Floating Mascot Container (Bottom-Right) --- */
+.chinatsu-companion-root {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+  right: calc(24px + env(safe-area-inset-right, 0px)) !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  pointer-events: none !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.chinatsu-mascot-btn {
+  pointer-events: auto !important;
+  position: relative !important;
+  width: 88px !important;
+  height: 88px !important;
+  border-radius: 50% !important;
+  padding: 3px !important;
+  background: linear-gradient(135deg, #00f0ff, #ff2a85, #ff8c00) !important;
+  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.45), 0 0 25px rgba(255, 42, 133, 0.35) !important;
+  cursor: pointer !important;
+  border: none !important;
+  outline: none !important;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  display: block !important;
+}
+
+.chinatsu-mascot-btn:hover {
+  transform: scale(1.08) translateY(-3px) !important;
+  box-shadow: 0 12px 35px rgba(0, 240, 255, 0.6), 0 0 35px rgba(255, 42, 133, 0.55) !important;
+}
+
+.chinatsu-mascot-btn:active {
+  transform: scale(0.96) !important;
+}
+
+/* Inner Avatar Video / Image Frame */
+.chinatsu-avatar-frame {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: #080c14 url('../chinatsu-senpai/1.jpeg') center/cover no-repeat !important;
+}
+
+.chinatsu-avatar-video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+/* Status & Basketball Badges */
+.chinatsu-mascot-badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #ff8c00, #ff4500);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: chinatsuBallBounce 2.5s ease-in-out infinite;
+}
+
+@keyframes chinatsuBallBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.chinatsu-pulse-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 240, 255, 0.6);
+  opacity: 0;
+  animation: chinatsuPulse 3s infinite;
+  pointer-events: none;
+}
+
+@keyframes chinatsuPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+/* --- Idle Thought Bubble --- */
+.chinatsu-thought-bubble {
+  pointer-events: auto;
+  position: absolute;
+  bottom: 100px;
+  right: 10px;
+  width: 250px;
+  background: var(--glass-bg, rgba(11, 15, 25, 0.85));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 42, 133, 0.35);
+  border-radius: 16px;
+  border-bottom-right-radius: 4px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary, #ffffff);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(255, 42, 133, 0.2);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  user-select: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.chinatsu-thought-bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.chinatsu-thought-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.chinatsu-thought-text {
+  flex: 1;
+}
+
+.chinatsu-thought-tail {
+  position: absolute;
+  bottom: -7px;
+  right: 25px;
+  width: 14px;
+  height: 14px;
+  background: inherit;
+  border-right: 1px solid rgba(255, 42, 133, 0.35);
+  border-bottom: 1px solid rgba(255, 42, 133, 0.35);
+  transform: rotate(45deg);
+}
+
+/* --- Chat Drawer Window --- */
+.chinatsu-chat-window {
+  pointer-events: auto;
+  position: fixed;
+  bottom: 124px;
+  right: 24px;
+  bottom: calc(124px + env(safe-area-inset-bottom, 0px));
+  right: calc(24px + env(safe-area-inset-right, 0px));
+  width: 400px;
+  max-width: calc(100vw - 2.5rem);
+  height: 600px;
+  max-height: calc(100vh - 140px);
+  background: var(--glass-bg, rgba(11, 15, 25, 0.88));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.15);
+  z-index: 9995;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chinatsu-chat-window.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Chat Header */
+.chinatsu-chat-header {
+  padding: 0.85rem 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.chinatsu-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.chinatsu-header-thumb {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #00f0ff;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.chinatsu-header-titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.chinatsu-header-name {
+  font-weight: 750;
+  font-size: 0.92rem;
+  color: var(--text-primary, #ffffff);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chinatsu-header-name .name-kanji {
+  font-size: 0.75rem;
+  color: #ff2a85;
+  font-weight: 600;
+}
+
+.chinatsu-header-status {
+  font-size: 0.68rem;
+  color: #00f0ff;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chinatsu-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.chinatsu-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.chinatsu-header-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary, #ffffff);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.chinatsu-header-btn:hover {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  transform: translateY(-1px);
+}
+
+.chinatsu-header-btn.is-active {
+  background: rgba(255, 42, 133, 0.25);
+  border-color: #ff2a85;
+  color: #ff2a85;
+}
+
+/* Quick Navigation Dropdown in Chat */
+.chinatsu-quick-nav-bar {
+  padding: 0.4rem 0.85rem;
+  background: rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.chinatsu-quick-nav-label {
+  color: var(--text-muted, #9ca3af);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.chinatsu-nav-select {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary, #ffffff);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.chinatsu-nav-select option {
+  background: #0f1626;
+  color: #ffffff;
+}
+
+.chinatsu-nav-select:focus {
+  border-color: #00f0ff;
+}
+
+/* Chat Messages Container */
+.chinatsu-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  scroll-behavior: smooth;
+}
+
+.chinatsu-chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chinatsu-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+}
+
+/* Message Bubble */
+.chinatsu-msg-row {
+  display: flex;
+  gap: 0.6rem;
+  max-width: 90%;
+  animation: chinatsuMsgFadeIn 0.3s ease-out;
+}
+
+@keyframes chinatsuMsgFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chinatsu-msg-row.is-assistant {
+  align-self: flex-start;
+}
+
+.chinatsu-msg-row.is-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.chinatsu-msg-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid #ff2a85;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.chinatsu-msg-bubble {
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-primary, #ffffff);
+  word-break: break-word;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  letter-spacing: 0.01em;
+}
+
+.chinatsu-msg-row.is-assistant .chinatsu-msg-bubble {
+  background: linear-gradient(135deg, rgba(255, 42, 133, 0.14), rgba(147, 51, 234, 0.12));
+  border: 1px solid rgba(255, 42, 133, 0.3);
+  border-top-left-radius: 4px;
+  box-shadow: 0 4px 16px rgba(255, 42, 133, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.chinatsu-msg-row.is-user .chinatsu-msg-bubble {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(14, 165, 233, 0.14));
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-top-right-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 240, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.chinatsu-msg-bubble p {
+  margin-bottom: 0.45rem;
+}
+
+.chinatsu-msg-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.chinatsu-msg-bubble code {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #00f0ff;
+}
+
+.chinatsu-msg-bubble pre {
+  background: #05080f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin: 0.4rem 0;
+  overflow-x: auto;
+}
+
+.chinatsu-msg-bubble pre code {
+  background: transparent;
+  padding: 0;
+  color: #f1f5f9;
+}
+
+.chinatsu-msg-bubble a {
+  color: #00f0ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Typing / Thinking Indicator */
+.chinatsu-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(255, 42, 133, 0.1);
+  border: 1px solid rgba(255, 42, 133, 0.2);
+  border-radius: 12px;
+  font-size: 0.78rem;
+  color: #ff2a85;
+  align-self: flex-start;
+}
+
+.chinatsu-typing-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.chinatsu-typing-dot {
+  width: 5px;
+  height: 5px;
+  background: #ff2a85;
+  border-radius: 50%;
+  animation: chinatsuDotBlink 1.4s infinite ease-in-out;
+}
+
+.chinatsu-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.chinatsu-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes chinatsuDotBlink {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Quick Suggestion Chips */
+.chinatsu-suggestion-chips {
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chinatsu-suggestion-chips::-webkit-scrollbar {
+  height: 3px;
+}
+
+.chinatsu-chip-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary, #ffffff);
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.chinatsu-chip-btn:hover {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  transform: translateY(-1px);
+}
+
+/* Chat Input Bar */
+.chinatsu-chat-input-bar {
+  padding: 0.75rem 0.85rem;
+  background: rgba(0, 0, 0, 0.28);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chinatsu-chat-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.6rem 0.85rem;
+  color: var(--text-primary, #ffffff);
+  font-size: 0.84rem;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.chinatsu-chat-input:focus {
+  border-color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+}
+
+.chinatsu-chat-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00f0ff, #ff2a85);
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+
+.chinatsu-chat-send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 42, 133, 0.4);
+}
+
+.chinatsu-chat-send-btn:active {
+  transform: scale(0.95);
+}
+
+/* Navigation Banner Toast */
+.chinatsu-nav-toast {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: linear-gradient(135deg, #ff8c00, #ff2a85);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  box-shadow: 0 6px 20px rgba(255, 42, 133, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.chinatsu-nav-toast.is-active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Light Theme Adaptations */
+[data-theme="light"] .chinatsu-chat-window {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(2, 132, 199, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 30px rgba(2, 132, 199, 0.15);
+}
+
+[data-theme="light"] .chinatsu-chat-header {
+  background: rgba(240, 246, 255, 0.6);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .chinatsu-thought-bubble {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(236, 72, 153, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Screens */
+@media (max-width: 640px) {
+  .chinatsu-companion-root {
+    bottom: calc(1rem + var(--sab, 0px));
+    right: 1rem;
+  }
+  .chinatsu-mascot-btn {
+    width: 72px;
+    height: 72px;
+  }
+  .chinatsu-chat-window {
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+    max-width: none;
+    height: 70vh;
+    bottom: calc(6rem + var(--sab, 0px));
+  }
+  .chinatsu-thought-bubble {
+    width: 210px;
+    bottom: 84px;
+    font-size: 0.76rem;
+  }
+}

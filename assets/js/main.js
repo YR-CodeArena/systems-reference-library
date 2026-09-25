@@ -2659,5 +2659,14 @@ builtins.input = _sys_input
         tick();
       }, pauseAfterType);
     })();
+
+    // --- Chinatsu-senpai AI Companion Autonomous Loader ---
+    (function loadChinatsuCompanion() {
+      if (window.ChinatsuCompanion || document.querySelector('script[src*="chinatsu-companion.js"]')) return;
+      const script = document.createElement("script");
+      script.src = "assets/js/chinatsu-companion.js";
+      script.defer = true;
+      document.body.appendChild(script);
+    })();
   });
 })();

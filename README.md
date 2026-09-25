@@ -18,6 +18,7 @@ The **Systems Reference Library** is designed as a zero-compromise, definitive e
 
 ### Key Highlights
 - **15 Exhaustive Volumes**: 100% word-for-word complete manuals covering low-level hardware, operating systems, compilers, databases, wire protocols, high-concurrency JVM runtimes, Python internals, and modern web architectures.
+- **Chinatsu-senpai AI Companion**: Interactive anime companion and basketball CS mentor anchored in the bottom-right corner. Powered by Google's Gemini API (`gemini-1.5-flash`) and Web Speech Synthesis, she explains complex systems using basketball analogies, reacts with 11 video animations, and autonomously navigates through all volumes upon request.
 - **In-Browser Code Execution**: Dual-engine client-side sandboxes utilizing **Pyodide** (WebAssembly CPython 3.12) and **Skulpt** with real-time interactive terminals and one-click copyable snippets.
 - **24 Animated SVG Diagrams**: Interactive telemetry models illustrating sliding window protocols, cache locality hierarchies, CPU instruction pipelines, LSM-Tree compaction, and JVM thread scheduling.
 - **Cinematic Media Integration**: Background video stream powered directly by YouTube's IFrame API with custom dual audio controls and 40-second continuous Ken Burns pan/zoom fallbacks.
@@ -103,7 +104,15 @@ Systems Reference Library
   - Floating HUD (`#floatingAudioBtn`) anchored at the bottom-left with real-time status indicators (`AUDIO: MUTED` / `AUDIO: PLAYING`).
 - **Resilient Fallback Engine**: If the video stream is restricted or accessed offline, the container seamlessly activates `.yt-fallback` displaying high-resolution Makoto Shinkai artwork with a continuous 40-second Ken Burns pan/zoom animation.
 
-### 4. Zero Layout Shift (CLS) Typewriter Hero
+### 4. Chinatsu-senpai AI Companion & Basketball CS Mentor
+- **Character Authenticity**: Embodying **Chinatsu Kano** (鹿野千夏) from *Blue Box* (*Ao no Hako*), the companion maintains a warm, encouraging senpai persona towards the user ("Kouhai-kun"). She explains intricate systems concepts using basketball tactics (fast breaks for low latency, zone defense for firewalls, rebounding for cache line retrieval, pick-and-rolls for client-server RPCs) and mentions her Eimei High School life (Taiki Inomata, Hina Chono, morning gym drills).
+- **Google Gemini API Integration**: Leverages `gemini-1.5-flash` with full multi-turn conversation memory, custom system prompts, and temperature controls. Features a key configuration modal stored securely in client `localStorage`.
+- **Dynamic 11-Clip Video Mascot**: A floating avatar anchored in the bottom-right corner with smooth state-driven animations (`idle`, `speaking`, `thinking`) sourced from 11 micro-videos and 10 reaction images, accompanied by periodic silly idle thought bubbles.
+- **Web Speech Synthesis**: Real-time anime girl voice playback with high-pitch modulation (`pitch: 1.38, rate: 1.08`), lip-sync state triggers, and an instant mute/unmute control.
+- **Autonomous In-Site Navigation**: Natural language understanding detects navigation requests (e.g., *"Open the PostgreSQL manual"* or *"Take me to Volume 5"*), executes `[NAVIGATE: <url>]` protocols, displays an anime toast notification, and navigates seamlessly across all 15 volumes.
+- **Universal Availability**: Automatically loaded on all 16 pages via `main.js` and `chinatsu-companion.css` with responsive mobile drawer support.
+
+### 5. Zero Layout Shift (CLS) Typewriter Hero
 - Asynchronous typing and backspacing animation engine for the main title:
   - Pauses for 2.4s for full readability.
   - Smooth backspacing at 38ms/char.

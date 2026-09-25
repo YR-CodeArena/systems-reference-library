@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+chinatsu-config.json
+.env
+*.env
+
