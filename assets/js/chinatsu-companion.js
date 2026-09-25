@@ -518,24 +518,31 @@ Your Personality & Tone:
             if (!voices || voices.length === 0) return;
 
             // Priority 1: Authentic Japanese Anime Voices (Speaking English with cute anime Japanese accent)
-            // Windows Edge: Nanami, Keiko. iOS/Mac: Kyoko, Otoya. Android/Chrome: Google 日本語.
+            // Windows Edge: Nanami, Keiko. iOS/Mac: Kyoko, Otoya. Android/Chrome: Google 日本語 / ja-JP.
             let chosen = voices.find(
               (v) =>
-                (v.lang.startsWith("ja") || v.lang.startsWith("jp")) &&
-                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online|female/i.test(v.name)
+                (v.lang.startsWith("ja") || v.lang.startsWith("jp") || /japanese|nihongo|日本語/i.test(v.name)) &&
+                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online|female|google/i.test(v.name)
             );
 
             // Priority 2: Any Japanese system voice
             if (!chosen) {
               chosen = voices.find(
-                (v) => (v.lang.startsWith("ja") || v.lang.startsWith("jp")) && !/male|ichiro|naoki/i.test(v.name)
+                (v) => (v.lang.startsWith("ja") || v.lang.startsWith("jp") || /japanese|nihongo|日本語/i.test(v.name)) && !/male|ichiro|naoki/i.test(v.name)
               );
             }
             if (!chosen) {
-              chosen = voices.find((v) => v.lang.startsWith("ja") || v.lang.startsWith("jp"));
+              chosen = voices.find((v) => v.lang.startsWith("ja") || v.lang.startsWith("jp") || /japanese|nihongo|日本語/i.test(v.name));
             }
 
-            // Priority 3: Modern High-Fidelity Natural Female voices (Google UK English Female, Microsoft Ana/Jenny/Aria, Samantha)
+            // Priority 3: Android Google TTS Youthful Female Voices (Realme, Samsung, Pixel: en-us-x-sfg, en-gb-x-rjs, tpd)
+            if (!chosen) {
+              chosen = voices.find(
+                (v) => /sfg|tpd|rjs|female|woman|natural|neural/i.test(v.name) && !/male|david|mark/i.test(v.name)
+              );
+            }
+
+            // Priority 4: Modern High-Fidelity Natural Female voices (Google UK English Female, Microsoft Ana/Jenny/Aria, Samantha)
             if (!chosen) {
               chosen = voices.find(
                 (v) =>
@@ -544,7 +551,7 @@ Your Personality & Tone:
               );
             }
 
-            // Priority 4: Any non-desktop female voice
+            // Priority 5: Any non-desktop female voice
             if (!chosen) {
               chosen = voices.find(
                 (v) => /female/i.test(v.name) && !/desktop|sapi|male|david|george|mark/i.test(v.name)
@@ -585,27 +592,28 @@ Your Personality & Tone:
         }
 
         const vName = (this.preferredVoice?.name || "").toLowerCase();
-        const isJapanese = this.preferredVoice?.lang?.startsWith("ja") || this.preferredVoice?.lang?.startsWith("jp");
+        const vLang = (this.preferredVoice?.lang || "").toLowerCase();
+        const isJapanese = vLang.startsWith("ja") || vLang.startsWith("jp") || /japanese|nihongo|日本語/i.test(vName);
         const isLegacyDesktop = /desktop|sapi|zira|david|george|mark/i.test(vName);
-        const isNatural = /natural|online|google/.test(vName);
+        const isNaturalOrAndroid = /natural|online|google|sfg|tpd|rjs|network/i.test(vName);
 
-        // Acoustic Tuning calibrated to eliminate cracking, digital clipping, and buzzing:
+        // Acoustic Tuning calibrated to eliminate cracking and deliver cute anime girl tone:
         if (isJapanese) {
-          // Japanese voice reading English: pitch 1.08 gives a cute, pleasant anime accent without phonetic buffer cracking
-          utterance.pitch = 1.08;
-          utterance.rate = 1.0;
+          // Japanese voice reading English: authentic, sweet anime accent without phonetic buffer cracking
+          utterance.pitch = 1.12;
+          utterance.rate = 1.02;
         } else if (isLegacyDesktop) {
           // Legacy Desktop voices (e.g. Microsoft Zira on Windows): baseline pitch 1.0 to prevent metallic robotic crackle
           utterance.pitch = 1.0;
           utterance.rate = 1.0;
-        } else if (isNatural) {
-          // Modern Natural / Online voices (Edge/Safari/Android): sweet anime lift without distortion
-          utterance.pitch = 1.10;
-          utterance.rate = 1.02;
+        } else if (isNaturalOrAndroid) {
+          // Modern Natural / Android Google TTS voices: cute, youthful anime girl pitch without distortion
+          utterance.pitch = 1.20;
+          utterance.rate = 1.05;
         } else {
-          // Standard female voice baseline
-          utterance.pitch = 1.06;
-          utterance.rate = 1.0;
+          // General female voice fallback: sweet anime girl pitch
+          utterance.pitch = 1.18;
+          utterance.rate = 1.04;
         }
 
         utterance.onstart = () => {
