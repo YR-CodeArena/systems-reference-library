@@ -1000,61 +1000,66 @@ Your Personality & Tone:
       const detectedLang = this.detectLanguage(text);
       const voices = this.synth.getVoices() || [];
       let targetVoice = null;
+      let useNativeVoice = false; // true = we found a dedicated Hindi/Gujarati voice
       let langCode = "en-US";
       let pitch = 1.16;
       let rate = 1.02;
 
       if (detectedLang === "gu") {
-        // Native Gujarati Voice (Google ગુજરાતી, Microsoft Dhwani, Niranjan)
+        // Search for a dedicated Gujarati voice
         targetVoice = voices.find(v => (v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name)) && !/male/i.test(v.name));
         if (!targetVoice) {
           targetVoice = voices.find(v => v.lang.startsWith("gu") || /gujarati|ગુજરાતી/i.test(v.name));
         }
-        // Fallback to Hindi voice if browser doesn't have Gujarati installed
+        // Fallback to Hindi voice (close phonetic match)
         if (!targetVoice) {
-          targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name)) && !/male/i.test(v.name));
+          targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name));
         }
         if (!targetVoice) {
-          targetVoice = voices.find(v => v.lang.includes("IN") || /india|heera|neerja/i.test(v.name));
+          targetVoice = voices.find(v => v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
         }
+        // Fallback to any Indian English voice (NOT Japanese!)
+        if (!targetVoice) {
+          targetVoice = voices.find(v => (v.lang.includes("IN") || /india|heera|neerja/i.test(v.name)) && !/ja|jp|japanese/i.test(v.lang));
+        }
+        useNativeVoice = !!targetVoice;
         langCode = "gu-IN";
-        pitch = 1.18;
+        pitch = 1.1;
         rate = 1.0;
       } else if (detectedLang === "hi") {
-        // Native Hindi Voice (Google हिन्दी, Microsoft Swara, Kalpana)
+        // Search for a dedicated Hindi voice
         targetVoice = voices.find(v => (v.lang.startsWith("hi") || /hindi|हिन्दी|swara|kalpana/i.test(v.name)) && !/male|hemant/i.test(v.name));
         if (!targetVoice) {
           targetVoice = voices.find(v => v.lang.startsWith("hi") || /hindi|हिन्दी/i.test(v.name));
         }
+        // Fallback to any Indian English voice (NOT Japanese!)
         if (!targetVoice) {
-          targetVoice = voices.find(v => v.lang.includes("IN") || /india|heera|neerja/i.test(v.name));
+          targetVoice = voices.find(v => (v.lang.includes("IN") || /india|heera|neerja/i.test(v.name)) && !/ja|jp|japanese/i.test(v.lang));
         }
+        useNativeVoice = !!targetVoice;
         langCode = "hi-IN";
-        pitch = 1.18;
+        pitch = 1.1;
         rate = 1.0;
       } else {
-        // English / Japanese Anime English
+        // English: use the Japanese anime voice (preferredVoice)
         targetVoice = this.preferredVoice;
+        useNativeVoice = true;
         langCode = targetVoice?.lang || "en-US";
       }
 
-      if (!targetVoice) {
-        targetVoice = this.preferredVoice || voices[0];
-      }
+      // Determine if the final voice is Japanese (for cleanSpeech phonetic adjustments)
+      const isJapaneseVoice = targetVoice ? /ja|jp|japanese|nihongo|日本語/i.test((targetVoice.name || "") + (targetVoice.lang || "")) : false;
 
-      const vName = (targetVoice?.name || "").toLowerCase();
-      const isJapaneseVoice = /ja|jp|japanese|nihongo|日本語/i.test(vName);
-      const isLegacyDesktop = /desktop|sapi|zira|david|george|mark/i.test(vName);
-      const isNaturalOrAndroid = /natural|online|google|sfg|tpd|rjs|network/i.test(vName);
-
+      // Acoustic tuning for English voices
       if (detectedLang === "en") {
+        const vName = (targetVoice?.name || "").toLowerCase();
         if (isJapaneseVoice) {
           pitch = 1.12;
           rate = 1.02;
-        } else if (isLegacyDesktop) {
+        } else if (/desktop|sapi|zira|david|george|mark/i.test(vName)) {
           pitch = 1.0;
           rate = 1.0;
-        } else if (isNaturalOrAndroid) {
+        } else if (/natural|online|google|sfg|tpd|rjs|network/i.test(vName)) {
           pitch = 1.20;
           rate = 1.05;
         } else {
@@ -1074,7 +1079,15 @@ Your Personality & Tone:
         this.synth.cancel();
 
         const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.voice = targetVoice;
+
+        // CRITICAL: For Hindi/Gujarati, only set utterance.voice if we found a real
+        // native Indic voice. Otherwise, leave it unset and let the browser's language
+        // engine pick the correct voice based on utterance.lang alone.
+        // This prevents the Japanese voice from reading Devanagari/Gujarati text.
+        if (useNativeVoice && targetVoice) {
+          utterance.voice = targetVoice;
+        }
+
         utterance.lang = langCode;
         utterance.pitch = pitch;
         utterance.rate = rate;
