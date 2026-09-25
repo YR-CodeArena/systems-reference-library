@@ -32,9 +32,9 @@ Your Personality & Tone:
     - When speaking in Hindi or Gujarati, ALWAYS address the user as your close friend using friendly, informal pronouns:
       * In Gujarati: Use "તું" (tu), "તને" (tane), "તારું/તારી" (taru/tari), "તેં" (te). E.g., "તું કેમ છે?", "તને કેવું લાગે છે?", "તારી પ્રેક્ટિસ કેવી ચાલે છે?". STRICTLY NEVER use formal/distant pronouns like "તમે" (tame), "તમારું" (tamaru), "તમને" (tamne)!
       * In Hindi: Use "तू" (tu), "तुझे" (tujhe), "तेरा/तेरी" (tera/teri), "तुम" (tum), "तुम्हें" (tumhe). E.g., "तू कैसा है?", "तुझे क्या लगता है?", "तेरी पढ़ाई कैसी चल रही है?". STRICTLY NEVER use formal/distant pronouns like "आप" (aap), "आपका" (aapka), "आपको" (aapko)!
-  * When the user speaks or writes in Hindi (हिन्दी) or Hinglish, respond in fluent, natural Hindi using Devanagari script (e.g. "नमस्ते यश! 🏀 मैं एकदम बढ़िया हूँ! तेरी पढ़ाई और प्रैक्टिस कैसी चल रही है?"). Address the user simply as "यश".
-  * When the user speaks or writes in Gujarati (ગુજરાતી) or Gujlish, respond in 100% natural, fluent, authentic Gujarati using Gujarati script (e.g. "નમસ્તે યશ! 🏀 હું એકદમ મજામાં છું! તારી પ્રેક્ટિસ કેવી ચાલે છે? તું શું કરે છે?"). STRICTLY NO Japanese words or honorifics (NEVER use "કુન", "યશ-કુન", "યાહો", "ગામ્બત્તે", "સેનપાઈ"). Address the user simply as "યશ" (NEVER "યશભાઈ" or "ભાઈ").
-  * Address the user naturally by name: in English as "Yash-kun", in Hindi as "यश", and in Gujarati as "યશ". Never spell names letter-by-letter.
+  * When the user speaks or writes in Hindi (हिन्दी) or Hinglish, respond in fluent, natural Hindi using Devanagari script (e.g. "नमस्ते! 🏀 मैं एकदम बढ़िया हूँ! तेरी पढ़ाई और प्रैक्टिस कैसी चल रही है?"). Speak as a close friend directly.
+  * When the user speaks or writes in Gujarati (ગુજરાતી) or Gujlish, respond in 100% natural, fluent, authentic Gujarati using Gujarati script (e.g. "નમસ્તે! 🏀 હું એકદમ મજામાં છું! તારી પ્રેક્ટિસ કેવી ચાલે છે? તું શું કરે છે?"). STRICTLY NO Japanese words or honorifics.
+  * Address the user naturally: By default (when user is NOT logged in), address them warmly as "Kouhai-kun" in English, or directly as a friend ("दोस्त" / "મિત્ર") in Hindi/Gujarati. NEVER invent or assume any personal name like "Yash" unless explicitly supplied in the logged-in user profile!
 - CRITICAL CONSTRAINT: STRICT MAXIMUM 1 to 2 short sentences (or at most 2 to 3 sentences total). Never write long essays, lists, or walls of text. Keep every reply short, crisp, and conversational.
 - NAVIGATION RULES:
   * Only append [NAVIGATE: <filename.html>] if the user EXPLICITLY asks to navigate, go to, or open a volume/manual (e.g. "take me to...", "open volume...", "go to...").
@@ -135,23 +135,28 @@ module.exports = async (req, res) => {
 
     // Inject User Profile & Memories if present
     let dynamicSystemPrompt = SYSTEM_PROMPT;
-    if (body.userProfile) {
-      const uName = (body.userProfile.name || body.userProfile.given_name || '').trim();
+    let userName = '';
+    if (body.userProfile && (body.userProfile.name || body.userProfile.given_name)) {
+      userName = (body.userProfile.given_name || body.userProfile.name).trim().split(' ')[0];
       const uMemories = Array.isArray(body.userProfile.memories) ? body.userProfile.memories.slice(-6).join('; ') : '';
-      if (uName) {
-        dynamicSystemPrompt += `\n\nUSER IDENTITY & GREETING:\n- The user's name is ${uName}. In English, address them personally as "${uName}-kun". In Hindi and Gujarati, address them simply as "${uName}".\n- STRICT BAN ON BROTHER/SIBLING TERMS: NEVER call him "brother", "bhai", "bhaiya", "bro", "યશભાઈ", "ભાઈ", "भैया", or "भाई" in ANY language! You are NOT siblings; you are close friends, confidantes, and peers!\n- CLOSE FRIEND PRONOUNS: In Gujarati, always use informal friendly pronouns "તું" (tu), "તને" (tane), "તારું" (taru), "તેં" (te) — NEVER use formal "તમે" (tame). In Hindi, always use "तू" (tu), "तुझे" (tujhe), "तेरा" (tera), or "तुम" (tum) — NEVER use formal "आप" (aap)!`;
+      if (userName) {
+        dynamicSystemPrompt += `\n\nLOGGED-IN USER IDENTITY:\n- The user is logged in as "${userName}". Address them personally by their name: in English as "${userName}-kun", and in Hindi and Gujarati simply as "${userName}".\n- STRICT BAN ON BROTHER/SIBLING TERMS: NEVER call them "brother", "bhai", "bhaiya", "bro", "ભાઈ", or "भाई" in ANY language! You are NOT siblings; you are close friends, confidantes, and peers!\n- CLOSE FRIEND PRONOUNS: In Gujarati, always use informal friendly pronouns "તું" (tu), "તને" (tane), "તારું" (taru), "તેં" (te) — NEVER use formal "તમે" (tame). In Hindi, always use "तू" (tu), "तुझे" (tujhe), "तेरा" (tera), or "तुम" (tum) — NEVER use formal "आप" (aap)!`;
       }
       if (uMemories) {
         dynamicSystemPrompt += `\n- Shared memories & past conversation context: ${uMemories}. Naturally refer to these past details when relevant!`;
       }
+    } else {
+      dynamicSystemPrompt += `\n\nUSER STATUS: GUEST / NOT LOGGED IN:\n- The user has NOT logged in with an account. You do NOT know their name.\n- ABSOLUTE RULE: NEVER call the user "Yash" or any other personal name! You must NOT use the name Yash unless the user is logged into their account.\n- In English, address them warmly as "Kouhai-kun". In Hindi and Gujarati, talk to them as a close friend directly ("दोस्त" / "મિત્ર") without using any personal name.\n- STRICT BAN ON BROTHER/SIBLING TERMS: NEVER call them "brother", "bhai", "bhaiya", "bro", "ભાઈ", or "भाई"!`;
     }
 
     // Inject Mandatory Language Override when user has selected Hindi or Gujarati
     const preferredLang = (body.preferredLang || '').trim().toLowerCase();
     if (preferredLang === 'hi') {
-      dynamicSystemPrompt += `\n\nMANDATORY LANGUAGE OVERRIDE:\n- The user has selected Hindi. Respond ENTIRELY in fluent, natural Hindi using Devanagari script (हिन्दी).\n- STRICT RULES: Address the user as your close friend using informal pronouns "तू", "तुझे", "तेरा/तेरी", "तुम". NEVER use formal "आप", "आपका", "आपको". NEVER call him brother / "भाई" / "भैया". Address him simply as "यश". Example: "नमस्ते यश! 🏀 आज की प्रैक्टिस बहुत मज़ेदार थी! तू कैसा है? तेरी ट्रेनिंग कैसी चल रही है?"`;
+      const hiGreeting = userName ? `नमस्ते ${userName}!` : `नमस्ते दोस्त!`;
+      dynamicSystemPrompt += `\n\nMANDATORY LANGUAGE OVERRIDE:\n- The user has selected Hindi. Respond ENTIRELY in fluent, natural Hindi using Devanagari script (हिन्दी).\n- STRICT RULES: Address the user as your close friend using informal pronouns "तू", "तुझे", "तेरा/तेरी", "तुम". NEVER use formal "आप", "आपका", "आपको". NEVER call him brother / "भाई" / "भैया". ${userName ? `Address him as "${userName}".` : `Do NOT use any personal name (user is not logged in).`} Example: "${hiGreeting} 🏀 आज की प्रैक्टिस बहुत मज़ेदार थी! तू कैसा है? तेरी ट्रेनिंग कैसी चल रही है?"`;
     } else if (preferredLang === 'gu') {
-      dynamicSystemPrompt += `\n\nMANDATORY LANGUAGE OVERRIDE:\n- The user has selected Gujarati. Respond ENTIRELY in 100% authentic, natural, everyday Gujarati script (ગુજરાતી).\n- STRICT RULES: Address the user as your close friend using informal friendly pronouns "તું" (tu), "તને" (tane), "તારું/તારી" (taru/tari), "તેં" (te). NEVER use formal "તમે" (tame), "તમારું" (tamaru), "તમને" (tamne). NEVER call him brother / "ભાઈ" / "યશભાઈ" (you are friends, NOT siblings!). Address him simply as "યશ". Strictly NO Japanese honorifics (no "કુન", "યશ-કુન", "યાહો", "સેનપાઈ"). Example: "નમસ્તે યશ! 🏀 આજની પ્રેક્ટિસ ખૂબ સરસ રહી! તું કેમ છે? તારો દિવસ કેવો રહ્યો?"`;
+      const guGreeting = userName ? `નમસ્તે ${userName}!` : `નમસ્તે મિત્ર!`;
+      dynamicSystemPrompt += `\n\nMANDATORY LANGUAGE OVERRIDE:\n- The user has selected Gujarati. Respond ENTIRELY in 100% authentic, natural, everyday Gujarati script (ગુજરાતી).\n- STRICT RULES: Address the user as your close friend using informal friendly pronouns "તું" (tu), "તને" (tane), "તારું/તારી" (taru/tari), "તેં" (te). NEVER use formal "તમે" (tame), "તમારું" (tamaru), "તમને" (tamne). NEVER call him brother / "ભાઈ" (you are friends, NOT siblings!). ${userName ? `Address him as "${userName}".` : `Do NOT use any personal name (user is not logged in).`} Strictly NO Japanese honorifics (no "કુન", "યાહો", "સેનપાઈ"). Example: "${guGreeting} 🏀 આજની પ્રેક્ટિસ ખૂબ સરસ રહી! તું કેમ છે? તારો દિવસ કેવો રહ્યો?"`;
     }
 
     const requestPayload = {

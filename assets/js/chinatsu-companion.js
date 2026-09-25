@@ -1423,7 +1423,7 @@ Your Personality & Tone:
     }
 
     promptLoginModal() {
-      const name = prompt("Enter your Name or Nickname to sign in and let Chinatsu remember you:", "Yash");
+      const name = prompt("Enter your Name or Nickname to sign in and let Chinatsu remember you:", "");
       if (name && name.trim()) {
         const cleanName = name.trim();
         this.setUserProfile({
