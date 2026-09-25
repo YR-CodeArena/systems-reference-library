@@ -1,10 +1,11 @@
 # Systems Reference Library // システム仕様書
 
+[![Live Deployment](https://img.shields.io/badge/Deployment-Vercel%20Live-black?style=for-the-badge&logo=vercel&logoColor=white)](https://systems-reference-library.vercel.app)
 [![Volumes](https://img.shields.io/badge/Volumes-15%20Comprehensive-00f0ff?style=for-the-badge&logo=gitbook&logoColor=white)](index.html)
-[![Tracks](https://img.shields.io/badge/Specialized%20Tracks-3%20Tracks-ff2a85?style=for-the-badge)](index.html)
+[![AI Companion](https://img.shields.io/badge/AI%20Companion-Gemini%202.5%20Flash-ff2a85?style=for-the-badge&logo=google&logoColor=white)](https://systems-reference-library.vercel.app)
+[![Multilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI%20%7C%20GU-10b981?style=for-the-badge)](https://systems-reference-library.vercel.app)
 [![WebAssembly](https://img.shields.io/badge/Runtime-Pyodide%20WASM%20%2B%20Skulpt-8b5cf6?style=for-the-badge&logo=webassembly&logoColor=white)](index.html)
 [![Aesthetic](https://img.shields.io/badge/Aesthetic-Cyberpunk%20%26%20Shinkai%20Glass-0284c7?style=for-the-badge)](index.html)
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20Frameworks-success?style=for-the-badge)](index.html)
 
 > **A rigorous, production-grade digital reference curriculum and interactive engineering manual compiled directly from foundational computer systems engineering specifications, RFCs, and authoritative masterclasses.**
 > 
@@ -18,7 +19,11 @@ The **Systems Reference Library** is designed as a zero-compromise, definitive e
 
 ### Key Highlights
 - **15 Exhaustive Volumes**: 100% word-for-word complete manuals covering low-level hardware, operating systems, compilers, databases, wire protocols, high-concurrency JVM runtimes, Python internals, and modern web architectures.
-- **Chinatsu-senpai AI Companion**: Interactive anime companion and basketball CS mentor anchored in the bottom-right corner. Powered by Google's Gemini API (`gemini-1.5-flash`) and Web Speech Synthesis, she explains complex systems using basketball analogies, reacts with 11 video animations, and autonomously navigates through all volumes upon request.
+- **Chinatsu-senpai AI Companion & Basketball CS Mentor**: Interactive companion anchored in the bottom-right corner. Powered by a Vercel serverless backend with Google Gemini 2.5/2.0 Flash models, Web Speech Synthesis & Recognition, multilingual support (English, Hindi, Gujarati), Google OAuth memory persistence, and autonomous in-site navigation.
+- **Voice Commands & Multilingual Speech**: Hands-free voice chat via Web Speech Recognition. Dynamic voice synthesis with cute Japanese anime accent in English, native Indian speech for Hindi (`hi-IN`), and native Gujarati (`gu-IN`) with phonetic Devanagari transliteration fallback.
+- **Proactive Slice-of-Life Messaging**: Zero-API-cost procedural thought engine generating infinite, non-repeating slice-of-life updates, high school stories, basketball drills, and jokes with notification chimes and unread badge counters.
+- **User Memory & Google Identity**: Sign-in via Google accounts, cross-session memory tracking, personalized greeting by name when logged in, and neutral guest mode when unauthenticated.
+- **Interactive Suggestion Bar**: Horizontally scrollable topic bar with custom neon-glowing scroll track, rotating across 28+ computer systems and casual conversation topics.
 - **In-Browser Code Execution**: Dual-engine client-side sandboxes utilizing **Pyodide** (WebAssembly CPython 3.12) and **Skulpt** with real-time interactive terminals and one-click copyable snippets.
 - **24 Animated SVG Diagrams**: Interactive telemetry models illustrating sliding window protocols, cache locality hierarchies, CPU instruction pipelines, LSM-Tree compaction, and JVM thread scheduling.
 - **Cinematic Media Integration**: Background video stream powered directly by YouTube's IFrame API with custom dual audio controls and 40-second continuous Ken Burns pan/zoom fallbacks.
@@ -104,13 +109,32 @@ Systems Reference Library
   - Floating HUD (`#floatingAudioBtn`) anchored at the bottom-left with real-time status indicators (`AUDIO: MUTED` / `AUDIO: PLAYING`).
 - **Resilient Fallback Engine**: If the video stream is restricted or accessed offline, the container seamlessly activates `.yt-fallback` displaying high-resolution Makoto Shinkai artwork with a continuous 40-second Ken Burns pan/zoom animation.
 
-### 4. Chinatsu-senpai AI Companion & Basketball CS Mentor
-- **Character Authenticity**: Embodying **Chinatsu Kano** (鹿野千夏) from *Blue Box* (*Ao no Hako*), the companion maintains a warm, encouraging senpai persona towards the user ("Kouhai-kun"). She explains intricate systems concepts using basketball tactics (fast breaks for low latency, zone defense for firewalls, rebounding for cache line retrieval, pick-and-rolls for client-server RPCs) and mentions her Eimei High School life (Taiki Inomata, Hina Chono, morning gym drills).
-- **Google Gemini API Integration**: Leverages `gemini-1.5-flash` with full multi-turn conversation memory, custom system prompts, and temperature controls. Features a key configuration modal stored securely in client `localStorage`.
-- **Dynamic 11-Clip Video Mascot**: A floating avatar anchored in the bottom-right corner with smooth state-driven animations (`idle`, `speaking`, `thinking`) sourced from 11 micro-videos and 10 reaction images, accompanied by periodic silly idle thought bubbles.
-- **Web Speech Synthesis**: Real-time anime girl voice playback with high-pitch modulation (`pitch: 1.38, rate: 1.08`), lip-sync state triggers, and an instant mute/unmute control.
+### 4. Chinatsu-senpai AI Companion & Systems Engineering Mentor
+- **Character Authenticity & Persona**: Embodying **Chinatsu Kano** (鹿野千夏) from *Blue Box* (*Ao no Hako*), star basketball player of Eimei High. She combines encouraging mentorship with high school life updates (morning gym drills with Taiki Inomata, gymnastic flexibility with Hina Chono, Inter-High tournament goals) and playful basketball analogies for complex computer systems.
+- **Vercel Serverless Backend (`/api/chat.js`)**: Secure server-side execution utilizing Google Gemini models (`gemini-2.5-flash` with automatic fallback to `gemini-2.0-flash`). Features multi-turn chat sanitization, dynamic system prompt injection, and zero client-side API key exposure.
+- **Multilingual Intelligence (EN / HI / GU)**:
+  - **English**: Cute anime Japanese English with endearing senpai expressions.
+  - **Hindi (हिन्दी)**: 100% natural conversational Hindi in Devanagari script, addressing the user as a close friend using informal friendly pronouns (`तू`, `तुझे`, `तेरा`).
+  - **Gujarati (ગુજરાતી)**: Authentic, native everyday Gujarati script, strictly avoiding Japanese loan words and addressing the user with friendly pronouns (`તું`, `તને`, `તારું`).
+  - **Strict Relationship Boundaries**: Strictly prohibited from using brother/bhai terms across all languages—she interacts purely as a close friend, confidante, and peer.
+- **Voice Recognition & Speech Synthesis**:
+  - Hands-free microphone toggle (`webkitSpeechRecognition`) with dynamic language sync.
+  - **Native Gujarati Audio with Phonetic Devanagari Transliteration**: Implements a custom `gujaratiToDevanagari` fallback algorithm so mobile/desktop browsers lacking offline Gujarati TTS voice packs can pronounce Gujarati characters with 100% fluent, natural Indian phonetics.
+  - Cleaned speech engine (`cleanSpeech`) that strips markdown, math expressions, navigation commands, and punctuation hiccups.
+- **Google Identity Services & Persistent Memory**:
+  - One-click Google Login (`@accounts/gsi/client`) persisting user profiles in `localStorage`.
+  - **User-Specific Memory**: Cross-session chat persistence (`chinatsu_chat_<id>`) and automatic extraction of shared conversation memories.
+  - **Dynamic Identity**: When logged in, Chinatsu addresses the user personally by their verified account name. When unauthenticated, she operates in guest mode addressing the user as "Kouhai-kun" / "दोस्त" / "મિત્ર" without assuming personal names.
+- **Infinite Slice-of-Life Thoughts & Humorous Puns**:
+  - Client-side procedural thought combinator (`PROCEDURAL_CHINATSU_MATRIX`) generating millions of unique, non-repeating thoughts, jokes, and basketball anecdotes with zero Gemini API quota consumption.
+  - SHA-hashed novelty tracking to guarantee freshness across page reloads.
+  - Smart suppression: Automatically pauses proactive messages while the chat modal is open or when the user is actively typing.
+  - Bouncy notification counter badge and Web Audio chime (E6 → G#6 sine waves).
+- **Interactive Suggestion Bar**:
+  - Horizontal scrollable bar with glowing neon scrollbar track and thumb.
+  - Displays 8 dynamically rotated topic chips per load from a categorized pool of 28+ prompts, complete with a "More topics" refresh button.
 - **Autonomous In-Site Navigation**: Natural language understanding detects navigation requests (e.g., *"Open the PostgreSQL manual"* or *"Take me to Volume 5"*), executes `[NAVIGATE: <url>]` protocols, displays an anime toast notification, and navigates seamlessly across all 15 volumes.
-- **Universal Availability**: Automatically loaded on all 16 pages via `main.js` and `chinatsu-companion.css` with responsive mobile drawer support.
+- **Dynamic 11-Clip Video Mascot**: Anchored in the bottom-right corner with smooth state-driven animations (`idle`, `speaking`, `thinking`) sourced from 11 micro-videos and 10 reaction images.
 
 ### 5. Zero Layout Shift (CLS) Typewriter Hero
 - Asynchronous typing and backspacing animation engine for the main title:
@@ -120,7 +144,7 @@ Systems Reference Library
   - Preserves vertical height (`min-height: 2.6em`) ensuring zero jump or cumulative layout shift for cards below.
   - Respects accessibility standards (`prefers-reduced-motion`).
 
-### 5. Interactive Animated Telemetry Diagrams
+### 6. Interactive Animated Telemetry Diagrams
 - 24 custom SVG system diagrams embedded across all volumes.
 - Features dynamic animated SVG packets, memory pointer transitions, thread states, and node traversals.
 - Includes step-by-step playback controls (Play, Pause, Reset, Speed Adjustment).
@@ -132,9 +156,13 @@ Systems Reference Library
 | Domain | Technology / Specification | Purpose |
 | :--- | :--- | :--- |
 | **Markup & Semantics** | HTML5 (Living Standard), WAI-ARIA | Semantic document structure, accessible screen-reader navigation, metadata tags. |
-| **Styling & Design System** | Modern CSS3, CSS Custom Properties, CSS Grid, Flexbox | Glassmorphism, 3D transforms, dual light/dark themes, responsive mobile drawer. |
+| **Styling & Design System** | Modern CSS3, CSS Custom Properties, CSS Grid, Flexbox | Glassmorphism, 3D transforms, dual light/dark themes, custom scrollbars, responsive mobile drawer. |
 | **Typography & Fonts** | System UI Native Stacks, JetBrains Mono | Monospaced high-legibility code rendering and clean cross-platform typography. |
 | **Client Scripting** | Vanilla JavaScript (ECMAScript 2023 / ES6+) | Async typewriter engine, audio HUD synchronization, DOM mutation observers. |
+| **AI Companion Backend** | Vercel Serverless Functions (`api/chat.js`), Node.js | Multi-model Gemini orchestrator with history sanitization, dynamic prompt injection, CORS headers. |
+| **Generative Intelligence** | Google Gemini API (`gemini-2.5-flash`, `gemini-2.0-flash`) | Fast, multi-turn AI reasoning, basketball analogies, multilingual Hindi/Gujarati translation. |
+| **Speech & Audio** | Web Speech Synthesis & Recognition API, Web Audio API | Voice-to-voice interaction, anime voice modulation, Devanagari phonetic transliteration, notification chimes. |
+| **Authentication & Memory**| Google Identity Services (GSI), HTML5 LocalStorage | OAuth Google Sign-In, per-user memory tracking, persistent conversation history. |
 | **WebAssembly Python** | Pyodide v0.26.2 (WASM) | Client-side CPython 3.12 sandbox for running production Python code in-browser. |
 | **JS Python Runtime** | Skulpt v1.2.0 | Lightweight pure-JS Python VM for ultra-fast snippet execution. |
 | **Video & Streaming** | YouTube IFrame Player API (`youtube-nocookie.com`) | 1080p privacy-enhanced video background streaming, programmatic mute/unmute control. |
@@ -164,13 +192,19 @@ systems-reference-library/
 ├── enterprise-scss.html            # VOL.14: Enterprise SCSS Architecture & Design Systems
 ├── javascript-mastery.html         # VOL.15: The Ultimate Complete Guide to JavaScript
 ├── verify_all.py                   # Automated verification test suite
+├── vercel.json                     # Vercel deployment & routing configuration
+├── api/
+│   └── chat.js                     # Vercel Serverless Function (Gemini 2.5/2.0 API gateway)
 ├── assets/
 │   ├── css/
-│   │   └── style.css               # Core styling, glassmorphism, responsive themes
+│   │   ├── style.css               # Core library styling, glassmorphism, responsive themes
+│   │   └── chinatsu-companion.css  # AI companion widget, neon scrollbars, chat layout, auth UI
 │   ├── js/
 │   │   ├── main.js                 # App engine, YouTube player, audio controller, code runner
+│   │   ├── chinatsu-companion.js   # AI companion engine, voice synthesis, Google Auth, matrix
 │   │   ├── skulpt.min.js           # Client-side Python VM
 │   │   └── skulpt-stdlib.js        # Python standard library emulation
+│   ├── chinatsu-senpai/            # Mascot video clips (1.mp4 - 11.mp4) & reaction images
 │   └── images/
 │       ├── vol_1.png ... vol_15.png # Volume 3D card backs & volume page backgrounds
 │       ├── vol_universal.png       # Portal primary Makoto Shinkai background
