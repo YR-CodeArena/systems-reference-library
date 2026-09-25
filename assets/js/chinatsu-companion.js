@@ -515,53 +515,37 @@ Your Personality & Tone:
             const voices = this.synth.getVoices();
             if (!voices || voices.length === 0) return;
 
-            // Priority 1: Clear, youthful English neural voices (Microsoft Ana is a youthful cheerful girl; Jenny; Aria; Google)
-            const enAna = voices.find((v) => /ana online|ana.*natural/i.test(v.name));
-            if (enAna) {
-              this.preferredVoice = enAna;
-              return;
-            }
-
-            const enJennyAria = voices.find(
-              (v) => /jenny online|aria online|natural.*female|female.*natural/i.test(v.name)
-            );
-            if (enJennyAria) {
-              this.preferredVoice = enJennyAria;
-              return;
-            }
-
-            const enGoogle = voices.find(
-              (v) => /google uk english female|google us english/i.test(v.name)
-            );
-            if (enGoogle) {
-              this.preferredVoice = enGoogle;
-              return;
-            }
-
-            const enGood = voices.find(
-              (v) =>
-                /ana|jenny|aria|samantha|victoria|karen|moira|tessa/i.test(v.name) &&
-                !/desktop|david|zira|george|mark|hazel|sapi|male/i.test(v.name)
-            );
-            if (enGood) {
-              this.preferredVoice = enGood;
-              return;
-            }
-
-            // Priority 2: Natural Japanese Anime Voices (Microsoft Nanami, Keiko)
-            const jaAnime = voices.find(
+            // Priority 1: Authentic Japanese Voices (Speaking English with cute anime Japanese accent)
+            // Windows/Mac/iOS: Nanami, Keiko, Aoi, Mayu, Shiori, Kyoko, Ayumi, Sayaka, Haruka, etc.
+            let chosen = voices.find(
               (v) =>
                 (v.lang.startsWith("ja") || v.lang.startsWith("jp")) &&
-                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online/i.test(v.name)
+                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online|female/i.test(v.name)
             );
-            if (jaAnime) {
-              this.preferredVoice = jaAnime;
-              return;
+
+            // Priority 2: Any Japanese system voice
+            if (!chosen) {
+              chosen = voices.find(
+                (v) => (v.lang.startsWith("ja") || v.lang.startsWith("jp")) && !/male|ichiro|naoki/i.test(v.name)
+              );
+            }
+            if (!chosen) {
+              chosen = voices.find((v) => v.lang.startsWith("ja") || v.lang.startsWith("jp"));
             }
 
-            // Final fallback: Any non-male voice
-            const nonMale = voices.find((v) => !/male|david|george|mark/i.test(v.name));
-            this.preferredVoice = nonMale || voices[0];
+            // Priority 3: Youthful cute female voice (Google UK English Female, Samantha, Victoria, Ana, Jenny, Aria)
+            if (!chosen) {
+              chosen = voices.find(
+                (v) => /google uk english female|samantha|victoria|ana online|jenny|aria|karen|moira/i.test(v.name)
+              );
+            }
+
+            // Final fallback: Any female voice
+            if (!chosen) {
+              chosen = voices.find((v) => /female/i.test(v.name) && !/male|david|george|mark/i.test(v.name));
+            }
+
+            this.preferredVoice = chosen || voices[0];
           } catch (e) {}
         };
 
@@ -574,77 +558,28 @@ Your Personality & Tone:
       }
     }
 
-    speak(text, audioData) {
-      if (!this.voiceEnabled) return;
+    speak(text) {
+      if (!this.voiceEnabled || !this.synth) return;
 
       const cleanText = this.cleanSpeech(text);
       if (!cleanText) return;
 
-      // 1. Studio Neural AI Audio Playback (Kore Studio Voice)
-      if (audioData) {
-        try {
-          if (this.currentAudio) {
-            this.currentAudio.pause();
-            this.currentAudio = null;
-          }
-          if (this.synth) this.synth.cancel();
-
-          const audio = new Audio("data:audio/wav;base64," + audioData);
-          this.currentAudio = audio;
-
-          audio.onplay = () => {
-            this.setVideoState("speaking");
-          };
-          audio.onended = () => {
-            this.setVideoState("idle");
-            this.currentAudio = null;
-          };
-          audio.onerror = () => {
-            this.setVideoState("idle");
-            this.currentAudio = null;
-            this.speakWithWebSpeech(cleanText);
-          };
-
-          audio.play().catch(() => {
-            this.speakWithWebSpeech(cleanText);
-          });
-          return;
-        } catch (e) {
-          console.warn("[Chinatsu] Audio playback notice:", e);
-        }
-      }
-
-      // 2. Tuned Browser Speech Synthesis Fallback
-      this.speakWithWebSpeech(cleanText);
-    }
-
-    speakWithWebSpeech(cleanText) {
-      if (!this.voiceEnabled || !this.synth || !cleanText) return;
-
       try {
+        if (this.currentAudio) {
+          this.currentAudio.pause();
+          this.currentAudio = null;
+        }
         this.synth.cancel();
+
         const utterance = new SpeechSynthesisUtterance(cleanText);
 
         if (this.preferredVoice) {
           utterance.voice = this.preferredVoice;
         }
 
-        const vName = (this.preferredVoice?.name || "").toLowerCase();
-        const isJapanese = this.preferredVoice?.lang?.startsWith("ja") || this.preferredVoice?.lang?.startsWith("jp");
-        const isNatural = /natural|online|google/.test(vName);
-
-        // Smart Acoustic Tuning: 30% anime lift for clear natural English
-        if (isJapanese) {
-          utterance.pitch = 1.15;
-          utterance.rate = 1.05;
-        } else if (isNatural) {
-          utterance.pitch = 1.14;
-          utterance.rate = 1.05;
-        } else {
-          // Legacy Desktop voice (Microsoft Zira): use natural baseline to prevent metallic robot distortion
-          utterance.pitch = 1.04;
-          utterance.rate = 1.02;
-        }
+        // Cute anime Japanese English voice characteristics: high pitch, energetic cadence
+        utterance.pitch = 1.32;
+        utterance.rate = 1.06;
 
         utterance.onstart = () => {
           this.setVideoState("speaking");
@@ -660,7 +595,7 @@ Your Personality & Tone:
 
         this.synth.speak(utterance);
       } catch (err) {
-        console.warn("Speech synthesis error:", err);
+        console.warn("[Chinatsu] Speech synthesis error:", err);
         this.setVideoState("idle");
       }
     }
@@ -889,7 +824,7 @@ Your Personality & Tone:
       const cleanDisplay = assistantText.replace(/\[NAVIGATE:[^\]]+\]/gi, "").trim();
 
       this.addMessage("assistant", cleanDisplay);
-      this.speak(cleanDisplay, data?.audio);
+      this.speak(cleanDisplay);
 
       if (navMatch && navMatch[1]) {
         this.navigateWithToast(navMatch[1].trim());
