@@ -2465,7 +2465,12 @@ builtins.input = _sys_input
         floatingAudioBtn.addEventListener("click", toggleAudio);
       }
 
-      if (ytTarget) {
+      if (bgVideo) {
+        // Native HTML5 Video Stream (Ad-Free, Remote CDN Stream)
+        bgVideo.muted = true;
+        bgVideo.play().catch(() => {});
+        updateAudioUI(true);
+      } else if (ytTarget) {
         const isFileProtocol = window.location.protocol === "file:";
 
         function activateVisualFallback() {
@@ -2556,10 +2561,6 @@ builtins.input = _sys_input
           }, 200);
         }
 
-        updateAudioUI(true);
-      } else if (bgVideo) {
-        bgVideo.muted = true;
-        bgVideo.play().catch(() => {});
         updateAudioUI(true);
       }
 

@@ -2513,7 +2513,19 @@ body::before {
   background-color: #080c14 !important;
 }
 
-.bg-video-element,
+.bg-video-element {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: translate(-50%, -50%) !important;
+  object-fit: cover !important;
+  pointer-events: none !important;
+}
+
 .bg-youtube-iframe,
 .video-bg-container iframe {
   position: absolute !important;
