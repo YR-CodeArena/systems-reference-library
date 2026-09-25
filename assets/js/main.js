@@ -2385,63 +2385,165 @@ builtins.input = _sys_input
         });
       }
 
-      // Background Video Audio Toggle Engine (Overview Portal)
+      // Background Video & Audio Engine (YouTube Stream on Overview Portal)
+      const ytTarget = document.getElementById("bgYoutubePlayer");
       const bgVideo = document.getElementById("bgVideo");
       const audioToggleBtn = document.getElementById("bgAudioToggleBtn");
       const floatingAudioBtn = document.getElementById("floatingAudioBtn");
 
-      if (bgVideo) {
-        function updateAudioUI(isMuted) {
-          if (audioToggleBtn) {
-            const mutedIcon = audioToggleBtn.querySelector(".audio-icon-muted");
-            const playingIcon = audioToggleBtn.querySelector(".audio-icon-playing");
-            if (isMuted) {
-              audioToggleBtn.classList.remove("is-active");
-              audioToggleBtn.setAttribute("title", "Enable Background Audio (Unmute)");
-              audioToggleBtn.setAttribute("aria-label", "Enable Background Audio");
-              if (mutedIcon) mutedIcon.style.display = "block";
-              if (playingIcon) playingIcon.style.display = "none";
-            } else {
-              audioToggleBtn.classList.add("is-active");
-              audioToggleBtn.setAttribute("title", "Mute Background Audio");
-              audioToggleBtn.setAttribute("aria-label", "Mute Background Audio");
-              if (mutedIcon) mutedIcon.style.display = "none";
-              if (playingIcon) playingIcon.style.display = "block";
-            }
-          }
+      let isAudioMuted = true;
+      let ytPlayer = null;
 
-          if (floatingAudioBtn) {
-            const icon = floatingAudioBtn.querySelector(".audio-hud-icon");
-            const label = floatingAudioBtn.querySelector(".audio-hud-label");
-            if (isMuted) {
-              floatingAudioBtn.classList.remove("is-active");
-              if (icon) icon.textContent = "🔇";
-              if (label) label.textContent = "AUDIO: MUTED";
-            } else {
-              floatingAudioBtn.classList.add("is-active");
-              if (icon) icon.textContent = "🔊";
-              if (label) label.textContent = "AUDIO: PLAYING";
-            }
+      function updateAudioUI(isMuted) {
+        if (audioToggleBtn) {
+          const mutedIcon = audioToggleBtn.querySelector(".audio-icon-muted");
+          const playingIcon = audioToggleBtn.querySelector(".audio-icon-playing");
+          if (isMuted) {
+            audioToggleBtn.classList.remove("is-active");
+            audioToggleBtn.setAttribute("title", "Enable Background Audio (Unmute)");
+            audioToggleBtn.setAttribute("aria-label", "Enable Background Audio");
+            if (mutedIcon) mutedIcon.style.display = "block";
+            if (playingIcon) playingIcon.style.display = "none";
+          } else {
+            audioToggleBtn.classList.add("is-active");
+            audioToggleBtn.setAttribute("title", "Mute Background Audio");
+            audioToggleBtn.setAttribute("aria-label", "Mute Background Audio");
+            if (mutedIcon) mutedIcon.style.display = "none";
+            if (playingIcon) playingIcon.style.display = "block";
           }
         }
 
-        function toggleAudio(e) {
-          if (e) e.preventDefault();
-          bgVideo.muted = !bgVideo.muted;
-          if (!bgVideo.muted) {
+        if (floatingAudioBtn) {
+          const icon = floatingAudioBtn.querySelector(".audio-hud-icon");
+          const label = floatingAudioBtn.querySelector(".audio-hud-label");
+          if (isMuted) {
+            floatingAudioBtn.classList.remove("is-active");
+            if (icon) icon.textContent = "🔇";
+            if (label) label.textContent = "AUDIO: MUTED";
+          } else {
+            floatingAudioBtn.classList.add("is-active");
+            if (icon) icon.textContent = "🔊";
+            if (label) label.textContent = "AUDIO: PLAYING";
+          }
+        }
+      }
+
+      function toggleAudio(e) {
+        if (e) e.preventDefault();
+        isAudioMuted = !isAudioMuted;
+
+        if (ytPlayer && typeof ytPlayer.mute === "function") {
+          try {
+            if (isAudioMuted) {
+              ytPlayer.mute();
+            } else {
+              ytPlayer.unMute();
+              ytPlayer.setVolume(100);
+              if (typeof ytPlayer.playVideo === "function") {
+                ytPlayer.playVideo();
+              }
+            }
+          } catch (err) {
+            console.warn("YouTube audio toggle error:", err);
+          }
+        }
+
+        if (bgVideo) {
+          bgVideo.muted = isAudioMuted;
+          if (!isAudioMuted) {
             bgVideo.play().catch(() => {});
           }
-          updateAudioUI(bgVideo.muted);
         }
 
-        if (audioToggleBtn) {
-          audioToggleBtn.addEventListener("click", toggleAudio);
-        }
-        if (floatingAudioBtn) {
-          floatingAudioBtn.addEventListener("click", toggleAudio);
+        updateAudioUI(isAudioMuted);
+      }
+
+      if (audioToggleBtn) {
+        audioToggleBtn.addEventListener("click", toggleAudio);
+      }
+      if (floatingAudioBtn) {
+        floatingAudioBtn.addEventListener("click", toggleAudio);
+      }
+
+      if (ytTarget) {
+        function setupYTPlayer() {
+          if (!window.YT || !window.YT.Player || ytPlayer) return;
+          try {
+            ytPlayer = new YT.Player("bgYoutubePlayer", {
+              videoId: "IUXpEsqIIfI",
+              playerVars: {
+                autoplay: 1,
+                mute: 1,
+                controls: 0,
+                showinfo: 0,
+                rel: 0,
+                loop: 1,
+                playlist: "IUXpEsqIIfI",
+                playsinline: 1,
+                enablejsapi: 1,
+                disablekb: 1,
+                modestbranding: 1,
+                fs: 0,
+                iv_load_policy: 3
+              },
+              events: {
+                onReady: function(event) {
+                  if (isAudioMuted) {
+                    event.target.mute();
+                  } else {
+                    event.target.unMute();
+                    event.target.setVolume(100);
+                  }
+                  event.target.playVideo();
+                  updateAudioUI(isAudioMuted);
+                },
+                onStateChange: function(event) {
+                  // Loop seamlessly when ended (0 = ENDED)
+                  if (event.data === 0) {
+                    event.target.playVideo();
+                  }
+                }
+              }
+            });
+          } catch (err) {
+            console.warn("YouTube Player initialization error:", err);
+          }
         }
 
-        // Initialize muted autoplay as required by browser policy
+        if (window.YT && window.YT.Player) {
+          setupYTPlayer();
+        } else {
+          const prevYTReady = window.onYouTubeIframeAPIReady;
+          window.onYouTubeIframeAPIReady = function() {
+            if (typeof prevYTReady === "function") prevYTReady();
+            setupYTPlayer();
+          };
+
+          if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+            const ytTag = document.createElement("script");
+            ytTag.src = "https://www.youtube.com/iframe_api";
+            const firstScript = document.getElementsByTagName("script")[0];
+            if (firstScript && firstScript.parentNode) {
+              firstScript.parentNode.insertBefore(ytTag, firstScript);
+            } else {
+              document.head.appendChild(ytTag);
+            }
+          }
+
+          let ytAttempts = 0;
+          const ytPoll = setInterval(function() {
+            ytAttempts++;
+            if (window.YT && window.YT.Player) {
+              clearInterval(ytPoll);
+              setupYTPlayer();
+            } else if (ytAttempts > 30) {
+              clearInterval(ytPoll);
+            }
+          }, 200);
+        }
+
+        updateAudioUI(true);
+      } else if (bgVideo) {
         bgVideo.muted = true;
         bgVideo.play().catch(() => {});
         updateAudioUI(true);

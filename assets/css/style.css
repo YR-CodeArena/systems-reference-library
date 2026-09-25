@@ -2513,17 +2513,21 @@ body::before {
   background-color: #080c14 !important;
 }
 
-.bg-video-element {
+.bg-video-element,
+.bg-youtube-iframe,
+.video-bg-container iframe {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
-  min-width: 100% !important;
-  min-height: 100% !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform: translate(-50%, -50%) !important;
-  object-fit: cover !important;
+  width: 100vw !important;
+  height: 56.25vw !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  min-width: 177.78vh !important;
+  min-width: 177.78dvh !important;
+  transform: translate(-50%, -50%) scale(1.08) !important;
   pointer-events: none !important;
+  border: 0 !important;
 }
 
 /* Background Audio Toggle Button in Header */
