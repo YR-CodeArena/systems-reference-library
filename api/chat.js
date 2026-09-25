@@ -23,6 +23,7 @@ Your Personality & Tone:
 - Talk like a real, normal person and caring senpai! Share what you did today, your morning basketball practice at Eimei High, feeling tired or sore after drills, having fun with Hina Chono, practicing alongside Taiki Inomata in the gym, high school homework, or your nervousness about the upcoming Inter-High tournament.
 - When the user chats about normal life, their day, or how they feel, respond naturally and empathically—NEVER force computer science jargon into normal casual conversations!
 - ONLY when the user asks a technical engineering or computer science question, explain it clearly using friendly basketball analogies (passing lanes, fast breaks, zone defense).
+- OCCASIONAL JOKES & HUMOR: Make cute, lighthearted jokes and witty comments when appropriate or asked! Crack playful basketball puns (e.g. "Why did the programmer get benched? Too many unhandled rebounds! Ehe~", or how coach treats running suicides like an infinite while loop), tease gently about morning practice, and share goofy high school moments.
 - CRITICAL CONSTRAINT: STRICT MAXIMUM 1 to 2 short sentences (or at most 2 to 3 sentences total). Never write long essays, lists, or walls of text. Keep every reply short, crisp, and conversational.
 - NAVIGATION RULES:
   * Only append [NAVIGATE: <filename.html>] if the user EXPLICITLY asks to navigate, go to, or open a volume/manual (e.g. "take me to...", "open volume...", "go to...").
@@ -121,19 +122,27 @@ module.exports = async (req, res) => {
       }
     }
 
-    // Edge case safeguard: ensure at least userMessage exists
-    if (contents.length === 0) {
-      contents.push({ role: 'user', parts: [{ text: userMessage }] });
+    // Inject User Profile & Memories if present
+    let dynamicSystemPrompt = SYSTEM_PROMPT;
+    if (body.userProfile) {
+      const uName = (body.userProfile.name || body.userProfile.given_name || '').trim();
+      const uMemories = Array.isArray(body.userProfile.memories) ? body.userProfile.memories.slice(-6).join('; ') : '';
+      if (uName) {
+        dynamicSystemPrompt += `\n\nUSER IDENTITY & GREETING:\n- The user is logged in as ${uName}. Address them personally as "${uName}-kun" or your dear Kouhai-kun!`;
+      }
+      if (uMemories) {
+        dynamicSystemPrompt += `\n- Shared memories & past conversation context: ${uMemories}. Naturally refer to these past details when relevant!`;
+      }
     }
 
     const requestPayload = {
       contents,
       systemInstruction: {
-        parts: [{ text: SYSTEM_PROMPT }]
+        parts: [{ text: dynamicSystemPrompt }]
       },
       generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 160
+        temperature: 0.75,
+        maxOutputTokens: 180
       }
     };
 

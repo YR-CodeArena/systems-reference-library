@@ -663,6 +663,29 @@
   height: 3px;
 }
 
+.chinatsu-chip-refresh-btn {
+  background: rgba(255, 42, 133, 0.15);
+  border: 1px solid rgba(255, 42, 133, 0.35);
+  color: #ff2a85;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chinatsu-chip-refresh-btn:hover {
+  background: rgba(255, 42, 133, 0.3);
+  border-color: #ff2a85;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .chinatsu-chip-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -680,6 +703,88 @@
   border-color: #00f0ff;
   color: #00f0ff;
   transform: translateY(-1px);
+}
+
+/* Google Auth & User Memory Strip */
+.chinatsu-auth-strip {
+  padding: 0.4rem 0.85rem;
+  background: rgba(15, 23, 42, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+  gap: 0.5rem;
+  min-height: 32px;
+}
+
+.chinatsu-auth-user {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.72rem;
+}
+
+.chinatsu-user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #00f0ff;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.chinatsu-user-name {
+  color: #00f0ff;
+  font-weight: 700;
+}
+
+.chinatsu-auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.chinatsu-google-login-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.22rem 0.55rem;
+  border-radius: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chinatsu-google-login-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+}
+
+.chinatsu-signout-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.68rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.chinatsu-signout-btn:hover {
+  color: #ff2a85;
 }
 
 /* Chat Input Bar */

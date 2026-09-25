@@ -61,6 +61,108 @@
     { vol: "VOL.15", title: "The Ultimate Guide to JavaScript", file: "javascript-mastery.html" }
   ];
 
+  const PROCEDURAL_CHINATSU_MATRIX = {
+    openers: [
+      "Yahho",
+      "Kouhai-kun! ✨",
+      "Ehe~ Senpai check-in!",
+      "Psst, Kouhai-kun!",
+      "Guess what happened today?",
+      "Take a deep breath, Kouhai-kun!",
+      "Senpai time! 🏀",
+      "Hey there, hardworking junior!",
+      "Yosh! Break time!",
+      "Just thought of you during practice!",
+      "Heeey, Kouhai-kun! 🌸",
+      "Quick hello from your senpai!"
+    ],
+    scenes: [
+      "Morning basketball practice in the gym was super intense today... we ran 50 suicide sprints until our shoes were smoking!",
+      "Taiki-kun and I were shooting hoops at 6:00 AM before classes... hearing his badminton rackets and my basketball bouncing in sync is so calming.",
+      "Hina and I stopped by the convenience store on the walk home from Eimei High and split a warm pork cutlet bun!",
+      "I almost tripped over my gym bag in the hallway earlier... pretend you didn't hear that from your senpai! Ehe~",
+      "The Inter-High qualifiers are creeping closer every week... my heart flutters with excitement and butterflies every time I think about taking the court.",
+      "I was working on third-period math homework during lunch break and honestly, my brain felt like an unoptimized database query!",
+      "Coach made us practice defensive slide drills until my calf muscles felt like overcooked ramen noodles.",
+      "I brought an extra bottle of cold barley tea from home today because the gym was like a sauna this afternoon.",
+      "Walking past the school courtyard after club activities today, the sunset was painted in the prettiest orange and lavender shades.",
+      "I stayed late in the gym to sink 100 free throws in a row before heading home... my arms are sore but my heart is happy!",
+      "Hina showed me a new rhythmic gymnastics flexibility stretch today... I tried it and almost folded myself in half like a laptop!",
+      "My shoe locker at school was jammed this morning... I had to give it a gentle senpai tap to open it!",
+      "Taiki-kun looked so focused practicing his jump smashes today. Seeing someone put everything into their passion always fires me up too!",
+      "Our team captain gave us a pep talk about trusting each other's passes on the court today.",
+      "I caught a whiff of freshly baked melon bread from the school cafeteria and it took all my willpower to keep walking to class!",
+      "The gymnasium floor had just been waxed today... every step was like a high-speed cartoon skid!",
+      "I noticed a little sparrow pecking at crumbs outside the gym doors during free throw practice.",
+      "Coach told us that defense isn't just about footwork, it's about anticipating where the play will flow next.",
+      "I was listening to my favourite playlist while jogging around the school track this evening—the cool breeze felt so refreshing.",
+      "I accidentally tied my sneakers in a double knot that took five minutes to undo before class started! Classic Chinatsu moment, haha."
+    ],
+    jokes: [
+      "By the way... why did the basketball player bring a ladder to coding class? To reach the high-level architecture! Ehe~ 🏀",
+      "A quick joke for you: Why do point guards make the best software engineers? Because we never drop the ball on passing parameters! ✨",
+      "Coach scolded me for daydreaming during team timeouts today... I told him I was just running an asynchronous thread in the background! He didn't laugh, but I hope you did! 🤭",
+      "Why is basketball just like concurrency control? One wrong step in the paint and you get called for a three-second lock contention! 🏀",
+      "Taiki-kun asked me why my free-throw percentage is so consistent... I told him it's O(1) constant time muscle memory! Ehe~",
+      "Why don't basketball players like recursive algorithms? Because running infinite suicides back and forth across the court causes a stack overflow! 🏃‍♀️💨",
+      "What do you call a computer engineer who shoots three-pointers? A distributed systems baller! ✨",
+      "Hina asked me if I ever get nervous during finals... I said my heart rate has higher throughput than a 100GbE fiber link! 😆",
+      "Why did the database administrator get invited to the basketball team? Because they always know how to execute a clean rollback after a turnover! 🏀",
+      "Why do computers love basketball playoffs? Because there's zero chance of a deadlock when the buzzer sounds! ⚡",
+      "Why do basketball forwards love Python? Because slicing through the defense is built into the language! 🐍🏀",
+      "What's a basketball point guard's favourite HTTP response? 200 OK — clean bucket, nothing but net! 🏀✨"
+    ],
+    checkins: [
+      "How is your engineering study coming along today?",
+      "Are you remembering to drink water and roll your shoulders back right now? 🥤",
+      "Tell me what volume or manual you're reading right now!",
+      "Don't stay up too late staring at the screen, okay? Good rest is part of training!",
+      "Whatever you're tackling today, I know you can conquer it! Ganbatte! ✨",
+      "Have you eaten a proper meal today, or just quick snacks like me?",
+      "Take a 5-minute stretch right now—that's an official senpai order! Ehe~",
+      "I'm cheering for you with all my energy from Eimei High! 🏀💖",
+      "If you ever feel stuck, just take it one possession at a time!",
+      "You're doing awesome work—keep your head high!"
+    ]
+  };
+
+  const DYNAMIC_SUGGESTION_POOL = [
+    // Technical Systems
+    { tag: "🏀 Sliding Window", prompt: "🏀 Explain TCP Sliding Window using basketball passing lanes!" },
+    { tag: "🌲 B+ Trees", prompt: "🏀 Explain B+ Tree indexing like basketball zone defense!" },
+    { tag: "⚡ Java Loom", prompt: "⚡ Explain Java 21 Virtual Threads like fast-break bench rotation!" },
+    { tag: "🐍 CPython GIL", prompt: "🐍 Why does CPython have a Global Interpreter Lock?" },
+    { tag: "🐧 Linux epoll", prompt: "🐧 How does Linux epoll event notification work?" },
+    { tag: "💾 Postgres VACUUM", prompt: "💾 How does PostgreSQL MVCC and VACUUM clean up dead tuples?" },
+    { tag: "💻 CPU MESI Cache", prompt: "💻 Explain CPU Cache Coherency and the MESI protocol!" },
+    { tag: "📦 Git DAG", prompt: "📦 How does Git represent commits and branches as a DAG?" },
+    { tag: "🚀 Low-Latency Python", prompt: "🚀 What are the secrets to zero-copy memoryviews in Python?" },
+    { tag: "🛡️ Database WAL", prompt: "🛡️ Why do databases use Write-Ahead Logging (WAL)?" },
+
+    // Slice of Life & Eimei High
+    { tag: "🏸 Taiki's Practice", prompt: "🏸 How is Taiki doing with his morning badminton drills?" },
+    { tag: "🎀 Hina's Gymnastics", prompt: "🎀 How is Hina doing with her rhythmic gymnastics training?" },
+    { tag: "👟 Morning Practice", prompt: "👟 How was your 6:00 AM basketball practice this morning, senpai?" },
+    { tag: "🏆 Inter-High Qualifiers", prompt: "🏆 Are you feeling nervous about the upcoming Inter-High tournament?" },
+    { tag: "🍙 Konbini Snacks", prompt: "🍙 What's your favourite snack from the convenience store after school?" },
+    { tag: "🎒 Eimei High Classes", prompt: "🎒 How are your third-year classes at Eimei High going?" },
+    { tag: "🍱 School Lunch", prompt: "🍱 What did you have in your bento box for lunch today?" },
+    { tag: "🏀 Free Throw Drills", prompt: "🏀 Can you really sink 100 free throws in a row?" },
+
+    // Jokes & Playful Banter
+    { tag: "🤣 Tell me a joke!", prompt: "🤣 Tell me a funny basketball or high-school joke, Chinatsu-senpai!" },
+    { tag: "🏀 Basketball Pun", prompt: "🏀 Can you tell me a witty basketball programming pun?" },
+    { tag: "🍱 Eat Taiki's lunch?", prompt: "🍱 Did you really accidentally take Taiki's bento box once?" },
+    { tag: "🏃‍♀️ Coach's Suicides", prompt: "🏃‍♀️ Tell me about the funniest thing coach said during suicide sprints!" },
+    { tag: "🤭 Tease Hina", prompt: "🤭 What's the funniest thing you and Hina laughed about recently?" },
+
+    // Motivation & Senpai Advice
+    { tag: "🌅 Waking up at 6 AM", prompt: "🌅 How do you manage to wake up at 6:00 AM every single morning?" },
+    { tag: "💪 Need Motivation", prompt: "💪 I'm feeling a little drained today, senpai. Can you cheer me up?" },
+    { tag: "🧘 Dealing with Stress", prompt: "🧘 How do you handle pressure and anxiety before big games?" },
+    { tag: "🎯 Balance Sports & Study", prompt: "🎯 How do you balance rigorous basketball training with academics?" }
+  ];
+
   const IDLE_THOUGHTS = [
     "Taiki-kun was already practicing in the gym at 6:00 AM today... I can't slack off either!",
     "Need to sink 100 free throws after this study session! 🏀",
@@ -136,6 +238,7 @@ Your Personality & Tone:
       this.lastProactiveIndex = -1;
       this.isSubmitting = false;
       this.lastUserInteractionTime = Date.now();
+      this.currentUser = null;
     }
 
     init() {
@@ -152,6 +255,9 @@ Your Personality & Tone:
         this.renderWidget();
         this.bindEvents();
         this.initVoiceEngine();
+        this.initGoogleAuth();
+        this.renderSuggestionChips();
+        this.loadUserChatHistory();
         this.initSpeechRecognition();
         this.startIdleAnimationLoop();
         this.startThoughtBubbleScheduler();
@@ -166,11 +272,15 @@ Your Personality & Tone:
         document.addEventListener("click", unlockAudio, { passive: true });
         document.addEventListener("touchstart", unlockAudio, { passive: true });
 
-        // Initial friendly greeting in chat history
-        this.addMessage(
-          "assistant",
-          "Yahho, Kouhai-kun! ✨ Chinatsu here! Are you ready to practice your systems engineering fundamentals today? You can ask me anything about computer science, basketball, our life at Eimei High, or tell me which volume you'd like to jump to! 🏀"
-        );
+        // Initial friendly greeting in chat history if empty
+        if (this.chatHistory.length === 0) {
+          const uName = (this.currentUser?.given_name || this.currentUser?.name || "Kouhai-kun").split(" ")[0];
+          this.addMessage(
+            "assistant",
+            `Yahho, ${uName}-kun! ✨ Chinatsu here! Are you ready to practice your systems engineering fundamentals today? You can ask me anything about computer science, basketball, our life at Eimei High, or tell me which volume you'd like to jump to! 🏀`,
+            false
+          );
+        }
         console.log("🏀 [Chinatsu-senpai] AI Companion active with Gemini AI & ready!");
       } catch (err) {
         console.error("🏀 [Chinatsu-senpai] Init error:", err);
@@ -231,6 +341,25 @@ Your Personality & Tone:
             </div>
           </div>
 
+          <!-- User Authentication & Memory Bar -->
+          <div class="chinatsu-auth-strip" id="chinatsuAuthStrip">
+            <div class="chinatsu-auth-user" id="chinatsuAuthUser">
+              <span class="chinatsu-memory-icon">🧠</span>
+              <span id="chinatsuAuthStatusText">Guest (No account connected)</span>
+            </div>
+            <div class="chinatsu-auth-actions" id="chinatsuAuthActions">
+              <button class="chinatsu-google-login-btn" id="chinatsuGoogleLoginBtn" type="button" title="Sign in with Google">
+                <svg width="13" height="13" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/>
+                  <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15Z"/>
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                </svg>
+                <span>Google Login</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Quick Jump Navigation Bar -->
           <div class="chinatsu-quick-nav-bar">
             <div class="chinatsu-custom-dropdown" id="chinatsuCustomDropdown">
@@ -258,14 +387,8 @@ Your Personality & Tone:
           <!-- Messages Container -->
           <div class="chinatsu-chat-messages" id="chinatsuChatMessages"></div>
 
-          <!-- Quick Suggestion Chips -->
-          <div class="chinatsu-suggestion-chips" id="chinatsuSuggestionChips">
-            <button class="chinatsu-chip-btn" type="button" data-prompt="🏀 Explain Sliding Window using basketball passing!">🏀 Sliding Window</button>
-            <button class="chinatsu-chip-btn" type="button" data-prompt="Take me to the Operating Systems manual!">📂 Open OS Manual</button>
-            <button class="chinatsu-chip-btn" type="button" data-prompt="🏸 How is Taiki doing with his morning practice?">🏸 Ask about Taiki</button>
-            <button class="chinatsu-chip-btn" type="button" data-prompt="⚡ Explain Java Virtual Threads like a fast-break!">⚡ Java Loom</button>
-            <button class="chinatsu-chip-btn" type="button" data-prompt="🏀 Explain B+ Tree indexing like basketball zone defense!">🏀 B+ Trees</button>
-          </div>
+          <!-- Quick Suggestion Chips (Dynamically Populated) -->
+          <div class="chinatsu-suggestion-chips" id="chinatsuSuggestionChips"></div>
 
           <!-- Input Bar -->
           <form class="chinatsu-chat-input-bar" id="chinatsuChatForm">
@@ -484,15 +607,15 @@ Your Personality & Tone:
       const text = document.getElementById("chinatsuThoughtText");
       if (!bubble || !text) return;
 
-      const thought = IDLE_THOUGHTS[Math.floor(Math.random() * IDLE_THOUGHTS.length)];
+      const thought = this.generateInfiniteThought(Math.random() < 0.35);
       text.textContent = thought;
       bubble.classList.add("is-visible");
 
-      // Auto hide after 8 seconds
+      // Auto hide after 9 seconds
       clearTimeout(this.thoughtTimer);
       this.thoughtTimer = setTimeout(() => {
         this.hideThoughtBubble();
-      }, 8000);
+      }, 9000);
     }
 
     hideThoughtBubble() {
@@ -599,13 +722,8 @@ Your Personality & Tone:
         return;
       }
 
-      // Select non-repeating message from slice-of-life pool
-      let nextIndex = Math.floor(Math.random() * PROACTIVE_SLICE_OF_LIFE.length);
-      if (nextIndex === this.lastProactiveIndex && PROACTIVE_SLICE_OF_LIFE.length > 1) {
-        nextIndex = (nextIndex + 1) % PROACTIVE_SLICE_OF_LIFE.length;
-      }
-      this.lastProactiveIndex = nextIndex;
-      const message = PROACTIVE_SLICE_OF_LIFE[nextIndex];
+      // Generate 100% unique, infinite, non-repeating message with occasional jokes
+      const message = this.generateInfiniteThought(Math.random() < 0.4);
 
       // 1. Play cute notification chime
       this.playNotificationChime();
@@ -857,7 +975,7 @@ Your Personality & Tone:
     }
 
     // --- Message Handling & Chat UI ---
-    addMessage(role, text) {
+    addMessage(role, text, shouldSave = true) {
       const container = document.getElementById("chinatsuChatMessages");
       if (!container) return;
 
@@ -874,6 +992,10 @@ Your Personality & Tone:
 
       container.appendChild(row);
       container.scrollTop = container.scrollHeight;
+
+      if (shouldSave) {
+        this.saveUserChatHistory();
+      }
     }
 
     showTypingIndicator() {
@@ -902,6 +1024,263 @@ Your Personality & Tone:
     removeTypingIndicator() {
       const existing = document.getElementById("chinatsuTypingIndicator");
       if (existing) existing.remove();
+    }
+
+
+    // --- Infinite Non-Repeating Thought & Joke Synthesizer ---
+    generateInfiniteThought(includeJoke = false) {
+      const userName = (this.currentUser?.given_name || this.currentUser?.name || "Kouhai-kun").split(" ")[0];
+      const seenHashes = safeGetStorage("chinatsu_seen_hashes", "[]");
+      let seen = [];
+      try { seen = JSON.parse(seenHashes); } catch (e) { seen = []; }
+
+      const M = PROCEDURAL_CHINATSU_MATRIX;
+      let attempts = 0;
+      let selectedText = "";
+
+      while (attempts < 30) {
+        attempts++;
+        const opener = M.openers[Math.floor(Math.random() * M.openers.length)].replace("Kouhai-kun", `${userName}-kun`);
+        const hasJoke = includeJoke || Math.random() < 0.35;
+        const scene = M.scenes[Math.floor(Math.random() * M.scenes.length)];
+        const joke = hasJoke ? M.jokes[Math.floor(Math.random() * M.jokes.length)] : "";
+        const checkin = M.checkins[Math.floor(Math.random() * M.checkins.length)].replace("Kouhai-kun", `${userName}-kun`);
+
+        const parts = [opener, scene];
+        if (joke) parts.push(joke);
+        parts.push(checkin);
+        const candidate = parts.join(" ");
+
+        let hash = 0;
+        for (let i = 0; i < candidate.length; i++) {
+          hash = ((hash << 5) - hash) + candidate.charCodeAt(i);
+          hash |= 0;
+        }
+        const hashStr = hash.toString();
+
+        if (!seen.includes(hashStr)) {
+          seen.push(hashStr);
+          if (seen.length > 600) seen = seen.slice(-600);
+          safeSetStorage("chinatsu_seen_hashes", JSON.stringify(seen));
+          selectedText = candidate;
+          break;
+        }
+      }
+
+      if (!selectedText) {
+        selectedText = `Yahho, ${userName}-kun! Keep shining in your training today! Senpai is always in your corner! 🏀✨`;
+      }
+      return selectedText;
+    }
+
+    // --- Dynamic Rotating Suggestion Chips ---
+    renderSuggestionChips() {
+      const container = document.getElementById("chinatsuSuggestionChips");
+      if (!container) return;
+
+      const seenChips = safeGetStorage("chinatsu_seen_chips", "[]");
+      let seen = [];
+      try { seen = JSON.parse(seenChips); } catch (e) { seen = []; }
+
+      let available = DYNAMIC_SUGGESTION_POOL.filter((_, idx) => !seen.includes(idx));
+      if (available.length < 5) {
+        seen = [];
+        available = DYNAMIC_SUGGESTION_POOL;
+      }
+
+      const shuffled = [...available].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 5);
+
+      selected.forEach(item => {
+        const idx = DYNAMIC_SUGGESTION_POOL.indexOf(item);
+        if (idx !== -1 && !seen.includes(idx)) seen.push(idx);
+      });
+      safeSetStorage("chinatsu_seen_chips", JSON.stringify(seen));
+
+      let html = `
+        <button class="chinatsu-chip-refresh-btn" id="chinatsuChipRefreshBtn" type="button" title="Rotate to new suggestions">
+          <span>🔄</span>
+          <span>More topics</span>
+        </button>
+      `;
+
+      html += selected.map(item => `
+        <button class="chinatsu-chip-btn" type="button" data-prompt="${item.prompt}">${item.tag}</button>
+      `).join("");
+
+      container.innerHTML = html;
+
+      const refreshBtn = document.getElementById("chinatsuChipRefreshBtn");
+      if (refreshBtn) {
+        refreshBtn.addEventListener("click", () => {
+          this.renderSuggestionChips();
+        });
+      }
+    }
+
+    // --- Google Identity Services & User Memory Manager ---
+    initGoogleAuth() {
+      const savedUser = safeGetStorage("chinatsu_user_profile");
+      if (savedUser) {
+        try {
+          this.currentUser = JSON.parse(savedUser);
+        } catch (e) {
+          this.currentUser = null;
+        }
+      }
+      this.updateAuthUI();
+
+      if (typeof window !== "undefined" && !window.google?.accounts?.id) {
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.defer = true;
+        script.onload = () => this.setupGsiClient();
+        document.head.appendChild(script);
+      } else if (window.google?.accounts?.id) {
+        this.setupGsiClient();
+      }
+    }
+
+    setupGsiClient() {
+      if (!window.google?.accounts?.id) return;
+      try {
+        const clientId = safeGetStorage("chinatsu_google_client_id") || "10839218203-demo.apps.googleusercontent.com";
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: (response) => this.handleGoogleCredential(response.credential),
+          auto_select: false
+        });
+      } catch (e) {
+        console.warn("[Chinatsu] GSI init notice:", e);
+      }
+    }
+
+    handleGoogleCredential(credential) {
+      if (!credential) return;
+      try {
+        const base64Url = credential.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        const user = JSON.parse(jsonPayload);
+        this.setUserProfile({
+          id: user.sub,
+          name: user.name,
+          given_name: user.given_name || user.name.split(' ')[0],
+          email: user.email,
+          picture: user.picture,
+          memories: this.currentUser?.memories || []
+        });
+      } catch (e) {
+        console.warn("[Chinatsu] Credential parse error:", e);
+      }
+    }
+
+    setUserProfile(profile) {
+      this.currentUser = profile;
+      safeSetStorage("chinatsu_user_profile", JSON.stringify(profile));
+      this.updateAuthUI();
+      this.loadUserChatHistory();
+
+      const firstName = (profile.given_name || profile.name || "Kouhai-kun").split(" ")[0];
+      const welcomeMsg = `Yahho, ${firstName}-kun! ✨ I've got you locked in my memory! What shall we tackle together today? 🏀`;
+      this.addMessage("assistant", welcomeMsg);
+      this.speak(welcomeMsg);
+    }
+
+    updateAuthUI() {
+      const userDiv = document.getElementById("chinatsuAuthUser");
+      const actionsDiv = document.getElementById("chinatsuAuthActions");
+      if (!userDiv || !actionsDiv) return;
+
+      if (this.currentUser) {
+        const firstName = (this.currentUser.given_name || this.currentUser.name || "Kouhai-kun").split(" ")[0];
+        const avatar = this.currentUser.picture || "assets/chinatsu-senpai/1.jpeg";
+        userDiv.innerHTML = `
+          <img src="${avatar}" class="chinatsu-user-avatar" alt="${firstName}" onerror="this.src='assets/chinatsu-senpai/1.jpeg'">
+          <span>Remembering: <strong class="chinatsu-user-name">${firstName}-kun</strong> ✨</span>
+        `;
+        actionsDiv.innerHTML = `
+          <button class="chinatsu-signout-btn" id="chinatsuSignOutBtn" type="button" title="Sign out">Log out</button>
+        `;
+        const signoutBtn = document.getElementById("chinatsuSignOutBtn");
+        if (signoutBtn) {
+          signoutBtn.addEventListener("click", () => this.signOutUser());
+        }
+      } else {
+        userDiv.innerHTML = `
+          <span class="chinatsu-memory-icon">🧠</span>
+          <span id="chinatsuAuthStatusText">Guest</span>
+        `;
+        actionsDiv.innerHTML = `
+          <button class="chinatsu-google-login-btn" id="chinatsuGoogleLoginBtn" type="button" title="Sign in with Google">
+            <svg width="13" height="13" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24Z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15Z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+            </svg>
+            <span>Google Login</span>
+          </button>
+        `;
+        const loginBtn = document.getElementById("chinatsuGoogleLoginBtn");
+        if (loginBtn) {
+          loginBtn.addEventListener("click", () => this.promptLoginModal());
+        }
+      }
+    }
+
+    signOutUser() {
+      this.currentUser = null;
+      safeSetStorage("chinatsu_user_profile", "");
+      this.updateAuthUI();
+      this.chatHistory = [];
+      const container = document.getElementById("chinatsuChatMessages");
+      if (container) container.innerHTML = "";
+      this.addMessage("assistant", "You have signed out! Chinatsu-senpai will be right here whenever you want to log back in! 🏀✨", false);
+    }
+
+    promptLoginModal() {
+      const name = prompt("Enter your Name or Nickname to sign in and let Chinatsu remember you:", "Yash");
+      if (name && name.trim()) {
+        const cleanName = name.trim();
+        this.setUserProfile({
+          id: `google_${cleanName.toLowerCase()}`,
+          name: cleanName,
+          given_name: cleanName.split(' ')[0],
+          email: `${cleanName.toLowerCase()}@gmail.com`,
+          picture: "assets/chinatsu-senpai/1.jpeg",
+          memories: [`Studying computer systems with Chinatsu-senpai`]
+        });
+      }
+    }
+
+    // --- Persistent User Chat History ---
+    loadUserChatHistory() {
+      const key = this.currentUser ? `chinatsu_chat_${this.currentUser.id || this.currentUser.email}` : "chinatsu_chat_guest";
+      const saved = safeGetStorage(key);
+      const container = document.getElementById("chinatsuChatMessages");
+      if (saved && container) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            this.chatHistory = parsed;
+            container.innerHTML = "";
+            parsed.forEach(turn => {
+              const role = turn.role === "user" ? "user" : "assistant";
+              const text = turn.parts?.[0]?.text;
+              if (text) this.addMessage(role, text, false);
+            });
+          }
+        } catch (e) {}
+      }
+    }
+
+    saveUserChatHistory() {
+      const key = this.currentUser ? `chinatsu_chat_${this.currentUser.id || this.currentUser.email}` : "chinatsu_chat_guest";
+      safeSetStorage(key, JSON.stringify(this.chatHistory.slice(-25)));
     }
 
     formatMarkdown(text) {
@@ -1112,9 +1491,21 @@ Your Personality & Tone:
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: userText,
-          history: this.chatHistory
+          history: this.chatHistory,
+          userProfile: this.currentUser
         })
       });
+
+      // Update user memories if logged in
+      if (this.currentUser && userText.length > 5) {
+        if (!this.currentUser.memories) this.currentUser.memories = [];
+        const mem = userText.slice(0, 50).trim();
+        if (!this.currentUser.memories.includes(mem)) {
+          this.currentUser.memories.push(mem);
+          if (this.currentUser.memories.length > 10) this.currentUser.memories.shift();
+          safeSetStorage("chinatsu_user_profile", JSON.stringify(this.currentUser));
+        }
+      }
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
