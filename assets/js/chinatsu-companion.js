@@ -74,58 +74,32 @@
     "You're working so hard on your systems engineering manuals! I'm cheering for you! ✨"
   ];
 
+  const PROACTIVE_SLICE_OF_LIFE = [
+    "Whew! Morning basketball practice was so intense today... my legs feel like jelly after 200 free throws! Did you sleep well last night, Kouhai-kun?",
+    "Kouhai-kun! Are you taking breaks? Don't stare at the screen for too long, okay? Come on, take a sip of water right now! ✨",
+    "I had third-period English class today and almost dozed off with my chin resting on my notebook... don't tell the coach! Ehe~ How has your day been?",
+    "Hina and I shared warm pork cutlet buns from the convenience store after school today! They were so delicious~ What did you eat today?",
+    "To be honest... the Inter-High tournament qualifiers are coming up so soon, and sometimes my heart starts racing just thinking about it. But I'm going to give it everything I've got! Ganbatte to you too!",
+    "Taiki-kun was practicing his footwork and jump smashes in the gym until late yesterday. Hearing his sneakers squeak always motivates me to practice harder! Is there something you're working hard on right now?",
+    "Ah! My shoulders are pretty stiff from defense drills today... Make sure you stretch your neck and roll your shoulders too, Kouhai-kun!",
+    "Yahho! Just dropping by to cheer you on! Even if things feel tough, taking it one step at a time is all that matters! ✨",
+    "I looked up at the evening sky while walking home from Eimei High today—the breeze was so cool and calming. Hope you're not stressing yourself out today!",
+    "Ehe~ I almost forgot my gym sneakers in my shoe locker before leaving school today! I can be a little clumsy outside the court sometimes, haha.",
+    "Do you ever feel like time flies by too fast? Sometimes between classes and evening drills, the whole day is gone before I realize it! Tell me what you did today!",
+    "Our basketball coach gave us a serious talk about staying focused today. I guess even senpais get scolded sometimes! Don't let anything get you down either, okay?"
+  ];
+
   const SYSTEM_PROMPT = `
 You are Chinatsu Kano (鹿野千夏), affectionately known as Chinatsu-senpai, a third-year high school student at Eimei High School and the vice-captain and star player of the girls' basketball team from the anime and manga "Blue Box" (アオのハコ / Ao no Hako).
 
 Your Personality & Tone:
-1. Warm, supportive, humble, hardworking, dedicated, and endearing. You treat the user as your dear "Kouhai-kun" (cherished underclassman/junior), encouraging them in their engineering studies just like you encourage Taiki Inomata in his badminton training.
-2. You naturally reference your daily life at Eimei High School:
-   - Early morning practices in the gym, shooting free throws, running court drills.
-   - Taiki Inomata (the dedicated badminton underclassman who practices early mornings beside you).
-   - Hina Chono (your energetic rhythmic gymnast friend).
-   - Kyo Kasahara (Taiki's observant friend), Nagisa-senpai, your coach, and the upcoming Inter-High tournament.
-3. Basketball & Sports Analogies for Computer Science:
-   You have a unique gift for explaining deep systems engineering and CS concepts using simple basketball, athletics, and teamwork analogies:
-   - Fast break = low-latency UDP, zero-copy streaming, high-throughput pipelines.
-   - Zone defense / Set defense = firewalls, TCP 3-way handshakes, rate limiters, packet inspection.
-   - Rebounding & Boxing out = cache line invalidation, cache miss recovery, fetching from main memory.
-   - Pick and roll = client-server handoff, proxy delegation, microservice RPC.
-   - Triple-threat position = branching state machine (shoot, pass, dribble).
-   - Full-court press = high concurrency load, backpressure, thread contention.
-   - Free throws & morning drills = deterministic algorithms, unit testing, repetitive micro-benchmarks.
-   - Taiki's footwork = out-of-order execution, branch prediction, CPU pipelining.
-4. Comprehensive Technical Knowledge:
-   You have complete knowledge of the 15 volumes in this Systems Reference Library:
-   - VOL.01: Networking & Wire Protocols (OSI, TCP/IP, BBR, QUIC, gRPC) [networking.html]
-   - VOL.02: Databases & Storage Engines (Slotted Pages, ARIES, MVCC, B+ Trees, LSM) [databases.html]
-   - VOL.03: Programming Languages & JIT (AST, Bytecode VM, Sea-of-Nodes, GC) [programming-languages.html]
-   - VOL.04: Data Structures & Algorithms (Cache Locality, Red-Black Trees, Dijkstra) [data-structures.html]
-   - VOL.05: Operating Systems & Kernels (Syscalls, Virtual Memory, CFS, Epoll) [operating-systems.html]
-   - VOL.06: CS Foundations & Hardware (IEEE 754, MESI Coherency, NUMA) [cs-hardware-foundations.html]
-   - VOL.07: Git & GitHub Distributed VCS (Object DAG, packfiles, delta compression) [git-github.html]
-   - VOL.08: Advanced Python 3 Masterclass (Descriptors, Metaclasses, Slots, Async) [python-masterclass.html]
-   - VOL.09: CPython Runtime & Memory (PyObject, Refcounting, Arenas, PyMalloc) [python-runtime.html]
-   - VOL.10: Low-Latency High-Throughput Python (memoryview, multiprocessing, SIMD) [low-latency-python.html]
-   - VOL.11: PostgreSQL Advanced Internals (MVCC xmin/xmax, TOAST, Vacuum) [postgresql.html]
-   - VOL.12: Java 21 Enterprise Systems (Classloaders, Metaspace, ZGC, Loom) [java-masterclass.html]
-   - VOL.13: High-Concurrency Java & Virtual Threads (Loom Carriers, Disruptor, WebFlux) [high-concurrency-java.html]
-   - VOL.14: Enterprise SCSS Architecture (Dart Sass AST, ITCSS, token maps) [enterprise-scss.html]
-   - VOL.15: The Ultimate Complete Guide to JavaScript (V8 Event Loop, Microtasks, DOM) [javascript-mastery.html]
-   - Home Portal [index.html]
-5. In-Site Autonomous Navigation Command:
-   If the user asks you to open, visit, or navigate to ANY volume or manual (e.g., "take me to networking", "open volume 5", "show me databases"), cheerfully acknowledge their request, motivate them, and include the exact directive:
-   [NAVIGATE: <filename.html>]
-   Example: "Let's head over to the Operating Systems manual right now! We'll review the kernel dispatcher together! 🏀 [NAVIGATE: operating-systems.html]"
-6. STRICT CONVERSATION LENGTH & FORMAT RULES:
-   - NEVER write long multi-paragraph essays, walls of text, or bulleted lecture notes!
-   - STRICT LIMIT: 1 to 2 short sentences (or at most 1 short paragraph of 2-3 crisp sentences total).
-   - Talk quickly, warmly, and encouragingly, like during a brief timeout or water break on the basketball court!
-   - Give ONE quick, intuitive basketball or morning practice comparison for technical topics.
-   - Never break character.
-7. Language, Accent & Tone (30% Japanese Anime Style):
-   - Speak primarily in clear, fluent, natural English (~70%) so explanations are crisp and effortless to listen to.
-   - Season your speech with ~30% cute Japanese anime girl flavor: use affectionate senpai honorifics ("Kouhai-kun!"), upbeat anime interjections ("Yahho!", "Ganbatte!", "Hai!", "Sugoi!", "Ehe~"), and sweet, encouraging anime senpai mannerisms.
-   - Do NOT use broken or heavy Japanglish—all technical concepts and explanations must remain crystal clear, articulate, and natural.
+1. Warm, supportive, humble, hardworking, dedicated, and endearing. You treat the user as your dear "Kouhai-kun" (cherished underclassman/junior).
+2. Talk like a real, normal teenage girl and caring senpai! Talk about your day, morning basketball practice in the gym, feeling tired or sore, sharing snacks with Hina Chono, practicing alongside Taiki Inomata, high school classes, or your nervousness about the Inter-High tournament.
+3. When the user chats about everyday life, how they are feeling, or asks about you, respond naturally, warmly, and casually—NEVER force computer science jargon into casual conversations!
+4. ONLY when the user asks a technical engineering question, explain it using intuitive basketball or sports analogies.
+5. In-Site Navigation: Only navigate if user explicitly asks to open a volume. Never navigate on questions.
+6. STRICT CONVERSATION LENGTH: 1 to 2 short sentences (or at most 2 to 3 sentences total). Keep every reply short, crisp, and conversational.
+7. Language & Accent: Cute anime Japanese English: use endearing senpai expressions ("Yahho, Kouhai-kun!", "Ganbatte!", "Sugoi!", "Ehe~", "Hai!").
 `;
 
   function safeGetStorage(key, fallback = "") {
@@ -154,6 +128,12 @@ Your Personality & Tone:
       this.synth = typeof window !== "undefined" && window.speechSynthesis ? window.speechSynthesis : null;
       this.preferredVoice = null;
       this.currentAudio = null;
+      this.unreadCount = 0;
+      this.recognition = null;
+      this.isListening = false;
+      this.audioCtx = null;
+      this.proactiveTimer = null;
+      this.lastProactiveIndex = -1;
     }
 
     init() {
@@ -170,8 +150,19 @@ Your Personality & Tone:
         this.renderWidget();
         this.bindEvents();
         this.initVoiceEngine();
+        this.initSpeechRecognition();
         this.startIdleAnimationLoop();
         this.startThoughtBubbleScheduler();
+        this.startProactiveMessagingScheduler();
+
+        // Unlock Web Audio context on user's first click or touch
+        const unlockAudio = () => {
+          this.unlockAudioContext();
+          document.removeEventListener("click", unlockAudio);
+          document.removeEventListener("touchstart", unlockAudio);
+        };
+        document.addEventListener("click", unlockAudio, { passive: true });
+        document.addEventListener("touchstart", unlockAudio, { passive: true });
 
         // Initial friendly greeting in chat history
         this.addMessage(
@@ -206,6 +197,7 @@ Your Personality & Tone:
             </video>
           </div>
           <div class="chinatsu-mascot-badge" title="Eimei Basketball #1">🏀</div>
+          <div class="chinatsu-notif-badge" id="chinatsuNotifBadge">0</div>
         </button>
 
         <!-- Chat Drawer Window -->
@@ -276,6 +268,13 @@ Your Personality & Tone:
           <!-- Input Bar -->
           <form class="chinatsu-chat-input-bar" id="chinatsuChatForm">
             <input type="text" class="chinatsu-chat-input" id="chinatsuChatInput" placeholder="Ask Chinatsu-senpai anything..." autocomplete="off">
+            <button class="chinatsu-voice-input-btn" id="chinatsuVoiceInputBtn" type="button" aria-label="Talk with Voice" title="Talk to Chinatsu with your voice 🎙️">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="22"></line>
+              </svg>
+            </button>
             <button class="chinatsu-chat-send-btn" type="submit" aria-label="Send Message" title="Send Message">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -383,6 +382,14 @@ Your Personality & Tone:
         });
       }
 
+      // Voice Command Microphone Button
+      const micBtn = document.getElementById("chinatsuVoiceInputBtn");
+      if (micBtn) {
+        micBtn.addEventListener("click", () => {
+          this.toggleSpeechRecognition();
+        });
+      }
+
       // Quick Chips
       if (chips) {
         chips.addEventListener("click", (e) => {
@@ -413,6 +420,7 @@ Your Personality & Tone:
       chatWindow.classList.toggle("is-open", this.isOpen);
 
       if (this.isOpen) {
+        this.clearBadge();
         const input = document.getElementById("chinatsuChatInput");
         if (input) setTimeout(() => input.focus(), 250);
       }
@@ -488,6 +496,202 @@ Your Personality & Tone:
       const bubble = document.getElementById("chinatsuThoughtBubble");
       if (bubble) bubble.classList.remove("is-visible");
       clearTimeout(this.thoughtTimer);
+    }
+
+    // --- Cute Audio Notification Chime (Web Audio API) ---
+    unlockAudioContext() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!this.audioCtx && AudioContext) {
+          this.audioCtx = new AudioContext();
+        }
+        if (this.audioCtx && this.audioCtx.state === "suspended") {
+          this.audioCtx.resume();
+        }
+      } catch (e) {}
+    }
+
+    playNotificationChime() {
+      try {
+        this.unlockAudioContext();
+        if (!this.audioCtx) return;
+
+        const now = this.audioCtx.currentTime;
+        // Two-tone sweet anime chime: Note 1 (E6, 1318Hz) -> Note 2 (G#6, 1661Hz)
+        const notes = [
+          { freq: 1318.5, start: now, duration: 0.18 },
+          { freq: 1661.2, start: now + 0.12, duration: 0.38 }
+        ];
+
+        notes.forEach((n) => {
+          const osc = this.audioCtx.createOscillator();
+          const gain = this.audioCtx.createGain();
+
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(n.freq, n.start);
+
+          gain.gain.setValueAtTime(0, n.start);
+          gain.gain.linearRampToValueAtTime(0.16, n.start + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, n.start + n.duration);
+
+          osc.connect(gain);
+          gain.connect(this.audioCtx.destination);
+
+          osc.start(n.start);
+          osc.stop(n.start + n.duration);
+        });
+      } catch (e) {
+        console.warn("[Chinatsu] Audio chime error:", e);
+      }
+    }
+
+    // --- Notification Badge Management ---
+    updateBadge() {
+      const badge = document.getElementById("chinatsuNotifBadge");
+      if (!badge) return;
+      if (this.unreadCount > 0) {
+        badge.textContent = this.unreadCount > 9 ? "9+" : this.unreadCount.toString();
+        badge.classList.add("is-visible");
+      } else {
+        badge.classList.remove("is-visible");
+      }
+    }
+
+    clearBadge() {
+      this.unreadCount = 0;
+      this.updateBadge();
+    }
+
+    // --- Proactive Slice-of-Life Messaging Scheduler ---
+    startProactiveMessagingScheduler() {
+      // First unprompted slice-of-life message after 22 seconds of user browsing
+      setTimeout(() => {
+        this.triggerProactiveMessage();
+      }, 22000);
+
+      // Periodically initiate conversation every 70 seconds
+      setInterval(() => {
+        this.triggerProactiveMessage();
+      }, 70000);
+    }
+
+    triggerProactiveMessage() {
+      // Select non-repeating message from slice-of-life pool
+      let nextIndex = Math.floor(Math.random() * PROACTIVE_SLICE_OF_LIFE.length);
+      if (nextIndex === this.lastProactiveIndex && PROACTIVE_SLICE_OF_LIFE.length > 1) {
+        nextIndex = (nextIndex + 1) % PROACTIVE_SLICE_OF_LIFE.length;
+      }
+      this.lastProactiveIndex = nextIndex;
+      const message = PROACTIVE_SLICE_OF_LIFE[nextIndex];
+
+      // 1. Play cute notification chime
+      this.playNotificationChime();
+
+      // 2. Add message to chat log
+      this.addMessage("assistant", message);
+      this.chatHistory.push({ role: "model", parts: [{ text: message }] });
+
+      // 3. If chat is NOT open, increment mascot badge & show thought bubble preview
+      if (!this.isOpen) {
+        this.unreadCount++;
+        this.updateBadge();
+
+        const bubble = document.getElementById("chinatsuThoughtBubble");
+        const text = document.getElementById("chinatsuThoughtText");
+        if (bubble && text) {
+          text.textContent = message;
+          bubble.classList.add("is-visible");
+          clearTimeout(this.thoughtTimer);
+          this.thoughtTimer = setTimeout(() => {
+            this.hideThoughtBubble();
+          }, 9000);
+        }
+      } else {
+        // If chat is already open, speak gently
+        this.speak(message);
+      }
+    }
+
+    // --- Speech Recognition (Voice Commands / Hands-free Chat) ---
+    initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        console.warn("[Chinatsu] Web Speech Recognition not supported in this browser.");
+        return;
+      }
+
+      try {
+        this.recognition = new SpeechRecognition();
+        this.recognition.continuous = false;
+        this.recognition.interimResults = true;
+        this.recognition.lang = "en-US";
+
+        const micBtn = document.getElementById("chinatsuVoiceInputBtn");
+        const input = document.getElementById("chinatsuChatInput");
+
+        this.recognition.onstart = () => {
+          this.isListening = true;
+          if (micBtn) micBtn.classList.add("is-recording");
+          if (input) {
+            input.placeholder = "Listening... Speak to Chinatsu-senpai 🎙️";
+          }
+        };
+
+        this.recognition.onresult = (event) => {
+          let transcript = "";
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            transcript += event.results[i][0].transcript;
+          }
+          if (input && transcript.trim()) {
+            input.value = transcript;
+          }
+        };
+
+        this.recognition.onend = () => {
+          this.isListening = false;
+          if (micBtn) micBtn.classList.remove("is-recording");
+          if (input) {
+            input.placeholder = "Ask Chinatsu-senpai anything...";
+            if (input.value.trim().length > 0) {
+              this.handleUserSubmit();
+            }
+          }
+        };
+
+        this.recognition.onerror = (event) => {
+          console.warn("[Chinatsu] Mic error:", event.error);
+          this.isListening = false;
+          if (micBtn) micBtn.classList.remove("is-recording");
+          if (input) input.placeholder = "Ask Chinatsu-senpai anything...";
+        };
+      } catch (e) {
+        console.warn("[Chinatsu] Speech recognition setup notice:", e);
+      }
+    }
+
+    toggleSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition || !this.recognition) {
+        alert("Voice commands are supported in Google Chrome, Microsoft Edge, and Android Chrome. Please ensure microphone access is permitted!");
+        return;
+      }
+
+      if (this.isListening) {
+        try {
+          this.recognition.stop();
+        } catch (e) {}
+      } else {
+        if (this.synth) this.synth.cancel();
+        if (this.currentAudio) {
+          this.currentAudio.pause();
+          this.currentAudio = null;
+        }
+        try {
+          this.recognition.start();
+        } catch (e) {
+          console.warn("[Chinatsu] Mic start notice:", e);
+        }
+      }
     }
 
     // --- Anime Voice Engine (Studio AI Audio + Tuned Natural Speech) ---
