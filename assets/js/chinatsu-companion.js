@@ -921,11 +921,13 @@ Your Personality & Tone:
         .replace(/[🏀✨🏸⚡💭📁🌸🎀⭐💡🎯🔥•✕✖]/gu, "")
         .replace(/[*_#~]/g, "");
 
-      // 1. Strip Japanese honorifics & anime phrases in Gujarati & Hindi so speech sounds authentic Indian
-      clean = clean.replace(/યશ-કુન|યશ\s*કુન/gu, "યશ");
-      clean = clean.replace(/यश-कुन|यश\s*कुन/gu, "यश");
+      // 1. Strip Japanese honorifics, anime phrases, and brother terms in Gujarati & Hindi
+      clean = clean.replace(/યશ-કુન|યશ\s*કુન|યશભાઈ|યશ\s*ભાઈ/gu, "યશ");
+      clean = clean.replace(/यश-कुन|यश\s*कुन|यश\s*भाई|यश\s*भैया/gu, "यश");
       clean = clean.replace(/-?કુન|-?કું/gu, "");
       clean = clean.replace(/સેનપાઈ|કોહાઈ/gu, "");
+      clean = clean.replace(/\bભાઈ\b|\bભૈયા\b/gu, "");
+      clean = clean.replace(/\bभाई\b|\bभैया\b/gu, "");
       clean = clean.replace(/([A-Za-z\u0900-\u0AF1])-([A-Za-z\u0900-\u0AF1])/gu, "$1 $2");
 
       // 2. English honorifics cleanup
