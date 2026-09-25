@@ -149,6 +149,7 @@ Your Personality & Tone:
       this.currentVideoIndex = 0;
       this.synth = typeof window !== "undefined" && window.speechSynthesis ? window.speechSynthesis : null;
       this.preferredVoice = null;
+      this.currentAudio = null;
     }
 
     init() {
@@ -234,11 +235,18 @@ Your Personality & Tone:
 
           <!-- Quick Jump Navigation Bar -->
           <div class="chinatsu-quick-nav-bar">
-            <span class="chinatsu-quick-nav-label">🏀 Jump to Manual:</span>
-            <select class="chinatsu-nav-select" id="chinatsuNavSelect">
-              <option value="" disabled selected>Select a volume...</option>
-              ${SITE_VOLUMES.map((v) => `<option value="${v.file}">${v.vol}: ${v.title}</option>`).join("")}
-            </select>
+            <div class="chinatsu-nav-select-wrapper">
+              <span class="chinatsu-nav-select-badge">🏀 Manuals</span>
+              <select class="chinatsu-nav-select" id="chinatsuNavSelect" aria-label="Jump to manual volume">
+                <option value="" disabled selected>Select a volume to study together...</option>
+                ${SITE_VOLUMES.map((v) => `<option value="${v.file}">${v.vol} &bull; ${v.title}</option>`).join("")}
+              </select>
+              <div class="chinatsu-nav-select-arrow" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
           </div>
 
           <!-- Messages Container -->
@@ -297,7 +305,15 @@ Your Personality & Tone:
 
       // Close Chat Button
       if (closeBtn) {
-        closeBtn.addEventListener("click", () => this.toggleChat(false));
+        closeBtn.addEventListener("click", () => {
+          this.toggleChat(false);
+          if (this.currentAudio) {
+            this.currentAudio.pause();
+            this.currentAudio = null;
+          }
+          if (this.synth) this.synth.cancel();
+          this.setVideoState("idle");
+        });
       }
 
       // Voice Toggle
@@ -307,8 +323,12 @@ Your Personality & Tone:
           localStorage.setItem("chinatsu_voice_enabled", this.voiceEnabled.toString());
           voiceBtn.textContent = this.voiceEnabled ? "🔊" : "🔇";
           voiceBtn.classList.toggle("is-active", this.voiceEnabled);
-          if (!this.voiceEnabled && this.synth) {
-            this.synth.cancel();
+          if (!this.voiceEnabled) {
+            if (this.currentAudio) {
+              this.currentAudio.pause();
+              this.currentAudio = null;
+            }
+            if (this.synth) this.synth.cancel();
             this.setVideoState("idle");
           }
         });
@@ -431,7 +451,7 @@ Your Personality & Tone:
       clearTimeout(this.thoughtTimer);
     }
 
-    // --- Web Speech Synthesis (Cute Anime Voice) ---
+    // --- Anime Voice Engine (Studio AI Audio + Tuned Natural Speech) ---
     initVoiceEngine() {
       try {
         if (!this.synth) return;
@@ -441,25 +461,65 @@ Your Personality & Tone:
             const voices = this.synth.getVoices();
             if (!voices || voices.length === 0) return;
 
-            // Priority 1: High quality Japanese female voices
-            let chosen = voices.find(
-              (v) => (v.lang.startsWith("ja") || v.lang.startsWith("jp")) && /female|kyoko|otoya|nanami|ayumi/i.test(v.name)
+            // 1. Natural Japanese Anime Voices (Microsoft Nanami, Keiko, Aoi, Kyoko, Google 日本語)
+            const jaAnime = voices.find(
+              (v) =>
+                (v.lang.startsWith("ja") || v.lang.startsWith("jp")) &&
+                /nanami|keiko|aoi|mayu|shiori|kyoko|otoya|ayumi|sayaka|haruka|natural|online/i.test(v.name)
             );
-
-            // Priority 2: English cute female voice (Google UK English Female, Samantha, Victoria, Zira)
-            if (!chosen) {
-              chosen = voices.find(
-                (v) => /google uk english female|samantha|victoria|zira|karen|moira/i.test(v.name)
-              );
+            if (jaAnime) {
+              this.preferredVoice = jaAnime;
+              return;
             }
 
-            // Priority 3: Any female voice
-            if (!chosen) {
-              chosen = voices.find((v) => /female/i.test(v.name));
+            const jaAny = voices.find(
+              (v) => (v.lang.startsWith("ja") || v.lang.startsWith("jp")) && !/male|ichiro/i.test(v.name)
+            );
+            if (jaAny) {
+              this.preferredVoice = jaAny;
+              return;
             }
 
-            // Fallback: Default system voice
-            this.preferredVoice = chosen || voices[0];
+            // 2. High-grade Cheerful Young English Neural Voices
+            // Microsoft Ana Online (Natural) -> modelled as a cheerful youthful female!
+            const enAna = voices.find((v) => /ana online|ana.*natural/i.test(v.name));
+            if (enAna) {
+              this.preferredVoice = enAna;
+              return;
+            }
+
+            // Microsoft Jenny / Aria / Natural Female
+            const enNatural = voices.find(
+              (v) => /jenny online|aria online|natural.*female|female.*natural/i.test(v.name)
+            );
+            if (enNatural) {
+              this.preferredVoice = enNatural;
+              return;
+            }
+
+            // Google Neural Voices (Chrome)
+            const enGoogle = voices.find(
+              (v) => /google uk english female|google us english/i.test(v.name)
+            );
+            if (enGoogle) {
+              this.preferredVoice = enGoogle;
+              return;
+            }
+
+            // Non-desktop female voices (Samantha, Victoria, Karen, Moira)
+            const enGood = voices.find(
+              (v) =>
+                /ana|jenny|aria|samantha|victoria|karen|moira|tessa/i.test(v.name) &&
+                !/desktop|david|zira|george|mark|hazel|sapi|male/i.test(v.name)
+            );
+            if (enGood) {
+              this.preferredVoice = enGood;
+              return;
+            }
+
+            // Final fallback: Any non-male voice
+            const nonMale = voices.find((v) => !/male|david|george|mark/i.test(v.name));
+            this.preferredVoice = nonMale || voices[0];
           } catch (e) {}
         };
 
@@ -472,10 +532,50 @@ Your Personality & Tone:
       }
     }
 
-    speak(text) {
+    speak(text, audioData) {
+      if (!this.voiceEnabled) return;
+
+      // 1. Studio Neural AI Audio Playback (Kore Studio Voice)
+      if (audioData) {
+        try {
+          if (this.currentAudio) {
+            this.currentAudio.pause();
+            this.currentAudio = null;
+          }
+          if (this.synth) this.synth.cancel();
+
+          const audio = new Audio("data:audio/wav;base64," + audioData);
+          this.currentAudio = audio;
+
+          audio.onplay = () => {
+            this.setVideoState("speaking");
+          };
+          audio.onended = () => {
+            this.setVideoState("idle");
+            this.currentAudio = null;
+          };
+          audio.onerror = () => {
+            this.setVideoState("idle");
+            this.currentAudio = null;
+            this.speakWithWebSpeech(text);
+          };
+
+          audio.play().catch(() => {
+            this.speakWithWebSpeech(text);
+          });
+          return;
+        } catch (e) {
+          console.warn("[Chinatsu] Audio playback notice:", e);
+        }
+      }
+
+      // 2. Tuned Browser Speech Synthesis Fallback
+      this.speakWithWebSpeech(text);
+    }
+
+    speakWithWebSpeech(text) {
       if (!this.voiceEnabled || !this.synth) return;
 
-      // Clean markdown, navigation directives, and code blocks for cleaner speech
       const cleanText = text
         .replace(/\[NAVIGATE:[^\]]+\]/gi, "")
         .replace(/```[\s\S]*?```/g, "")
@@ -486,16 +586,29 @@ Your Personality & Tone:
       if (!cleanText) return;
 
       try {
-        this.synth.cancel(); // cancel any active speech
+        this.synth.cancel();
         const utterance = new SpeechSynthesisUtterance(cleanText);
 
         if (this.preferredVoice) {
           utterance.voice = this.preferredVoice;
         }
 
-        // Cute anime voice characteristics: higher pitch, energetic cadence
-        utterance.pitch = 1.38;
-        utterance.rate = 1.08;
+        const vName = (this.preferredVoice?.name || "").toLowerCase();
+        const isJapanese = this.preferredVoice?.lang?.startsWith("ja") || this.preferredVoice?.lang?.startsWith("jp");
+        const isNatural = /natural|online|google/.test(vName);
+
+        // Smart Acoustic Tuning: NEVER pitch legacy desktop voices (Zira) high!
+        if (isJapanese) {
+          utterance.pitch = 1.22;
+          utterance.rate = 1.05;
+        } else if (isNatural) {
+          utterance.pitch = 1.14;
+          utterance.rate = 1.05;
+        } else {
+          // Legacy Desktop voice (Microsoft Zira): use natural baseline to prevent metallic robot distortion
+          utterance.pitch = 1.04;
+          utterance.rate = 1.02;
+        }
 
         utterance.onstart = () => {
           this.setVideoState("speaking");
@@ -740,7 +853,7 @@ Your Personality & Tone:
       const cleanDisplay = assistantText.replace(/\[NAVIGATE:[^\]]+\]/gi, "").trim();
 
       this.addMessage("assistant", cleanDisplay);
-      this.speak(cleanDisplay);
+      this.speak(cleanDisplay, data?.audio);
 
       if (navMatch && navMatch[1]) {
         this.navigateWithToast(navMatch[1].trim());

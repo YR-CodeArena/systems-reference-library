@@ -139,7 +139,37 @@ module.exports = async (req, res) => {
       throw lastError || new Error('No candidate reply received from Gemini API');
     }
 
-    return res.status(200).json({ reply: replyText });
+    // Attempt to synthesize high-fidelity studio AI voice (Kore)
+    let audioData = null;
+    try {
+      const cleanSpeech = replyText.replace(/\[NAVIGATE:[^\]]+\]/gi, '').trim();
+      const ttsEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-tts:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const ttsRes = await fetch(ttsEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: cleanSpeech }] }],
+          generationConfig: {
+            responseModalities: ['AUDIO'],
+            speechConfig: {
+              voiceConfig: {
+                prebuiltVoiceConfig: {
+                  voiceName: 'Kore'
+                }
+              }
+            }
+          }
+        })
+      });
+      if (ttsRes.ok) {
+        const ttsJson = await ttsRes.json();
+        audioData = ttsJson.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data || null;
+      }
+    } catch (ttsErr) {
+      console.warn('[Vercel API] Neural TTS notice:', ttsErr.message);
+    }
+
+    return res.status(200).json({ reply: replyText, audio: audioData });
   } catch (error) {
     console.error('[Vercel API Error]:', error);
     return res.status(500).json({
