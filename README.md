@@ -95,12 +95,13 @@ Systems Reference Library
 - **Dynamic Background Synchronization**: Hovering over any card triggers an event listener that maps `--dynamic-bg` to the body pseudo-element, smoothly crossfading the page background to match the volume's back artwork.
 
 ### 3. Background Streaming & Audio Architecture
-- **Ad-Free Remote CDN Video Stream**: High-definition video streamed directly from a dedicated cloud CDN (`https://files.catbox.moe/473yg4.mp4`) via native HTML5 `<video autoplay loop muted playsinline preload="auto">` with zero ads, zero tracking scripts, and zero local repository bloat.
-- **Aspect-Ratio Preserving Geometry**: Sized with responsive full-bleed rules (`min-width: 100%; min-height: 100%; width: 100%; height: 100%; object-fit: cover`) with `pointer-events: none` and `z-index: -5`, eliminating letterboxing and allowing user clicks, scrolling, and card flips to pass through to manual content.
+- **Official YouTube-nocookie Privacy Stream**: Sourced directly from YouTube's official privacy-enhanced server (`https://www.youtube-nocookie.com/embed/IUXpEsqIIfI`) with `autoplay=1&mute=1&loop=1&playlist=IUXpEsqIIfI&controls=0`. YouTube does not track user data or serve targeted ads under this domain, drastically minimizing ad interruptions while streaming directly from the creator's video.
+- **Aspect-Ratio Preserving Geometry**: Sized with responsive 16:9 viewport rules (`min-width: 177.78vh; height: 56.25vw; min-height: 100vh; transform: translate(-50%, -50%) scale(1.08)`) with `pointer-events: none` and `z-index: -5`, eliminating letterboxing and allowing user clicks, scrolling, and card flips to pass through to manual content.
+- **Security & Origin Verification**: Configured with `<meta name="referrer" content="strict-origin-when-cross-origin">` and `referrerpolicy="strict-origin-when-cross-origin"` ensuring error-free playback across modern browsers.
 - **Dual Synced Audio Controls**: 
   - Header Button (`#bgAudioToggleBtn`) with dynamic SVG volume wave states.
   - Floating HUD (`#floatingAudioBtn`) anchored at the bottom-left with real-time status indicators (`AUDIO: MUTED` / `AUDIO: PLAYING`).
-- **Resilient Fallback Engine**: If video streaming is delayed or restricted, the container displays a high-resolution Makoto Shinkai poster artwork with a continuous 40-second Ken Burns pan/zoom animation.
+- **Resilient Fallback Engine**: If the video stream is restricted or accessed offline, the container seamlessly activates `.yt-fallback` displaying high-resolution Makoto Shinkai artwork with a continuous 40-second Ken Burns pan/zoom animation.
 
 ### 4. Zero Layout Shift (CLS) Typewriter Hero
 - Asynchronous typing and backspacing animation engine for the main title:
@@ -127,7 +128,7 @@ Systems Reference Library
 | **Client Scripting** | Vanilla JavaScript (ECMAScript 2023 / ES6+) | Async typewriter engine, audio HUD synchronization, DOM mutation observers. |
 | **WebAssembly Python** | Pyodide v0.26.2 (WASM) | Client-side CPython 3.12 sandbox for running production Python code in-browser. |
 | **JS Python Runtime** | Skulpt v1.2.0 | Lightweight pure-JS Python VM for ultra-fast snippet execution. |
-| **Video & Streaming** | Native HTML5 Video (`<video>` + CDN Stream) | 1080p ad-free cinematic video background streaming, programmatic mute/unmute control. |
+| **Video & Streaming** | YouTube IFrame Player API (`youtube-nocookie.com`) | 1080p privacy-enhanced video background streaming, programmatic mute/unmute control. |
 | **Vector Graphics** | Scalable Vector Graphics (SVG 2.0) | High-definition technical architecture diagrams with CSS keyframe animation. |
 | **Quality & Verification** | Python 3.12 Test Suite (`verify_all.py`) | Automated CI/CD script validating link integrity, diagram bindings, and buttons. |
 
@@ -209,7 +210,7 @@ This project synthesizes open engineering specifications with world-class commun
 ### 2. Cinematic Background Video & Audio
 - **Video Source & Edit**: *[Chinatsu & Taiki 💙 \| Blue Box AMV \| Mahiye Jinna Sohna [Hindi Amv/Edit] 4k✨](https://youtu.be/IUXpEsqIIfI?si=twoufKr7KiVn8-aV)*
 - **Original YouTube Creator / Channel**: **[FAXCO](https://www.youtube.com/@Faxco77)** on **[YouTube](https://www.youtube.com)**
-- **Architecture**: Streamed as an ad-free remote CDN HTML5 video stream (`https://files.catbox.moe/473yg4.mp4`). No video or audio files are bundled or committed locally in this Git repository. All music, anime scenes, and creative editing rights belong to FAXCO, the music publishers, and TMS Entertainment.
+- **Architecture**: Streamed directly from YouTube's official privacy-enhanced server (`https://www.youtube-nocookie.com/embed/IUXpEsqIIfI`) via the YouTube IFrame API. No video or audio files are downloaded, redistributed, or stored in this Git repository. All music, anime footage, and creative editing rights belong to FAXCO, the music publishers, and TMS Entertainment.
 
 ### 3. Authoritative Specifications & Literature
 The curriculum content is compiled directly from primary technical sources:
