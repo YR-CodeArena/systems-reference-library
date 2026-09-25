@@ -1,0 +1,1063 @@
+/* ===================================================================
+   SYSTEMS REFERENCE LIBRARY - SPORTS ANIME EXPANSION STYLES
+   Features:
+   1. Eimei High Pomodoro Mode (Focus State)
+   2. Morning Practice Code Arena (Pyodide WASM Split-Pane)
+   3. NEETCode 250 Daily Streak & 7-Day Activity HUD
+   4. Animated Technical Metaphors (Taiki TCP Smash & Hina SCSS Ribbon)
+   5. Cyberpunk Server Room Fallback Background
+   =================================================================== */
+
+/* -------------------------------------------------------------------
+   FEATURE 1: EIMEI HIGH POMODORO MODE (STUDY MODE)
+   ------------------------------------------------------------------- */
+
+/* Header Study Mode Toggle Button */
+.study-mode-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  box-sizing: border-box;
+  padding: 0 0.75rem;
+  background: linear-gradient(135deg, rgba(255, 180, 0, 0.15), rgba(255, 42, 133, 0.15));
+  border: 1px solid rgba(255, 180, 0, 0.35);
+  border-radius: 8px;
+  color: #fbbf24;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.15);
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.study-mode-toggle-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 180, 0, 0.3), rgba(255, 42, 133, 0.3));
+  border-color: #fbbf24;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
+}
+
+.study-mode-toggle-btn .study-icon {
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.study-mode-toggle-btn:hover .study-icon {
+  transform: rotate(-10deg) scale(1.15);
+}
+
+@media (max-width: 560px) {
+  .study-mode-toggle-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    max-width: 36px;
+    max-height: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+  .study-mode-toggle-btn span:not(.study-icon) {
+    display: none !important;
+  }
+}
+
+/* Study Mode Fullscreen Background Overlay */
+.study-mode-bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.8) 100%),
+                    url('../images/asset_1_library.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth 0.8s fadeout of main technical panels when Study Mode is active */
+body.study-mode-active main,
+body.study-mode-active .site-footer,
+body.study-mode-active .track-header-container,
+body.study-mode-active .portal-hero,
+body.study-mode-active .portal-grid,
+body.study-mode-active .doc-hero,
+body.study-mode-active .ref-section,
+body.study-mode-active .floating-audio-hud {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.study-mode-active .study-mode-bg-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Glassmorphic Minimalist Pomodoro Modal */
+.pomodoro-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.94);
+  width: 92%;
+  max-width: 480px;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(251, 191, 36, 0.2);
+  border-radius: 24px;
+  padding: 2.2rem 2rem;
+  z-index: 1010;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+body.study-mode-active .pomodoro-modal {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.pomodoro-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  margin-bottom: 0.8rem;
+}
+
+.pomodoro-sub-caption {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1.5rem;
+}
+
+/* Mode Switcher (Work / Short Break / Long Break) */
+.pomodoro-mode-switch {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.3rem;
+  border-radius: 12px;
+  margin-bottom: 1.8rem;
+}
+
+.pomodoro-mode-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pomodoro-mode-btn:hover {
+  color: #ffffff;
+}
+
+.pomodoro-mode-btn.active {
+  background: rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+/* Timer Display Container */
+.pomodoro-timer-circle {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pomodoro-svg-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.pomodoro-ring-bg {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 6;
+  fill: transparent;
+}
+
+.pomodoro-ring-progress {
+  stroke: #fbbf24;
+  stroke-width: 6;
+  stroke-linecap: round;
+  fill: transparent;
+  stroke-dasharray: 628;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.8s linear, stroke 0.4s ease;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+}
+
+.pomodoro-time-text {
+  font-size: 3.4rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 0 0 25px rgba(251, 191, 36, 0.35);
+  line-height: 1;
+}
+
+.pomodoro-status-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fbbf24;
+  margin-top: 0.4rem;
+}
+
+/* Control Buttons */
+.pomodoro-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.2rem;
+}
+
+.pomodoro-btn-primary {
+  padding: 0.65rem 1.8rem;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border: none;
+  border-radius: 9999px;
+  color: #0f172a;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 18px rgba(251, 191, 36, 0.35);
+}
+
+.pomodoro-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(251, 191, 36, 0.5);
+}
+
+.pomodoro-btn-secondary {
+  padding: 0.65rem 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pomodoro-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.pomodoro-exit-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pomodoro-exit-btn:hover {
+  color: #ff2a85;
+}
+
+
+/* -------------------------------------------------------------------
+   FEATURE 2, 4, 5: MORNING PRACTICE CODE ARENA & STREAK TRACKER
+   ------------------------------------------------------------------- */
+
+.morning-practice-section {
+  position: relative;
+  background-image: linear-gradient(180deg, rgba(10, 15, 30, 0.84) 0%, rgba(10, 15, 30, 0.90) 100%),
+                    url('../images/asset_2_gym.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  padding: 4rem 1.5rem;
+  border-top: 2px solid rgba(0, 240, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 42, 133, 0.2);
+  margin: 3rem 0;
+  overflow: hidden;
+}
+
+.morning-practice-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Arena Header & Streak HUD */
+.arena-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.arena-title-group .arena-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #00f0ff;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.arena-title-group h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.arena-title-group p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.92rem;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* Minimalist Streak & 7-Day Activity HUD (Feature 5) */
+.arena-streak-hud {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 0.75rem 1.25rem;
+  border-radius: 16px;
+  flex-wrap: wrap;
+}
+
+.streak-counter-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.streak-counter-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.streak-counter-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ff2a85;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-shadow: 0 0 12px rgba(255, 42, 133, 0.5);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Neon pop animation when a problem is passed */
+@keyframes streakPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); text-shadow: 0 0 25px #00f0ff; color: #00f0ff; }
+  100% { transform: scale(1); }
+}
+
+.streak-pop-active {
+  animation: streakPop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.streak-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.total-solved-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.total-solved-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+/* 7-Day Activity Visualizer */
+.week-activity-visualizer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.week-activity-label {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.week-dots-row {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.day-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.day-dot.today-dot {
+  border-color: #fbbf24;
+}
+
+.day-dot.active-dot {
+  background: #00f0ff;
+  border-color: #00f0ff;
+  color: #0f172a;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+
+/* Arena Problem Selector Bar */
+.arena-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.arena-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.arena-nav-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.arena-nav-btn:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  color: #00f0ff;
+}
+
+.arena-problem-select {
+  background: rgba(10, 15, 30, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  outline: none;
+  cursor: pointer;
+  max-width: 280px;
+}
+
+.arena-problem-select:focus {
+  border-color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+/* Split-Pane Grid Layout (Feature 2) */
+.arena-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 992px) {
+  .arena-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Panel: Markdown-Styled Problem Spec */
+.arena-problem-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 1.8rem;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  overflow-y: auto;
+  max-height: 680px;
+}
+
+.problem-meta-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.problem-id-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.problem-diff-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.diff-easy {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.diff-medium {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.diff-hard {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.problem-category-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #ec4899;
+  background: rgba(236, 72, 153, 0.12);
+  border: 1px solid rgba(236, 72, 153, 0.25);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.problem-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+}
+
+.problem-description-content {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 1.5rem;
+}
+
+.problem-description-content code {
+  background: rgba(255, 255, 255, 0.1);
+  color: #67e8f9;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+}
+
+.problem-cases-box {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.problem-cases-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0.6rem;
+}
+
+.problem-case-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-bottom: 0.4rem;
+}
+
+.problem-case-item strong {
+  color: #e2e8f0;
+}
+
+/* Right Panel: Code Sandbox & Terminal */
+.arena-editor-panel {
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.editor-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background: rgba(10, 15, 30, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.editor-lang-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #38bdf8;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editor-mini-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editor-mini-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Code Input Textarea */
+.arena-code-input {
+  width: 100%;
+  height: 240px;
+  background: rgba(10, 14, 26, 0.95);
+  color: #f8fafc;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  resize: vertical;
+  tab-size: 4;
+}
+
+/* Execution Action Bar */
+.arena-run-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.arena-run-btn {
+  background: linear-gradient(135deg, #00f0ff, #0284c7);
+  border: none;
+  color: #0f172a;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 0.55rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arena-run-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.65);
+}
+
+.arena-run-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.arena-status-indicator {
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Terminal Output Block */
+.arena-terminal-container {
+  background: #090d16;
+  padding: 1rem;
+  max-height: 240px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.arena-terminal-output {
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.terminal-pass {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.terminal-fail {
+  color: #f43f5e;
+  font-weight: 700;
+}
+
+.terminal-header {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.terminal-gold {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+
+/* -------------------------------------------------------------------
+   FEATURE 3: ANIMATED TECHNICAL METAPHORS (TAIKI SMASH & HINA RIBBON)
+   ------------------------------------------------------------------- */
+
+.technical-metaphor-section {
+  position: relative;
+  margin: 3.5rem 0;
+  padding: 2.5rem 2rem;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.metaphor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  margin-bottom: 0.6rem;
+}
+
+.metaphor-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 0.8rem 0;
+}
+
+.metaphor-desc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+  max-width: 900px;
+}
+
+/* Metaphor Stage Wrapper */
+.metaphor-stage {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.metaphor-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Overlay Canvas & Keyframe Animations */
+.metaphor-overlay-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 1. Taiki TCP Packet Badminton Smash Animation (networking.html) */
+@keyframes tcpPacketSmash {
+  0% {
+    top: 22%;
+    left: 18%;
+    transform: scale(0.6);
+    opacity: 0;
+    box-shadow: 0 0 10px #00f0ff;
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #00f0ff, 0 0 45px #38bdf8;
+  }
+  50% {
+    top: 42%;
+    left: 52%;
+    transform: scale(1.4);
+    box-shadow: 0 0 35px #38bdf8, 0 0 60px #00f0ff;
+  }
+  85% {
+    top: 76%;
+    left: 82%;
+    transform: scale(0.9);
+    opacity: 1;
+    box-shadow: 0 0 20px #ff2a85;
+  }
+  100% {
+    top: 84%;
+    left: 88%;
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+.animated-tcp-packet {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 10%, #00f0ff 60%, transparent 100%);
+  filter: drop-shadow(0 0 12px #00f0ff);
+  animation: tcpPacketSmash 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+/* Net firewall line glow */
+.firewall-net-marker {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  height: 48%;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, #ec4899, #ff2a85, transparent);
+  box-shadow: 0 0 15px #ff2a85;
+  animation: firewallPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes firewallPulse {
+  0% { opacity: 0.5; box-shadow: 0 0 8px #ff2a85; }
+  100% { opacity: 1; box-shadow: 0 0 22px #ff2a85, 0 0 35px #00f0ff; }
+}
+
+/* Telemetry HUD overlay */
+.metaphor-telemetry-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1.2rem;
+  background: rgba(10, 15, 30, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.telemetry-item strong {
+  color: #00f0ff;
+}
+
+/* 2. Hina SCSS Ribbon CSSOM Data Stream Animation (enterprise-scss.html) */
+@keyframes ribbonStreamFlow {
+  0% {
+    stroke-dashoffset: 1200;
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px #ff2a85);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+}
+
+.hina-ribbon-svg-stream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hina-stream-path {
+  fill: none;
+  stroke: url(#hinaNeonGrad);
+  stroke-width: 4;
+  stroke-dasharray: 120, 30;
+  stroke-dashoffset: 1200;
+  animation: ribbonStreamFlow 3.2s linear infinite;
+}
+
+/* -------------------------------------------------------------------
+   FEATURE 3: DEEP BACKEND VOLUMES CYBERPUNK SERVER BACKGROUND
+   ------------------------------------------------------------------- */
+
+body.backend-volume {
+  background-image: linear-gradient(180deg, rgba(10, 15, 30, 0.90) 0%, rgba(10, 15, 30, 0.94) 100%),
+                    url('../images/asset_3_server.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-attachment: fixed !important;
+}

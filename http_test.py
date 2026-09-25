@@ -35,8 +35,16 @@ def test_pages():
         "high-concurrency-java.html",
         "enterprise-scss.html",
         "javascript-mastery.html",
+        "neetcode-arena.html",
+        "tech-news.html",
+        "assets/images/neetcode.png",
+        "assets/images/news.png",
         "assets/css/style.css",
+        "assets/css/neetcode-arena.css",
+        "assets/css/tech-news.css",
         "assets/js/main.js",
+        "assets/js/neetcode-arena.js",
+        "assets/js/tech-news.js",
         "assets/js/skulpt.min.js",
         "assets/js/skulpt-stdlib.js"
     ]

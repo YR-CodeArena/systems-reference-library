@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#080c14" media="(prefers-color-scheme: dark)">
+  <title>NeetCode 250 Practice Arena & AI Skill Coach | Systems Reference Library</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260926_live27">
+  <link rel="stylesheet" href="assets/css/chinatsu-companion.css?v=20260926_live27">
+  <link rel="stylesheet" href="assets/css/sports-anime-features.css?v=20260926_live27">
+  <link rel="stylesheet" href="assets/css/neetcode-arena.css?v=20260926_live27">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+</head>
+<body class="neetcode-arena-page arena-page-root">
+  <div id="reading-progress"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="brand-wrapper" title="Systems Architecture Reference // システム仕様書">
+      <div class="brand-icon">SR</div>
+      <div class="brand-text-block">
+        <div class="brand-title-row">
+          <span class="brand-title">Systems Reference</span>
+          <span class="brand-status-tag">● ONLINE // 稼働中</span>
+        </div>
+        <span class="brand-subtitle">システム アーキテクチャ 仕様書 &bull; 15 Volumes</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="nav-item-btn">
+            <span>🏛️</span>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a href="neetcode-arena.html" class="nav-item-btn active">
+            <span>⚡</span>
+            <span>NeetCode 250</span>
+          </a>
+        </li>
+        <li>
+          <a href="tech-news.html" class="nav-item-btn">
+            <span>📰</span>
+            <span>Tech News</span>
+          </a>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownCore">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🌐</span>
+            <span>Core Architecture</span>
+            <span class="dropdown-badge">VOL.01–06</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART I // 基礎システムアーキテクチャ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="networking.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.01</span>
+                <div class="card-text">
+                  <div class="card-title">Networking &amp; Wire Protocols <span class="card-kanji">[通信]</span></div>
+                  <div class="card-sub">OSI &bull; TCP/IP &bull; Sliding Window &bull; BBR &bull; QUIC &bull; gRPC</div>
+                </div>
+              </a>
+              <a href="databases.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.02</span>
+                <div class="card-text">
+                  <div class="card-title">Databases &amp; Storage Engines <span class="card-kanji">[DB]</span></div>
+                  <div class="card-sub">Slotted Pages &bull; ARIES &bull; MVCC &bull; B+ Trees &bull; LSM-Trees</div>
+                </div>
+              </a>
+              <a href="programming-languages.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.03</span>
+                <div class="card-text">
+                  <div class="card-title">Programming Languages &amp; JIT <span class="card-kanji">[言語]</span></div>
+                  <div class="card-sub">Lexing &bull; AST &bull; Bytecode VM &bull; JIT Tiering &bull; GC</div>
+                </div>
+              </a>
+              <a href="data-structures.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.04</span>
+                <div class="card-text">
+                  <div class="card-title">Data Structures &amp; Algorithms <span class="card-kanji">[構造]</span></div>
+                  <div class="card-sub">Cache Locality &bull; Red-Black Trees &bull; Dijkstra &bull; Bloom Filters</div>
+                </div>
+              </a>
+              <a href="operating-systems.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.05</span>
+                <div class="card-text">
+                  <div class="card-title">Operating Systems &amp; Kernels <span class="card-kanji">[OS]</span></div>
+                  <div class="card-sub">Syscalls &bull; Virtual Memory &bull; CFS &bull; Epoll &bull; Zero-Copy</div>
+                </div>
+              </a>
+              <a href="cs-hardware-foundations.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.06</span>
+                <div class="card-text">
+                  <div class="card-title">CS Foundations &amp; Hardware <span class="card-kanji">[ハードウェア]</span></div>
+                  <div class="card-sub">Protection Rings &bull; Epoll Kernel &bull; 4-Level Paging &bull; MESI &bull; SPSC</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownBackend">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>⚡</span>
+            <span>Backend Runtimes</span>
+            <span class="dropdown-badge">VOL.07–12</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART II // 言語エンジン &amp; 運用基盤</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="git-github.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.07</span>
+                <div class="card-text">
+                  <div class="card-title">Git &amp; GitHub Architecture <span class="card-kanji">[Git]</span></div>
+                  <div class="card-sub">SHA-1 DAG &bull; Packfiles &bull; Three-Way Merge &bull; Rebase Mechanics</div>
+                </div>
+              </a>
+              <a href="python-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.08</span>
+                <div class="card-text">
+                  <div class="card-title">Python 3 Masterclass <span class="card-kanji">[Python]</span></div>
+                  <div class="card-sub">OOP &bull; Metaclasses &bull; Asyncio &bull; MRO &bull; Pattern Matching</div>
+                </div>
+              </a>
+              <a href="python-runtime.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.09</span>
+                <div class="card-text">
+                  <div class="card-title">CPython Execution Internals <span class="card-kanji">[CPython]</span></div>
+                  <div class="card-sub">PyObject &bull; GIL &bull; PyArena &bull; CEval Loop &bull; Garbage Collector</div>
+                </div>
+              </a>
+              <a href="low-latency-python.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.10</span>
+                <div class="card-text">
+                  <div class="card-title">Low-Latency Python Systems <span class="card-kanji">[高速化]</span></div>
+                  <div class="card-sub">Asyncio Event Loop &bull; Cython &bull; Zero-Copy &bull; Lock-Free Queues</div>
+                </div>
+              </a>
+              <a href="postgresql.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.11</span>
+                <div class="card-text">
+                  <div class="card-title">PostgreSQL Architecture <span class="card-kanji">[PG]</span></div>
+                  <div class="card-sub">Shared Buffers &bull; WAL Pipeline &bull; HOT &bull; Cost-Based Optimizer</div>
+                </div>
+              </a>
+              <a href="java-masterclass.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.12</span>
+                <div class="card-text">
+                  <div class="card-title">Java Masterclass &amp; Bytecode <span class="card-kanji">[Java]</span></div>
+                  <div class="card-sub">Classloader &bull; Bytecode &bull; JVM Stack &bull; JIT Tiering &bull; Concurrency</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-dropdown" id="dropdownWeb">
+          <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+            <span>🎨</span>
+            <span>Enterprise Web</span>
+            <span class="dropdown-badge">VOL.13–15</span>
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-pane" role="menu">
+            <div class="dropdown-pane-header">
+              <span class="dropdown-group-tag">PART III // エンタープライズ Web &amp; リアクティブ</span>
+            </div>
+            <div class="dropdown-grid">
+              <a href="high-concurrency-java.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.13</span>
+                <div class="card-text">
+                  <div class="card-title">High-Concurrency Java 21 <span class="card-kanji">[並行性]</span></div>
+                  <div class="card-sub">Loom Internals &bull; ZGC Colored Pointers &bull; Disruptor &bull; Reactive</div>
+                </div>
+              </a>
+              <a href="enterprise-scss.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.14</span>
+                <div class="card-text">
+                  <div class="card-title">Enterprise SCSS Architecture <span class="card-kanji">[SCSS]</span></div>
+                  <div class="card-sub">Dart Sass &bull; @use/@forward &bull; ITCSS &bull; Tokens &bull; Compilation AST</div>
+                </div>
+              </a>
+              <a href="javascript-mastery.html" class="dropdown-card" role="menuitem">
+                <span class="card-vol-tag">VOL.15</span>
+                <div class="card-text">
+                  <div class="card-title">The Ultimate Guide to JS <span class="card-kanji">[JS]</span></div>
+                  <div class="card-sub">ES6+ &bull; Event Loop &bull; DOM &bull; MVC Architecture &bull; Async/Await</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button id="bgAudioToggleBtn" class="bg-audio-toggle-btn" type="button" aria-label="Enable Background Audio" title="Enable Background Audio (Unmute)">
+        <svg class="audio-icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <svg class="audio-icon-playing" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+      <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Theme" title="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- NeetCode 250 Arena Main Container -->
+  <main id="neetcode-arena-root">
+    <!-- Top Stats Banner -->
+    <div class="arena-top-banner">
+      <div class="arena-top-container">
+        <div class="arena-hero-title-group">
+          <div class="arena-badge-tag">
+            <span>⚡</span>
+            <span>Eimei High Morning Dojo // 競技プログラミング道場</span>
+          </div>
+          <h1>NeetCode 250 Practice Arena</h1>
+          <p class="arena-hero-desc">
+            Complete 250-problem algorithmic training curriculum executed on client-side Pyodide WebAssembly. Features an integrated AI Skill Coach that analyzes your solve pace and guides your multi-path career trajectory.
+          </p>
+        </div>
+
+        <!-- Hina Chono Featured Drill Coach Card -->
+        <div class="arena-character-card">
+          <div class="char-avatar-ring">
+            <img src="assets/images/neetcode.png" alt="Hina Chono" class="char-avatar-img">
+            <span class="char-online-indicator" title="Active Drill Coach"></span>
+          </div>
+          <div class="char-meta">
+            <div class="char-title-row">
+              <span class="char-name">Hina Chono</span>
+              <span class="char-kanji">[ 蝶野 雛 ]</span>
+            </div>
+            <div class="char-sub">Eimei High &bull; Rhythmic Gymnastics &bull; Drill Coach</div>
+            <div class="char-quote">&ldquo;Focus on each rep! Daily consistency turns hard algorithms into muscle memory! 🌸&rdquo;</div>
+          </div>
+        </div>
+
+        <div class="arena-top-actions">
+          <div class="arena-stat-pill">
+            <span class="stat-pill-label">Daily Streak</span>
+            <span class="stat-pill-val streak">🔥 <span id="arenaHeaderStreak">0</span> DAYS</span>
+          </div>
+          <div class="arena-stat-pill">
+            <span class="stat-pill-label">Total Solved</span>
+            <span class="stat-pill-val" id="arenaHeaderSolved">0 / 250</span>
+          </div>
+          <div class="arena-stat-pill">
+            <span class="stat-pill-label">Completion</span>
+            <span class="stat-pill-val" id="arenaHeaderPercent">0%</span>
+          </div>
+          <button id="openAICoachBtn" class="ai-coach-trigger-btn" type="button" title="Open AI Skill Coach & Next Path Guide">
+            <span>✨</span>
+            <span>AI Skill Coach &amp; Next Path</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter Bar (18 Categories Horizontal Scroll) -->
+    <div class="cat-tabs-scroll-wrapper">
+      <div class="cat-tabs-bar">
+        <button class="cat-tab-btn active" data-category="All">All (250)</button>
+        <button class="cat-tab-btn" data-category="Arrays & Hashing">Arrays &amp; Hashing (23)</button>
+        <button class="cat-tab-btn" data-category="Two Pointers">Two Pointers (12)</button>
+        <button class="cat-tab-btn" data-category="Sliding Window">Sliding Window (13)</button>
+        <button class="cat-tab-btn" data-category="Stack">Stack (12)</button>
+        <button class="cat-tab-btn" data-category="Binary Search">Binary Search (14)</button>
+        <button class="cat-tab-btn" data-category="Linked List">Linked List (14)</button>
+        <button class="cat-tab-btn" data-category="Trees">Trees (28)</button>
+        <button class="cat-tab-btn" data-category="Heap / Priority Queue">Heap / PQ (12)</button>
+        <button class="cat-tab-btn" data-category="Backtracking">Backtracking (12)</button>
+        <button class="cat-tab-btn" data-category="Tries">Tries (5)</button>
+        <button class="cat-tab-btn" data-category="Graphs">Graphs (24)</button>
+        <button class="cat-tab-btn" data-category="Advanced Graphs">Advanced Graphs (8)</button>
+        <button class="cat-tab-btn" data-category="1-D Dynamic Programming">1-D DP (16)</button>
+        <button class="cat-tab-btn" data-category="2-D Dynamic Programming">2-D DP (16)</button>
+        <button class="cat-tab-btn" data-category="Greedy">Greedy (11)</button>
+        <button class="cat-tab-btn" data-category="Intervals">Intervals (8)</button>
+        <button class="cat-tab-btn" data-category="Math & Geometry">Math &amp; Geometry (11)</button>
+        <button class="cat-tab-btn" data-category="Bit Manipulation">Bit Manipulation (11)</button>
+      </div>
+    </div>
+
+    <!-- Main Workspace (Sidebar Catalogue + Split-Pane Arena) -->
+    <div class="arena-main-layout">
+      <!-- Left Sidebar: Problem Catalogue -->
+      <aside class="arena-sidebar-panel">
+        <div class="sidebar-search-box">
+          <input id="arenaSearchInput" class="sidebar-search-input" type="text" placeholder="🔍 Search by name, ID, or tag..." aria-label="Search problems">
+        </div>
+        <div class="sidebar-filter-row">
+          <select id="arenaDiffFilter" class="sidebar-filter-select" aria-label="Filter by difficulty">
+            <option value="All">All Difficulties</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <select id="arenaStatusFilter" class="sidebar-filter-select" aria-label="Filter by solved status">
+            <option value="All">All Statuses</option>
+            <option value="Solved">✓ Solved Only</option>
+            <option value="Unsolved">○ Unsolved Only</option>
+          </select>
+        </div>
+        <div class="sidebar-tools-row">
+          <span class="sidebar-count-label" id="problemListCount">250 / 250</span>
+          <button id="arenaRandomProblemBtn" class="sidebar-random-btn" type="button">🎲 Random Drill</button>
+        </div>
+        <div class="problem-list-scroll" id="problemListContainer">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </aside>
+
+      <!-- Right Area: Split-Pane Arena Stage -->
+      <section class="arena-split-stage">
+        <!-- Problem Spec Panel (Left of Split-Pane) -->
+        <div class="spec-panel">
+          <div class="spec-badges-row">
+            <span id="specProblemId" class="badge-id">NC-001</span>
+            <span id="specProblemDiff" class="badge-diff diff-easy">Easy</span>
+            <span id="specProblemCategory" class="badge-cat">Arrays &amp; Hashing</span>
+            <span id="specProblemEst" class="badge-est">⏱️ ~10 mins</span>
+          </div>
+
+          <div class="spec-title-row">
+            <h2 id="specProblemTitle" class="spec-title">Contains Duplicate</h2>
+            <a id="specLeetcodeLink" class="spec-leetcode-link" href="#" target="_blank" rel="noopener">LeetCode ↗</a>
+          </div>
+
+          <div id="specProblemDesc" class="spec-desc-content">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div class="spec-tags-box" id="specProblemTags">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div class="spec-cases-container">
+            <div class="spec-cases-title">Verification Harness Test Cases</div>
+            <div id="specTestCasesList">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Editor & Terminal Panel (Right of Split-Pane) -->
+        <div class="editor-panel">
+          <div class="editor-top-bar">
+            <div class="editor-timer-box" title="Problem Stopwatch">
+              <span>⏱️</span>
+              <span id="arenaTimerDisplay">00:00</span>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button id="arenaResetBtn" class="editor-mini-btn" type="button" title="Reset starter code">Reset Code</button>
+              <button id="arenaCopyBtn" class="editor-mini-btn" type="button" title="Copy code to clipboard">📋 Copy</button>
+            </div>
+          </div>
+
+          <textarea id="arenaCodeTextarea" class="arena-code-textarea" spellcheck="false" placeholder="Write your Python solution here..."></textarea>
+
+          <div class="editor-action-bar">
+            <button id="arenaRunHarnessBtn" class="arena-run-harness-btn" type="button">
+              <span>▶ Run Verification Harness</span>
+            </button>
+            <span id="arenaRunStatus" style="font-size: 0.78rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+              ⚡ Pyodide WASM Engine Ready
+            </span>
+          </div>
+
+          <div class="arena-terminal-wrap">
+            <pre id="arenaPyodideTerminal" class="arena-pyodide-terminal">Press [Run Verification Harness] to execute test cases in Pyodide WebAssembly...</pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- AI Skill Coach & Next Path Modal -->
+  <div id="aiCoachModal" class="ai-coach-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="aiCoachTitle">
+    <div class="ai-coach-modal-card">
+      <div class="coach-modal-header">
+        <div class="coach-modal-title" id="aiCoachTitle">
+          <img src="assets/images/neetcode.png" class="coach-header-avatar" alt="Hina Chono">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span>Eimei High AI Skill Coach &amp; Path Advisor</span>
+              <span class="coach-header-badge">Hina &amp; Chinatsu Senpai</span>
+            </div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); font-weight:500;">Real-time pace analytics, multi-path career roadmaps, and custom drill queues</div>
+          </div>
+        </div>
+        <button id="closeAICoachBtn" class="coach-close-btn" type="button" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <div class="coach-modal-body">
+        <!-- Section 1: Algorithmic Readiness & Metrics -->
+        <div class="coach-readiness-row">
+          <div class="readiness-gauge-box">
+            <div class="readiness-val" id="coachReadinessVal">0/100</div>
+            <div class="readiness-label">Interview Readiness Rating</div>
+            <div class="readiness-bar-track">
+              <div class="readiness-bar-fill" id="coachReadinessBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="coach-diff-stats">
+            <div class="diff-stat-item">
+              <span><strong>Easy Problems</strong></span>
+              <span id="coachEasyCount">0 / 70</span>
+            </div>
+            <div class="diff-stat-item">
+              <span><strong>Medium Problems</strong></span>
+              <span id="coachMedCount">0 / 140</span>
+            </div>
+            <div class="diff-stat-item">
+              <span><strong>Hard Problems</strong></span>
+              <span id="coachHardCount">0 / 40</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Top 3 Personalized Next Problem Recommendations -->
+        <div>
+          <div class="coach-section-heading">
+            <span>🎯</span>
+            <span>Personalized Next Drills (Based on your solve speed &amp; skill gaps)</span>
+          </div>
+          <div class="coach-recs-grid" id="coachRecommendationsList">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Section 3: Strategic Career & Learning Paths -->
+        <div>
+          <div class="coach-section-heading">
+            <span>🗺️</span>
+            <span>Algorithmic Specialization Roadmaps</span>
+          </div>
+          <div class="coach-paths-grid" id="coachPathsContainer">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Section 4: Live Senpai Coaching Advice -->
+        <div class="coach-consult-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.8rem;">
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: #ffffff;">Deep Coaching Consultation</div>
+              <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Get tailored feedback on your workout rhythm from Chinatsu Kano (Eimei High Senpai)</div>
+            </div>
+            <button id="aiCoachConsultSenpaiBtn" class="coach-consult-btn" type="button">
+              <span>✨</span>
+              <span>Ask Chinatsu Sensei for Strategy Plan</span>
+            </button>
+          </div>
+          <div id="aiCoachLiveResponse" class="coach-live-response" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-title">Systems Architecture Reference // システム仕様書</div>
+        <p class="footer-desc">
+          Enterprise Systems Engineering &bull; 15 Comprehensive Volumes &bull; 250 Complete NeetCode Drills
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Systems Reference Library. NeetCode 250 In-Browser WASM Practice Suite.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js?v=20260926_live27"></script>
+  <script src="assets/js/neetcode-250-data.js?v=20260926_live27"></script>
+  <script src="assets/js/sports-anime-features.js?v=20260926_live27"></script>
+  <script src="assets/js/neetcode-arena.js?v=20260926_live27"></script>
+  <script src="assets/js/chinatsu-companion.js?v=20260926_live27" defer></script>
+</body>
+</html>

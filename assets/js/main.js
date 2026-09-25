@@ -21,6 +21,14 @@
   const root = document.documentElement;
 
   function getPreferredTheme() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlTheme = urlParams.get("theme");
+      if (urlTheme === "light" || urlTheme === "dark") {
+        return urlTheme;
+      }
+    } catch (e) {}
+
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return saved;
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -1962,9 +1970,11 @@ builtins.input = _sys_input
             <button class="mobile-drawer-close-btn" id="mobileDrawerCloseBtn" type="button" aria-label="Close navigation menu">✕</button>
           </div>
           <div class="mobile-drawer-body">
-            <div class="mobile-drawer-group-title">⟦ OVERVIEW // 総合ポータル ⟧</div>
+            <div class="mobile-drawer-group-title">⟦ OVERVIEW &amp; DRILLS // 総合ポータル &amp; 演習 ⟧</div>
             <ul class="mobile-drawer-links">
               <li><a href="index.html" data-page="index.html"><span class="drawer-icon">🏛️</span> Overview Portal</a></li>
+              <li><a href="neetcode-arena.html" data-page="neetcode-arena.html"><span class="drawer-icon">⚡</span> NeetCode 250 Practice Arena</a></li>
+              <li><a href="tech-news.html" data-page="tech-news.html"><span class="drawer-icon">📰</span> Latest Tech News &amp; Systems Intel</a></li>
             </ul>
 
             <div class="mobile-drawer-group-title">⟦ PART I // 基礎システムアーキテクチャ ⟧</div>
@@ -2667,6 +2677,24 @@ builtins.input = _sys_input
       script.src = "assets/js/chinatsu-companion.js";
       script.defer = true;
       document.body.appendChild(script);
+    })();
+
+    // --- Modern Glassmorphic Footer Enhancement (No Links) ---
+    (function enhanceFooter() {
+      const footerInner = document.querySelector(".site-footer .footer-inner");
+      if (!footerInner) return;
+      
+      // Ensure any legacy or dynamically added footer nav link rows are removed
+      const existingNavRow = footerInner.querySelector(".footer-nav-row");
+      if (existingNavRow) existingNavRow.remove();
+
+      const footerBottom = footerInner.querySelector(".footer-bottom");
+      if (footerBottom && !footerBottom.querySelector(".footer-status-pill")) {
+        const statusPill = document.createElement("div");
+        statusPill.className = "footer-status-pill";
+        statusPill.innerHTML = `<span class="pulse-dot"></span> ALL 15 VOLUMES ONLINE`;
+        footerBottom.appendChild(statusPill);
+      }
     })();
   });
 })();
