@@ -3482,8 +3482,8 @@ main,
   }
 }
 
-/* Tablets, Small Laptops & Mobile Viewports (< 1140px): Keep NeetCode & Tech News Visible */
-@media (max-width: 1139px) {
+/* Tablets & Small Laptops (769px - 1139px): Keep NeetCode & Tech News Visible */
+@media (min-width: 769px) and (max-width: 1139px) {
   .brand-subtitle,
   .brand-status-tag {
     display: none !important;
@@ -3501,12 +3501,12 @@ main,
     align-items: center !important;
     gap: 0.35rem !important;
   }
-  /* Hide 3 volume dropdowns and Overview on tablet/mobile (< 1140px) */
+  /* Hide 3 volume dropdowns and Overview on tablet (< 1140px) */
   .nav-dropdown,
   .nav-menu li:first-child {
     display: none !important;
   }
-  /* NeetCode 250 & Tech News buttons remain visible in the top header */
+  /* NeetCode 250 & Tech News buttons remain visible in the top header on tablet */
   .nav-item-btn {
     height: 34px !important;
     min-height: 34px !important;
@@ -3561,6 +3561,15 @@ main,
 @media (max-width: 768px) {
   .site-header {
     padding: var(--sat) 1rem 0 1rem;
+  }
+
+  /* On mobile screens, hide NeetCode & Tech News from top header (already in hamburger drawer) */
+  .site-header nav,
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: inline-flex !important;
   }
 
   .portal-hero {
@@ -3685,8 +3694,8 @@ body.tech-news-page .bg-audio-toggle-btn {
   display: none !important;
 }
 
-/* Tablet / Medium Screens (641px - 1139px) Header Refinements */
-@media (min-width: 641px) and (max-width: 1139px) {
+/* Tablet / Medium Screens (769px - 1139px) Header Refinements */
+@media (min-width: 769px) and (max-width: 1139px) {
   .brand-title {
     display: inline-block !important;
     font-size: 0.95rem !important;
@@ -3706,14 +3715,16 @@ body.tech-news-page .bg-audio-toggle-btn {
 /* Compact Smartphones & Narrow Screens (<= 640px) */
 @media (max-width: 640px) {
   .site-header {
-    padding: var(--sat) 0.5rem 0 0.5rem !important;
-    gap: 0.35rem !important;
+    padding: var(--sat) 0.65rem 0 0.65rem !important;
+    gap: 0.5rem !important;
     justify-content: space-between !important;
   }
 
   .brand-wrapper {
-    gap: 0 !important;
+    gap: 0.5rem !important;
     flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
   .brand-icon {
@@ -3724,42 +3735,26 @@ body.tech-news-page .bg-audio-toggle-btn {
     font-size: 0.88rem !important;
   }
 
-  .brand-title,
+  .brand-title {
+    display: inline-block !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+
   .brand-subtitle,
   .brand-status-tag {
     display: none !important;
   }
 
+  /* Remove NeetCode & Tech News buttons from mobile header bar (already in hamburger menu) */
   .site-header nav,
   .desktop-nav {
-    display: flex !important;
-    flex: 0 1 auto !important;
-    margin: 0 auto !important;
-  }
-
-  .nav-menu {
-    gap: 0.3rem !important;
-  }
-
-  .nav-item-btn {
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
-    padding: 0 0.5rem !important;
-    font-size: 0.72rem !important;
-    gap: 0.25rem !important;
-    white-space: nowrap !important;
-  }
-
-  .nav-text-full {
     display: none !important;
-  }
-  .nav-text-short {
-    display: inline !important;
   }
 
   .header-actions {
-    gap: 0.3rem !important;
+    gap: 0.4rem !important;
     flex-shrink: 0 !important;
     display: flex !important;
     align-items: center !important;
