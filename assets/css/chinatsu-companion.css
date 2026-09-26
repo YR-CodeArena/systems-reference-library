@@ -987,26 +987,35 @@
 }
 
 /* Mobile Screens */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .chinatsu-companion-root {
-    bottom: calc(1rem + var(--sab, 0px));
-    right: 1rem;
+    bottom: calc(0.75rem + var(--sab, 0px)) !important;
+    right: 0.75rem !important;
   }
   .chinatsu-mascot-btn {
-    width: 72px;
-    height: 72px;
+    width: 52px !important;
+    height: 52px !important;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), 0 0 10px rgba(255, 42, 133, 0.4) !important;
+  }
+  .chinatsu-mascot-avatar {
+    width: 44px !important;
+    height: 44px !important;
   }
   .chinatsu-chat-window {
-    right: 0.75rem;
-    left: 0.75rem;
-    width: auto;
-    max-width: none;
-    height: 70vh;
-    bottom: calc(6rem + var(--sab, 0px));
+    right: 0.5rem !important;
+    left: 0.5rem !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 72vh !important;
+    bottom: calc(4.5rem + var(--sab, 0px)) !important;
+    border-radius: 16px !important;
   }
+  /* Hide intrusive idle thought bubble on mobile (< 768px) so code editor, terminal, problem text, and action buttons are NEVER covered */
   .chinatsu-thought-bubble {
-    width: 210px;
-    bottom: 84px;
-    font-size: 0.76rem;
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
   }
 }
+
