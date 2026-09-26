@@ -1975,6 +1975,8 @@ builtins.input = _sys_input
               <li><a href="index.html" data-page="index.html"><span class="drawer-icon">🏛️</span> Overview Portal</a></li>
               <li><a href="neetcode-arena.html" data-page="neetcode-arena.html"><span class="drawer-icon">⚡</span> NeetCode 250 Practice Arena</a></li>
               <li><a href="tech-news.html" data-page="tech-news.html"><span class="drawer-icon">📰</span> Latest Tech News &amp; Systems Intel</a></li>
+              <li><a href="resume-maker.html" data-page="resume-maker.html"><span class="drawer-icon">📄</span> Jake's Resume Maker</a></li>
+              <li><a href="ats-checker.html" data-page="ats-checker.html"><span class="drawer-icon">🎯</span> ATS Resume Checker</a></li>
             </ul>
 
             <div class="mobile-drawer-group-title">⟦ PART I // 基礎システムアーキテクチャ ⟧</div>
@@ -2575,6 +2577,8 @@ builtins.input = _sys_input
       }
 
       // 3. Spatial Scroll Telemetry & Parallax Engine
+      if (document.body.classList.contains("page-resume-maker") || document.body.classList.contains("page-ats-checker")) return;
+
       let hudEl = document.getElementById("spatialDepthHud");
       if (!hudEl) {
         hudEl = document.createElement("div");
@@ -2672,6 +2676,7 @@ builtins.input = _sys_input
 
     // --- Chinatsu-senpai AI Companion Autonomous Loader ---
     (function loadChinatsuCompanion() {
+      if (document.body.classList.contains("page-resume-maker") || document.body.classList.contains("page-ats-checker")) return;
       if (window.ChinatsuCompanion || document.querySelector('script[src*="chinatsu-companion.js"]')) return;
       const script = document.createElement("script");
       script.src = "assets/js/chinatsu-companion.js";

@@ -1,0 +1,891 @@
+/**
+ * Systems Reference Library - Jake's Resume Maker Stylesheet
+ * Strict adherence to Jake's ATS Resume Template (Overleaf / LaTeX standard)
+ * Clean, distraction-free engineering aesthetics - NO background images.
+ */
+
+:root {
+  --rm-bg-dark: #080c14;
+  --rm-surface-dark: #0e1524;
+  --rm-surface-hover: #151f34;
+  --rm-border-dark: rgba(255, 255, 255, 0.1);
+  --rm-border-active: #00f0ff;
+  --rm-accent-cyan: #00f0ff;
+  --rm-accent-magenta: #ff2a85;
+  --rm-accent-green: #00ff88;
+  --rm-text-primary: #f8fafc;
+  --rm-text-secondary: rgba(255, 255, 255, 0.65);
+  --rm-text-muted: rgba(255, 255, 255, 0.4);
+  --paper-width: 8.5in;
+  --paper-min-height: 11in;
+}
+
+body.page-resume-maker {
+  background: var(--rm-bg-dark) !important;
+  background-image: none !important;
+  color: var(--rm-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Strictly hide all floating widgets, companion characters, and background video on tool pages */
+body.page-resume-maker .chinatsu-companion-widget,
+body.page-resume-maker #chinatsuCompanionWidget,
+body.page-resume-maker .sports-anime-container,
+body.page-resume-maker #videoBgContainer,
+body.page-resume-maker .char-stage-container,
+body.page-ats-checker .chinatsu-companion-widget,
+body.page-ats-checker #chinatsuCompanionWidget,
+body.page-ats-checker .sports-anime-container,
+body.page-ats-checker #videoBgContainer,
+body.page-ats-checker .char-stage-container {
+  display: none !important;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] body.page-resume-maker {
+  background: #f1f5f9 !important;
+  background-image: none !important;
+  --rm-surface-dark: #ffffff;
+  --rm-surface-hover: #f8fafc;
+  --rm-border-dark: rgba(0, 0, 0, 0.12);
+  --rm-text-primary: #0f172a;
+  --rm-text-secondary: rgba(15, 23, 42, 0.7);
+  --rm-text-muted: rgba(15, 23, 42, 0.45);
+}
+
+/* Top App Toolbar */
+.rm-toolbar {
+  background: var(--rm-surface-dark);
+  border-bottom: 1px solid var(--rm-border-dark);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: sticky;
+  top: 70px; /* Below site header */
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.rm-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.rm-template-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid var(--rm-accent-cyan);
+  color: var(--rm-accent-cyan);
+  padding: 0.28rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rm-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.rm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--rm-border-dark);
+  background: var(--rm-surface-hover);
+  color: var(--rm-text-primary);
+  text-decoration: none;
+}
+
+.rm-btn:hover {
+  border-color: var(--rm-accent-cyan);
+  color: var(--rm-accent-cyan);
+  transform: translateY(-1px);
+}
+
+.rm-btn-primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.05));
+  border-color: var(--rm-accent-cyan);
+  color: var(--rm-accent-cyan);
+}
+
+.rm-btn-primary:hover {
+  background: var(--rm-accent-cyan);
+  color: #080c14;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+}
+
+.rm-btn-ats {
+  background: linear-gradient(135deg, rgba(255, 42, 133, 0.18), rgba(255, 42, 133, 0.04));
+  border-color: var(--rm-accent-magenta);
+  color: var(--rm-accent-magenta);
+}
+
+.rm-btn-ats:hover {
+  background: var(--rm-accent-magenta);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.4);
+}
+
+.rm-btn-success {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.05));
+  border-color: var(--rm-accent-green);
+  color: var(--rm-accent-green);
+}
+
+.rm-btn-success:hover {
+  background: var(--rm-accent-green);
+  color: #080c14;
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.4);
+}
+
+/* Mobile View Switcher */
+.rm-view-toggle {
+  display: none;
+  background: var(--rm-surface-dark);
+  border: 1px solid var(--rm-border-dark);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.rm-view-toggle button {
+  padding: 0.45rem 0.9rem;
+  background: transparent;
+  border: none;
+  color: var(--rm-text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rm-view-toggle button.active {
+  background: var(--rm-accent-cyan);
+  color: #080c14;
+}
+
+/* Main Split Workspace */
+.rm-workspace {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  flex: 1;
+  min-height: calc(100vh - 130px);
+}
+
+@media (max-width: 1200px) {
+  .rm-workspace {
+    grid-template-columns: 460px 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .rm-view-toggle {
+    display: flex;
+  }
+  .rm-workspace {
+    grid-template-columns: 1fr;
+  }
+  .rm-editor-panel {
+    display: block;
+  }
+  .rm-preview-panel {
+    display: none;
+  }
+  .rm-workspace.show-preview .rm-editor-panel {
+    display: none;
+  }
+  .rm-workspace.show-preview .rm-preview-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.75rem;
+    overflow-x: hidden;
+  }
+  .rm-workspace.show-preview .jake-resume-sheet {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    padding: 1.25rem 1rem !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transform: none !important;
+    margin: 0 !important;
+  }
+}
+
+/* Left Editor Panel */
+.rm-editor-panel {
+  background: var(--rm-surface-dark);
+  border-right: 1px solid var(--rm-border-dark);
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 130px);
+}
+
+/* Upload & Pathway Card */
+.rm-pathway-card {
+  background: rgba(0, 240, 255, 0.04);
+  border: 1px dashed var(--rm-accent-cyan);
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.rm-pathway-card.drag-over {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: #ffffff;
+  transform: scale(1.01);
+}
+
+.rm-upload-icon {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.rm-pathway-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--rm-text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.rm-pathway-sub {
+  font-size: 0.8rem;
+  color: var(--rm-text-secondary);
+  line-height: 1.4;
+  margin-bottom: 0.9rem;
+}
+
+.rm-upload-input {
+  display: none;
+}
+
+/* Preset Pill Selector */
+.rm-presets-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.rm-presets-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--rm-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rm-preset-chip {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.76rem;
+  border-radius: 4px;
+  background: var(--rm-surface-hover);
+  border: 1px solid var(--rm-border-dark);
+  color: var(--rm-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rm-preset-chip:hover,
+.rm-preset-chip.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--rm-accent-cyan);
+  color: var(--rm-accent-cyan);
+}
+
+/* Form Sections Accordion */
+.rm-section-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--rm-border-dark);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.rm-section-box:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.rm-section-header {
+  padding: 0.85rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.015);
+  user-select: none;
+}
+
+.rm-section-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.rm-section-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--rm-accent-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+}
+
+.rm-section-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--rm-text-primary);
+}
+
+.rm-section-arrow {
+  color: var(--rm-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.rm-section-box.is-collapsed .rm-section-arrow {
+  transform: rotate(-90deg);
+}
+
+.rm-section-box.is-collapsed .rm-section-body {
+  display: none;
+}
+
+.rm-section-body {
+  padding: 1.1rem;
+  border-top: 1px solid var(--rm-border-dark);
+}
+
+/* Input Fields */
+.rm-form-group {
+  margin-bottom: 0.85rem;
+}
+
+.rm-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.rm-form-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--rm-text-secondary);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rm-form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.52rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--rm-border-dark);
+  color: var(--rm-text-primary);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+}
+
+[data-theme="light"] .rm-form-input {
+  background: #f8fafc;
+}
+
+.rm-form-input:focus {
+  border-color: var(--rm-accent-cyan);
+  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.18);
+}
+
+/* Dynamic Item Card (for Experience, Projects, Education) */
+.rm-item-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--rm-border-dark);
+  border-radius: 6px;
+  padding: 0.95rem;
+  margin-bottom: 0.95rem;
+  position: relative;
+}
+
+.rm-item-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.rm-item-card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--rm-accent-cyan);
+}
+
+.rm-remove-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 80, 80, 0.7);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.rm-remove-btn:hover {
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.12);
+}
+
+/* Bullet Points Container */
+.rm-bullets-group {
+  margin-top: 0.6rem;
+}
+
+.rm-bullet-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin-bottom: 0.45rem;
+}
+
+.rm-bullet-input {
+  flex: 1;
+  resize: vertical;
+  min-height: 48px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--rm-border-dark);
+  color: var(--rm-text-primary);
+  font-family: inherit;
+  outline: none;
+}
+
+[data-theme="light"] .rm-bullet-input {
+  background: #ffffff;
+}
+
+.rm-bullet-input:focus {
+  border-color: var(--rm-accent-cyan);
+}
+
+.rm-bullet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.rm-bullet-verb-btn {
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--rm-accent-cyan);
+  font-size: 0.68rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rm-bullet-verb-btn:hover {
+  background: var(--rm-accent-cyan);
+  color: #080c14;
+}
+
+.rm-add-item-btn {
+  width: 100%;
+  padding: 0.55rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--rm-border-dark);
+  color: var(--rm-text-secondary);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.rm-add-item-btn:hover {
+  border-color: var(--rm-accent-cyan);
+  color: var(--rm-accent-cyan);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+/* Right Preview Panel */
+.rm-preview-panel {
+  background: #1e2638;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  max-height: calc(100vh - 130px);
+}
+
+[data-theme="light"] .rm-preview-panel {
+  background: #cbd5e1;
+}
+
+/* Zoom / Preview Controls */
+.rm-preview-controls {
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--rm-surface-dark);
+  border: 1px solid var(--rm-border-dark);
+  border-radius: 20px;
+  padding: 0.35rem 0.9rem;
+}
+
+.rm-preview-controls span {
+  font-size: 0.78rem;
+  color: var(--rm-text-secondary);
+  font-weight: 600;
+}
+
+.rm-preview-controls button {
+  background: none;
+  border: none;
+  color: var(--rm-text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+
+.rm-preview-controls button:hover {
+  color: var(--rm-accent-cyan);
+}
+
+/* ============================================================
+   JAKE'S RESUME TEMPLATE - AUTHENTIC PHYSICAL SHEET (100% FAITHFUL)
+   Based on jakegut/resume LaTeX Template
+   ============================================================ */
+.jake-resume-sheet {
+  width: var(--paper-width);
+  min-height: var(--paper-min-height);
+  background: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 0.5in 0.55in;
+  font-family: "Computer Modern", "Latin Modern Roman", "Times New Roman", Times, Georgia, serif;
+  font-size: 9.8pt;
+  line-height: 1.32;
+  margin: 0 auto;
+  transform-origin: top center;
+  transition: transform 0.2s ease;
+}
+
+/* Sans-serif alternative toggle */
+.jake-resume-sheet.font-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 9.4pt;
+  line-height: 1.34;
+}
+
+/* Header Section */
+.jake-header {
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+
+.jake-name {
+  font-size: 20pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.25rem 0;
+  color: #000000;
+}
+
+.jake-contacts {
+  font-size: 9.2pt;
+  color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.jake-contacts a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.jake-contacts a:hover {
+  text-decoration: underline;
+}
+
+.jake-sep {
+  color: #555555;
+  font-weight: 300;
+}
+
+/* Jake's Section Title with Full-Width Horizontal Rule */
+.jake-section {
+  margin-top: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.jake-section-title {
+  font-size: 10.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.2rem 0;
+  padding-bottom: 0.12rem;
+  border-bottom: 1.2px solid #000000;
+  color: #000000;
+}
+
+/* Entry Line Layouts */
+.jake-entry {
+  margin-bottom: 0.55rem;
+}
+
+.jake-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.jake-left-bold {
+  font-weight: 700;
+  color: #000000;
+}
+
+.jake-right-text {
+  font-size: 9.2pt;
+  color: #222222;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.jake-left-italic {
+  font-style: italic;
+  color: #222222;
+}
+
+/* Project header specific */
+.jake-project-heading {
+  font-size: 9.8pt;
+}
+
+.jake-project-name {
+  font-weight: 700;
+  color: #000000;
+}
+
+.jake-project-tech {
+  font-style: italic;
+  color: #333333;
+}
+
+.jake-project-links a {
+  color: #000000;
+  text-decoration: underline;
+  margin-left: 0.3rem;
+  font-size: 8.8pt;
+}
+
+/* Bullet Points */
+.jake-bullet-list {
+  margin: 0.18rem 0 0.35rem 1.15rem;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.jake-bullet-list li {
+  margin-bottom: 0.18rem;
+  line-height: 1.32;
+  color: #111111;
+  text-align: justify;
+}
+
+/* Skills Section */
+.jake-skills-list {
+  margin: 0.25rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jake-skills-item {
+  margin-bottom: 0.22rem;
+  line-height: 1.34;
+}
+
+.jake-skills-category {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* LaTeX Modal */
+.rm-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+.rm-modal-box {
+  background: var(--rm-surface-dark);
+  border: 1px solid var(--rm-border-dark);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 780px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.rm-modal-header {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--rm-border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rm-modal-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--rm-accent-cyan);
+}
+
+.rm-modal-body {
+  padding: 1.2rem 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.rm-latex-code {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--rm-border-dark);
+  border-radius: 6px;
+  padding: 1rem;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.8rem;
+  color: #00ff88;
+  white-space: pre-wrap;
+  user-select: all;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.rm-modal-footer {
+  padding: 0.85rem 1.5rem;
+  border-top: 1px solid var(--rm-border-dark);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
+/* ============================================================
+   PRINT / PDF EXPORT - SINGLE PAGE OPTIMIZED
+   ============================================================ */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.45in 0.5in;
+  }
+
+  body, html {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 9.5pt !important;
+  }
+
+  /* Hide entire application shell */
+  .site-header,
+  .rm-toolbar,
+  .rm-editor-panel,
+  .rm-preview-controls,
+  .rm-modal-backdrop,
+  #videoBgContainer,
+  #reading-progress,
+  .chinatsu-widget,
+  .sports-anime-container,
+  #mobileNavDrawer,
+  .mobile-nav-backdrop {
+    display: none !important;
+  }
+
+  .rm-workspace {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .rm-preview-panel {
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+    max-height: none !important;
+  }
+
+  .jake-resume-sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    transform: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .jake-section {
+    page-break-inside: avoid !important;
+  }
+
+  .jake-entry {
+    page-break-inside: avoid !important;
+  }
+}

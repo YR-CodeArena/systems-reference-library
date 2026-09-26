@@ -19,7 +19,9 @@ html_files = [
     "enterprise-scss.html",
     "javascript-mastery.html",
     "neetcode-arena.html",
-    "tech-news.html"
+    "tech-news.html",
+    "resume-maker.html",
+    "ats-checker.html"
 ]
 
 def verify_all():
@@ -81,7 +83,7 @@ def verify_all():
         total_run_buttons += run_btns
 
         # Volume pages should have at least 1 diagram
-        if fname not in ("index.html", "neetcode-arena.html", "tech-news.html"):
+        if fname not in ("index.html", "neetcode-arena.html", "tech-news.html", "resume-maker.html", "ats-checker.html"):
             if diagrams_in_file == 0:
                 print(f"[WARN] No diagram-card in {fname}")
                 all_passed = False
