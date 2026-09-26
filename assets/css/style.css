@@ -468,6 +468,13 @@ body.mobile-toc-open {
   box-shadow: 0 0 10px var(--accent-glow);
 }
 
+.nav-text-short {
+  display: none !important;
+}
+.nav-text-full {
+  display: inline !important;
+}
+
 .nav-dropdown {
   position: relative;
 }
@@ -1820,21 +1827,6 @@ table.ref-table code {
 
 .portal-card:hover .card-footer-cta {
   color: var(--accent-secondary);
-}
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-}
-
-.card-footer-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-subtle);
 }
 
 /* ===================================================================
@@ -3489,6 +3481,10 @@ main,
 
 /* Tablets, Small Laptops & Mobile Viewports (< 1140px): Keep NeetCode & Tech News Visible */
 @media (max-width: 1139px) {
+  .brand-subtitle,
+  .brand-status-tag {
+    display: none !important;
+  }
   .site-header nav,
   .desktop-nav {
     display: flex !important;
@@ -3680,46 +3676,91 @@ main,
   }
 }
 
-/* Compact Smartphones (<= 480px) */
-@media (max-width: 480px) {
+/* Background audio button strictly hidden on NeetCode and Tech News pages */
+body.neetcode-arena-page .bg-audio-toggle-btn,
+body.tech-news-page .bg-audio-toggle-btn {
+  display: none !important;
+}
+
+/* Tablet / Medium Screens (641px - 1139px) Header Refinements */
+@media (min-width: 641px) and (max-width: 1139px) {
+  .brand-title {
+    display: inline-block !important;
+    font-size: 0.95rem !important;
+    white-space: nowrap !important;
+  }
+  .brand-subtitle,
+  .brand-status-tag {
+    display: none !important;
+  }
+  .site-header nav.desktop-nav {
+    display: flex !important;
+    margin-left: auto !important;
+    margin-right: 0.35rem !important;
+  }
+}
+
+/* Compact Smartphones & Narrow Screens (<= 640px) */
+@media (max-width: 640px) {
   .site-header {
     padding: var(--sat) 0.5rem 0 0.5rem !important;
     gap: 0.35rem !important;
+    justify-content: space-between !important;
   }
 
   .brand-wrapper {
     gap: 0 !important;
+    flex-shrink: 0 !important;
   }
 
   .brand-icon {
     width: 32px !important;
     height: 32px !important;
-    font-size: 0.92rem !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    font-size: 0.88rem !important;
   }
 
-  .brand-title {
-    display: none !important;
-  }
-
-  .brand-subtitle {
-    display: none !important;
-  }
-
+  .brand-title,
+  .brand-subtitle,
   .brand-status-tag {
     display: none !important;
+  }
+
+  .site-header nav,
+  .desktop-nav {
+    display: flex !important;
+    flex: 0 1 auto !important;
+    margin: 0 auto !important;
+  }
+
+  .nav-menu {
+    gap: 0.3rem !important;
   }
 
   .nav-item-btn {
     height: 32px !important;
     min-height: 32px !important;
     max-height: 32px !important;
-    padding: 0 0.4rem !important;
+    padding: 0 0.5rem !important;
     font-size: 0.72rem !important;
-    gap: 0.2rem !important;
+    gap: 0.25rem !important;
+    white-space: nowrap !important;
+  }
+
+  .nav-text-full {
+    display: none !important;
+  }
+  .nav-text-short {
+    display: inline !important;
   }
 
   .header-actions {
-    gap: 0.25rem !important;
+    gap: 0.3rem !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    margin-left: auto !important;
   }
 
   .theme-toggle-btn,
@@ -3732,6 +3773,7 @@ main,
     max-width: 32px !important;
     max-height: 32px !important;
     font-size: 0.95rem !important;
+    display: inline-flex !important;
   }
 
   .main-content {
