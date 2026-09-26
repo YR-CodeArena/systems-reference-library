@@ -250,8 +250,11 @@
         <div class="news-hero-actions">
           <button id="liveHnFetchBtn" class="live-hn-btn" type="button">
             <span>⚡</span>
-            <span>Fetch Live Hacker News Feed</span>
+            <span>Refresh Live News</span>
           </button>
+          <span id="livePulseTag" class="live-pulse-indicator">
+            <span class="pulse-dot"></span> <span>LIVE WIRE ACTIVE</span>
+          </span>
         </div>
       </div>
     </div>
@@ -275,6 +278,20 @@
       <div class="news-search-box">
         <span class="news-search-icon">🔍</span>
         <input id="newsSearchInput" class="news-search-input" type="text" placeholder="Search flying cabs, iPhone 18, Galaxy, Lava curve, AI..." aria-label="Search articles">
+        <button id="clearSearchBtn" class="clear-search-btn" type="button" aria-label="Clear search" style="display: none;">✕</button>
+      </div>
+
+      <!-- Dynamic Search Suggestions Bar -->
+      <div class="news-suggestions-container" id="newsSuggestionsContainer">
+        <div class="suggestions-header">
+          <span class="suggestions-label">🔥 Trending Searches:</span>
+          <button type="button" id="shuffleSuggestionsBtn" class="shuffle-suggestions-btn" title="Show fresh search ideas">
+            <span>🔄</span> <span>Shuffle Ideas</span>
+          </button>
+        </div>
+        <div class="suggestions-chips-row" id="suggestionsChipsRow">
+          <!-- Populated dynamically by tech-news.js -->
+        </div>
       </div>
     </div>
 
